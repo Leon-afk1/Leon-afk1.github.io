@@ -11,6 +11,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 });
 
+
 // Theme Toggle Functionality
 document.addEventListener('DOMContentLoaded', function() {
     const themeToggle = document.getElementById('theme-toggle');
@@ -171,7 +172,7 @@ function playAchievementSound() {
         oscillator.start(audioContext.currentTime);
         oscillator.stop(audioContext.currentTime + 0.3);
     }
-}
+
     const navToggle = document.querySelector('.nav-toggle');
     const navMenu = document.querySelector('.nav-menu');
     const navLinks = document.querySelectorAll('.nav-link');
@@ -200,7 +201,7 @@ function playAchievementSound() {
             document.body.classList.remove('nav-open');
         }
     });
-});
+};
 
 // Smooth Scrolling and Active Navigation
 document.addEventListener('DOMContentLoaded', function() {
