@@ -20,9 +20,11 @@
     --shadow-light: rgba(0, 0, 0, 0.05);
     --shadow-medium: rgba(0, 0, 0, 0.1);
     --shadow-heavy: rgba(0, 0, 0, 0.2);
+    --shadow-color: rgba(0, 0, 0, 0.1);
     --gradient-primary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     --card-bg: #ffffff;
     --nav-bg: rgba(255, 255, 255, 0.95);
+    --nav-bg-scrolled: rgba(255, 255, 255, 0.98);
 }
 
 /* Dark theme colors (default) */
@@ -38,9 +40,11 @@
     --shadow-light: rgba(0, 0, 0, 0.3);
     --shadow-medium: rgba(0, 0, 0, 0.4);
     --shadow-heavy: rgba(0, 0, 0, 0.6);
+    --shadow-color: rgba(0, 0, 0, 0.4);
     --gradient-primary: linear-gradient(135deg, #4299e1 0%, #667eea 100%);
     --card-bg: #2d3748;
     --nav-bg: rgba(26, 32, 44, 0.95);
+    --nav-bg-scrolled: rgba(26, 32, 44, 0.98);
 }
 
 /* Apply dark theme by default */
@@ -432,6 +436,11 @@ p {
     border-bottom: 1px solid var(--border-color);
     z-index: 1000;
     transition: all 0.3s ease;
+}
+
+.nav.scrolled {
+    background: var(--nav-bg-scrolled);
+    box-shadow: 0 2px 20px var(--shadow-color);
 }
 
 .nav-container {
