@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Leon - AI Engineer</title>
-    <meta name="description" content="AI Engineer specializing in machine learning, deep learning, and intelligent systems">
+    <title>Léon - AI Engineer & Researcher</title>
+    <meta name="description" content="AI Engineering student specializing in machine learning, deep learning, and AI research">
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='0.9em' font-size='90'>🤖</text></svg>">
     <link rel="stylesheet" href="styles.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -15,7 +15,7 @@
     <!-- Navigation -->
     <nav class="nav">
         <div class="nav-container">
-            <a href="#home" class="nav-logo">Leon</a>
+            <a href="#home" class="nav-logo">Léon</a>
             <ul class="nav-menu">
                 <li><a href="#about" class="nav-link">About</a></li>
                 <li><a href="#skills" class="nav-link">Skills</a></li>
@@ -23,6 +23,9 @@
                 <li><a href="#experience" class="nav-link">Experience</a></li>
                 <li><a href="#contact" class="nav-link">Contact</a></li>
             </ul>
+            <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark/light mode">
+                <span class="theme-icon">🌙</span>
+            </button>
             <div class="nav-toggle">
                 <span></span>
                 <span></span>
@@ -33,19 +36,23 @@
 
     <!-- Hero Section -->
     <section id="home" class="hero">
+        <div class="particles-background"></div>
+        <div class="matrix-rain"></div>
         <div class="container">
             <div class="hero-content">
                 <h1 class="hero-title">
-                    <span class="hero-greeting">Hi, I'm</span>
-                    <span class="hero-name">Leon</span>
+                    <span class="hero-greeting">Salut, I'm</span>
+                    <span class="hero-name glitch" data-text="Léon">Léon</span>
                 </h1>
-                <p class="hero-subtitle">AI Engineer & Machine Learning Specialist</p>
+                <p class="hero-subtitle typewriter">AI Engineer & Research Enthusiast</p>
                 <p class="hero-description">
-                    Building intelligent systems and pushing the boundaries of artificial intelligence.
-                    Passionate about deep learning, computer vision, and creating AI solutions that matter.
+                    Passionate about artificial intelligence, machine learning, and cutting-edge research.
+                    Currently pursuing excellence in AI engineering with a focus on deep learning,
+                    computer vision, and innovative AI solutions.
+                    <span class="easter-egg-trigger" id="konami-hint">🎮</span>
                 </p>
                 <div class="hero-buttons">
-                    <a href="#projects" class="btn btn-primary">View Projects</a>
+                    <a href="#projects" class="btn btn-primary pulse-btn">View Projects</a>
                     <a href="#contact" class="btn btn-secondary">Get in Touch</a>
                 </div>
             </div>
@@ -59,6 +66,12 @@
                     <div class="connection"></div>
                     <div class="connection"></div>
                 </div>
+                <div class="floating-elements">
+                    <div class="float-element">⚡</div>
+                    <div class="float-element">🚀</div>
+                    <div class="float-element">🔮</div>
+                    <div class="float-element">💡</div>
+                </div>
             </div>
         </div>
     </section>
@@ -70,27 +83,28 @@
             <div class="about-content">
                 <div class="about-text">
                     <p>
-                        I'm a passionate AI Engineer with expertise in developing cutting-edge machine learning solutions.
-                        My journey in artificial intelligence spans from theoretical research to practical implementations,
-                        with a focus on creating intelligent systems that solve real-world problems.
+                        I'm a dedicated AI engineering student with a strong foundation in mathematics, 
+                        computer science, and machine learning. Currently pursuing advanced studies in AI 
+                        and exploring research opportunities in Canada and France.
                     </p>
                     <p>
-                        I specialize in deep learning architectures, computer vision, natural language processing,
-                        and MLOps. I believe in the transformative power of AI and am committed to building
-                        ethical, robust, and scalable AI solutions.
+                        My expertise spans deep learning architectures, natural language processing, 
+                        computer vision, and MLOps. I'm passionate about bridging theoretical research 
+                        with practical applications, always seeking to push the boundaries of what's 
+                        possible with AI.
                     </p>
                 </div>
                 <div class="about-stats">
                     <div class="stat">
+                        <span class="stat-number">4+</span>
+                        <span class="stat-label">Years Studying AI</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number">20+</span>
+                        <span class="stat-label">Projects Completed</span>
+                    </div>
+                    <div class="stat">
                         <span class="stat-number">3+</span>
-                        <span class="stat-label">Years Experience</span>
-                    </div>
-                    <div class="stat">
-                        <span class="stat-number">15+</span>
-                        <span class="stat-label">AI Projects</span>
-                    </div>
-                    <div class="stat">
-                        <span class="stat-number">5+</span>
                         <span class="stat-label">Research Papers</span>
                     </div>
                 </div>
@@ -104,43 +118,43 @@
             <h2 class="section-title">Technical Skills</h2>
             <div class="skills-grid">
                 <div class="skill-category">
-                    <h3>Machine Learning</h3>
+                    <h3>Machine Learning & AI</h3>
                     <ul class="skill-list">
-                        <li>Deep Learning</li>
+                        <li>Deep Learning (CNN, RNN, Transformers)</li>
                         <li>Computer Vision</li>
                         <li>Natural Language Processing</li>
                         <li>Reinforcement Learning</li>
-                        <li>Time Series Analysis</li>
+                        <li>Time Series Forecasting</li>
                     </ul>
                 </div>
                 <div class="skill-category">
-                    <h3>Frameworks & Tools</h3>
+                    <h3>Frameworks & Libraries</h3>
                     <ul class="skill-list">
-                        <li>PyTorch</li>
-                        <li>TensorFlow</li>
-                        <li>Scikit-learn</li>
-                        <li>Hugging Face</li>
-                        <li>OpenCV</li>
+                        <li>PyTorch & TensorFlow</li>
+                        <li>Scikit-learn & Pandas</li>
+                        <li>Hugging Face Transformers</li>
+                        <li>OpenCV & PIL</li>
+                        <li>Matplotlib & Seaborn</li>
                     </ul>
                 </div>
                 <div class="skill-category">
                     <h3>Programming Languages</h3>
                     <ul class="skill-list">
-                        <li>Python</li>
-                        <li>R</li>
-                        <li>SQL</li>
-                        <li>JavaScript</li>
-                        <li>C++</li>
+                        <li>Python (Advanced)</li>
+                        <li>R & MATLAB</li>
+                        <li>SQL & NoSQL</li>
+                        <li>JavaScript & TypeScript</li>
+                        <li>C++ & Java</li>
                     </ul>
                 </div>
                 <div class="skill-category">
-                    <h3>MLOps & Cloud</h3>
+                    <h3>Tools & Technologies</h3>
                     <ul class="skill-list">
-                        <li>Docker</li>
-                        <li>Kubernetes</li>
-                        <li>AWS/GCP</li>
-                        <li>MLflow</li>
-                        <li>Git/GitHub</li>
+                        <li>Docker & Kubernetes</li>
+                        <li>AWS & Google Cloud</li>
+                        <li>Git & GitHub</li>
+                        <li>Jupyter & VS Code</li>
+                        <li>Linux & Shell Scripting</li>
                     </ul>
                 </div>
             </div>
@@ -239,27 +253,13 @@
                 <div class="timeline-item">
                     <div class="timeline-marker"></div>
                     <div class="timeline-content">
-                        <h3>Senior AI Engineer</h3>
-                        <p class="company">TechCorp AI Solutions</p>
+                        <h3>Master's in AI Engineering</h3>
+                        <p class="company">UTBM (Université de Technologie de Belfort-Montbéliard)</p>
                         <p class="period">2023 - Present</p>
                         <ul class="achievements">
-                            <li>Led development of computer vision pipeline reducing processing time by 40%</li>
-                            <li>Implemented MLOps practices improving model deployment efficiency by 60%</li>
-                            <li>Mentored junior engineers and conducted AI workshops</li>
-                        </ul>
-                    </div>
-                </div>
-
-                <div class="timeline-item">
-                    <div class="timeline-marker"></div>
-                    <div class="timeline-content">
-                        <h3>Machine Learning Engineer</h3>
-                        <p class="company">DataTech Innovations</p>
-                        <p class="period">2022 - 2023</p>
-                        <ul class="achievements">
-                            <li>Developed predictive models increasing business revenue by 25%</li>
-                            <li>Built automated ML pipelines processing 1M+ data points daily</li>
-                            <li>Collaborated with cross-functional teams on AI strategy</li>
+                            <li>Specializing in advanced machine learning and deep learning architectures</li>
+                            <li>Research focus on computer vision and natural language processing</li>
+                            <li>Exploring opportunities for research collaboration in Canada</li>
                         </ul>
                     </div>
                 </div>
@@ -268,12 +268,26 @@
                     <div class="timeline-marker"></div>
                     <div class="timeline-content">
                         <h3>AI Research Intern</h3>
-                        <p class="company">University AI Lab</p>
-                        <p class="period">2021 - 2022</p>
+                        <p class="company">Research Laboratory / Tech Company</p>
+                        <p class="period">2022 - 2023</p>
                         <ul class="achievements">
-                            <li>Published research on neural architecture search algorithms</li>
-                            <li>Contributed to open-source deep learning frameworks</li>
-                            <li>Presented findings at international AI conferences</li>
+                            <li>Developed novel neural network architectures for image classification</li>
+                            <li>Published research paper on efficient training methods</li>
+                            <li>Collaborated on multi-disciplinary AI projects</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-marker"></div>
+                    <div class="timeline-content">
+                        <h3>Bachelor's in Computer Science</h3>
+                        <p class="company">Engineering School / University</p>
+                        <p class="period">2020 - 2023</p>
+                        <ul class="achievements">
+                            <li>Strong foundation in mathematics, algorithms, and programming</li>
+                            <li>Specialized courses in machine learning and data science</li>
+                            <li>Final project on deep learning applications</li>
                         </ul>
                     </div>
                 </div>
@@ -292,21 +306,21 @@
                         or innovative AI projects. Let's connect and explore how we can work together!
                     </p>
                     <div class="contact-methods">
-                        <a href="mailto:leon@example.com" class="contact-method">
+                        <a href="mailto:leon.student@utbm.fr" class="contact-method">
                             <span class="contact-icon">📧</span>
-                            <span>leon@example.com</span>
+                            <span>leon.student@utbm.fr</span>
                         </a>
-                        <a href="https://linkedin.com/in/leon-ai" class="contact-method">
+                        <a href="https://linkedin.com/in/leon-ai-engineer" class="contact-method">
                             <span class="contact-icon">💼</span>
-                            <span>LinkedIn</span>
+                            <span>LinkedIn Profile</span>
                         </a>
                         <a href="https://github.com/Leon-afk1" class="contact-method">
                             <span class="contact-icon">👨‍💻</span>
-                            <span>GitHub</span>
+                            <span>GitHub Portfolio</span>
                         </a>
-                        <a href="https://twitter.com/leon_ai" class="contact-method">
-                            <span class="contact-icon">🐦</span>
-                            <span>Twitter</span>
+                        <a href="https://scholar.google.com/citations?user=leon_ai" class="contact-method">
+                            <span class="contact-icon">🎓</span>
+                            <span>Google Scholar</span>
                         </a>
                     </div>
                 </div>
@@ -332,9 +346,26 @@
     <!-- Footer -->
     <footer class="footer">
         <div class="container">
-            <p>&copy; 2025 Leon. Crafted with passion for AI and innovation.</p>
+            <p>&copy; 2025 Léon. Crafted with passion for AI and innovation.</p>
+            <p class="easter-egg-text">🎯 Psst... Try the Konami Code for a surprise! 🎯</p>
         </div>
     </footer>
+
+    <!-- Easter Egg Modal -->
+    <div id="easter-egg-modal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>🎉 Easter Egg Activated! 🎉</h2>
+            <p>Congratulations! You found the secret! 🎮</p>
+            <div class="secret-message">
+                <p>As an AI engineer, you know that the best solutions come from exploration and curiosity.</p>
+                <p>Thanks for being curious enough to try the Konami Code!</p>
+                <div class="achievement">
+                    <span>🏆 Achievement Unlocked: Curiosity Overflow 🏆</span>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <script src="script.js"></script>
 </body>

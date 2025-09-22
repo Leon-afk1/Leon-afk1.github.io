@@ -1,5 +1,177 @@
-// Mobile Navigation Toggle
+// Set dark theme as default
 document.addEventListener('DOMContentLoaded', function() {
+    // Set dark theme by default
+    document.body.setAttribute('data-theme', 'dark');
+    localStorage.setItem('theme', 'dark');
+    
+    // Update theme icon if it exists
+    const themeIcon = document.querySelector('.theme-icon');
+    if (themeIcon) {
+        themeIcon.textContent = '☀️'; // Sun icon for dark theme (to switch to light)
+    }
+});
+
+// Theme Toggle Functionality
+document.addEventListener('DOMContentLoaded', function() {
+    const themeToggle = document.getElementById('theme-toggle');
+    const themeIcon = document.querySelector('.theme-icon');
+    
+    if (!themeToggle || !themeIcon) return;
+    
+    // Load saved theme or default to dark
+    const savedTheme = localStorage.getItem('theme') || 'dark';
+    document.body.setAttribute('data-theme', savedTheme);
+    updateThemeIcon(savedTheme);
+    
+    themeToggle.addEventListener('click', function() {
+        const currentTheme = document.body.getAttribute('data-theme');
+        const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+        
+        document.body.setAttribute('data-theme', newTheme);
+        localStorage.setItem('theme', newTheme);
+        updateThemeIcon(newTheme);
+        
+        // Add rotation animation
+        themeToggle.style.transform = 'rotate(360deg)';
+        setTimeout(() => {
+            themeToggle.style.transform = 'rotate(0deg)';
+        }, 300);
+    });
+    
+    function updateThemeIcon(theme) {
+        themeIcon.textContent = theme === 'dark' ? '☀️' : '🌙';
+    }
+});
+
+// Konami Code Easter Egg
+document.addEventListener('DOMContentLoaded', function() {
+    const konamiCode = [
+        'ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown',
+        'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight',
+        'KeyB', 'KeyA'
+    ];
+    let konamiIndex = 0;
+    
+    document.addEventListener('keydown', function(e) {
+        if (e.code === konamiCode[konamiIndex]) {
+            konamiIndex++;
+            if (konamiIndex === konamiCode.length) {
+                activateEasterEgg();
+                konamiIndex = 0;
+            }
+        } else {
+            konamiIndex = 0;
+        }
+    });
+    
+    // Alternative trigger via easter egg element
+    const easterEggTrigger = document.getElementById('konami-hint');
+    if (easterEggTrigger) {
+        let clickCount = 0;
+        easterEggTrigger.addEventListener('click', function() {
+            clickCount++;
+            this.style.transform = `scale(${1 + clickCount * 0.1}) rotate(${clickCount * 36}deg)`;
+            
+            if (clickCount >= 5) {
+                activateEasterEgg();
+                clickCount = 0;
+                this.style.transform = 'scale(1) rotate(0deg)';
+            }
+            
+            // Reset after 2 seconds
+            setTimeout(() => {
+                if (clickCount < 5) {
+                    clickCount = 0;
+                    this.style.transform = 'scale(1) rotate(0deg)';
+                }
+            }, 2000);
+        });
+    }
+    
+    function activateEasterEgg() {
+        const modal = document.getElementById('easter-egg-modal');
+        if (modal) {
+            modal.style.display = 'block';
+            createConfetti();
+            playAchievementSound();
+            document.body.style.animation = 'shake 0.5s ease-in-out';
+            setTimeout(() => {
+                document.body.style.animation = '';
+            }, 500);
+        }
+    }
+    
+    // Close modal functionality
+    const closeModal = document.querySelector('.close');
+    const modal = document.getElementById('easter-egg-modal');
+    
+    if (closeModal && modal) {
+        closeModal.addEventListener('click', function() {
+            modal.style.display = 'none';
+        });
+        
+        window.addEventListener('click', function(e) {
+            if (e.target === modal) {
+                modal.style.display = 'none';
+            }
+        });
+    }
+});
+
+// Confetti Effect
+function createConfetti() {
+    const colors = ['#ff6b6b', '#4ecdc4', '#45b7d1', '#96ceb4', '#feca57', '#ff9ff3'];
+    const confettiCount = 100;
+    
+    for (let i = 0; i < confettiCount; i++) {
+        const confetti = document.createElement('div');
+        confetti.style.position = 'fixed';
+        confetti.style.left = Math.random() * 100 + 'vw';
+        confetti.style.top = '-10px';
+        confetti.style.width = Math.random() * 10 + 5 + 'px';
+        confetti.style.height = Math.random() * 10 + 5 + 'px';
+        confetti.style.background = colors[Math.floor(Math.random() * colors.length)];
+        confetti.style.pointerEvents = 'none';
+        confetti.style.zIndex = '10001';
+        confetti.style.borderRadius = '50%';
+        
+        document.body.appendChild(confetti);
+        
+        const fallAnimation = confetti.animate([
+            { transform: 'translateY(-10px) rotate(0deg)', opacity: 1 },
+            { transform: `translateY(100vh) rotate(${Math.random() * 360}deg)`, opacity: 0 }
+        ], {
+            duration: Math.random() * 3000 + 2000,
+            easing: 'cubic-bezier(0.25, 0.46, 0.45, 0.94)'
+        });
+        
+        fallAnimation.addEventListener('finish', () => {
+            confetti.remove();
+        });
+    }
+}
+
+// Achievement Sound
+function playAchievementSound() {
+    if (typeof AudioContext !== 'undefined' || typeof webkitAudioContext !== 'undefined') {
+        const audioContext = new (AudioContext || webkitAudioContext)();
+        const oscillator = audioContext.createOscillator();
+        const gainNode = audioContext.createGain();
+        
+        oscillator.connect(gainNode);
+        gainNode.connect(audioContext.destination);
+        
+        oscillator.frequency.setValueAtTime(800, audioContext.currentTime);
+        oscillator.frequency.setValueAtTime(1000, audioContext.currentTime + 0.1);
+        oscillator.frequency.setValueAtTime(1200, audioContext.currentTime + 0.2);
+        
+        gainNode.gain.setValueAtTime(0.3, audioContext.currentTime);
+        gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.3);
+        
+        oscillator.start(audioContext.currentTime);
+        oscillator.stop(audioContext.currentTime + 0.3);
+    }
+}
     const navToggle = document.querySelector('.nav-toggle');
     const navMenu = document.querySelector('.nav-menu');
     const navLinks = document.querySelectorAll('.nav-link');
