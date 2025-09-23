@@ -48,8 +48,7 @@ document.addEventListener('DOMContentLoaded', function() {
 document.addEventListener('DOMContentLoaded', function() {
     const konamiCode = [
         'ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown',
-        'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight',
-        'KeyB', 'KeyA'
+        'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight'
     ];
     let konamiIndex = 0;
     
@@ -608,6 +607,108 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     }
+});
+
+// Neural Network Snowflakes
+class NeuralSnowflake {
+    constructor() {
+        this.element = document.createElement('div');
+        this.element.className = 'neural-snowflake';
+        this.x = Math.random() * window.innerWidth;
+        this.y = -20;
+        this.speed = Math.random() * 2 + 1;
+        this.rotation = 0;
+        this.isNode = false;
+        this.connections = [];
+        
+        this.element.style.position = 'fixed';
+        this.element.style.left = this.x + 'px';
+        this.element.style.top = this.y + 'px';
+        this.element.style.pointerEvents = 'none';
+        this.element.style.zIndex = '1000';
+        this.element.style.transition = 'all 0.3s ease';
+        
+        this.updateAppearance();
+        document.body.appendChild(this.element);
+    }
+    
+    updateAppearance() {
+        if (this.isNode) {
+            this.element.innerHTML = '●';
+            this.element.style.color = '#16a085';
+            this.element.style.fontSize = '12px';
+            this.element.style.textShadow = '0 0 10px #16a085';
+        } else {
+            this.element.innerHTML = '❄';
+            this.element.style.color = '#ffffff';
+            this.element.style.fontSize = '16px';
+            this.element.style.textShadow = '0 0 5px rgba(255,255,255,0.5)';
+        }
+    }
+    
+    transformToNode() {
+        this.isNode = true;
+        this.speed *= 0.5;
+        this.updateAppearance();
+    }
+    
+    update() {
+        this.y += this.speed;
+        this.rotation += 1;
+        this.x += Math.sin(this.y * 0.01) * 0.5;
+        
+        this.element.style.left = this.x + 'px';
+        this.element.style.top = this.y + 'px';
+        this.element.style.transform = `rotate(${this.rotation}deg)`;
+        
+        // Remove if off screen
+        if (this.y > window.innerHeight + 20) {
+            this.element.remove();
+            return false;
+        }
+        return true;
+    }
+}
+
+// Snowflake system
+const snowflakeSystem = {
+    snowflakes: [],
+    lastScroll: 0,
+    
+    init() {
+        this.createSnowflake();
+        setInterval(() => this.createSnowflake(), 2000);
+        setInterval(() => this.update(), 50);
+        
+        window.addEventListener('scroll', () => {
+            const scrollSpeed = Math.abs(window.scrollY - this.lastScroll);
+            this.lastScroll = window.scrollY;
+            
+            // Transform snowflakes to neural nodes on fast scroll
+            if (scrollSpeed > 10) {
+                this.snowflakes.forEach(snowflake => {
+                    if (!snowflake.isNode && Math.random() < 0.3) {
+                        snowflake.transformToNode();
+                    }
+                });
+            }
+        });
+    },
+    
+    createSnowflake() {
+        if (this.snowflakes.length < 15) {
+            this.snowflakes.push(new NeuralSnowflake());
+        }
+    },
+    
+    update() {
+        this.snowflakes = this.snowflakes.filter(snowflake => snowflake.update());
+    }
+};
+
+// Initialize snowflake system
+document.addEventListener('DOMContentLoaded', () => {
+    setTimeout(() => snowflakeSystem.init(), 1000);
 });
 
 console.log('🚀 Portfolio website loaded successfully!');
