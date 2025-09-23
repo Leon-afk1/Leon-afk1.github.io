@@ -14,14 +14,16 @@
     --text-primary: #2d3748;
     --text-secondary: #4a5568;
     --text-muted: #718096;
-    --accent-primary: #3182ce;
-    --accent-secondary: #2c5282;
+    --accent-primary: #16a085;
+    --accent-secondary: #138d75;
     --border-color: #e2e8f0;
     --shadow-light: rgba(0, 0, 0, 0.05);
     --shadow-medium: rgba(0, 0, 0, 0.1);
     --shadow-heavy: rgba(0, 0, 0, 0.2);
     --shadow-color: rgba(0, 0, 0, 0.1);
-    --gradient-primary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    --gradient-primary: linear-gradient(135deg, #27ae60 0%, #16a085 100%);
+    --hero-bg: #8b7355;
+    --hero-text: #ffffff;
     --card-bg: #ffffff;
     --nav-bg: rgba(255, 255, 255, 0.95);
     --nav-bg-scrolled: rgba(255, 255, 255, 0.98);
@@ -34,14 +36,16 @@
     --text-primary: #f7fafc;
     --text-secondary: #e2e8f0;
     --text-muted: #a0aec0;
-    --accent-primary: #63b3ed;
-    --accent-secondary: #3182ce;
+    --accent-primary: #48cc6c;
+    --accent-secondary: #38a169;
     --border-color: #4a5568;
     --shadow-light: rgba(0, 0, 0, 0.3);
     --shadow-medium: rgba(0, 0, 0, 0.4);
     --shadow-heavy: rgba(0, 0, 0, 0.6);
     --shadow-color: rgba(0, 0, 0, 0.4);
-    --gradient-primary: linear-gradient(135deg, #4299e1 0%, #667eea 100%);
+    --gradient-primary: linear-gradient(135deg, #48cc6c 0%, #38a169 100%);
+    --hero-bg: #2d3748;
+    --hero-text: #f7fafc;
     --card-bg: #2d3748;
     --nav-bg: rgba(26, 32, 44, 0.95);
     --nav-bg-scrolled: rgba(26, 32, 44, 0.98);
@@ -510,7 +514,7 @@ p {
 .nav-toggle span {
     width: 25px;
     height: 3px;
-    background: #4a5568;
+    background: var(--text-secondary);
     transition: all 0.3s ease;
 }
 
@@ -519,10 +523,15 @@ p {
     min-height: 100vh;
     display: flex;
     align-items: center;
-    background: var(--gradient-primary);
-    color: white;
+    background: #8b7355 !important; 
+    color: var(--hero-text);
     position: relative;
     overflow: hidden;
+}
+
+/* Dark theme hero background */
+[data-theme="dark"] .hero {
+    background: #2d3748 !important; 
 }
 
 .hero::before {
@@ -1096,6 +1105,33 @@ section:nth-child(even) {
 .form-group textarea {
     resize: vertical;
     min-height: 120px;
+}
+
+/* Form Status Messages */
+.form-status {
+    margin-top: 1rem;
+}
+
+.form-success {
+    color: #10b981;
+    background: rgba(16, 185, 129, 0.1);
+    border: 1px solid rgba(16, 185, 129, 0.2);
+    padding: 0.75rem;
+    border-radius: 6px;
+    font-size: 0.9rem;
+}
+
+.form-error {
+    color: #ef4444;
+    background: rgba(239, 68, 68, 0.1);
+    border: 1px solid rgba(239, 68, 68, 0.2);
+    padding: 0.75rem;
+    border-radius: 6px;
+    font-size: 0.9rem;
+}
+
+.btn-loading {
+    opacity: 0.7;
 }
 
 /* Footer */

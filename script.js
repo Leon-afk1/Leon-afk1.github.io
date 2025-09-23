@@ -558,4 +558,56 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 
+// Contact Form Functionality
+document.addEventListener('DOMContentLoaded', function() {
+    const contactForm = document.getElementById('contact-form');
+    const submitBtn = document.getElementById('submit-btn');
+    const btnText = submitBtn.querySelector('.btn-text');
+    const btnLoading = submitBtn.querySelector('.btn-loading');
+    const formStatus = document.getElementById('form-status');
+
+    if (contactForm) {
+        contactForm.addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            // Show loading state
+            btnText.style.display = 'none';
+            btnLoading.style.display = 'inline';
+            submitBtn.disabled = true;
+            formStatus.innerHTML = '';
+
+            // Get form data
+            const formData = new FormData(contactForm);
+            
+            try {
+                // For now, let's use a simple mailto fallback since Formspree requires setup
+                const name = formData.get('name');
+                const email = formData.get('email');
+                const message = formData.get('message');
+                
+                // Create mailto URL
+                const subject = `Portfolio Contact from ${name}`;
+                const body = `Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`;
+                const mailtoUrl = `mailto:leon.morales@utbm.fr?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+                
+                // Open email client
+                window.open(mailtoUrl);
+                
+                // Show success message
+                formStatus.innerHTML = '<div class="form-success">✓ Email client opened! Please send the email from your email application.</div>';
+                contactForm.reset();
+                
+            } catch (error) {
+                // Show error message
+                formStatus.innerHTML = '<div class="form-error">✗ Something went wrong. Please try again or email me directly.</div>';
+            } finally {
+                // Reset button state
+                btnText.style.display = 'inline';
+                btnLoading.style.display = 'none';
+                submitBtn.disabled = false;
+            }
+        });
+    }
+});
+
 console.log('🚀 Portfolio website loaded successfully!');
