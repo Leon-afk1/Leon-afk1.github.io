@@ -138,21 +138,21 @@
         "achievement4": "Twice participant in Crunch Time Challenge, solving real-world company projects in multidisciplinary teams"
       },
       "item3": {
-        "title": "Exchange Semester — Computer Science",
-        "company": "Yeditepe University, Istanbul, Turkey",
-        "period": "Jan 2023 - Jun 2023",
-        "achievement1": "Erasmus exchange program focused on computer science and international teamwork",
-        "achievement2": "Specialized courses in object-oriented programming",
-        "achievement3": "Developed adaptability and cross-cultural collaboration skills"
-      },
-      "item4": {
         "title": "AI Engineering Intern",
         "company": "Ksilink, Strasbourg, France",
         "period": "Sept 2024 - Feb 2025",
         "achievement1": "Implemented a multimodal contrastive learning model for pharmacological analysis",
         "achievement2": "Built an AI-powered chatbot connecting a knowledge graph with an LLM",
         "achievement3": "Designed and trained CNNs for biomedical image classification"
-      }
+      },
+      "item4": {
+        "title": "Exchange Semester — Computer Science",
+        "company": "Yeditepe University, Istanbul, Turkey",
+        "period": "Jan 2023 - Jun 2023",
+        "achievement1": "Erasmus exchange program focused on computer science and international teamwork",
+        "achievement2": "Specialized courses in object-oriented programming",
+        "achievement3": "Developed adaptability and cross-cultural collaboration skills"
+      }      
     },
     "contact": {
       "title": "Get In Touch",
@@ -313,20 +313,20 @@
         "achievement4": "Double participation au Crunch Time Challenge, résolution de projets d'entreprise réels en équipes multidisciplinaires"
       },
       "item3": {
-        "title": "Semestre d'Échange — Informatique",
-        "company": "Université Yeditepe, Istanbul, Turquie",
-        "period": "Jan 2023 - Juin 2023",
-        "achievement1": "Programme d'échange Erasmus axé sur l'informatique et le travail d'équipe international",
-        "achievement2": "Cours spécialisés en programmation orientée objet",
-        "achievement3": "Développement de l'adaptabilité et des compétences de collaboration interculturelle"
-      },
-      "item4": {
         "title": "Stagiaire Ingénieur IA",
         "company": "Ksilink, Strasbourg, France",
         "period": "Sept 2024 - Fév 2025",
         "achievement1": "Implémentation d'un modèle d'apprentissage contrastif multimodal pour l'analyse pharmacologique",
         "achievement2": "Construction d'un chatbot IA connectant un graphe de connaissances à un LLM",
         "achievement3": "Conception et entraînement de CNNs pour la classification d'images biomédicales"
+      },
+      "item4": {
+        "title": "Semestre d'Échange — Informatique",
+        "company": "Université Yeditepe, Istanbul, Turquie",
+        "period": "Jan 2023 - Juin 2023",
+        "achievement1": "Programme d'échange Erasmus axé sur l'informatique et le travail d'équipe international",
+        "achievement2": "Cours spécialisés en programmation orientée objet",
+        "achievement3": "Développement de l'adaptabilité et des compétences de collaboration interculturelle"
       }
     },
     "contact": {

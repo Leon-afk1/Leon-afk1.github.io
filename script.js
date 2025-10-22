@@ -477,7 +477,368 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 });
 
+// Language System
+let currentLanguage = 'en';
+let translations = {};
+
+// Load translations from JSON file
+async function loadTranslations() {
+    try {
+        const response = await fetch('./texte.json');
+        translations = await response.json();
+        console.log('Translations loaded successfully:', translations);
+        
+        // Set default language from localStorage or browser preference
+        const savedLanguage = localStorage.getItem('language') || 
+                             (navigator.language.startsWith('fr') ? 'fr' : 'en');
+        
+        console.log('Setting initial language to:', savedLanguage);
+        setLanguage(savedLanguage);
+    } catch (error) {
+        console.error('Error loading translations:', error);
+        // Fallback: keep current content if JSON fails to load
+    }
+}
+
+// Helper function to safely update element content
+function safeUpdateElement(selector, content, attribute = 'textContent') {
+    try {
+        const element = document.querySelector(selector);
+        if (element) {
+            if (attribute === 'textContent') {
+                element.textContent = content;
+            } else {
+                element.setAttribute(attribute, content);
+            }
+        } else {
+            console.warn('Element not found:', selector);
+        }
+    } catch (error) {
+        console.warn('Error updating element:', selector, error);
+    }
+}
+
+// Update page content with current language
+function updateContent() {
+    if (!translations[currentLanguage]) {
+        console.log('No translations available for language:', currentLanguage);
+        return;
+    }
+    
+    console.log('Updating content to language:', currentLanguage);
+    const t = translations[currentLanguage];
+    
+    // Update debug indicator immediately
+    const currentLangElement = document.getElementById('current-lang');
+    if (currentLangElement) {
+        currentLangElement.textContent = `${currentLanguage.toUpperCase()} (${currentLanguage === 'en' ? 'English' : 'Français'})`;
+    }
+    
+    // Update page title and meta
+    document.title = t.pageTitle;
+    const metaDesc = document.querySelector('meta[name="description"]');
+    if (metaDesc) metaDesc.content = t.metaDescription;
+    
+    // Navigation
+    safeUpdateElement('.nav-logo', t.nav.logo);
+    safeUpdateElement('a[href="#about"]', t.nav.about);
+    safeUpdateElement('a[href="#skills"]', t.nav.skills);
+    safeUpdateElement('a[href="#projects"]', t.nav.projects);
+    safeUpdateElement('a[href="#experience"]', t.nav.experience);
+    safeUpdateElement('a[href="#contact"]', t.nav.contact);
+    safeUpdateElement('#theme-toggle', t.nav.themeToggleLabel, 'aria-label');
+    
+    // Hero section - using direct updates for testing
+    const heroGreeting = document.querySelector('.hero-greeting');
+    const heroName = document.querySelector('.hero-name');
+    const heroSubtitle = document.querySelector('.hero-subtitle');
+    const heroDescription = document.querySelector('.hero-description');
+    const btnPrimary = document.querySelector('.hero-buttons .btn-primary');
+    const btnSecondary = document.querySelector('.hero-buttons .btn-secondary');
+    
+    if (heroGreeting) {
+        heroGreeting.textContent = t.hero.greeting;
+        console.log('Updated hero greeting to:', t.hero.greeting);
+    }
+    if (heroName) {
+        heroName.textContent = t.hero.name;
+        heroName.setAttribute('data-text', t.hero.name.split(' ')[0]);
+        console.log('Updated hero name to:', t.hero.name);
+    }
+    if (heroSubtitle) {
+        heroSubtitle.textContent = t.hero.subtitle;
+        console.log('Updated hero subtitle to:', t.hero.subtitle);
+    }
+    if (heroDescription) {
+        heroDescription.textContent = t.hero.description;
+        console.log('Updated hero description');
+    }
+    if (btnPrimary) {
+        btnPrimary.textContent = t.hero.buttonProjects;
+        console.log('Updated primary button to:', t.hero.buttonProjects);
+    }
+    if (btnSecondary) {
+        btnSecondary.textContent = t.hero.buttonContact;
+        console.log('Updated secondary button to:', t.hero.buttonContact);
+    }
+    
+    // About section
+    safeUpdateElement('#about .section-title', t.about.title);
+    const aboutTexts = document.querySelectorAll('.about-text p');
+    if (aboutTexts[0]) aboutTexts[0].textContent = t.about.paragraph1;
+    if (aboutTexts[1]) aboutTexts[1].textContent = t.about.paragraph2;
+    
+    // Stats
+    const statLabels = document.querySelectorAll('.stat-label');
+    if (statLabels[0]) statLabels[0].textContent = t.about.stat1Label;
+    if (statLabels[1]) statLabels[1].textContent = t.about.stat2Label;
+    if (statLabels[2]) statLabels[2].textContent = t.about.stat3Label;
+    
+    // Skills section
+    document.querySelector('#skills .section-title').textContent = t.skills.title;
+    const skillCategories = document.querySelectorAll('.skill-category');
+    
+    skillCategories[0].querySelector('h3').textContent = t.skills.category1Title;
+    const cat1Items = skillCategories[0].querySelectorAll('li');
+    cat1Items[0].textContent = t.skills.category1Item1;
+    cat1Items[1].textContent = t.skills.category1Item2;
+    cat1Items[2].textContent = t.skills.category1Item3;
+    cat1Items[3].textContent = t.skills.category1Item4;
+    
+    skillCategories[1].querySelector('h3').textContent = t.skills.category2Title;
+    const cat2Items = skillCategories[1].querySelectorAll('li');
+    cat2Items[0].textContent = t.skills.category2Item1;
+    cat2Items[1].textContent = t.skills.category2Item2;
+    cat2Items[2].textContent = t.skills.category2Item3;
+    cat2Items[3].textContent = t.skills.category2Item4;
+    
+    skillCategories[2].querySelector('h3').textContent = t.skills.category3Title;
+    const cat3Items = skillCategories[2].querySelectorAll('li');
+    cat3Items[0].textContent = t.skills.category3Item1;
+    cat3Items[1].textContent = t.skills.category3Item2;
+    cat3Items[2].textContent = t.skills.category3Item3;
+    cat3Items[3].textContent = t.skills.category3Item4;
+    
+    // Projects section
+    document.querySelector('#projects .section-title').textContent = t.projects.title;
+    const projectCards = document.querySelectorAll('.project-card');
+    
+    // Project 1
+    projectCards[0].querySelector('h3').textContent = t.projects.card1.title;
+    const card1Tags = projectCards[0].querySelectorAll('.tag');
+    card1Tags[0].textContent = t.projects.card1.tag1;
+    card1Tags[1].textContent = t.projects.card1.tag2;
+    card1Tags[2].textContent = t.projects.card1.tag3;
+    card1Tags[3].textContent = t.projects.card1.tag4;
+    projectCards[0].querySelector('.project-description').textContent = t.projects.card1.description;
+    const card1Links = projectCards[0].querySelectorAll('.project-link');
+    card1Links[0].textContent = t.projects.card1.link1Text;
+    card1Links[1].textContent = t.projects.card1.link2Text;
+    
+    // Project 2
+    projectCards[1].querySelector('h3').textContent = t.projects.card2.title;
+    const card2Tags = projectCards[1].querySelectorAll('.tag');
+    card2Tags[0].textContent = t.projects.card2.tag1;
+    card2Tags[1].textContent = t.projects.card2.tag2;
+    card2Tags[2].textContent = t.projects.card2.tag3;
+    card2Tags[3].textContent = t.projects.card2.tag4;
+    projectCards[1].querySelector('.project-description').textContent = t.projects.card2.description;
+    projectCards[1].querySelector('.project-link').textContent = t.projects.card2.link1Text;
+    
+    // Project 3
+    projectCards[2].querySelector('h3').textContent = t.projects.card3.title;
+    const card3Tags = projectCards[2].querySelectorAll('.tag');
+    card3Tags[0].textContent = t.projects.card3.tag1;
+    card3Tags[1].textContent = t.projects.card3.tag2;
+    card3Tags[2].textContent = t.projects.card3.tag3;
+    card3Tags[3].textContent = t.projects.card3.tag4;
+    projectCards[2].querySelector('.project-description').textContent = t.projects.card3.description;
+    projectCards[2].querySelector('.project-link').textContent = t.projects.card3.link1Text;
+    
+    // Project 4
+    projectCards[3].querySelector('h3').textContent = t.projects.card4.title;
+    const card4Tags = projectCards[3].querySelectorAll('.tag');
+    card4Tags[0].textContent = t.projects.card4.tag1;
+    card4Tags[1].textContent = t.projects.card4.tag2;
+    card4Tags[2].textContent = t.projects.card4.tag3;
+    projectCards[3].querySelector('.project-description').textContent = t.projects.card4.description;
+    const card4Links = projectCards[3].querySelectorAll('.project-link');
+    card4Links[0].textContent = t.projects.card4.link1Text;
+    card4Links[1].textContent = t.projects.card4.link2Text;
+    
+    // Project 5
+    projectCards[4].querySelector('h3').textContent = t.projects.card5.title;
+    const card5Tags = projectCards[4].querySelectorAll('.tag');
+    card5Tags[0].textContent = t.projects.card5.tag1;
+    card5Tags[1].textContent = t.projects.card5.tag2;
+    card5Tags[2].textContent = t.projects.card5.tag3;
+    card5Tags[3].textContent = t.projects.card5.tag4;
+    projectCards[4].querySelector('.project-description').textContent = t.projects.card5.description;
+    const card5Links = projectCards[4].querySelectorAll('.project-link');
+    card5Links[0].textContent = t.projects.card5.link1Text;
+    card5Links[1].textContent = t.projects.card5.link2Text;
+    
+    // Project 6
+    projectCards[5].querySelector('h3').textContent = t.projects.card6.title;
+    const card6Tags = projectCards[5].querySelectorAll('.tag');
+    card6Tags[0].textContent = t.projects.card6.tag1;
+    card6Tags[1].textContent = t.projects.card6.tag2;
+    projectCards[5].querySelector('.project-description').textContent = t.projects.card6.description;
+    const card6Links = projectCards[5].querySelectorAll('.project-link');
+    card6Links[0].textContent = t.projects.card6.link1Text;
+    card6Links[1].textContent = t.projects.card6.link2Text;
+    
+    // MNIST Demo section
+    document.querySelector('#mnist-demo .section-title').textContent = t.mnistDemo.title;
+    document.querySelector('.mnist-description').textContent = t.mnistDemo.description;
+    document.querySelector('.drawing-section h3').textContent = t.mnistDemo.drawingTitle;
+    document.querySelector('#clearCanvas').textContent = t.mnistDemo.clearButton;
+    document.querySelector('#predictDigit').textContent = t.mnistDemo.predictButton;
+    document.querySelector('.preview-section h3').textContent = t.mnistDemo.previewTitle;
+    const previewInfo = document.querySelectorAll('.preview-info p');
+    previewInfo[0].textContent = t.mnistDemo.previewLine1;
+    previewInfo[1].textContent = t.mnistDemo.previewLine2;
+    previewInfo[2].textContent = t.mnistDemo.previewLine3;
+    document.querySelector('.prediction-section h3').textContent = t.mnistDemo.predictionTitle;
+    
+    // Experience section
+    document.querySelector('#experience .section-title').textContent = t.experience.title;
+    const timelineItems = document.querySelectorAll('.timeline-item');
+    
+    // Experience 1
+    timelineItems[0].querySelector('h3').textContent = t.experience.item1.title;
+    timelineItems[0].querySelector('.company').textContent = t.experience.item1.company;
+    timelineItems[0].querySelector('.period').textContent = t.experience.item1.period;
+    const exp1Achievements = timelineItems[0].querySelectorAll('.achievements li');
+    exp1Achievements[0].textContent = t.experience.item1.achievement1;
+    exp1Achievements[1].textContent = t.experience.item1.achievement2;
+    exp1Achievements[2].textContent = t.experience.item1.achievement3;
+    
+    // Experience 2
+    timelineItems[1].querySelector('h3').textContent = t.experience.item2.title;
+    timelineItems[1].querySelector('.company').textContent = t.experience.item2.company;
+    timelineItems[1].querySelector('.period').textContent = t.experience.item2.period;
+    const exp2Achievements = timelineItems[1].querySelectorAll('.achievements li');
+    exp2Achievements[0].textContent = t.experience.item2.achievement1;
+    exp2Achievements[1].textContent = t.experience.item2.achievement2;
+    exp2Achievements[2].textContent = t.experience.item2.achievement3;
+    exp2Achievements[3].textContent = t.experience.item2.achievement4;
+    
+    // Experience 3 (Exchange)
+    timelineItems[2].querySelector('h3').textContent = t.experience.item4.title;
+    timelineItems[2].querySelector('.company').textContent = t.experience.item4.company;
+    timelineItems[2].querySelector('.period').textContent = t.experience.item4.period;
+    const exp3Achievements = timelineItems[2].querySelectorAll('.achievements li');
+    exp3Achievements[0].textContent = t.experience.item4.achievement1;
+    exp3Achievements[1].textContent = t.experience.item4.achievement2;
+    exp3Achievements[2].textContent = t.experience.item4.achievement3;
+    
+    // Experience 4 (Ksilink internship)
+    timelineItems[3].querySelector('h3').textContent = t.experience.item3.title;
+    timelineItems[3].querySelector('.company').textContent = t.experience.item3.company;
+    timelineItems[3].querySelector('.period').textContent = t.experience.item3.period;
+    const exp4Achievements = timelineItems[3].querySelectorAll('.achievements li');
+    exp4Achievements[0].textContent = t.experience.item3.achievement1;
+    exp4Achievements[1].textContent = t.experience.item3.achievement2;
+    exp4Achievements[2].textContent = t.experience.item3.achievement3;
+    
+    // Contact section
+    document.querySelector('#contact .section-title').textContent = t.contact.title;
+    document.querySelector('.contact-description').textContent = t.contact.description;
+    const contactMethods = document.querySelectorAll('.contact-method span:last-child');
+    contactMethods[0].textContent = t.contact.method1;
+    contactMethods[1].textContent = t.contact.method2;
+    contactMethods[2].textContent = t.contact.method3;
+    
+    // Contact form
+    document.querySelector('label[for="name"]').textContent = t.contact.form.nameLabel;
+    document.querySelector('label[for="email"]').textContent = t.contact.form.emailLabel;
+    document.querySelector('label[for="message"]').textContent = t.contact.form.messageLabel;
+    document.querySelector('.btn-text').textContent = t.contact.form.submitButton;
+    document.querySelector('.btn-loading').textContent = t.contact.form.submitButtonLoading;
+    
+    // Footer
+    document.querySelector('.footer p').textContent = t.footer.copyright;
+}
+
+// Set language and update interface
+function setLanguage(lang) {
+    console.log('setLanguage called with:', lang);
+    currentLanguage = lang;
+    localStorage.setItem('language', lang);
+    
+    // Update language toggle button
+    const languageIcon = document.querySelector('.language-icon');
+    if (languageIcon) {
+        languageIcon.textContent = lang === 'en' ? '🇫🇷' : '🇺🇸';
+        console.log('Language icon updated to:', languageIcon.textContent);
+    } else {
+        console.warn('Language icon element not found');
+    }
+    
+    // Update page HTML lang attribute
+    document.documentElement.lang = lang;
+    
+    updateContent();
+}
+
+// Initialize language system
+function initializeLanguageSystem() {
+    console.log('Initializing language system...');
+    const languageToggle = document.getElementById('language-toggle');
+    
+    if (languageToggle) {
+        console.log('Language toggle button found, adding event listener...');
+        languageToggle.addEventListener('click', function() {
+            const newLanguage = currentLanguage === 'en' ? 'fr' : 'en';
+            console.log('Switching language from', currentLanguage, 'to', newLanguage);
+            setLanguage(newLanguage);
+            
+            // Add rotation animation
+            languageToggle.style.transform = 'rotate(360deg)';
+            setTimeout(() => {
+                languageToggle.style.transform = 'rotate(0deg)';
+            }, 300);
+        });
+    } else {
+        console.warn('Language toggle button not found!');
+    }
+    
+    // Load translations when page loads
+    loadTranslations();
+}
+
+// Language Toggle Functionality
+document.addEventListener('DOMContentLoaded', function() {
+    // Initialize language system
+    initializeLanguageSystem();
+});
+
 console.log('🚀 Portfolio website loaded successfully!');
+
+// Test function for debugging (can be called from browser console)
+window.testLanguageSystem = function() {
+    console.log('Current language:', currentLanguage);
+    console.log('Available translations:', Object.keys(translations));
+    console.log('French translations loaded:', !!translations.fr);
+    console.log('English translations loaded:', !!translations.en);
+    
+    if (translations.fr) {
+        console.log('Sample French text:', translations.fr.hero.greeting);
+    }
+    if (translations.en) {
+        console.log('Sample English text:', translations.en.hero.greeting);
+    }
+};
+
+// Test function to manually switch language
+window.switchToFrench = function() {
+    setLanguage('fr');
+};
+
+window.switchToEnglish = function() {
+    setLanguage('en');
+};
 
 /*
 // Pathfinding Maze Visualization
@@ -1468,7 +1829,9 @@ document.addEventListener('DOMContentLoaded', function() {
     // Update prediction table
     function updatePredictionTable(predictions) {
         if (predictions.length === 0) {
-            predictionTable.innerHTML = '<div class="prediction-row"><span class="digit">Draw a digit to see predictions</span></div>';
+            const t = translations[currentLanguage] || translations['en'] || {};
+            const placeholder = t.mnistDemo?.predictionPlaceholder || 'Draw a digit to see predictions';
+            predictionTable.innerHTML = `<div class="prediction-row"><span class="digit">${placeholder}</span></div>`;
             return;
         }
         
@@ -1510,7 +1873,8 @@ document.addEventListener('DOMContentLoaded', function() {
             const max = Math.max(...inputData);
             console.log(`Input stats - Mean: ${mean.toFixed(4)}, Min: ${min.toFixed(4)}, Max: ${max.toFixed(4)}`);
             
-            predictBtn.textContent = 'Predicting...';
+            const t = translations[currentLanguage] || translations['en'] || {};
+            predictBtn.textContent = t.mnistDemo?.predictingButton || 'Predicting...';
             predictBtn.disabled = true;
             
             // Use your actual PyTorch model for prediction
@@ -1522,7 +1886,7 @@ document.addEventListener('DOMContentLoaded', function() {
             console.error('Prediction error:', error);
             alert('Error during prediction. Please try again.');
         } finally {
-            predictBtn.textContent = 'Predict';
+            predictBtn.textContent = t.mnistDemo?.predictButton || 'Predict';
             predictBtn.disabled = false;
         }
     });

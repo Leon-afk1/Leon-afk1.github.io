@@ -118,6 +118,51 @@ p {
     transition: transform 0.3s ease;
 }
 
+/* Language Toggle Button */
+.language-toggle {
+    background: var(--card-bg);
+    border: 2px solid var(--border-color);
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 1.5rem;
+    box-shadow: 0 4px 15px var(--shadow-light);
+    margin-left: 1rem;
+}
+
+.language-toggle:hover {
+    transform: scale(1.1) rotate(5deg);
+    box-shadow: 0 6px 20px var(--shadow-medium);
+}
+
+.language-icon {
+    transition: transform 0.3s ease;
+}
+
+/* Mobile Navigation Controls */
+@media (max-width: 768px) {
+    .nav-controls {
+        gap: 0.5rem;
+    }
+    
+    .theme-toggle,
+    .language-toggle {
+        width: 40px;
+        height: 40px;
+        font-size: 1.2rem;
+        margin-left: 0;
+    }
+    
+    .nav-container {
+        padding: 0 1rem;
+    }
+}
+
 /* Glitch Effect for Name */
 .glitch {
     position: relative;
@@ -319,6 +364,12 @@ p {
     justify-content: space-between;
     align-items: center;
     height: 70px;
+}
+
+.nav-controls {
+    display: flex;
+    align-items: center;
+    gap: 0;
 }
 
 .nav-logo {
