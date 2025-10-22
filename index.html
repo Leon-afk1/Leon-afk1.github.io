@@ -10,6 +10,8 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <!-- ONNX Runtime Web for PyTorch MNIST model -->
+    <script src="https://cdn.jsdelivr.net/npm/onnxruntime-web/dist/ort.min.js"></script>
 </head>
 <body>
     <!-- Navigation -->
@@ -231,6 +233,27 @@
 
                 <article class="project-card">
                     <div class="project-header">
+                        <h3>MNIST Digit Recognition CNN</h3>
+                        <div class="project-tags">
+                            <span class="tag">CNN</span>
+                            <span class="tag">PyTorch</span>
+                            <span class="tag">Computer Vision</span>
+                            <span class="tag">Deep Learning</span>
+                        </div>
+                    </div>
+                    <p class="project-description">
+                        One of my first machine learning projects was building a Convolutional Neural Network 
+                        to recognize handwritten digits from the famous MNIST dataset. This PyTorch-trained CNN 
+                        achieves high accuracy on digit classification tasks.
+                    </p>
+                    <div class="project-links">
+                        <a href="#mnist-demo" class="project-link">Try Live Demo</a>
+                        <a href="https://www.utbm.fr/" class="project-link">UTBM</a>
+                    </div>
+                </article>
+
+                <article class="project-card">
+                    <div class="project-header">
                         <h3>Tangram Solver</h3>
                         <div class="project-tags">
                             <span class="tag">First AI project</span>
@@ -246,6 +269,52 @@
                         <a href="https://www.utbm.fr/" class="project-link">UTBM</a>
                     </div>
                 </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- MNIST Interactive Demo Section -->
+    <section id="mnist-demo" class="mnist-section">
+        <div class="container">
+            <h2 class="section-title">Interactive MNIST Demo</h2>
+            <div class="mnist-intro">
+                <p class="mnist-description">
+                    One of my first machine learning projects was building a Convolutional Neural Network 
+                    to recognize handwritten digits from the famous MNIST dataset. This PyTorch-trained CNN 
+                    runs directly in your browser using ONNX.js. Try drawing a digit below and see the model's predictions!
+                </p>
+            </div>
+            
+            <div class="mnist-demo-container">
+                <div class="drawing-section">
+                    <h3>Draw a digit (0-9):</h3>
+                    <canvas id="drawingCanvas" width="280" height="280"></canvas>
+                    <div class="canvas-controls">
+                        <button id="clearCanvas" class="btn btn-secondary">Clear</button>
+                        <button id="predictDigit" class="btn btn-primary">Predict</button>
+                    </div>
+                </div>
+                
+                <div class="preview-section">
+                    <h3>How the model sees it:</h3>
+                    <div class="preview-container">
+                        <canvas id="previewCanvas" width="140" height="140"></canvas>
+                        <div class="preview-info">
+                            <p>28×28 pixels</p>
+                            <p>White digit on black background</p>
+                            <p>Normalized and centered</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="prediction-section">
+                    <h3>Model Predictions:</h3>
+                    <div id="predictionTable" class="prediction-table">
+                        <div class="prediction-row">
+                            <span class="digit">Draw a digit to see predictions</span>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </section>

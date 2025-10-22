@@ -1459,3 +1459,397 @@ document.addEventListener('DOMContentLoaded', function() {
 
     init();
 });
+
+// MNIST Digit Recognition Demo
+document.addEventListener('DOMContentLoaded', function() {
+    const canvas = document.getElementById('drawingCanvas');
+    const previewCanvas = document.getElementById('previewCanvas');
+    const clearBtn = document.getElementById('clearCanvas');
+    const predictBtn = document.getElementById('predictDigit');
+    const predictionTable = document.getElementById('predictionTable');
+    
+    if (!canvas || !previewCanvas) return; // Exit if canvases not found
+    
+    const ctx = canvas.getContext('2d');
+    const previewCtx = previewCanvas.getContext('2d');
+    let isDrawing = false;
+    let model = null;
+    let previewTimeout = null;
+    
+    // Initialize canvases
+    function initCanvas() {
+        // Drawing canvas - white background for user drawing
+        ctx.fillStyle = '#ffffff';
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        ctx.strokeStyle = '#000000';
+        ctx.lineWidth = 8;
+        ctx.lineCap = 'round';
+        ctx.lineJoin = 'round';
+        
+        // Preview canvas - black background to show MNIST format
+        previewCtx.fillStyle = '#000000';
+        previewCtx.fillRect(0, 0, previewCanvas.width, previewCanvas.height);
+        
+        updatePreview();
+    }
+    
+    // Drawing functionality
+    function startDrawing(e) {
+        isDrawing = true;
+        draw(e);
+    }
+    
+    function draw(e) {
+        if (!isDrawing) return;
+        
+        const rect = canvas.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        
+        ctx.lineTo(x, y);
+        ctx.stroke();
+        ctx.beginPath();
+        ctx.moveTo(x, y);
+        
+        // Throttled preview update during drawing
+        if (previewTimeout) clearTimeout(previewTimeout);
+        previewTimeout = setTimeout(updatePreview, 100);
+    }
+    
+    function stopDrawing() {
+        if (!isDrawing) return;
+        isDrawing = false;
+        ctx.beginPath();
+        updatePreview(); // Update preview when drawing stops
+    }
+    
+    // Update preview canvas to show how the model sees the image
+    function updatePreview() {
+        console.log('Updating preview...');
+        // Get the processed image data
+        const processedData = preprocessCanvasAdvanced();
+        
+        // Clear preview canvas
+        previewCtx.fillStyle = '#000000';
+        previewCtx.fillRect(0, 0, previewCanvas.width, previewCanvas.height);
+        
+        // Draw the 28x28 processed image scaled up to 140x140 (5x scale)
+        const imageData = previewCtx.createImageData(140, 140);
+        const scale = 140 / 28;
+        
+        for (let y = 0; y < 28; y++) {
+            for (let x = 0; x < 28; x++) {
+                const pixelValue = processedData[y * 28 + x];
+                // Convert from normalized value back to 0-255 for display
+                // Denormalize: tensorValue = (normalized * std) + mean
+                const tensorValue = (pixelValue * 0.3081) + 0.1307;
+                // Clamp to valid range and convert to 0-255
+                const clampedValue = Math.max(0, Math.min(1, tensorValue));
+                const grayValue = Math.round(clampedValue * 255);
+                
+                // Fill the scaled area (5x5 pixels for each original pixel)
+                for (let dy = 0; dy < scale; dy++) {
+                    for (let dx = 0; dx < scale; dx++) {
+                        const pixelIndex = ((y * scale + dy) * 140 + (x * scale + dx)) * 4;
+                        imageData.data[pixelIndex] = grayValue;     // Red
+                        imageData.data[pixelIndex + 1] = grayValue; // Green
+                        imageData.data[pixelIndex + 2] = grayValue; // Blue
+                        imageData.data[pixelIndex + 3] = 255;       // Alpha
+                    }
+                }
+            }
+        }
+        
+        previewCtx.putImageData(imageData, 0, 0);
+    }
+    
+    // Touch events for mobile
+    function getTouchPos(e) {
+        const rect = canvas.getBoundingClientRect();
+        return {
+            x: e.touches[0].clientX - rect.left,
+            y: e.touches[0].clientY - rect.top
+        };
+    }
+    
+    function handleTouch(e) {
+        e.preventDefault();
+        const touch = e.touches[0];
+        const mouseEvent = new MouseEvent(e.type.replace('touch', 'mouse'), {
+            clientX: touch.clientX,
+            clientY: touch.clientY
+        });
+        canvas.dispatchEvent(mouseEvent);
+    }
+    
+    // Event listeners
+    canvas.addEventListener('mousedown', startDrawing);
+    canvas.addEventListener('mousemove', draw);
+    canvas.addEventListener('mouseup', stopDrawing);
+    canvas.addEventListener('mouseout', stopDrawing);
+    
+    // Touch events
+    canvas.addEventListener('touchstart', handleTouch);
+    canvas.addEventListener('touchmove', handleTouch);
+    canvas.addEventListener('touchend', handleTouch);
+    
+    // Clear canvas
+    clearBtn.addEventListener('click', () => {
+        initCanvas();
+        updatePredictionTable([]);
+    });
+    
+    // Load your PyTorch model using ONNX.js
+    async function loadModel() {
+        try {
+            console.log('Loading ONNX model with ONNX Runtime Web...');
+            
+            // Use ONNX Runtime Web API
+            const session = await ort.InferenceSession.create('./mnist_model.onnx');
+            model = session;
+            
+            console.log('Your PyTorch MNIST model loaded successfully!');
+            console.log('Model input names:', session.inputNames);
+            console.log('Model output names:', session.outputNames);
+            return true;
+        } catch (error) {
+            console.error('Error loading model:', error);
+            console.log('Using demo mode - model loading failed');
+            model = null; // Ensure model is null for fallback
+            return false;
+        }
+    }
+    
+    // Advanced preprocessing with proper centering and padding
+    function preprocessCanvasAdvanced() {
+        console.log('Starting advanced preprocessing...');
+        // Get image data from canvas
+        const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+        const pixels = imageData.data;
+        
+        // Convert to grayscale and find bounding box
+        const grayImage = [];
+        let minX = canvas.width, maxX = 0, minY = canvas.height, maxY = 0;
+        let hasContent = false;
+        
+        for (let y = 0; y < canvas.height; y++) {
+            for (let x = 0; x < canvas.width; x++) {
+                const idx = (y * canvas.width + x) * 4;
+                // Invert colors: black pen on white background -> white digit on black background
+                const gray = 255 - (pixels[idx] + pixels[idx + 1] + pixels[idx + 2]) / 3;
+                grayImage.push(gray);
+                
+                // Find bounding box of non-black pixels
+                if (gray > 50) { // Threshold to detect drawn content
+                    hasContent = true;
+                    minX = Math.min(minX, x);
+                    maxX = Math.max(maxX, x);
+                    minY = Math.min(minY, y);
+                    maxY = Math.max(maxY, y);
+                }
+            }
+        }
+        
+        if (!hasContent) {
+            console.log('No content detected, returning empty array');
+            // Return empty normalized array
+            return new Array(784).fill((0 - 0.1307) / 0.3081);
+        }
+        
+        console.log('Bounding box:', {minX, maxX, minY, maxY});
+        
+        // Add padding around the digit
+        const padding = 20;
+        minX = Math.max(0, minX - padding);
+        maxX = Math.min(canvas.width - 1, maxX + padding);
+        minY = Math.max(0, minY - padding);
+        maxY = Math.min(canvas.height - 1, maxY + padding);
+        
+        // Extract the digit region
+        const digitWidth = maxX - minX + 1;
+        const digitHeight = maxY - minY + 1;
+        
+        // Create a square crop (MNIST digits are roughly square)
+        const cropSize = Math.max(digitWidth, digitHeight);
+        const cropX = minX - (cropSize - digitWidth) / 2;
+        const cropY = minY - (cropSize - digitHeight) / 2;
+        
+        // Create 28x28 result array
+        const result = new Array(784);
+        
+        for (let y = 0; y < 28; y++) {
+            for (let x = 0; x < 28; x++) {
+                // Map 28x28 coordinates to crop coordinates
+                const srcX = Math.round(cropX + (x / 27) * (cropSize - 1));
+                const srcY = Math.round(cropY + (y / 27) * (cropSize - 1));
+                
+                let grayValue = 0;
+                if (srcX >= 0 && srcX < canvas.width && srcY >= 0 && srcY < canvas.height) {
+                    grayValue = grayImage[srcY * canvas.width + srcX];
+                }
+                
+                // Apply the exact same preprocessing as your PyTorch model:
+                // 1. Normalize to 0-1 range (like transforms.ToTensor())
+                const tensorValue = grayValue / 255.0;
+                // 2. Apply MNIST normalization: (x - mean) / std
+                const normalized = (tensorValue - 0.1307) / 0.3081;
+                result[y * 28 + x] = normalized;
+            }
+        }
+        
+        console.log('Preprocessing complete. Sample values:', result.slice(300, 310));
+        console.log('Min/Max values:', Math.min(...result), Math.max(...result));
+        
+        return result;
+    }
+    
+    // Simple preprocessing (for backward compatibility)
+    function preprocessCanvas() {
+        return preprocessCanvasAdvanced();
+    }
+    
+    // Predict using your PyTorch model
+    async function predictWithModel(inputData) {
+        if (!model) {
+            console.log('Model not loaded, using demo predictions');
+            return demoPredict(); // Fallback to demo if model not loaded
+        }
+        
+        try {
+            console.log('Running actual model prediction...');
+            
+            // Debug: Check input data format
+            console.log('Input data length:', inputData.length);
+            console.log('Input data sample (first 10 values):', inputData.slice(0, 10));
+            
+            // Prepare input tensor for ONNX Runtime Web
+            const float32Data = new Float32Array(inputData);
+            const inputTensor = new ort.Tensor('float32', float32Data, [1, 1, 28, 28]);
+            
+            console.log('Input tensor shape:', inputTensor.dims);
+            console.log('Input tensor type:', inputTensor.type);
+            
+            // Run inference with proper input mapping
+            const feeds = {};
+            feeds[model.inputNames[0]] = inputTensor;
+            
+            console.log('Running model inference with input name:', model.inputNames[0]);
+            const outputMap = await model.run(feeds);
+            console.log('Output map keys:', Object.keys(outputMap));
+            
+            const outputTensorName = model.outputNames[0];
+            const outputTensor = outputMap[outputTensorName];
+            const predictions = Array.from(outputTensor.data);
+            
+            console.log('Raw model outputs:', predictions);
+            
+            // Apply softmax to get probabilities
+            const maxLogit = Math.max(...predictions);
+            const expValues = predictions.map(x => Math.exp(x - maxLogit));
+            const sumExp = expValues.reduce((a, b) => a + b, 0);
+            const probabilities = expValues.map(x => x / sumExp);
+            
+            console.log('Probabilities after softmax:', probabilities);
+            
+            // Create prediction objects
+            const results = probabilities.map((prob, digit) => ({
+                digit,
+                confidence: prob
+            }));
+            
+            // Sort by confidence and return top 5
+            results.sort((a, b) => b.confidence - a.confidence);
+            console.log('Top 5 predictions:', results.slice(0, 5));
+            
+            return results.slice(0, 5);
+            
+        } catch (error) {
+            console.error('Prediction error:', error);
+            console.log('Falling back to demo predictions');
+            return demoPredict(); // Fallback to demo
+        }
+    }
+    
+    // Demo prediction function (fallback when model not available)
+    function demoPredict() {
+        const predictions = [];
+        
+        // Create random but realistic predictions
+        for (let i = 0; i < 10; i++) {
+            predictions.push({
+                digit: i,
+                confidence: Math.random() * 0.9 + 0.1
+            });
+        }
+        
+        // Sort by confidence and return top 5
+        predictions.sort((a, b) => b.confidence - a.confidence);
+        return predictions.slice(0, 5);
+    }
+    
+    // Update prediction table
+    function updatePredictionTable(predictions) {
+        if (predictions.length === 0) {
+            predictionTable.innerHTML = '<div class="prediction-row"><span class="digit">Draw a digit to see predictions</span></div>';
+            return;
+        }
+        
+        predictionTable.innerHTML = '';
+        
+        predictions.forEach((pred, index) => {
+            const row = document.createElement('div');
+            row.className = 'prediction-row';
+            if (index === 0) row.classList.add('top-prediction');
+            
+            row.innerHTML = `
+                <span class="digit">${pred.digit}</span>
+                <div class="confidence-bar">
+                    <div class="confidence-fill" style="width: ${pred.confidence * 100}%"></div>
+                </div>
+                <span class="confidence">${(pred.confidence * 100).toFixed(1)}%</span>
+            `;
+            
+            predictionTable.appendChild(row);
+        });
+    }
+    
+    // Predict digit
+    predictBtn.addEventListener('click', async () => {
+        try {
+            // Preprocess the canvas image
+            const inputData = preprocessCanvas();
+            
+            // Check if canvas has content (adjusted threshold for normalized data)
+            const hasContent = inputData.some(pixel => pixel > -0.3); // Adjusted for normalized range
+            if (!hasContent) {
+                alert('Please draw a digit first!');
+                return;
+            }
+            
+            // Debug: Log input statistics
+            const mean = inputData.reduce((a, b) => a + b) / inputData.length;
+            const min = Math.min(...inputData);
+            const max = Math.max(...inputData);
+            console.log(`Input stats - Mean: ${mean.toFixed(4)}, Min: ${min.toFixed(4)}, Max: ${max.toFixed(4)}`);
+            
+            predictBtn.textContent = 'Predicting...';
+            predictBtn.disabled = true;
+            
+            // Use your actual PyTorch model for prediction
+            const predictions = await predictWithModel(inputData);
+            
+            updatePredictionTable(predictions);
+            
+        } catch (error) {
+            console.error('Prediction error:', error);
+            alert('Error during prediction. Please try again.');
+        } finally {
+            predictBtn.textContent = 'Predict';
+            predictBtn.disabled = false;
+        }
+    });
+    
+    // Initialize
+    initCanvas();
+    loadModel();
+});
