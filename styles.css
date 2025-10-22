@@ -285,118 +285,7 @@ p {
     100% { transform: translateY(100%); }
 }
 
-/* Easter Egg Modal */
-.modal {
-    display: none;
-    position: fixed;
-    z-index: 10000;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.8);
-    backdrop-filter: blur(10px);
-}
 
-.modal-content {
-    background-color: var(--card-bg);
-    margin: 10% auto;
-    padding: 2rem;
-    border-radius: 15px;
-    width: 80%;
-    max-width: 500px;
-    text-align: center;
-    box-shadow: 0 20px 60px var(--shadow-heavy);
-    animation: modal-appear 0.5s ease-out;
-    border: 2px solid var(--accent-primary);
-}
-
-@keyframes modal-appear {
-    from { 
-        opacity: 0; 
-        transform: scale(0.7) translateY(-50px); 
-    }
-    to { 
-        opacity: 1; 
-        transform: scale(1) translateY(0); 
-    }
-}
-
-.close {
-    color: var(--text-muted);
-    float: right;
-    font-size: 28px;
-    font-weight: bold;
-    cursor: pointer;
-    transition: color 0.3s ease;
-}
-
-.close:hover {
-    color: var(--accent-primary);
-}
-
-.secret-message {
-    margin: 1.5rem 0;
-    padding: 1rem;
-    background: var(--bg-secondary);
-    border-radius: 10px;
-    border-left: 4px solid var(--accent-primary);
-}
-
-.achievement {
-    margin-top: 1rem;
-    padding: 0.5rem;
-    background: linear-gradient(45deg, #ffd700, #ffed4e);
-    color: #1a202c;
-    border-radius: 8px;
-    font-weight: bold;
-    animation: achievement-glow 2s ease-in-out infinite alternate;
-}
-
-@keyframes achievement-glow {
-    0% { box-shadow: 0 0 10px rgba(255, 215, 0, 0.5); }
-    100% { box-shadow: 0 0 30px rgba(255, 215, 0, 0.8); }
-}
-
-.easter-egg-trigger {
-    cursor: pointer;
-    transition: transform 0.3s ease;
-    display: inline-block;
-}
-
-.easter-egg-trigger:hover {
-    transform: scale(1.2) rotate(10deg);
-}
-
-.easter-egg-text {
-    font-size: 0.9rem;
-    opacity: 0.7;
-    margin-top: 0.5rem;
-    font-style: italic;
-}
-
-/* Interactive Basketball */
-.interactive-basketball {
-    position: fixed;
-    font-size: 3rem;
-    z-index: 999;
-    cursor: grab;
-    user-select: none;
-    transition: transform 0.1s ease-out;
-    filter: drop-shadow(2px 2px 4px rgba(0,0,0,0.3));
-    pointer-events: auto;
-    top: 50%;
-    left: 20px;
-}
-
-.interactive-basketball:active {
-    cursor: grabbing;
-    transform: scale(1.1);
-}
-
-.interactive-basketball.bouncing {
-    transition: none;
-}
 
 /* Layout Utilities */
 .container {
@@ -498,8 +387,8 @@ p {
     min-height: 100vh;
     display: flex;
     align-items: center;
-    background: #8b7355 !important; 
-    color: var(--hero-text);
+    background: #ffffff !important; 
+    color: #2d3748;
     position: relative;
     overflow: hidden;
 }
@@ -507,9 +396,11 @@ p {
 /* Dark theme hero background */
 [data-theme="dark"] .hero {
     background: #2d3748 !important; 
+    color: #f7fafc;
 }
 
-/* Maze Background */
+/* 
+Maze Background - Commented out for professional appearance
 .maze-background {
     position: absolute;
     top: 70px;
@@ -525,6 +416,7 @@ p {
     height: 100%;
     object-fit: cover;
 }
+*/
 
 .hero::before {
     content: '';
@@ -565,11 +457,19 @@ p {
 
 .hero-name {
     display: block;
-    background: linear-gradient(45deg, #fff, #a8edea);
+    background: linear-gradient(45deg, #2d3748, #16a085);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
     font-weight: 700;
+}
+
+/* Dark theme hero name */
+[data-theme="dark"] .hero-name {
+    background: linear-gradient(45deg, #fff, #a8edea);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
 }
 
 .hero-subtitle {
@@ -577,9 +477,14 @@ p {
     font-weight: 500;
     opacity: 0.9;
     margin: 1rem 0;
-    border-right: 2px solid rgba(255, 255, 255, 0.7);
+    border-right: 2px solid rgba(45, 55, 72, 0.7);
     overflow: hidden;
     white-space: nowrap;
+}
+
+/* Dark theme hero subtitle */
+[data-theme="dark"] .hero-subtitle {
+    border-right: 2px solid rgba(255, 255, 255, 0.7);
 }
 
 .hero-description {
@@ -609,27 +514,51 @@ p {
 }
 
 .btn-primary {
+    background: var(--accent-primary);
+    color: white;
+    border-color: var(--accent-primary);
+}
+
+.btn-primary:hover {
+    background: var(--accent-secondary);
+    border-color: var(--accent-secondary);
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px var(--shadow-medium);
+}
+
+.btn-secondary {
+    background: transparent;
+    color: var(--text-primary);
+    border-color: var(--text-primary);
+}
+
+.btn-secondary:hover {
+    background: var(--text-primary);
+    color: var(--bg-primary);
+    transform: translateY(-2px);
+}
+
+/* Dark theme button overrides for hero section */
+[data-theme="dark"] .hero .btn-primary {
     background: rgba(255, 255, 255, 0.2);
     color: white;
     border-color: rgba(255, 255, 255, 0.3);
     backdrop-filter: blur(10px);
 }
 
-.btn-primary:hover {
+[data-theme="dark"] .hero .btn-primary:hover {
     background: rgba(255, 255, 255, 0.3);
-    transform: translateY(-2px);
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
 }
 
-.btn-secondary {
+[data-theme="dark"] .hero .btn-secondary {
     background: transparent;
     color: white;
     border-color: rgba(255, 255, 255, 0.5);
 }
 
-.btn-secondary:hover {
+[data-theme="dark"] .hero .btn-secondary:hover {
     background: rgba(255, 255, 255, 0.1);
-    transform: translateY(-2px);
+    color: white;
 }
 
 /* Hero Visual */
@@ -905,7 +834,7 @@ section:nth-child(even) {
 #drawingCanvas {
     border: 2px solid var(--border-color);
     border-radius: 8px;
-    background: #fff;
+    background: #fff !important; /* Always white background for drawing */
     cursor: crosshair;
     display: block;
     margin: 1rem auto;
