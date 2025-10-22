@@ -447,26 +447,38 @@ document.addEventListener('DOMContentLoaded', function() {
             const formData = new FormData(contactForm);
             
             try {
-                // For now, let's use a simple mailto fallback since Formspree requires setup
-                const name = formData.get('name');
-                const email = formData.get('email');
-                const message = formData.get('message');
+                // Submit to Formspree
+                const response = await fetch(contactForm.action, {
+                    method: 'POST',
+                    body: formData,
+                    headers: {
+                        'Accept': 'application/json'
+                    }
+                });
                 
-                // Create mailto URL
-                const subject = `Portfolio Contact from ${name}`;
-                const body = `Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`;
-                const mailtoUrl = `mailto:leon.morales@utbm.fr?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-                
-                // Open email client
-                window.open(mailtoUrl);
-                
-                // Show success message
-                formStatus.innerHTML = '<div class="form-success">✓ Email client opened! Please send the email from your email application.</div>';
-                contactForm.reset();
+                if (response.ok) {
+                    // Show success message
+                    const t = translations[currentLanguage] || translations['en'] || {};
+                    const successMsg = t.contact?.form?.successMessage || '✓ Message sent successfully! I\'ll get back to you soon.';
+                    formStatus.innerHTML = `<div class="form-success">${successMsg}</div>`;
+                    contactForm.reset();
+                } else {
+                    // Handle Formspree validation errors
+                    const data = await response.json();
+                    if (data.errors) {
+                        const errorMsg = data.errors.map(error => error.message).join(', ');
+                        formStatus.innerHTML = `<div class="form-error">✗ ${errorMsg}</div>`;
+                    } else {
+                        throw new Error('Form submission failed');
+                    }
+                }
                 
             } catch (error) {
+                console.error('Form submission error:', error);
                 // Show error message
-                formStatus.innerHTML = '<div class="form-error">✗ Something went wrong. Please try again or email me directly.</div>';
+                const t = translations[currentLanguage] || translations['en'] || {};
+                const errorMsg = t.contact?.form?.errorMessage || '✗ Something went wrong. Please try again or email me directly.';
+                formStatus.innerHTML = `<div class="form-error">${errorMsg}</div>`;
             } finally {
                 // Reset button state
                 btnText.style.display = 'inline';
@@ -598,26 +610,71 @@ function updateContent() {
     document.querySelector('#skills .section-title').textContent = t.skills.title;
     const skillCategories = document.querySelectorAll('.skill-category');
     
+    // Helper function to add certification badges
+    function addCertificationBadge(text, badgeText) {
+        return text.replace(` - ${badgeText}`, ` - <span class="certification-badge">${badgeText}</span>`);
+    }
+    
+    // Category 1: AI & Machine Learning
     skillCategories[0].querySelector('h3').textContent = t.skills.category1Title;
     const cat1Items = skillCategories[0].querySelectorAll('li');
-    cat1Items[0].textContent = t.skills.category1Item1;
+    
+    // Handle NVIDIA certification in both languages
+    if (currentLanguage === 'en') {
+        cat1Items[0].innerHTML = addCertificationBadge(t.skills.category1Item1, 'NVIDIA Certified');
+        cat1Items[4].innerHTML = addCertificationBadge(t.skills.category1Item5, 'Google Certified');
+    } else if (currentLanguage === 'fr') {
+        cat1Items[0].innerHTML = addCertificationBadge(t.skills.category1Item1, 'Certifié NVIDIA');
+        cat1Items[4].innerHTML = addCertificationBadge(t.skills.category1Item5, 'Certifié Google');
+    }
+    
     cat1Items[1].textContent = t.skills.category1Item2;
     cat1Items[2].textContent = t.skills.category1Item3;
     cat1Items[3].textContent = t.skills.category1Item4;
+    cat1Items[5].textContent = t.skills.category1Item6;
     
+    // Category 2: Data Technologies & Databases
     skillCategories[1].querySelector('h3').textContent = t.skills.category2Title;
     const cat2Items = skillCategories[1].querySelectorAll('li');
-    cat2Items[0].textContent = t.skills.category2Item1;
+    
+    // Handle Neo4j certification in both languages
+    if (currentLanguage === 'en') {
+        cat2Items[0].innerHTML = addCertificationBadge(t.skills.category2Item1, 'Neo4j Certified Professional');
+    } else if (currentLanguage === 'fr') {
+        cat2Items[0].innerHTML = addCertificationBadge(t.skills.category2Item1, 'Professionnel Certifié Neo4j');
+    }
+    
     cat2Items[1].textContent = t.skills.category2Item2;
     cat2Items[2].textContent = t.skills.category2Item3;
     cat2Items[3].textContent = t.skills.category2Item4;
+    cat2Items[4].textContent = t.skills.category2Item5;
     
+    // Category 3: Frameworks & Libraries
     skillCategories[2].querySelector('h3').textContent = t.skills.category3Title;
     const cat3Items = skillCategories[2].querySelectorAll('li');
     cat3Items[0].textContent = t.skills.category3Item1;
     cat3Items[1].textContent = t.skills.category3Item2;
     cat3Items[2].textContent = t.skills.category3Item3;
     cat3Items[3].textContent = t.skills.category3Item4;
+    cat3Items[4].textContent = t.skills.category3Item5;
+    cat3Items[5].textContent = t.skills.category3Item6;
+    
+    // Category 4: Programming & Tools
+    skillCategories[3].querySelector('h3').textContent = t.skills.category4Title;
+    const cat4Items = skillCategories[3].querySelectorAll('li');
+    cat4Items[0].textContent = t.skills.category4Item1;
+    cat4Items[1].textContent = t.skills.category4Item2;
+    cat4Items[2].textContent = t.skills.category4Item3;
+    cat4Items[3].textContent = t.skills.category4Item4;
+    cat4Items[4].textContent = t.skills.category4Item5;
+    
+    // Certifications section
+    document.querySelector('.subsection-title').textContent = t.skills.certificationsTitle;
+    const certificationLinks = document.querySelectorAll('.certification-list a');
+    certificationLinks[0].textContent = t.skills.cert1;
+    certificationLinks[1].textContent = t.skills.cert2;
+    certificationLinks[2].textContent = t.skills.cert3;
+    certificationLinks[3].textContent = t.skills.cert4;
     
     // Projects section
     document.querySelector('#projects .section-title').textContent = t.projects.title;
@@ -724,23 +781,23 @@ function updateContent() {
     exp2Achievements[2].textContent = t.experience.item2.achievement3;
     exp2Achievements[3].textContent = t.experience.item2.achievement4;
     
-    // Experience 3 (Exchange)
-    timelineItems[2].querySelector('h3').textContent = t.experience.item4.title;
-    timelineItems[2].querySelector('.company').textContent = t.experience.item4.company;
-    timelineItems[2].querySelector('.period').textContent = t.experience.item4.period;
+    // Experience 3 (Ksilink internship)
+    timelineItems[2].querySelector('h3').textContent = t.experience.item3.title;
+    timelineItems[2].querySelector('.company').textContent = t.experience.item3.company;
+    timelineItems[2].querySelector('.period').textContent = t.experience.item3.period;
     const exp3Achievements = timelineItems[2].querySelectorAll('.achievements li');
-    exp3Achievements[0].textContent = t.experience.item4.achievement1;
-    exp3Achievements[1].textContent = t.experience.item4.achievement2;
-    exp3Achievements[2].textContent = t.experience.item4.achievement3;
+    exp3Achievements[0].textContent = t.experience.item3.achievement1;
+    exp3Achievements[1].textContent = t.experience.item3.achievement2;
+    exp3Achievements[2].textContent = t.experience.item3.achievement3;
     
-    // Experience 4 (Ksilink internship)
-    timelineItems[3].querySelector('h3').textContent = t.experience.item3.title;
-    timelineItems[3].querySelector('.company').textContent = t.experience.item3.company;
-    timelineItems[3].querySelector('.period').textContent = t.experience.item3.period;
+    // Experience 4 (Exchange)
+    timelineItems[3].querySelector('h3').textContent = t.experience.item4.title;
+    timelineItems[3].querySelector('.company').textContent = t.experience.item4.company;
+    timelineItems[3].querySelector('.period').textContent = t.experience.item4.period;
     const exp4Achievements = timelineItems[3].querySelectorAll('.achievements li');
-    exp4Achievements[0].textContent = t.experience.item3.achievement1;
-    exp4Achievements[1].textContent = t.experience.item3.achievement2;
-    exp4Achievements[2].textContent = t.experience.item3.achievement3;
+    exp4Achievements[0].textContent = t.experience.item4.achievement1;
+    exp4Achievements[1].textContent = t.experience.item4.achievement2;
+    exp4Achievements[2].textContent = t.experience.item4.achievement3;
     
     // Contact section
     document.querySelector('#contact .section-title').textContent = t.contact.title;
@@ -770,8 +827,15 @@ function setLanguage(lang) {
     // Update language toggle button
     const languageIcon = document.querySelector('.language-icon');
     if (languageIcon) {
-        languageIcon.textContent = lang === 'en' ? '🇫🇷' : '🇺🇸';
-        console.log('Language icon updated to:', languageIcon.textContent);
+        // Show the flag of the language you can switch TO
+        if (lang === 'en') {
+            // Show French flag (can switch to French)
+            languageIcon.className = 'language-icon fi fi-fr';
+        } else {
+            // Show UK flag (can switch to English)
+            languageIcon.className = 'language-icon fi fi-gb';
+        }
+        console.log('Language icon updated with flag-icons');
     } else {
         console.warn('Language icon element not found');
     }
@@ -814,7 +878,7 @@ document.addEventListener('DOMContentLoaded', function() {
     initializeLanguageSystem();
 });
 
-console.log('🚀 Portfolio website loaded successfully!');
+console.log('Portfolio website loaded successfully!');
 
 // Test function for debugging (can be called from browser console)
 window.testLanguageSystem = function() {
@@ -1636,6 +1700,11 @@ document.addEventListener('DOMContentLoaded', function() {
     clearBtn.addEventListener('click', () => {
         initCanvas();
         updatePredictionTable([]);
+        
+        // Reset predict button text and state
+        const t = translations[currentLanguage] || translations['en'] || {};
+        predictBtn.textContent = t.mnistDemo?.predictButton || 'Predict';
+        predictBtn.disabled = false;
     });
     
     // Load your PyTorch model using ONNX.js
@@ -1856,6 +1925,8 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Predict digit
     predictBtn.addEventListener('click', async () => {
+        const t = translations[currentLanguage] || translations['en'] || {};
+        
         try {
             // Preprocess the canvas image
             const inputData = preprocessCanvas();
@@ -1873,7 +1944,6 @@ document.addEventListener('DOMContentLoaded', function() {
             const max = Math.max(...inputData);
             console.log(`Input stats - Mean: ${mean.toFixed(4)}, Min: ${min.toFixed(4)}, Max: ${max.toFixed(4)}`);
             
-            const t = translations[currentLanguage] || translations['en'] || {};
             predictBtn.textContent = t.mnistDemo?.predictingButton || 'Predicting...';
             predictBtn.disabled = true;
             

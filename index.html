@@ -7,6 +7,8 @@
     <meta name="description" content="AI Engineering student specializing in machine learning, deep learning, and AI research">
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='0.9em' font-size='90'>🤖</text></svg>">
     <link rel="stylesheet" href="styles.css">
+    <!-- Flag Icons CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.2.3/css/flag-icons.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -30,7 +32,7 @@
                     <span class="theme-icon">🌙</span>
                 </button>
                 <button class="language-toggle" id="language-toggle" aria-label="Switch language">
-                    <span class="language-icon">🇫🇷</span>
+                    <span class="language-icon fi fi-fr"></span>
                 </button>
             </div>
             <div class="nav-toggle">
@@ -118,33 +120,63 @@
         <div class="container">
             <h2 class="section-title">Technical Skills</h2>
             <div class="skills-grid">
+
                 <div class="skill-category">
-                    <h3>Machine Learning & AI</h3>
+                    <h3>AI & Machine Learning</h3>
                     <ul class="skill-list">
-                        <li>Deep Learning (CNN, RNN, Transformers)</li>
-                        <li>Computer Vision</li>
-                        <li>Natural Language Processing</li>
+                        <li>Deep Learning (CNN, RNN, Transformers) - <span class="certification-badge">NVIDIA Certified</span></li>
+                        <li>Computer Vision (Object Detection, Classification)</li>
+                        <li>Natural Language Processing (NLP)</li>
                         <li>Reinforcement Learning</li>
+                        <li>Foundational AI Principles - <span class="certification-badge">Google Certified</span></li>
+                        <li>Generative AI Concepts</li>
                     </ul>
                 </div>
+
+                <div class="skill-category">
+                    <h3>Data Technologies & Databases</h3>
+                    <ul class="skill-list">
+                        <li>Graph Databases (Neo4j, Cypher) - <span class="certification-badge">Neo4j Certified Professional</span></li>
+                        <li>SQL Databases</li>
+                        <li>Data Manipulation & Analysis (Pandas, NumPy)</li>
+                        <li>Data Visualization (Matplotlib, Seaborn)</li>
+                        <li>Web Analytics (Google Analytics)</li>
+                    </ul>
+                </div>
+
                 <div class="skill-category">
                     <h3>Frameworks & Libraries</h3>
                     <ul class="skill-list">
                         <li>PyTorch & TensorFlow</li>
-                        <li>Scikit-learn & Pandas</li>
-                        <li>Hugging Face Transformers</li>
-                        <li>Matplotlib & Seaborn</li>
+                        <li>Scikit-learn</li>
+                        <li>Hugging Face (Transformers, Datasets)</li>
+                        <li>PyTorch Lightning</li>
+                        <li>FastAPI</li>
+                        <li>Streamlit</li>
                     </ul>
                 </div>
+
                 <div class="skill-category">
-                    <h3>Programming Languages</h3>
+                    <h3>Programming & Tools</h3>
                     <ul class="skill-list">
                         <li>Python (Advanced)</li>
-                        <li>C</li>
-                        <li>SQL & Cypher</li>
-                        <li>C++ & Java</li>
+                        <li>C / C++</li>
+                        <li>Java</li>
+                        <li>Git & GitHub</li>
+                        <li>Docker (Basics)</li>
                     </ul>
                 </div>
+
+            </div>
+
+            <div class="certifications-section">
+                <h3 class="subsection-title">Certifications & Badges</h3>
+                <ul class="certification-list">
+                    <li><a href="https://graphacademy.neo4j.com/c/dc5d32f9-cc44-4169-96e0-cbf5075aca15/" target="_blank" rel="noopener noreferrer">Neo4j Certified Professional</a></li>
+                    <li><a href="https://learn.nvidia.com/certificates?id=yu32AcCcTjG7Tnwshzvg_Q" target="_blank" rel="noopener noreferrer">NVIDIA - Fundamentals of Deep Learning</a></li>
+                    <li><a href="https://www.skills.google/public_profiles/5f23e336-8cc8-4026-91fb-28d4519a10c0/badges/14799776" target="_blank" rel="noopener noreferrer">Google - AI Fundamentals</a></li>
+                    <li><a href="https://www.skills.google/public_profiles/5f23e336-8cc8-4026-91fb-28d4519a10c0/badges/15133751" target="_blank" rel="noopener noreferrer">Google - Get started with Google Analytics</a></li>
+                </ul>
             </div>
         </div>
     </section>
@@ -152,7 +184,7 @@
     <!-- Projects Section -->
     <section id="projects" class="projects">
         <div class="container">
-            <h2 class="section-title">Featured Projects</h2>
+            <h2 class="section-title">Projects</h2>
             <div class="projects-grid">
                 <article class="project-card">
                     <div class="project-header">
@@ -171,8 +203,8 @@
                         way for molecule generation. Used PyTorch Lightning.
                     </p>
                     <div class="project-links">
-                        <a href="https://ksilink.com/" class="project-link">Ksilink</a>
-                        <a href="https://arxiv.org/pdf/2408.05196" class="project-link">Publication</a>
+                        <a href="https://ksilink.com/" class="project-link" target="_blank" rel="noopener noreferrer">Ksilink</a>
+                        <a href="https://arxiv.org/pdf/2408.05196" class="project-link" target="_blank" rel="noopener noreferrer">Publication</a>
                     </div>
                 </article>
 
@@ -188,11 +220,11 @@
                     </div>
                     <p class="project-description">
                         Designed a chatbot based on open-source LLMs to help biologists query internal 
-                        databases in natural language. Improved the knowledge graph pipeline and added 
+                        graph database in natural language. Improved the knowledge graph pipeline and added 
                         intuitive features to enhance usability and data enrichment.
                     </p>
                     <div class="project-links">
-                        <a href="https://ksilink.com/" class="project-link">Ksilink</a>
+                        <a href="https://ksilink.com/" class="project-link" target="_blank" rel="noopener noreferrer">Ksilink</a>
                     </div>
                 </article>
 
@@ -212,9 +244,7 @@
                         then PyTorch, and finally PyTorch Lightning.
                     </p>
                     <div class="project-links">
-                        <a href="https://ksilink.com/" class="project-link">Ksilink</a>
-                        <!-- <a href="#" class="project-link">View Code</a>
-                        <a href="#" class="project-link">Live Demo</a> -->
+                        <a href="https://ksilink.com/" class="project-link" target="_blank" rel="noopener noreferrer">Ksilink</a>
                     </div>
                 </article>
 
@@ -232,8 +262,8 @@
                         from scratch, then fine-tuned pre-trained models using XGBoost and Random Forest.
                     </p>
                     <div class="project-links">
-                        <a href="https://github.com/Leon-afk1/poisonous_mushroom" class="project-link">View Code</a>
-                        <a href="https://www.utbm.fr/" class="project-link">UTBM</a>
+                        <a href="https://github.com/Leon-afk1/poisonous_mushroom" class="project-link" target="_blank" rel="noopener noreferrer">View Code</a>
+                        <a href="https://www.utbm.fr/" class="project-link" target="_blank" rel="noopener noreferrer">UTBM</a>
                     </div>
                 </article>
 
@@ -254,7 +284,7 @@
                     </p>
                     <div class="project-links">
                         <a href="#mnist-demo" class="project-link">Try Live Demo</a>
-                        <a href="https://www.utbm.fr/" class="project-link">UTBM</a>
+                        <a href="https://www.utbm.fr/" class="project-link" target="_blank" rel="noopener noreferrer">UTBM</a>
                     </div>
                 </article>
 
@@ -268,11 +298,11 @@
                     </div>
                     <p class="project-description">
                         Implemented a solver for the classic Tangram puzzle with limited AI background 
-                        and tight deadlines—my first real step into the AI world.
+                        and tight deadlines, my first real step into the AI world.
                     </p>
                     <div class="project-links">
-                        <a href="https://github.com/Leon-afk1/Tangram_solver" class="project-link">View Code</a>
-                        <a href="https://www.utbm.fr/" class="project-link">UTBM</a>
+                        <a href="https://github.com/Leon-afk1/Tangram_solver" class="project-link" target="_blank" rel="noopener noreferrer">View Code</a>
+                        <a href="https://www.utbm.fr/" class="project-link" target="_blank" rel="noopener noreferrer">UTBM</a>
                     </div>
                 </article>
             </div>
@@ -333,7 +363,7 @@
                 <div class="timeline-item">
                     <div class="timeline-marker"></div>
                     <div class="timeline-content">
-                        <h3>Double Degree — Master’s in Artificial Intelligence</h3>
+                        <h3>Double Degree, Master’s in Artificial Intelligence</h3>
                         <p class="company">Université du Québec à Chicoutimi (UQAC), Canada</p>
                         <p class="period">2025 - Present</p>
                         <ul class="achievements">
@@ -347,7 +377,7 @@
                 <div class="timeline-item">
                     <div class="timeline-marker"></div>
                     <div class="timeline-content">
-                        <h3>Engineering Degree — Computer Science & Data Science</h3>
+                        <h3>Engineering Degree, Computer Science & Data Science</h3>
                         <p class="company">UTBM (Université de Technologie de Belfort-Montbéliard), France</p>
                         <p class="period">2021 – 2025</p>
                         <ul class="achievements">
@@ -362,20 +392,6 @@
                 <div class="timeline-item">
                     <div class="timeline-marker"></div>
                     <div class="timeline-content">
-                        <h3>Exchange Semester — Computer Science</h3>
-                        <p class="company">Yeditepe University, Istanbul, Turkey</p>
-                        <p class="period">Jan 2023 - Jun 2023</p>
-                        <ul class="achievements">
-                            <li>Erasmus exchange program focused on computer science and international teamwork</li>
-                            <li>Specialized courses in object-oriented programming</li>
-                            <li>Developed adaptability and cross-cultural collaboration skills</li>
-                        </ul>
-                    </div>
-                </div>
-
-                <div class="timeline-item">
-                    <div class="timeline-marker"></div>
-                    <div class="timeline-content">
                         <h3>AI Engineering Intern</h3>
                         <p class="company">Ksilink, Strasbourg, France</p>
                         <p class="period">Sept 2024 - Feb 2025</p>
@@ -383,6 +399,20 @@
                             <li>Implemented a multimodal contrastive learning model for pharmacological analysis</li>
                             <li>Built an AI-powered chatbot connecting a knowledge graph with an LLM</li>
                             <li>Designed and trained CNNs for biomedical image classification</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-marker"></div>
+                    <div class="timeline-content">
+                        <h3>Exchange Semester, Computer Science</h3>
+                        <p class="company">Yeditepe University, Istanbul, Turkey</p>
+                        <p class="period">Jan 2023 - Jun 2023</p>
+                        <ul class="achievements">
+                            <li>Erasmus exchange program focused on computer science and international teamwork</li>
+                            <li>Specialized courses in object-oriented programming</li>
+                            <li>Developed adaptability and cross-cultural collaboration skills</li>
                         </ul>
                     </div>
                 </div>
@@ -405,17 +435,21 @@
                             <span class="contact-icon">📧</span>
                             <span>leon.morales@utbm.fr</span>
                         </a>
-                        <a href="https://www.linkedin.com/in/léon-morales" class="contact-method">
+                        <a href="https://www.linkedin.com/in/léon-morales" class="contact-method" target="_blank" rel="noopener noreferrer">
                             <span class="contact-icon">💼</span>
                             <span>LinkedIn Profile</span>
                         </a>
-                        <a href="https://github.com/Leon-afk1" class="contact-method">
+                        <a href="https://github.com/Leon-afk1" class="contact-method" target="_blank" rel="noopener noreferrer">
                             <span class="contact-icon">👨‍💻</span>
                             <span>GitHub Portfolio</span>
                         </a>
                     </div>
                 </div>
-                <form class="contact-form" id="contact-form" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+                <form class="contact-form" id="contact-form" action="https://formspree.io/f/xpwyglgl" method="POST">
+                    <!-- Formspree hidden input for spam protection -->
+                    <input type="hidden" name="_subject" value="New Portfolio Contact Message">
+                    <input type="text" name="_gotcha" style="display:none !important">
+                    
                     <div class="form-group">
                         <label for="name">Name</label>
                         <input type="text" id="name" name="name" required>

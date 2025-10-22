@@ -30,24 +30,40 @@
     },
     "skills": {
       "title": "Technical Skills",
-      "category1Title": "Machine Learning & AI",
-      "category1Item1": "Deep Learning (CNN, RNN, Transformers)",
-      "category1Item2": "Computer Vision",
-      "category1Item3": "Natural Language Processing",
+      "category1Title": "AI & Machine Learning",
+      "category1Item1": "Deep Learning (CNN, RNN, Transformers) - NVIDIA Certified",
+      "category1Item2": "Computer Vision (Object Detection, Classification)",
+      "category1Item3": "Natural Language Processing (NLP)",
       "category1Item4": "Reinforcement Learning",
-      "category2Title": "Frameworks & Libraries",
-      "category2Item1": "PyTorch & TensorFlow",
-      "category2Item2": "Scikit-learn & Pandas",
-      "category2Item3": "Hugging Face Transformers",
-      "category2Item4": "Matplotlib & Seaborn",
-      "category3Title": "Programming Languages",
-      "category3Item1": "Python (Advanced)",
-      "category3Item2": "C",
-      "category3Item3": "SQL & Cypher",
-      "category3Item4": "C++ & Java"
+      "category1Item5": "Foundational AI Principles - Google Certified",
+      "category1Item6": "Generative AI Concepts",
+      "category2Title": "Data Technologies & Databases",
+      "category2Item1": "Graph Databases (Neo4j, Cypher) - Neo4j Certified Professional",
+      "category2Item2": "SQL Databases",
+      "category2Item3": "Data Manipulation & Analysis (Pandas, NumPy)",
+      "category2Item4": "Data Visualization (Matplotlib, Seaborn)",
+      "category2Item5": "Web Analytics (Google Analytics)",
+      "category3Title": "Frameworks & Libraries",
+      "category3Item1": "PyTorch & TensorFlow",
+      "category3Item2": "Scikit-learn",
+      "category3Item3": "Hugging Face (Transformers, Datasets)",
+      "category3Item4": "PyTorch Lightning",
+      "category3Item5": "FastAPI",
+      "category3Item6": "Streamlit",
+      "category4Title": "Programming & Tools",
+      "category4Item1": "Python (Advanced)",
+      "category4Item2": "C / C++",
+      "category4Item3": "Java",
+      "category4Item4": "Git & GitHub",
+      "category4Item5": "Docker (Basics)",
+      "certificationsTitle": "Certifications & Badges",
+      "cert1": "Neo4j Certified Professional",
+      "cert2": "NVIDIA - Fundamentals of Deep Learning",
+      "cert3": "Google - AI Fundamentals",
+      "cert4": "Google - Get started with Google Analytics"
     },
     "projects": {
-      "title": "Featured Projects",
+      "title": "Projects",
       "card1": {
         "title": "Multimodal Contrastive Learning for Drug Analysis",
         "tag1": "GFlowNets",
@@ -64,7 +80,7 @@
         "tag2": "Graph RAG",
         "tag3": "Biology",
         "tag4": "Streamlit",
-        "description": "Designed a chatbot based on open-source LLMs to help biologists query internal databases in natural language. Improved the knowledge graph pipeline and added intuitive features to enhance usability and data enrichment.",
+        "description": "Designed a chatbot based on open-source LLMs to help biologists query internal graph database in natural language. Improved the knowledge graph pipeline and added intuitive features to enhance usability and data enrichment.",
         "link1Text": "Ksilink"
       },
       "card3": {
@@ -99,7 +115,7 @@
         "title": "Tangram Solver",
         "tag1": "First AI project",
         "tag2": "Game",
-        "description": "Implemented a solver for the classic Tangram puzzle with limited AI background and tight deadlines—my first real step into the AI world.",
+        "description": "Implemented a solver for the classic Tangram puzzle with limited AI background and tight deadlines, my first real step into the AI world.",
         "link1Text": "View Code",
         "link2Text": "UTBM"
       }
@@ -121,7 +137,7 @@
     "experience": {
       "title": "Experience",
       "item1": {
-        "title": "Double Degree — Master’s in Artificial Intelligence",
+        "title": "Double Degree, Master’s in Artificial Intelligence",
         "company": "Université du Québec à Chicoutimi (UQAC), Canada",
         "period": "2025 - Present",
         "achievement1": "Specialization in Artificial Intelligence",
@@ -129,7 +145,7 @@
         "achievement3": "Exploring opportunities for research collaboration in Canada"
       },
       "item2": {
-        "title": "Engineering Degree — Computer Science & Data Science",
+        "title": "Engineering Degree, Computer Science & Data Science",
         "company": "UTBM (Université de Technologie de Belfort-Montbéliard), France",
         "period": "2021 – 2025",
         "achievement1": "Strong foundation in computer science, mathematics, and data science",
@@ -146,7 +162,7 @@
         "achievement3": "Designed and trained CNNs for biomedical image classification"
       },
       "item4": {
-        "title": "Exchange Semester — Computer Science",
+        "title": "Exchange Semester, Computer Science",
         "company": "Yeditepe University, Istanbul, Turkey",
         "period": "Jan 2023 - Jun 2023",
         "achievement1": "Erasmus exchange program focused on computer science and international teamwork",
@@ -166,8 +182,8 @@
         "messageLabel": "Message",
         "submitButton": "Send Message",
         "submitButtonLoading": "Sending...",
-        "statusSuccess": "✓ Email client opened! Please send the email from your email application.",
-        "statusError": "✗ Something went wrong. Please try again or email me directly."
+        "successMessage": "✓ Message sent successfully! I'll get back to you soon.",
+        "errorMessage": "✗ Something went wrong. Please try again or email me directly."
       }
     },
     "footer": {
@@ -190,14 +206,14 @@
       "greeting": "Bonjour, je m'appelle",
       "name": "Léon MORALES",
       "subtitle": "Étudiant en IA",
-      "description": "J'ai 22 ans et je termine actuellement mes études d'ingénieur spécialisées en Intelligence Artificielle. Passionné par la résolution de problèmes grâce aux données, les voyages et les nouveaux défis, je combine une solide formation académique avec une expérience pratique sur des projets.",
+      "description": "J'ai 22 ans et je termine actuellement mes études d'ingénieur spécialisées en Intelligence Artificielle. Passionné par la résolution de problèmes, les voyages et les nouveaux défis, je combine une solide formation académique avec une expérience pratique sur des projets.",
       "buttonProjects": "Voir les Projets",
       "buttonContact": "Me Contacter",
       "mazeAlgorithmLabel": "Algorithme : "
     },
     "about": {
       "title": "À Propos de Moi",
-      "paragraph1": "Je suis un étudiant ingénieur avec un parcours international qui a façonné mes compétences techniques et personnelles. Après avoir commencé mes études à l'Université de Technologie de Belfort-Montbéliard (UTBM) en France, j'ai eu l'opportunité de passer un semestre à l'étranger à l'Université Yeditepe à Istanbul, où j'ai renforcé mon expertise en informatique. Aujourd'hui, je poursuis un double diplôme à l'Université du Québec à Chicoutimi (UQAC), axé sur l'Intelligence Artificielle.",
+      "paragraph1": "Je suis un étudiant ingénieur avec un parcours international qui a façonné mes compétences techniques et personnelles. Après avoir commencé mes études à l'Université de Technologie de Belfort-Montbéliard (UTBM) en France, j'ai eu l'opportunité de passer un semestre à l'étranger à l'Université Yeditepe à Istanbul, où j'ai renforcé mon expertise en informatique. Aujourd'hui, je poursuis un double diplôme à l'Université du Québec à Chicoutimi (UQAC), centré sur l'Intelligence Artificielle.",
       "paragraph2": "En dehors des études, je joue au basketball depuis plus de 15 ans, j'adore skier (j'ai même dirigé une association de ski comptant plus de 200 étudiants) et j'aime voyager, ce qui m'a donné une perspective plus large et une grande adaptabilité dans la vie et le travail.",
       "stat1Label": "Années d'Études en IA",
       "stat2Label": "Projets Réalisés",
@@ -205,21 +221,37 @@
     },
     "skills": {
       "title": "Compétences Techniques",
-      "category1Title": "Apprentissage Machine & IA",
-      "category1Item1": "Apprentissage Profond (CNN, RNN, Transformers)",
-      "category1Item2": "Vision par Ordinateur",
-      "category1Item3": "Traitement du Langage Naturel",
+      "category1Title": "IA & Apprentissage Machine",
+      "category1Item1": "Apprentissage Profond (CNN, RNN, Transformers) - Certifié NVIDIA",
+      "category1Item2": "Vision par Ordinateur (Détection d'objets, Classification)",
+      "category1Item3": "Traitement du Langage Naturel (NLP)",
       "category1Item4": "Apprentissage par Renforcement",
-      "category2Title": "Frameworks & Librairies",
-      "category2Item1": "PyTorch & TensorFlow",
-      "category2Item2": "Scikit-learn & Pandas",
-      "category2Item3": "Hugging Face Transformers",
-      "category2Item4": "Matplotlib & Seaborn",
-      "category3Title": "Langages de Programmation",
-      "category3Item1": "Python (Avancé)",
-      "category3Item2": "C",
-      "category3Item3": "SQL & Cypher",
-      "category3Item4": "C++ & Java"
+      "category1Item5": "Principes Fondamentaux de l'IA - Certifié Google",
+      "category1Item6": "Concepts d'IA Générative",
+      "category2Title": "Technologies de Données & Bases de Données",
+      "category2Item1": "Bases de Données Graphiques (Neo4j, Cypher) - Professionnel Certifié Neo4j",
+      "category2Item2": "Bases de Données SQL",
+      "category2Item3": "Manipulation & Analyse de Données (Pandas, NumPy)",
+      "category2Item4": "Visualisation de Données (Matplotlib, Seaborn)",
+      "category2Item5": "Analyse Web (Google Analytics)",
+      "category3Title": "Frameworks & Librairies",
+      "category3Item1": "PyTorch & TensorFlow",
+      "category3Item2": "Scikit-learn",
+      "category3Item3": "Hugging Face (Transformers, Datasets)",
+      "category3Item4": "PyTorch Lightning",
+      "category3Item5": "FastAPI",
+      "category3Item6": "Streamlit",
+      "category4Title": "Programmation & Outils",
+      "category4Item1": "Python (Avancé)",
+      "category4Item2": "C / C++",
+      "category4Item3": "Java",
+      "category4Item4": "Git & GitHub",
+      "category4Item5": "Docker (Bases)",
+      "certificationsTitle": "Certifications & Badges",
+      "cert1": "Professionnel Certifié Neo4j",
+      "cert2": "NVIDIA - Fondamentaux de l'Apprentissage Profond",
+      "cert3": "Google - Fondamentaux de l'IA",
+      "cert4": "Google - Commencer avec Google Analytics"
     },
     "projects": {
       "title": "Projets Principaux",
@@ -239,7 +271,7 @@
         "tag2": "Graph RAG",
         "tag3": "Biologie",
         "tag4": "Streamlit",
-        "description": "Conception d'un chatbot basé sur des LLMs open-source pour aider les biologistes à interroger des bases de données internes en langage naturel. Amélioration du pipeline du graphe de connaissances et ajout de fonctionnalités intuitives pour améliorer l'utilisabilité et l'enrichissement des données.",
+        "description": "Conception d'un chatbot basé sur des LLMs open-source pour aider les biologistes à interroger la base de données graphiques internes en langage naturel. Amélioration du pipeline du graphe de connaissances et ajout de fonctionnalités intuitives pour améliorer l'utilisabilité et l'enrichissement des données.",
         "link1Text": "Ksilink"
       },
       "card3": {
@@ -274,7 +306,7 @@
         "title": "Solveur de Tangram",
         "tag1": "Premier projet IA",
         "tag2": "Jeu",
-        "description": "Implémentation d'un solveur pour le puzzle classique du Tangram avec des connaissances limitées en IA et des délais serrés—mon premier vrai pas dans le monde de l'IA.",
+        "description": "Implémentation d'un solveur pour le puzzle classique du Tangram avec des connaissances limitées en IA et des délais serrés, mon premier vrai pas dans le monde de l'IA.",
         "link1Text": "Voir le Code",
         "link2Text": "UTBM"
       }
@@ -341,8 +373,8 @@
         "messageLabel": "Message",
         "submitButton": "Envoyer Message",
         "submitButtonLoading": "Envoi...",
-        "statusSuccess": "✓ Client email ouvert ! Veuillez envoyer l'email depuis votre application.",
-        "statusError": "✗ Une erreur s'est produite. Veuillez réessayer ou m'envoyer un email directement."
+        "successMessage": "✓ Message envoyé avec succès ! Je vous répondrai bientôt.",
+        "errorMessage": "✗ Une erreur s'est produite. Veuillez réessayer ou m'envoyer un email directement."
       }
     },
     "footer": {

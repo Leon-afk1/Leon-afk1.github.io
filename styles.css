@@ -142,6 +142,11 @@ p {
 
 .language-icon {
     transition: transform 0.3s ease;
+    display: inline-block;
+    width: 24px;
+    height: 18px;
+    border-radius: 2px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
 }
 
 /* Mobile Navigation Controls */
@@ -752,6 +757,106 @@ section:nth-child(even) {
     left: 0;
     color: var(--accent-primary);
     font-weight: bold;
+}
+
+/* Certification Badge Styling */
+.certification-badge {
+    background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+    color: white;
+    padding: 0.2rem 0.5rem;
+    border-radius: 12px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    margin-left: 0.5rem;
+    box-shadow: 0 2px 8px var(--shadow-light);
+    white-space: nowrap;
+}
+
+/* Certifications Section Styling */
+.certifications-section {
+    margin-top: 3rem;
+    padding: 2rem;
+    background: var(--card-bg);
+    border-radius: 12px;
+    box-shadow: 0 4px 15px var(--shadow-light);
+    border: 1px solid var(--border-color);
+}
+
+.subsection-title {
+    color: var(--text-primary);
+    margin-bottom: 1.5rem;
+    text-align: center;
+    font-size: 1.5rem;
+    font-weight: 600;
+    position: relative;
+}
+
+.subsection-title::after {
+    content: '';
+    position: absolute;
+    bottom: -8px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 40px;
+    height: 2px;
+    background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary));
+    border-radius: 2px;
+}
+
+.certification-list {
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1rem;
+}
+
+.certification-list li {
+    padding: 1rem;
+    background: var(--bg-secondary);
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+    transition: all 0.3s ease;
+}
+
+.certification-list li:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px var(--shadow-light);
+    border-color: var(--accent-primary);
+}
+
+.certification-list a {
+    text-decoration: none;
+    color: var(--text-secondary);
+    font-weight: 500;
+    transition: color 0.3s ease;
+    display: block;
+}
+
+.certification-list a:hover {
+    color: var(--accent-primary);
+}
+
+.certification-list a::before {
+    content: '🏆';
+    margin-right: 0.5rem;
+}
+
+/* Responsive adjustments for certifications */
+@media (max-width: 768px) {
+    .certification-list {
+        grid-template-columns: 1fr;
+    }
+    
+    .certifications-section {
+        margin-top: 2rem;
+        padding: 1.5rem;
+    }
+    
+    .certification-badge {
+        font-size: 0.7rem;
+        padding: 0.1rem 0.4rem;
+        margin-left: 0.3rem;
+    }
 }
 
 /* Projects Section */
