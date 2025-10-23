@@ -276,31 +276,34 @@ function showNotification(message, type = 'info') {
 }
 
 // Typing Animation for Hero Text
-document.addEventListener('DOMContentLoaded', function() {
+let typewriterActive = false;
+
+function startTypewriterEffect(text) {
     const heroSubtitle = document.querySelector('.hero-subtitle');
-    if (heroSubtitle) {
-        const text = heroSubtitle.textContent;
-        heroSubtitle.textContent = '';
-        heroSubtitle.style.borderRight = '2px solid rgba(255, 255, 255, 0.7)';
-        
-        let i = 0;
-        function typeWriter() {
-            if (i < text.length) {
-                heroSubtitle.textContent += text.charAt(i);
-                i++;
-                setTimeout(typeWriter, 100);
-            } else {
-                // Remove cursor after typing is complete
-                setTimeout(() => {
-                    heroSubtitle.style.borderRight = 'none';
-                }, 1000);
-            }
+    if (!heroSubtitle || typewriterActive) return;
+    
+    typewriterActive = true;
+    heroSubtitle.textContent = '';
+    heroSubtitle.style.borderRight = '2px solid rgba(255, 255, 255, 0.7)';
+    
+    let i = 0;
+    function typeWriter() {
+        if (i < text.length) {
+            heroSubtitle.textContent += text.charAt(i);
+            i++;
+            setTimeout(typeWriter, 100);
+        } else {
+            // Remove cursor after typing is complete
+            setTimeout(() => {
+                heroSubtitle.style.borderRight = 'none';
+                typewriterActive = false;
+            }, 1000);
         }
-        
-        // Start typing after a delay
-        setTimeout(typeWriter, 1500);
     }
-});
+    
+    // Start typing after a delay
+    setTimeout(typeWriter, 500);
+}
 
 // Parallax Effect for Hero Section
 window.addEventListener('scroll', function() {
@@ -578,7 +581,8 @@ function updateContent() {
         console.log('Updated hero name to:', t.hero.name);
     }
     if (heroSubtitle) {
-        heroSubtitle.textContent = t.hero.subtitle;
+        // Use typewriter effect for hero subtitle
+        startTypewriterEffect(t.hero.subtitle);
         console.log('Updated hero subtitle to:', t.hero.subtitle);
     }
     if (heroDescription) {
@@ -691,6 +695,10 @@ function updateContent() {
     const card1Links = projectCards[0].querySelectorAll('.project-link');
     card1Links[0].textContent = t.projects.card1.link1Text;
     card1Links[1].textContent = t.projects.card1.link2Text;
+    if (card1Links[2]) {
+        card1Links[2].textContent = t.projects.card1.link3Text;
+        card1Links[2].href = t.projects.card1.reportUrl;
+    }
     
     // Project 2
     projectCards[1].querySelector('h3').textContent = t.projects.card2.title;
@@ -700,7 +708,12 @@ function updateContent() {
     card2Tags[2].textContent = t.projects.card2.tag3;
     card2Tags[3].textContent = t.projects.card2.tag4;
     projectCards[1].querySelector('.project-description').textContent = t.projects.card2.description;
-    projectCards[1].querySelector('.project-link').textContent = t.projects.card2.link1Text;
+    const card2Links = projectCards[1].querySelectorAll('.project-link');
+    card2Links[0].textContent = t.projects.card2.link1Text;
+    if (card2Links[1]) {
+        card2Links[1].textContent = t.projects.card2.link2Text;
+        card2Links[1].href = t.projects.card2.reportUrl;
+    }
     
     // Project 3
     projectCards[2].querySelector('h3').textContent = t.projects.card3.title;
@@ -710,7 +723,12 @@ function updateContent() {
     card3Tags[2].textContent = t.projects.card3.tag3;
     card3Tags[3].textContent = t.projects.card3.tag4;
     projectCards[2].querySelector('.project-description').textContent = t.projects.card3.description;
-    projectCards[2].querySelector('.project-link').textContent = t.projects.card3.link1Text;
+    const card3Links = projectCards[2].querySelectorAll('.project-link');
+    card3Links[0].textContent = t.projects.card3.link1Text;
+    if (card3Links[1]) {
+        card3Links[1].textContent = t.projects.card3.link2Text;
+        card3Links[1].href = t.projects.card3.reportUrl;
+    }
     
     // Project 4
     projectCards[3].querySelector('h3').textContent = t.projects.card4.title;
@@ -789,6 +807,12 @@ function updateContent() {
     exp3Achievements[0].textContent = t.experience.item3.achievement1;
     exp3Achievements[1].textContent = t.experience.item3.achievement2;
     exp3Achievements[2].textContent = t.experience.item3.achievement3;
+    // Handle internship report link
+    const exp3ReportLink = timelineItems[2].querySelector('.internship-report-link');
+    if (exp3ReportLink) {
+        exp3ReportLink.textContent = t.experience.item3.reportText;
+        exp3ReportLink.href = t.experience.item3.reportUrl;
+    }
     
     // Experience 4 (Exchange)
     timelineItems[3].querySelector('h3').textContent = t.experience.item4.title;

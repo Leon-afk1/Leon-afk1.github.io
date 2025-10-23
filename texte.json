@@ -72,7 +72,9 @@
         "tag4": "Drug Discovery",
         "description": "Implemented a multimodal contrastive learning model inspired by the paper Cell Morphology Guided Small Molecule Generation with GFlowNets. Integrated molecular SMILES data with cell image features to build a shared latent space, paving the way for molecule generation. Used PyTorch Lightning.",
         "link1Text": "Ksilink",
-        "link2Text": "Publication"
+        "link2Text": "Publication",
+        "link3Text": "Internship Report",
+        "reportUrl": "./internship-report-en.pdf"
       },
       "card2": {
         "title": "LLM-based Chatbot for Biologists",
@@ -81,7 +83,9 @@
         "tag3": "Biology",
         "tag4": "Streamlit",
         "description": "Designed a chatbot based on open-source LLMs to help biologists query internal graph database in natural language. Improved the knowledge graph pipeline and added intuitive features to enhance usability and data enrichment.",
-        "link1Text": "Ksilink"
+        "link1Text": "Ksilink",
+        "link2Text": "Internship Report",
+        "reportUrl": "./internship-report-en.pdf"
       },
       "card3": {
         "title": "Cell Classification CNN",
@@ -90,7 +94,9 @@
         "tag3": "TensorFlow",
         "tag4": "CNN",
         "description": "Built a convolutional neural network to classify 4 types of cells from internal datasets, achieving 85%+ accuracy despite noisy labels. Implemented in TensorFlow, then PyTorch, and finally PyTorch Lightning.",
-        "link1Text": "Ksilink"
+        "link1Text": "Ksilink",
+        "link2Text": "Internship Report",
+        "reportUrl": "./internship-report-en.pdf"
       },
       "card4": {
         "title": "Mushroom Toxicity Prediction",
@@ -159,7 +165,9 @@
         "period": "Sept 2024 - Feb 2025",
         "achievement1": "Implemented a multimodal contrastive learning model for pharmacological analysis",
         "achievement2": "Built an AI-powered chatbot connecting a knowledge graph with an LLM",
-        "achievement3": "Designed and trained CNNs for biomedical image classification"
+        "achievement3": "Designed and trained CNNs for biomedical image classification",
+        "reportText": "Internship Report",
+        "reportUrl": "./internship-report-en.pdf"
       },
       "item4": {
         "title": "Exchange Semester, Computer Science",
@@ -263,7 +271,9 @@
         "tag4": "Découverte Médicaments",
         "description": "Implémentation d'un modèle d'apprentissage contrastif multimodal inspiré du papier 'Cell Morphology Guided Small Molecule Generation with GFlowNets'. Intégration des données moléculaires SMILES avec les caractéristiques d'images cellulaires pour construire un espace latent partagé, ouvrant la voie à la génération de molécules. Utilisation de PyTorch Lightning.",
         "link1Text": "Ksilink",
-        "link2Text": "Publication"
+        "link2Text": "Publication",
+        "link3Text": "Rapport de Stage",
+        "reportUrl": "./rapport-de-stage-fr.pdf"
       },
       "card2": {
         "title": "Chatbot basé sur LLM pour Biologistes",
@@ -272,7 +282,9 @@
         "tag3": "Biologie",
         "tag4": "Streamlit",
         "description": "Conception d'un chatbot basé sur des LLMs open-source pour aider les biologistes à interroger la base de données graphiques internes en langage naturel. Amélioration du pipeline du graphe de connaissances et ajout de fonctionnalités intuitives pour améliorer l'utilisabilité et l'enrichissement des données.",
-        "link1Text": "Ksilink"
+        "link1Text": "Ksilink",
+        "link2Text": "Rapport de Stage",
+        "reportUrl": "./rapport-de-stage-fr.pdf"
       },
       "card3": {
         "title": "CNN pour la Classification Cellulaire",
@@ -281,7 +293,9 @@
         "tag3": "TensorFlow",
         "tag4": "CNN",
         "description": "Construction d'un réseau neuronal convolutif pour classifier 4 types de cellules à partir de jeux de données internes, atteignant une précision de 85%+ malgré des étiquettes bruitées. Implémenté en TensorFlow, puis PyTorch, et enfin PyTorch Lightning.",
-        "link1Text": "Ksilink"
+        "link1Text": "Ksilink",
+        "link2Text": "Rapport de Stage",
+        "reportUrl": "./rapport-de-stage-fr.pdf"
       },
       "card4": {
         "title": "Prédiction de la Toxicité des Champignons",
@@ -350,7 +364,9 @@
         "period": "Sept 2024 - Fév 2025",
         "achievement1": "Implémentation d'un modèle d'apprentissage contrastif multimodal pour l'analyse pharmacologique",
         "achievement2": "Construction d'un chatbot IA connectant un graphe de connaissances à un LLM",
-        "achievement3": "Conception et entraînement de CNNs pour la classification d'images biomédicales"
+        "achievement3": "Conception et entraînement de CNNs pour la classification d'images biomédicales",
+        "reportText": "Rapport de Stage",
+        "reportUrl": "./rapport-de-stage-fr.pdf"
       },
       "item4": {
         "title": "Semestre d'Échange — Informatique",
