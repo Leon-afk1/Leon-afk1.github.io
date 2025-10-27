@@ -753,15 +753,28 @@ function updateContent() {
     card5Links[0].textContent = t.projects.card5.link1Text;
     card5Links[1].textContent = t.projects.card5.link2Text;
     
-    // Project 6
+    // Project 6 (Music Genre Classification)
     projectCards[5].querySelector('h3').textContent = t.projects.card6.title;
     const card6Tags = projectCards[5].querySelectorAll('.tag');
     card6Tags[0].textContent = t.projects.card6.tag1;
     card6Tags[1].textContent = t.projects.card6.tag2;
+    card6Tags[2].textContent = t.projects.card6.tag3;
+    card6Tags[3].textContent = t.projects.card6.tag4;
+    card6Tags[4].textContent = t.projects.card6.tag5;
     projectCards[5].querySelector('.project-description').textContent = t.projects.card6.description;
     const card6Links = projectCards[5].querySelectorAll('.project-link');
     card6Links[0].textContent = t.projects.card6.link1Text;
     card6Links[1].textContent = t.projects.card6.link2Text;
+    
+    // Project 7 (Tangram Solver)
+    projectCards[6].querySelector('h3').textContent = t.projects.card7.title;
+    const card7Tags = projectCards[6].querySelectorAll('.tag');
+    card7Tags[0].textContent = t.projects.card7.tag1;
+    card7Tags[1].textContent = t.projects.card7.tag2;
+    projectCards[6].querySelector('.project-description').textContent = t.projects.card7.description;
+    const card7Links = projectCards[6].querySelectorAll('.project-link');
+    card7Links[0].textContent = t.projects.card7.link1Text;
+    card7Links[1].textContent = t.projects.card7.link2Text;
     
     // MNIST Demo section
     document.querySelector('#mnist-demo .section-title').textContent = t.mnistDemo.title;

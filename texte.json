@@ -103,7 +103,7 @@
         "tag1": "XGBoost",
         "tag2": "Random Forest",
         "tag3": "FastAPI",
-        "description": "Developed models to predict whether a mushroom is poisonous or edible. Started from scratch, then fine-tuned pre-trained models using XGBoost and Random Forest.",
+        "description": "Developed models to predict whether a mushroom is poisonous or edible. This is part of a Kaggle competition. I used XGBoost and Random Forest.",
         "link1Text": "View Code",
         "link2Text": "UTBM"
       },
@@ -118,6 +118,17 @@
         "link2Text": "UTBM"
       },
       "card6": {
+        "title": "Music Genre Classification",
+        "tag1": "SVM",
+        "tag2": "Deep Learning",
+        "tag3": "Audio Analysis",
+        "tag4": "Keras",
+        "tag5": "Librosa",
+        "description": "Collaborated in a team of three for a university project focused on classifying music genres from the GTZAN dataset using audio features. Compared the performance of a Support Vector Machine (SVM) optimized via GridSearchCV (achieving ~90% accuracy) against a Keras-based deep neural network. Utilized librosa for audio analysis (EDA), scikit-learn for preprocessing and SVM, TensorFlow/Keras for the neural network, and Weights & Biases for experiment tracking.",
+        "link1Text": "View Code",
+        "link2Text": "UTBM"
+      },
+      "card7": {
         "title": "Tangram Solver",
         "tag1": "First AI project",
         "tag2": "Game",
@@ -302,7 +313,7 @@
         "tag1": "XGBoost",
         "tag2": "Random Forest",
         "tag3": "FastAPI",
-        "description": "Développement de modèles pour prédire si un champignon est vénéneux ou comestible. Commencé de zéro, puis affinage de modèles pré-entraînés en utilisant XGBoost et Random Forest.",
+        "description": "Développement de modèles pour prédire si un champignon est vénéneux ou comestible. Fait partie d'une compétition Kaggle. J'ai utilisé XGBoost et Random Forest.",
         "link1Text": "Voir le Code",
         "link2Text": "UTBM"
       },
@@ -317,6 +328,17 @@
         "link2Text": "UTBM"
       },
       "card6": {
+        "title": "Classification de Genres Musicaux",
+        "tag1": "SVM",
+        "tag2": "Apprentissage Profond",
+        "tag3": "Analyse Audio",
+        "tag4": "Keras",
+        "tag5": "Librosa",
+        "description": "Projet universitaire réalisé en équipe de trois visant à classifier les genres musicaux du dataset GTZAN à partir de caractéristiques audio. Comparaison des performances entre un modèle SVM (Support Vector Machine), optimisé via GridSearchCV (atteignant ~90% de précision), et un réseau de neurones profond basé sur Keras. Utilisation de librosa pour l'analyse audio exploratoire (EDA), scikit-learn pour le prétraitement et le SVM, TensorFlow/Keras pour le réseau neuronal, et Weights & Biases pour le suivi des expériences.",
+        "link1Text": "Voir le Code",
+        "link2Text": "UTBM"
+      },
+      "card7": {
         "title": "Solveur de Tangram",
         "tag1": "Premier projet IA",
         "tag2": "Jeu",
