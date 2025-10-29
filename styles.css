@@ -998,6 +998,10 @@ section:nth-child(even) {
     display: block;
     margin: 1rem auto;
     box-shadow: 0 4px 15px var(--shadow-light);
+    touch-action: none; /* Prevents scrolling on touch */
+    user-select: none; /* Prevents text selection */
+    -webkit-user-select: none;
+    -moz-user-select: none;
 }
 
 .canvas-controls {

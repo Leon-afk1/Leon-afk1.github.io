@@ -1706,20 +1706,49 @@ document.addEventListener('DOMContentLoaded', function() {
     // Touch events for mobile
     function getTouchPos(e) {
         const rect = canvas.getBoundingClientRect();
+        const scaleX = canvas.width / rect.width;
+        const scaleY = canvas.height / rect.height;
+        
         return {
-            x: e.touches[0].clientX - rect.left,
-            y: e.touches[0].clientY - rect.top
+            x: (e.touches[0].clientX - rect.left) * scaleX,
+            y: (e.touches[0].clientY - rect.top) * scaleY
         };
     }
     
-    function handleTouch(e) {
+    function handleTouchStart(e) {
         e.preventDefault();
-        const touch = e.touches[0];
-        const mouseEvent = new MouseEvent(e.type.replace('touch', 'mouse'), {
-            clientX: touch.clientX,
-            clientY: touch.clientY
-        });
-        canvas.dispatchEvent(mouseEvent);
+        console.log('Touch start detected'); // Debug log
+        if (e.touches.length === 1) {
+            const pos = getTouchPos(e);
+            isDrawing = true;
+            ctx.beginPath();
+            ctx.moveTo(pos.x, pos.y);
+        }
+    }
+    
+    function handleTouchMove(e) {
+        e.preventDefault();
+        if (!isDrawing || e.touches.length !== 1) return;
+        
+        const pos = getTouchPos(e);
+        ctx.lineTo(pos.x, pos.y);
+        ctx.stroke();
+        ctx.beginPath();
+        ctx.moveTo(pos.x, pos.y);
+        
+        // Throttled preview update during drawing
+        if (previewTimeout) clearTimeout(previewTimeout);
+        previewTimeout = setTimeout(updatePreview, 100);
+    }
+    
+    function handleTouchEnd(e) {
+        e.preventDefault();
+        console.log('Touch end detected'); // Debug log
+        if (isDrawing) {
+            isDrawing = false;
+            ctx.beginPath();
+            updatePreview(); // Update preview when drawing stops
+        }
     }
     
     // Event listeners
@@ -1729,9 +1758,9 @@ document.addEventListener('DOMContentLoaded', function() {
     canvas.addEventListener('mouseout', stopDrawing);
     
     // Touch events
-    canvas.addEventListener('touchstart', handleTouch);
-    canvas.addEventListener('touchmove', handleTouch);
-    canvas.addEventListener('touchend', handleTouch);
+    canvas.addEventListener('touchstart', handleTouchStart, { passive: false });
+    canvas.addEventListener('touchmove', handleTouchMove, { passive: false });
+    canvas.addEventListener('touchend', handleTouchEnd, { passive: false });
     
     // Clear canvas
     clearBtn.addEventListener('click', () => {
