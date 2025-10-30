@@ -3,7 +3,7 @@
     "pageTitle": "Léon - AI Engineer & Researcher",
     "metaDescription": "AI Engineering student specializing in machine learning, deep learning, and AI research",
     "nav": {
-      "logo": "Léon",
+      "logo": "Léon M.",
       "about": "About",
       "skills": "Skills",
       "projects": "Projects",
@@ -108,6 +108,17 @@
         "link2Text": "UTBM"
       },
       "card5": {
+        "title": "Poultry Disease Detection",
+        "tag1": "CNN",
+        "tag2": "Transfer Learning",
+        "tag3": "Computer Vision",
+        "tag4": "Agriculture",
+        "tag5": "Healthcare",
+        "description": "Developed a deep learning model to help farmers detect diseases in poultry through fecal analysis. Starting with a CNN and transitioning to transfer learning techniques using a Kaggle dataset. This project combines computer vision with agricultural applications to provide early disease detection for better animal health management.",
+        "link1Text": "View Code",
+        "link2Text": "UTBM"
+      },
+      "card6": {
         "title": "MNIST Digit Recognition CNN",
         "tag1": "CNN",
         "tag2": "PyTorch",
@@ -117,7 +128,7 @@
         "link1Text": "Try Live Demo",
         "link2Text": "UTBM"
       },
-      "card6": {
+      "card7": {
         "title": "Music Genre Classification",
         "tag1": "SVM",
         "tag2": "Deep Learning",
@@ -128,7 +139,7 @@
         "link1Text": "View Code",
         "link2Text": "UTBM"
       },
-      "card7": {
+      "card8": {
         "title": "Tangram Solver",
         "tag1": "First AI project",
         "tag2": "Game",
@@ -213,7 +224,7 @@
     "pageTitle": "Léon - Ingénieur & Chercheur IA",
     "metaDescription": "Étudiant ingénieur en IA spécialisé en apprentissage machine, apprentissage profond et recherche en IA",
     "nav": {
-      "logo": "Léon",
+      "logo": "Léon M.",
       "about": "À propos",
       "skills": "Compétences",
       "projects": "Projets",
@@ -318,6 +329,17 @@
         "link2Text": "UTBM"
       },
       "card5": {
+        "title": "Détection de Maladies Aviaires",
+        "tag1": "CNN",
+        "tag2": "Transfer Learning",
+        "tag3": "Vision Ordinateur",
+        "tag4": "Agriculture",
+        "tag5": "Santé",
+        "description": "Développement d'un modèle d'apprentissage profond pour aider les éleveurs à détecter les maladies chez la volaille par analyse fécale. En commençant par un CNN et en passant aux techniques de transfer learning en utilisant un dataset Kaggle. Ce projet combine la vision par ordinateur avec des applications agricoles pour fournir une détection précoce des maladies et une meilleure gestion de la santé animale.",
+        "link1Text": "Voir le Code",
+        "link2Text": "UTBM"
+      },
+      "card6": {
         "title": "CNN de Reconnaissance de Chiffres MNIST",
         "tag1": "CNN",
         "tag2": "PyTorch",
@@ -327,7 +349,7 @@
         "link1Text": "Essayer la Démo",
         "link2Text": "UTBM"
       },
-      "card6": {
+      "card7": {
         "title": "Classification de Genres Musicaux",
         "tag1": "SVM",
         "tag2": "Apprentissage Profond",
@@ -338,7 +360,7 @@
         "link1Text": "Voir le Code",
         "link2Text": "UTBM"
       },
-      "card7": {
+      "card8": {
         "title": "Solveur de Tangram",
         "tag1": "Premier projet IA",
         "tag2": "Jeu",
