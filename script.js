@@ -168,49 +168,6 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 
-// Contact Form Handling
-document.addEventListener('DOMContentLoaded', function() {
-    const contactForm = document.querySelector('.contact-form');
-    
-    if (contactForm) {
-        contactForm.addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            // Get form data
-            const formData = new FormData(this);
-            const name = formData.get('name');
-            const email = formData.get('email');
-            const message = formData.get('message');
-            
-            // Basic validation
-            if (!name || !email || !message) {
-                showNotification('Please fill in all fields.', 'error');
-                return;
-            }
-            
-            if (!isValidEmail(email)) {
-                showNotification('Please enter a valid email address.', 'error');
-                return;
-            }
-            
-            // Simulate form submission
-            const submitButton = this.querySelector('button[type="submit"]');
-            const originalText = submitButton.textContent;
-            
-            submitButton.textContent = 'Sending...';
-            submitButton.disabled = true;
-            
-            // Simulate API call
-            setTimeout(() => {
-                showNotification('Thank you for your message! I\'ll get back to you soon.', 'success');
-                this.reset();
-                submitButton.textContent = originalText;
-                submitButton.disabled = false;
-            }, 2000);
-        });
-    }
-});
-
 // Email validation helper
 function isValidEmail(email) {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -432,19 +389,24 @@ document.addEventListener('DOMContentLoaded', function() {
 document.addEventListener('DOMContentLoaded', function() {
     const contactForm = document.getElementById('contact-form');
     const submitBtn = document.getElementById('submit-btn');
-    const btnText = submitBtn.querySelector('.btn-text');
-    const btnLoading = submitBtn.querySelector('.btn-loading');
     const formStatus = document.getElementById('form-status');
 
-    if (contactForm) {
+    if (contactForm && submitBtn) {
+        const btnText = submitBtn.querySelector('.btn-text');
+        const btnLoading = submitBtn.querySelector('.btn-loading');
+
         contactForm.addEventListener('submit', async function(e) {
             e.preventDefault();
             
             // Show loading state
-            btnText.style.display = 'none';
-            btnLoading.style.display = 'inline';
+            if (btnText && btnLoading) {
+                btnText.style.display = 'none';
+                btnLoading.style.display = 'inline';
+            }
             submitBtn.disabled = true;
-            formStatus.innerHTML = '';
+            if (formStatus) {
+                formStatus.innerHTML = '';
+            }
 
             // Get form data
             const formData = new FormData(contactForm);
@@ -463,14 +425,18 @@ document.addEventListener('DOMContentLoaded', function() {
                     // Show success message
                     const t = translations[currentLanguage] || translations['en'] || {};
                     const successMsg = t.contact?.form?.successMessage || '✓ Message sent successfully! I\'ll get back to you soon.';
-                    formStatus.innerHTML = `<div class="form-success">${successMsg}</div>`;
+                    if (formStatus) {
+                        formStatus.innerHTML = `<div class="form-success">${successMsg}</div>`;
+                    }
                     contactForm.reset();
                 } else {
                     // Handle Formspree validation errors
                     const data = await response.json();
                     if (data.errors) {
                         const errorMsg = data.errors.map(error => error.message).join(', ');
-                        formStatus.innerHTML = `<div class="form-error">✗ ${errorMsg}</div>`;
+                        if (formStatus) {
+                            formStatus.innerHTML = `<div class="form-error">✗ ${errorMsg}</div>`;
+                        }
                     } else {
                         throw new Error('Form submission failed');
                     }
@@ -481,11 +447,15 @@ document.addEventListener('DOMContentLoaded', function() {
                 // Show error message
                 const t = translations[currentLanguage] || translations['en'] || {};
                 const errorMsg = t.contact?.form?.errorMessage || '✗ Something went wrong. Please try again or email me directly.';
-                formStatus.innerHTML = `<div class="form-error">${errorMsg}</div>`;
+                if (formStatus) {
+                    formStatus.innerHTML = `<div class="form-error">${errorMsg}</div>`;
+                }
             } finally {
                 // Reset button state
-                btnText.style.display = 'inline';
-                btnLoading.style.display = 'none';
+                if (btnText && btnLoading) {
+                    btnText.style.display = 'inline';
+                    btnLoading.style.display = 'none';
+                }
                 submitBtn.disabled = false;
             }
         });
