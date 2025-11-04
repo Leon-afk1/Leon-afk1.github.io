@@ -65,6 +65,18 @@
     "projects": {
       "title": "Projects",
       "card1": {
+        "title": "Intelligent RAG Chatbot & Dashboard (Hackathon Winner)",
+        "tag1": "RAG",
+        "tag2": "LLM",
+        "tag3": "Google Gemini",
+        "tag4": "Streamlit",
+        "tag5": "FastAPI",
+        "tag6": "Docker",
+        "description": "Co-developed in a team of four during a 25-hour hackathon, winning 2nd place ($1000 CAD). This project is an expert assistant using a RAG pipeline to translate natural language questions into secure SQL queries for a PostgreSQL database. The solution, powered by Google Gemini, features an interactive Streamlit dashboard for chat/visualization and a FastAPI backend, all containerized with Docker.",
+        "link1Text": "View Code",
+        "link2Text": "UQAC"
+      },
+      "card2": {
         "title": "Multimodal Contrastive Learning for Drug Analysis",
         "tag1": "GFlowNets",
         "tag2": "Cell Morphology",
@@ -76,7 +88,7 @@
         "link3Text": "Internship Report",
         "reportUrl": "./internship-report-en.pdf"
       },
-      "card2": {
+      "card3": {
         "title": "LLM-based Chatbot for Biologists",
         "tag1": "LLM",
         "tag2": "Graph RAG",
@@ -87,7 +99,7 @@
         "link2Text": "Internship Report",
         "reportUrl": "./internship-report-en.pdf"
       },
-      "card3": {
+      "card4": {
         "title": "Cell Classification CNN",
         "tag1": "PyTorch",
         "tag2": "PyTorch Lightning",
@@ -98,7 +110,7 @@
         "link2Text": "Internship Report",
         "reportUrl": "./internship-report-en.pdf"
       },
-      "card4": {
+      "card5": {
         "title": "Mushroom Toxicity Prediction",
         "tag1": "XGBoost",
         "tag2": "Random Forest",
@@ -107,7 +119,7 @@
         "link1Text": "View Code",
         "link2Text": "UTBM"
       },
-      "card5": {
+      "card6": {
         "title": "Poultry Disease Detection",
         "tag1": "CNN",
         "tag2": "Transfer Learning",
@@ -118,7 +130,7 @@
         "link1Text": "View Code",
         "link2Text": "UTBM"
       },
-      "card6": {
+      "card7": {
         "title": "MNIST Digit Recognition CNN",
         "tag1": "CNN",
         "tag2": "PyTorch",
@@ -128,7 +140,7 @@
         "link1Text": "Try Live Demo",
         "link2Text": "UTBM"
       },
-      "card7": {
+      "card8": {
         "title": "Music Genre Classification",
         "tag1": "SVM",
         "tag2": "Deep Learning",
@@ -139,7 +151,7 @@
         "link1Text": "View Code",
         "link2Text": "UTBM"
       },
-      "card8": {
+      "card9": {
         "title": "Tangram Solver",
         "tag1": "First AI project",
         "tag2": "Game",
@@ -173,6 +185,15 @@
         "achievement3": "Exploring opportunities for research collaboration in Canada"
       },
       "item2": {
+        "title": "Hackathon X UQAC - 2nd Place Winner",
+        "company": "Université du Québec à Chicoutimi (UQAC), Canada",
+        "period": "November 2, 2025",
+        "achievement1": "Won 2nd place ($1000 CAD) in a 25-hour hackathon",
+        "achievement2": "Co-developed an intelligent RAG chatbot using Google Gemini for SQL query generation",
+        "achievement3": "Built interactive Streamlit dashboard with FastAPI backend, containerized with Docker",
+        "achievement4": "Collaborated in a team of four to deliver a complete production-ready solution"
+      },
+      "item3": {
         "title": "Engineering Degree, Computer Science & Data Science",
         "company": "UTBM (Université de Technologie de Belfort-Montbéliard), France",
         "period": "2021 – 2025",
@@ -181,7 +202,7 @@
         "achievement3": "President of SKI’UTBM, leading a team and organizing a trip for 200+ students",
         "achievement4": "Twice participant in Crunch Time Challenge, solving real-world company projects in multidisciplinary teams"
       },
-      "item3": {
+      "item4": {
         "title": "AI Engineering Intern",
         "company": "Ksilink, Strasbourg, France",
         "period": "Sept 2024 - Feb 2025",
@@ -191,7 +212,7 @@
         "reportText": "Internship Report",
         "reportUrl": "./internship-report-en.pdf"
       },
-      "item4": {
+      "item5": {
         "title": "Exchange Semester, Computer Science",
         "company": "Yeditepe University, Istanbul, Turkey",
         "period": "Jan 2023 - Jun 2023",
@@ -215,6 +236,14 @@
         "successMessage": "✓ Message sent successfully! I'll get back to you soon.",
         "errorMessage": "✗ Something went wrong. Please try again or email me directly."
       }
+    },
+    "chatbot": {
+      "title": "💬 Ask me anything!",
+      "welcome": "Hi! I'm Léon's AI assistant. Ask me anything about his experience, skills, or projects!",
+      "placeholder": "Ask about my experience, skills, projects...",
+      "suggestion1": "💡 Skills",
+      "suggestion2": "🚀 Projects",
+      "suggestion3": "💼 Experience"
     },
     "footer": {
       "copyright": "© 2025 Léon"
@@ -286,6 +315,18 @@
     "projects": {
       "title": "Projets Principaux",
       "card1": {
+        "title": "Chatbot RAG Intelligent & Dashboard (Gagnant Hackathon)",
+        "tag1": "RAG",
+        "tag2": "LLM",
+        "tag3": "Google Gemini",
+        "tag4": "Streamlit",
+        "tag5": "FastAPI",
+        "tag6": "Docker",
+        "description": "Co-développé en équipe de quatre lors d'un hackathon de 25h, remportant la 2e place (1000 $CAD). Ce projet est un assistant expert utilisant un pipeline RAG et Google Gemini pour traduire des questions en langage naturel en requêtes SQL sécurisées pour une base de données PostgreSQL. La solution inclut un dashboard interactif Streamlit (chat/visualisation) et un backend FastAPI, le tout conteneurisé avec Docker.",
+        "link1Text": "Voir le Code",
+        "link2Text": "UQAC"
+      },
+      "card2": {
         "title": "Apprentissage Contrastif Multimodal pour l'Analyse de Médicaments",
         "tag1": "GFlowNets",
         "tag2": "Morphologie Cellulaire",
@@ -297,7 +338,7 @@
         "link3Text": "Rapport de Stage",
         "reportUrl": "./rapport-de-stage-fr.pdf"
       },
-      "card2": {
+      "card3": {
         "title": "Chatbot basé sur LLM pour Biologistes",
         "tag1": "LLM",
         "tag2": "Graph RAG",
@@ -308,7 +349,7 @@
         "link2Text": "Rapport de Stage",
         "reportUrl": "./rapport-de-stage-fr.pdf"
       },
-      "card3": {
+      "card4": {
         "title": "CNN pour la Classification Cellulaire",
         "tag1": "PyTorch",
         "tag2": "PyTorch Lightning",
@@ -319,7 +360,7 @@
         "link2Text": "Rapport de Stage",
         "reportUrl": "./rapport-de-stage-fr.pdf"
       },
-      "card4": {
+      "card5": {
         "title": "Prédiction de la Toxicité des Champignons",
         "tag1": "XGBoost",
         "tag2": "Random Forest",
@@ -328,7 +369,7 @@
         "link1Text": "Voir le Code",
         "link2Text": "UTBM"
       },
-      "card5": {
+      "card6": {
         "title": "Détection de Maladies Aviaires",
         "tag1": "CNN",
         "tag2": "Transfer Learning",
@@ -339,7 +380,7 @@
         "link1Text": "Voir le Code",
         "link2Text": "UTBM"
       },
-      "card6": {
+      "card7": {
         "title": "CNN de Reconnaissance de Chiffres MNIST",
         "tag1": "CNN",
         "tag2": "PyTorch",
@@ -349,7 +390,7 @@
         "link1Text": "Essayer la Démo",
         "link2Text": "UTBM"
       },
-      "card7": {
+      "card8": {
         "title": "Classification de Genres Musicaux",
         "tag1": "SVM",
         "tag2": "Apprentissage Profond",
@@ -360,7 +401,7 @@
         "link1Text": "Voir le Code",
         "link2Text": "UTBM"
       },
-      "card8": {
+      "card9": {
         "title": "Solveur de Tangram",
         "tag1": "Premier projet IA",
         "tag2": "Jeu",
@@ -394,6 +435,15 @@
         "achievement3": "Exploration d'opportunités de collaboration en recherche au Canada"
       },
       "item2": {
+        "title": "Hackathon X UQAC - Gagnant 2e Place",
+        "company": "Université du Québec à Chicoutimi (UQAC), Canada",
+        "period": "2 novembre 2025",
+        "achievement1": "Remporté la 2e place (1000 $CAD) lors d'un hackathon de 25 heures",
+        "achievement2": "Co-développement d'un chatbot RAG intelligent utilisant Google Gemini pour la génération de requêtes SQL",
+        "achievement3": "Construction d'un dashboard interactif Streamlit avec backend FastAPI, conteneurisé avec Docker",
+        "achievement4": "Collaboration en équipe de quatre pour livrer une solution complète prête pour la production"
+      },
+      "item3": {
         "title": "Diplôme d'Ingénieur — Informatique & Science des Données",
         "company": "UTBM (Université de Technologie de Belfort-Montbéliard), France",
         "period": "2021 – 2025",
@@ -402,7 +452,7 @@
         "achievement3": "Président de SKI’UTBM, gestion d'équipe et organisation d'un voyage pour 200+ étudiants",
         "achievement4": "Double participation au Crunch Time Challenge, résolution de projets d'entreprise réels en équipes multidisciplinaires"
       },
-      "item3": {
+      "item4": {
         "title": "Stagiaire Ingénieur IA",
         "company": "Ksilink, Strasbourg, France",
         "period": "Sept 2024 - Fév 2025",
@@ -412,7 +462,7 @@
         "reportText": "Rapport de Stage",
         "reportUrl": "./rapport-de-stage-fr.pdf"
       },
-      "item4": {
+      "item5": {
         "title": "Semestre d'Échange — Informatique",
         "company": "Université Yeditepe, Istanbul, Turquie",
         "period": "Jan 2023 - Juin 2023",
@@ -436,6 +486,14 @@
         "successMessage": "✓ Message envoyé avec succès ! Je vous répondrai bientôt.",
         "errorMessage": "✗ Une erreur s'est produite. Veuillez réessayer ou m'envoyer un email directement."
       }
+    },
+    "chatbot": {
+      "title": "💬 Posez-moi vos questions !",
+      "welcome": "Bonjour ! Je suis l'assistant IA de Léon. Posez-moi des questions sur son expérience, ses compétences ou ses projets !",
+      "placeholder": "Questions sur mon expérience, compétences, projets...",
+      "suggestion1": "💡 Compétences",
+      "suggestion2": "🚀 Projets",
+      "suggestion3": "💼 Expérience"
     },
     "footer": {
       "copyright": "© 2025 Léon"

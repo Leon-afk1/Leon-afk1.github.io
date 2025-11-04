@@ -70,8 +70,39 @@
                     <a href="#contact" class="btn btn-secondary">Get in Touch</a>
                 </div>
             </div>
-            <div class="hero-visual">
-                <!-- Pathfinding Maze will be inserted here by JavaScript -->
+            
+            <!-- Chatbot Widget -->
+            <div class="chatbot-widget">
+                <div class="chatbot-header">
+                    <h3 data-translate="chatbot.title">💬 Ask me anything!</h3>
+                    <button class="chatbot-minimize" id="chatbot-minimize" aria-label="Minimize chatbot">−</button>
+                </div>
+                <div class="chatbot-messages" id="chatbot-messages">
+                    <div class="chatbot-message bot-message">
+                        <div class="message-avatar">🤖</div>
+                        <div class="message-content">
+                            <p data-translate="chatbot.welcome">Hi! I'm Léon's AI assistant. Ask me anything about his experience, skills, or projects!</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="chatbot-input-container">
+                    <input 
+                        type="text" 
+                        id="chatbot-input" 
+                        class="chatbot-input" 
+                        placeholder="Ask about my experience, skills, projects..."
+                        data-translate-placeholder="chatbot.placeholder"
+                        autocomplete="off"
+                    />
+                    <button id="chatbot-send" class="chatbot-send" aria-label="Send message">
+                        <span>➤</span>
+                    </button>
+                </div>
+                <div class="chatbot-suggestions">
+                    <button class="suggestion-btn" data-question="What are your main skills?" data-translate="chatbot.suggestion1">💡 Skills</button>
+                    <button class="suggestion-btn" data-question="Tell me about your projects" data-translate="chatbot.suggestion2">🚀 Projects</button>
+                    <button class="suggestion-btn" data-question="What is your experience?" data-translate="chatbot.suggestion3">💼 Experience</button>
+                </div>
             </div>
         </div>
     </section>
@@ -186,6 +217,31 @@
         <div class="container">
             <h2 class="section-title">Projects</h2>
             <div class="projects-grid">
+                <article class="project-card">
+                    <div class="project-header">
+                        <h3>Intelligent RAG Chatbot & Dashboard (Hackathon Winner)</h3>
+                        <div class="project-tags">
+                            <span class="tag">RAG</span>
+                            <span class="tag">LLM</span>
+                            <span class="tag">Google Gemini</span>
+                            <span class="tag">Streamlit</span>
+                            <span class="tag">FastAPI</span>
+                            <span class="tag">Docker</span>
+                        </div>
+                    </div>
+                    <p class="project-description">
+                        Co-developed in a team of four during a 25-hour hackathon, winning 2nd place ($1000 CAD). 
+                        This project is an expert assistant using a RAG pipeline to translate natural language 
+                        questions into secure SQL queries for a PostgreSQL database. The solution, powered by 
+                        Google Gemini, features an interactive Streamlit dashboard for chat/visualization and 
+                        a FastAPI backend, all containerized with Docker.
+                    </p>
+                    <div class="project-links">
+                        <a href="https://github.com/Leon-afk1/Hackathon_CTI_UQAC.git" class="project-link" target="_blank" rel="noopener noreferrer">View Code</a>
+                        <a href="https://www.uqac.ca/" class="project-link" target="_blank" rel="noopener noreferrer">UQAC</a>
+                    </div>
+                </article>
+
                 <article class="project-card">
                     <div class="project-header">
                         <h3>Multimodal Contrastive Learning for Drug Analysis</h3>
@@ -406,13 +462,28 @@
                 <div class="timeline-item">
                     <div class="timeline-marker"></div>
                     <div class="timeline-content">
-                        <h3>Double Degree, Master’s in Artificial Intelligence</h3>
+                        <h3>Double Degree, Master's in Artificial Intelligence</h3>
                         <p class="company">Université du Québec à Chicoutimi (UQAC), Canada</p>
                         <p class="period">2025 - Present</p>
                         <ul class="achievements">
                             <li>Specialization in Artificial Intelligence</li>
                             <li>Focus on advanced machine learning and deep learning techniques</li>
                             <li>Exploring opportunities for research collaboration in Canada</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-marker"></div>
+                    <div class="timeline-content">
+                        <h3>Hackathon X UQAC - 2nd Place Winner</h3>
+                        <p class="company">Université du Québec à Chicoutimi (UQAC), Canada</p>
+                        <p class="period">November 2, 2025</p>
+                        <ul class="achievements">
+                            <li>Won 2nd place ($1000 CAD) in a 25-hour hackathon</li>
+                            <li>Co-developed an intelligent RAG chatbot using Google Gemini for SQL query generation</li>
+                            <li>Built interactive Streamlit dashboard with FastAPI backend, containerized with Docker</li>
+                            <li>Collaborated in a team of four to deliver a complete production-ready solution</li>
                         </ul>
                     </div>
                 </div>
@@ -526,5 +597,7 @@
     </footer>
 
     <script src="script.js"></script>
+    <script src="chatbot-config.js"></script>
+    <script src="chatbot-client.js"></script>
 </body>
 </html>

@@ -654,21 +654,19 @@ function updateContent() {
     document.querySelector('#projects .section-title').textContent = t.projects.title;
     const projectCards = document.querySelectorAll('.project-card');
     
-    // Project 1
+    // Project 1 (Hackathon)
     projectCards[0].querySelector('h3').textContent = t.projects.card1.title;
     const card1Tags = projectCards[0].querySelectorAll('.tag');
     card1Tags[0].textContent = t.projects.card1.tag1;
     card1Tags[1].textContent = t.projects.card1.tag2;
     card1Tags[2].textContent = t.projects.card1.tag3;
     card1Tags[3].textContent = t.projects.card1.tag4;
+    card1Tags[4].textContent = t.projects.card1.tag5;
+    card1Tags[5].textContent = t.projects.card1.tag6;
     projectCards[0].querySelector('.project-description').textContent = t.projects.card1.description;
     const card1Links = projectCards[0].querySelectorAll('.project-link');
     card1Links[0].textContent = t.projects.card1.link1Text;
     card1Links[1].textContent = t.projects.card1.link2Text;
-    if (card1Links[2]) {
-        card1Links[2].textContent = t.projects.card1.link3Text;
-        card1Links[2].href = t.projects.card1.reportUrl;
-    }
     
     // Project 2
     projectCards[1].querySelector('h3').textContent = t.projects.card2.title;
@@ -680,12 +678,13 @@ function updateContent() {
     projectCards[1].querySelector('.project-description').textContent = t.projects.card2.description;
     const card2Links = projectCards[1].querySelectorAll('.project-link');
     card2Links[0].textContent = t.projects.card2.link1Text;
-    if (card2Links[1]) {
-        card2Links[1].textContent = t.projects.card2.link2Text;
-        card2Links[1].href = t.projects.card2.reportUrl;
+    card2Links[1].textContent = t.projects.card2.link2Text;
+    card2Links[2].textContent = t.projects.card2.link3Text;
+    if (card2Links[2]) {
+        card2Links[2].href = t.projects.card2.reportUrl;
     }
     
-    // Project 3
+    // Project 3 (LLM-based Chatbot)
     projectCards[2].querySelector('h3').textContent = t.projects.card3.title;
     const card3Tags = projectCards[2].querySelectorAll('.tag');
     card3Tags[0].textContent = t.projects.card3.tag1;
@@ -695,69 +694,84 @@ function updateContent() {
     projectCards[2].querySelector('.project-description').textContent = t.projects.card3.description;
     const card3Links = projectCards[2].querySelectorAll('.project-link');
     card3Links[0].textContent = t.projects.card3.link1Text;
+    card3Links[1].textContent = t.projects.card3.link2Text;
     if (card3Links[1]) {
-        card3Links[1].textContent = t.projects.card3.link2Text;
         card3Links[1].href = t.projects.card3.reportUrl;
     }
     
-    // Project 4
+    // Project 4 (Cell Classification CNN)
     projectCards[3].querySelector('h3').textContent = t.projects.card4.title;
     const card4Tags = projectCards[3].querySelectorAll('.tag');
     card4Tags[0].textContent = t.projects.card4.tag1;
     card4Tags[1].textContent = t.projects.card4.tag2;
     card4Tags[2].textContent = t.projects.card4.tag3;
+    card4Tags[3].textContent = t.projects.card4.tag4;
     projectCards[3].querySelector('.project-description').textContent = t.projects.card4.description;
     const card4Links = projectCards[3].querySelectorAll('.project-link');
     card4Links[0].textContent = t.projects.card4.link1Text;
     card4Links[1].textContent = t.projects.card4.link2Text;
+    if (card4Links[1]) {
+        card4Links[1].href = t.projects.card4.reportUrl;
+    }
     
-    // Project 5 (Poultry Disease Detection)
+    // Project 5 (Mushroom Toxicity)
     projectCards[4].querySelector('h3').textContent = t.projects.card5.title;
     const card5Tags = projectCards[4].querySelectorAll('.tag');
     card5Tags[0].textContent = t.projects.card5.tag1;
     card5Tags[1].textContent = t.projects.card5.tag2;
     card5Tags[2].textContent = t.projects.card5.tag3;
-    card5Tags[3].textContent = t.projects.card5.tag4;
-    card5Tags[4].textContent = t.projects.card5.tag5;
     projectCards[4].querySelector('.project-description').textContent = t.projects.card5.description;
     const card5Links = projectCards[4].querySelectorAll('.project-link');
     card5Links[0].textContent = t.projects.card5.link1Text;
     card5Links[1].textContent = t.projects.card5.link2Text;
     
-    // Project 6 (MNIST)
+    // Project 6 (Poultry Disease Detection)
     projectCards[5].querySelector('h3').textContent = t.projects.card6.title;
     const card6Tags = projectCards[5].querySelectorAll('.tag');
     card6Tags[0].textContent = t.projects.card6.tag1;
     card6Tags[1].textContent = t.projects.card6.tag2;
     card6Tags[2].textContent = t.projects.card6.tag3;
     card6Tags[3].textContent = t.projects.card6.tag4;
+    card6Tags[4].textContent = t.projects.card6.tag5;
     projectCards[5].querySelector('.project-description').textContent = t.projects.card6.description;
     const card6Links = projectCards[5].querySelectorAll('.project-link');
     card6Links[0].textContent = t.projects.card6.link1Text;
     card6Links[1].textContent = t.projects.card6.link2Text;
     
-    // Project 7 (Music Genre Classification)
+    // Project 7 (MNIST)
     projectCards[6].querySelector('h3').textContent = t.projects.card7.title;
     const card7Tags = projectCards[6].querySelectorAll('.tag');
     card7Tags[0].textContent = t.projects.card7.tag1;
     card7Tags[1].textContent = t.projects.card7.tag2;
     card7Tags[2].textContent = t.projects.card7.tag3;
     card7Tags[3].textContent = t.projects.card7.tag4;
-    card7Tags[4].textContent = t.projects.card7.tag5;
     projectCards[6].querySelector('.project-description').textContent = t.projects.card7.description;
     const card7Links = projectCards[6].querySelectorAll('.project-link');
     card7Links[0].textContent = t.projects.card7.link1Text;
     card7Links[1].textContent = t.projects.card7.link2Text;
     
-    // Project 8 (Tangram Solver)
+    // Project 8 (Music Genre Classification)
     projectCards[7].querySelector('h3').textContent = t.projects.card8.title;
     const card8Tags = projectCards[7].querySelectorAll('.tag');
     card8Tags[0].textContent = t.projects.card8.tag1;
     card8Tags[1].textContent = t.projects.card8.tag2;
+    card8Tags[2].textContent = t.projects.card8.tag3;
+    card8Tags[3].textContent = t.projects.card8.tag4;
+    card8Tags[4].textContent = t.projects.card8.tag5;
     projectCards[7].querySelector('.project-description').textContent = t.projects.card8.description;
     const card8Links = projectCards[7].querySelectorAll('.project-link');
     card8Links[0].textContent = t.projects.card8.link1Text;
     card8Links[1].textContent = t.projects.card8.link2Text;
+    
+    // Project 9 (Tangram Solver)
+    projectCards[8].querySelector('h3').textContent = t.projects.card9.title;
+    const card9Tags = projectCards[8].querySelectorAll('.tag');
+    card9Tags[0].textContent = t.projects.card9.tag1;
+    card9Tags[1].textContent = t.projects.card9.tag2;
+    projectCards[8].querySelector('.project-description').textContent = t.projects.card9.description;
+    const card9Links = projectCards[8].querySelectorAll('.project-link');
+    card9Links[0].textContent = t.projects.card9.link1Text;
+    card9Links[1].textContent = t.projects.card9.link2Text;
     
     // MNIST Demo section
     document.querySelector('#mnist-demo .section-title').textContent = t.mnistDemo.title;
@@ -776,7 +790,7 @@ function updateContent() {
     document.querySelector('#experience .section-title').textContent = t.experience.title;
     const timelineItems = document.querySelectorAll('.timeline-item');
     
-    // Experience 1
+    // Experience 1 (Double Degree)
     timelineItems[0].querySelector('h3').textContent = t.experience.item1.title;
     timelineItems[0].querySelector('.company').textContent = t.experience.item1.company;
     timelineItems[0].querySelector('.period').textContent = t.experience.item1.period;
@@ -785,7 +799,7 @@ function updateContent() {
     exp1Achievements[1].textContent = t.experience.item1.achievement2;
     exp1Achievements[2].textContent = t.experience.item1.achievement3;
     
-    // Experience 2
+    // Experience 2 (Hackathon)
     timelineItems[1].querySelector('h3').textContent = t.experience.item2.title;
     timelineItems[1].querySelector('.company').textContent = t.experience.item2.company;
     timelineItems[1].querySelector('.period').textContent = t.experience.item2.period;
@@ -795,7 +809,7 @@ function updateContent() {
     exp2Achievements[2].textContent = t.experience.item2.achievement3;
     exp2Achievements[3].textContent = t.experience.item2.achievement4;
     
-    // Experience 3 (Ksilink internship)
+    // Experience 3 (Engineering Degree)
     timelineItems[2].querySelector('h3').textContent = t.experience.item3.title;
     timelineItems[2].querySelector('.company').textContent = t.experience.item3.company;
     timelineItems[2].querySelector('.period').textContent = t.experience.item3.period;
@@ -803,14 +817,9 @@ function updateContent() {
     exp3Achievements[0].textContent = t.experience.item3.achievement1;
     exp3Achievements[1].textContent = t.experience.item3.achievement2;
     exp3Achievements[2].textContent = t.experience.item3.achievement3;
-    // Handle internship report link
-    const exp3ReportLink = timelineItems[2].querySelector('.internship-report-link');
-    if (exp3ReportLink) {
-        exp3ReportLink.textContent = t.experience.item3.reportText;
-        exp3ReportLink.href = t.experience.item3.reportUrl;
-    }
+    exp3Achievements[3].textContent = t.experience.item3.achievement4;
     
-    // Experience 4 (Exchange)
+    // Experience 4 (Ksilink internship)
     timelineItems[3].querySelector('h3').textContent = t.experience.item4.title;
     timelineItems[3].querySelector('.company').textContent = t.experience.item4.company;
     timelineItems[3].querySelector('.period').textContent = t.experience.item4.period;
@@ -818,6 +827,21 @@ function updateContent() {
     exp4Achievements[0].textContent = t.experience.item4.achievement1;
     exp4Achievements[1].textContent = t.experience.item4.achievement2;
     exp4Achievements[2].textContent = t.experience.item4.achievement3;
+    // Handle internship report link
+    const exp4ReportLink = timelineItems[3].querySelector('.internship-report-link');
+    if (exp4ReportLink) {
+        exp4ReportLink.textContent = t.experience.item4.reportText;
+        exp4ReportLink.href = t.experience.item4.reportUrl;
+    }
+    
+    // Experience 5 (Exchange)
+    timelineItems[4].querySelector('h3').textContent = t.experience.item5.title;
+    timelineItems[4].querySelector('.company').textContent = t.experience.item5.company;
+    timelineItems[4].querySelector('.period').textContent = t.experience.item5.period;
+    const exp5Achievements = timelineItems[4].querySelectorAll('.achievements li');
+    exp5Achievements[0].textContent = t.experience.item5.achievement1;
+    exp5Achievements[1].textContent = t.experience.item5.achievement2;
+    exp5Achievements[2].textContent = t.experience.item5.achievement3;
     
     // Contact section
     document.querySelector('#contact .section-title').textContent = t.contact.title;
@@ -833,6 +857,43 @@ function updateContent() {
     document.querySelector('label[for="message"]').textContent = t.contact.form.messageLabel;
     document.querySelector('.btn-text').textContent = t.contact.form.submitButton;
     document.querySelector('.btn-loading').textContent = t.contact.form.submitButtonLoading;
+    
+    // Chatbot
+    if (t.chatbot) {
+        const chatbotTitle = document.querySelector('[data-translate="chatbot.title"]');
+        if (chatbotTitle) chatbotTitle.textContent = t.chatbot.title;
+        
+        const chatbotWelcome = document.querySelector('[data-translate="chatbot.welcome"]');
+        if (chatbotWelcome) chatbotWelcome.textContent = t.chatbot.welcome;
+        
+        const chatbotInput = document.querySelector('[data-translate-placeholder="chatbot.placeholder"]');
+        if (chatbotInput) chatbotInput.placeholder = t.chatbot.placeholder;
+        
+        const suggestionBtns = document.querySelectorAll('.suggestion-btn');
+        if (suggestionBtns[0]) suggestionBtns[0].textContent = t.chatbot.suggestion1;
+        if (suggestionBtns[1]) suggestionBtns[1].textContent = t.chatbot.suggestion2;
+        if (suggestionBtns[2]) suggestionBtns[2].textContent = t.chatbot.suggestion3;
+        
+        // Update data-question attributes based on language
+        const suggestions = {
+            en: [
+                "What are your main skills?",
+                "Tell me about your projects",
+                "What is your experience?"
+            ],
+            fr: [
+                "Quelles sont tes compétences principales ?",
+                "Parle-moi de tes projets",
+                "Quelle est ton expérience ?"
+            ]
+        };
+        
+        suggestionBtns.forEach((btn, index) => {
+            if (suggestions[currentLanguage] && suggestions[currentLanguage][index]) {
+                btn.setAttribute('data-question', suggestions[currentLanguage][index]);
+            }
+        });
+    }
     
     // Footer
     document.querySelector('.footer p').textContent = t.footer.copyright;
@@ -862,6 +923,10 @@ function setLanguage(lang) {
     
     // Update page HTML lang attribute
     document.documentElement.lang = lang;
+    
+    // Dispatch event for chatbot to listen
+    const languageChangedEvent = new CustomEvent('languageChanged', { detail: { language: lang } });
+    document.dispatchEvent(languageChangedEvent);
     
     updateContent();
 }
