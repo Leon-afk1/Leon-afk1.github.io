@@ -75,6 +75,45 @@ document.addEventListener('DOMContentLoaded', function() {
     // Listen for language changes from main site
     document.addEventListener('languageChanged', updateChatbotLanguage);
     
+    // Function to convert Markdown to HTML
+    function markdownToHtml(text) {
+        // Replace **bold** with <strong>
+        text = text.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
+        
+        // Replace bullet points (• or -) with <li>
+        text = text.replace(/^[•\-]\s+(.+)$/gm, '<li>$1</li>');
+        
+        // Wrap consecutive <li> in <ul>
+        text = text.replace(/(<li>.*<\/li>\s*)+/gs, '<ul>$&</ul>');
+        
+        // Replace numbered lists (1., 2., etc.)
+        text = text.replace(/^\d+\.\s+(.+)$/gm, '<li>$1</li>');
+        
+        // Replace Markdown tables
+        const tableRegex = /\|(.+)\|\n\|[-:\s|]+\|\n((?:\|.+\|\n?)+)/g;
+        text = text.replace(tableRegex, function(match, header, rows) {
+            // Process header
+            const headerCells = header.split('|').filter(cell => cell.trim()).map(cell => 
+                `<th>${cell.trim()}</th>`
+            ).join('');
+            
+            // Process rows
+            const rowsHtml = rows.trim().split('\n').map(row => {
+                const cells = row.split('|').filter(cell => cell.trim()).map(cell => 
+                    `<td>${cell.trim()}</td>`
+                ).join('');
+                return `<tr>${cells}</tr>`;
+            }).join('');
+            
+            return `<table class="chatbot-table"><thead><tr>${headerCells}</tr></thead><tbody>${rowsHtml}</tbody></table>`;
+        });
+        
+        // Replace line breaks with <br>
+        text = text.replace(/\n/g, '<br>');
+        
+        return text;
+    }
+    
     // Minimize/Maximize chatbot
     if (chatbotMinimize && chatbotWidget) {
         chatbotMinimize.addEventListener('click', () => {
@@ -96,7 +135,13 @@ document.addEventListener('DOMContentLoaded', function() {
         messageContent.className = 'message-content';
         
         const messagePara = document.createElement('p');
-        messagePara.textContent = content;
+        
+        // For bot messages, convert markdown to HTML
+        if (!isUser) {
+            messagePara.innerHTML = markdownToHtml(content);
+        } else {
+            messagePara.textContent = content;
+        }
         
         messageContent.appendChild(messagePara);
         messageDiv.appendChild(avatar);

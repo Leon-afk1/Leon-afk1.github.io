@@ -38,7 +38,7 @@ genai.configure(api_key=GEMINI_API_KEY)
 model = genai.GenerativeModel('gemini-2.0-flash')
 
 print("=" * 60)
-print("🚀 Initializing Portfolio Chatbot API")
+print("Initializing Portfolio Chatbot API")
 print("=" * 60)
 
 # Neo4j Connection Class
@@ -161,17 +161,35 @@ INSTRUCTIONS:
 7. The query must be valid Cypher syntax
 8. If the question is general, return information about Person, Skills, Projects, and Experience
 9. Make sure property names match the schema exactly
-10. Use proper Cypher syntax for string matching (use CONTAINS for partial matches)
+10. ALWAYS use toLower() for case-insensitive string comparisons
+11. ALWAYS use CONTAINS for partial string matching instead of exact matches
+12. For text searches, convert both the property and search term to lowercase
+
+STRING MATCHING RULES:
+- Use: WHERE toLower(s.name) CONTAINS toLower("python")
+- Use: WHERE toLower(proj.name) CONTAINS toLower("chatbot")
+- Use: WHERE toLower(e.role) CONTAINS toLower("engineer")
+- DO NOT use exact matches like: WHERE s.name = "Python"
+- DO NOT use case-sensitive CONTAINS: WHERE s.name CONTAINS "Python"
 
 EXAMPLES:
 Question: "What are Léon's skills?" OR "Quelles sont les compétences de Léon ?"
 Query: MATCH (p:Person {{name: "Léon Morales"}})-[:HAS_SKILL]->(s:Skill) RETURN s.name AS skill, s.level AS level, s.category AS category ORDER BY s.level DESC
 
+Question: "Tell me about Léon's Python skills" OR "Parle-moi des compétences Python de Léon"
+Query: MATCH (p:Person {{name: "Léon Morales"}})-[:HAS_SKILL]->(s:Skill) WHERE toLower(s.name) CONTAINS toLower("python") RETURN s.name AS skill, s.level AS level, s.category AS category
+
 Question: "Tell me about Léon's projects" OR "Parle-moi des projets de Léon"
 Query: MATCH (p:Person {{name: "Léon Morales"}})-[:WORKED_ON]->(proj:Project) RETURN proj.name AS project, proj.description AS description, proj.technologies AS technologies LIMIT 10
 
+Question: "What projects involve machine learning?" OR "Quels projets utilisent le machine learning ?"
+Query: MATCH (p:Person {{name: "Léon Morales"}})-[:WORKED_ON]->(proj:Project) WHERE toLower(proj.description) CONTAINS toLower("machine learning") OR toLower(proj.technologies) CONTAINS toLower("machine learning") RETURN proj.name AS project, proj.description AS description, proj.technologies AS technologies LIMIT 10
+
 Question: "What is Léon's background?" OR "Quel est le parcours de Léon ?"
 Query: MATCH (p:Person {{name: "Léon Morales"}}) OPTIONAL MATCH (p)-[:HAS_EXPERIENCE]->(e:Experience) OPTIONAL MATCH (p)-[:STUDIED_AT]->(edu:Education) RETURN p.bio AS bio, collect(DISTINCT e.role) AS roles, collect(DISTINCT edu.degree) AS degrees
+
+Question: "What engineering experience does he have?" OR "Quelle expérience en ingénierie a-t-il ?"
+Query: MATCH (p:Person {{name: "Léon Morales"}})-[:HAS_EXPERIENCE]->(e:Experience) WHERE toLower(e.role) CONTAINS toLower("engineer") RETURN e.role AS role, e.company AS company, e.duration AS duration, e.description AS description
 
 Now generate the Cypher query for the user's question:"""
 
@@ -206,7 +224,7 @@ def execute_cypher_query(cypher_query: str) -> tuple[str, bool, str]:
         
         # Format results as JSON string for context
         formatted_results = json.dumps(results, indent=2, ensure_ascii=False)
-        print(f"📊 Query returned {len(results)} results")
+        print(f"Query returned {len(results)} results")
         
         return formatted_results, True, ""
     
@@ -268,7 +286,7 @@ Is this question relevant to Léon Morales's portfolio? Answer with ONLY "YES" o
         response = model.generate_content(prompt)
         answer = response.text.strip().upper()
         
-        print(f"🎯 Question relevance: {answer}")
+        print(f"Question relevance: {answer}")
         return "YES" in answer
     
     except Exception as e:
@@ -295,8 +313,10 @@ IMPORTANT LANGUAGE INSTRUCTION:
 - RESPOND in the SAME language as the question
 - If the question is in French, respond in French
 - If the question is in English, respond in English
-- Use "I" or "Je" when speaking as Léon depending on the language
+- Speak in THIRD PERSON about Léon (use "he", "his" in English or "il", "son" in French)
+- Act as a professional assistant highlighting Léon's strengths and achievements
 - Be conversational, friendly, and professional
+- Your goal is to showcase Léon's expertise and qualifications to potential recruiters
 
 CONVERSATION HISTORY:
 {history_text}
@@ -317,11 +337,38 @@ INSTRUCTIONS:
 7. If asked about contact information, encourage the user to reach out
 8. Keep technical terms in English (e.g., Python, Machine Learning, etc.)
 9. RESPOND IN THE SAME LANGUAGE AS THE QUESTION
+10. ALWAYS use third person (he/his/il/son) when referring to Léon
+11. Present Léon's qualifications in a positive, professional manner that appeals to recruiters
+
+FORMATTING INSTRUCTIONS (use Markdown):
+- Use **bold** for important words, key skills, technologies, and achievements
+- Use bullet points (•) for lists of items
+- Use numbered lists (1., 2., 3.) for sequential steps or rankings
+- Create tables using Markdown syntax when presenting structured data (e.g., skills with levels, projects with technologies)
+- Use line breaks to separate different topics
+- Example table format:
+  | Skill | Level | Category |
+  |-------|-------|----------|
+  | Python | Expert | Programming |
+  | React | Advanced | Frontend |
+
+FORMATTING EXAMPLES:
+Good: "Léon has **5 years of experience** in **Machine Learning** and **Data Science**."
+Good: "His main skills include:\n• **Python** (Expert level)\n• **TensorFlow** (Advanced)\n• **Docker** (Intermediate)"
+Good for multiple projects: Use a table with columns: Project | Technologies | Description
+
+TONE EXAMPLES:
+Good (Third person, professional): "Léon has extensive experience in Machine Learning, with a particular focus on deep learning and computer vision."
+Good (French, third person): "Léon possède une solide expérience en Machine Learning, avec une spécialisation en deep learning."
+Bad (First person): "I have experience in Machine Learning and computer vision."
+Bad (First person French): "J'ai de l'expérience en Machine Learning."
 
 IMPORTANT:
 - Don't make up information not in the database results
 - Reference previous conversation topics when relevant
 - Detect and match the language of the user's question
+- Use Markdown formatting to make responses visually appealing and easy to read
+- Always speak in third person about Léon to maintain professional distance
 
 RESPONSE:"""
 
@@ -381,7 +428,10 @@ async def handle_chat(chat_query: ChatQuery):
     session_id = chat_query.session_id
     language = chat_query.language or "en"
     
-    print(f"📨 Session {session_id} [{language}]: {user_query}")
+    print("\n" + "="*80)
+    print(f"🤖 NEW QUERY | Session: {session_id} | Language: {language}")
+    print(f"📝 User Query: {user_query}")
+    print("="*80)
     
     try:
         # Step 0: Check if question is relevant
@@ -396,7 +446,7 @@ I can tell you about:
 - Education and certifications
 - Career goals
 
-Feel free to ask me anything about these topics! 😊""",
+Feel free to ask me anything about these topics! """,
                 
                 "fr": """Je suis désolé, mais je suis ici uniquement pour répondre à vos questions concernant Léon Morales et son parcours professionnel.
 
@@ -407,10 +457,10 @@ Je peux vous parler de :
 - Sa formation et certifications
 - Ses objectifs de carrière
 
-N'hésitez pas à me poser une question sur l'un de ces sujets ! 😊"""
+N'hésitez pas à me poser une question sur l'un de ces sujets ! """
             }
             
-            print("⚠️ Off-topic question detected")
+            print("Off-topic question detected")
             return ChatResponse(
                 response=off_topic_messages.get(language, off_topic_messages['en']), 
                 session_id=session_id
@@ -435,7 +485,7 @@ N'hésitez pas à me poser une question sur l'un de ces sujets ! 😊"""
         error_msg = ""
         
         for attempt in range(max_retries):
-            print(f"🔄 Attempt {attempt + 1}/{max_retries}")
+            print(f"Attempt {attempt + 1}/{max_retries}")
             
             # Generate Cypher query (with error context if retrying)
             cypher_query = generate_cypher_query_with_gemini(
@@ -450,18 +500,23 @@ N'hésitez pas à me poser une question sur l'un de ces sujets ! 😊"""
             
             if success:
                 print(f"✅ Query executed successfully on attempt {attempt + 1}")
+                print(f"📊 Retrieved data length: {len(context)} characters")
+                print(f"📄 Data preview: {context[:200]}..." if len(context) > 200 else f"📄 Data: {context}")
                 break
             else:
                 print(f"❌ Query failed on attempt {attempt + 1}: {error_msg}")
                 if attempt == max_retries - 1:
-                    print("⚠️ Max retries reached, using fallback")
+                    print("⚠️  Max retries reached, using fallback")
                     context = "No valid data could be retrieved from the database."
-        
-        print(f"📚 Context length: {len(context)} characters")
-        
+
+        print(f"Context length: {len(context)} characters")
+
         # Step 2: Generate response with Gemini
+        print("🤔 Generating response with Gemini...")
         response_text = generate_response_with_gemini(user_query, context, history, language)
-        print(f"✅ Generated response")
+        print(f"✅ Response generated ({len(response_text)} characters)")
+        print(f"💬 Response preview: {response_text[:150]}..." if len(response_text) > 150 else f"💬 Response: {response_text}")
+        print("="*80 + "\n")
         
         # Step 3: Update conversation history
         conversation_history[session_id].append({
@@ -476,7 +531,7 @@ N'hésitez pas à me poser une question sur l'un de ces sujets ! 😊"""
         return ChatResponse(response=response_text, session_id=session_id)
     
     except Exception as e:
-        print(f"❌ Error in handle_chat: {e}")
+        print(f"Error in handle_chat: {e}")
         raise HTTPException(status_code=500, detail="Error processing your request")
 
 # Cleanup on shutdown
