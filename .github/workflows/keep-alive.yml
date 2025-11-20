@@ -1,0 +1,31 @@
+name: Keep Neo4j Alive
+
+on:
+  schedule:
+    # S'exécute tous les jours à 9h00 UTC (donc le matin en France/Québec)
+    - cron: '0 9 * * *'
+  workflow_dispatch: # Permet de lancer le script manuellement via l'interface GitHub pour tester
+
+jobs:
+  ping-database:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Récupération du code (Checkout)
+        uses: actions/checkout@v3
+
+      - name: Installation de Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.9'
+
+      - name: Installation du driver Neo4j
+        # On installe juste le driver, pas besoin de tout ton requirements.txt
+        run: pip install neo4j
+
+      - name: Lancement du script de ping
+        env:
+          NEO4J_URI: ${{ secrets.NEO4J_URI }}
+          NEO4J_USER: ${{ secrets.NEO4J_USER }}
+          NEO4J_PASSWORD: ${{ secrets.NEO4J_PASSWORD }}
+        run: python neo4j_keep_alive.py
