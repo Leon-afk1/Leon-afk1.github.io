@@ -2,7 +2,11 @@ import os
 import requests
 
 # URL de l'API Hugging Face Space
-HF_SPACE_URL = os.environ.get("HF_SPACE_URL", "https://leon-mls-chatbot-portfolio.hf.space")
+# Utilise la variable d'environnement si définie, sinon utilise l'URL par défaut
+HF_SPACE_URL = os.environ.get("HF_SPACE_URL") or "https://leon-mls-chatbot-portfolio.hf.space"
+
+# Nettoyer l'URL (enlever les espaces et slashs en fin)
+HF_SPACE_URL = HF_SPACE_URL.strip().rstrip('/')
 
 def ping_huggingface():
     """Ping le serveur Hugging Face pour le maintenir actif."""
