@@ -1184,11 +1184,6 @@ section:nth-child(even) {
     color: var(--accent-primary);
 }
 
-.certification-list a::before {
-    content: '🏆';
-    margin-right: 0.5rem;
-}
-
 /* Responsive adjustments for certifications */
 @media (max-width: 768px) {
     .certification-list {

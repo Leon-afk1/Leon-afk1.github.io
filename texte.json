@@ -238,12 +238,12 @@
       }
     },
     "chatbot": {
-      "title": "💬 Ask me anything!",
+      "title": "Ask me anything!",
       "welcome": "Hi! I'm Léon's AI assistant. Ask me anything about his experience, skills, or projects!",
       "placeholder": "Ask about my experience, skills, projects...",
-      "suggestion1": "💡 Skills",
-      "suggestion2": "🚀 Projects",
-      "suggestion3": "💼 Experience"
+      "suggestion1": "Skills",
+      "suggestion2": "Projects",
+      "suggestion3": "Experience"
     },
     "footer": {
       "copyright": "© 2025 Léon"
@@ -488,12 +488,12 @@
       }
     },
     "chatbot": {
-      "title": "💬 Posez-moi vos questions !",
+      "title": "Posez-moi vos questions !",
       "welcome": "Bonjour ! Je suis l'assistant IA de Léon. Posez-moi des questions sur son expérience, ses compétences ou ses projets !",
       "placeholder": "Questions sur mon expérience, compétences, projets...",
-      "suggestion1": "💡 Compétences",
-      "suggestion2": "🚀 Projets",
-      "suggestion3": "💼 Expérience"
+      "suggestion1": "Compétences",
+      "suggestion2": "Projets",
+      "suggestion3": "Expérience"
     },
     "footer": {
       "copyright": "© 2025 Léon"
