@@ -239,7 +239,7 @@
     },
     "chatbot": {
       "title": "Ask me anything!",
-      "welcome": "Hi! I'm Léon's AI assistant. Ask me anything about his experience, skills, or projects!",
+      "welcome": "Hi! I'm Léon's AI assistant. Ask me anything about his experience, skills, or projects!\n\n⏳ Note: The first response may take a bit longer as the servers wake up.",
       "placeholder": "Ask about my experience, skills, projects...",
       "suggestion1": "Skills",
       "suggestion2": "Projects",
@@ -489,7 +489,7 @@
     },
     "chatbot": {
       "title": "Posez-moi vos questions !",
-      "welcome": "Bonjour ! Je suis l'assistant IA de Léon. Posez-moi des questions sur son expérience, ses compétences ou ses projets !",
+      "welcome": "Bonjour ! Je suis l'assistant IA de Léon. Posez-moi des questions sur son expérience, ses compétences ou ses projets !\n\n⏳ Note : La première réponse peut prendre un peu plus de temps, le temps que les serveurs redémarrent.",
       "placeholder": "Questions sur mon expérience, compétences, projets...",
       "suggestion1": "Compétences",
       "suggestion2": "Projets",
