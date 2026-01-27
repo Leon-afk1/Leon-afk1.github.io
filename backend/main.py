@@ -50,6 +50,7 @@ async def lifespan(app: FastAPI):
     model_names = [
         'gemini-2.5-flash',
         'gemini-2.5-flash-lite',
+        'gemini-3-flash',
     ]
     
     model = None
