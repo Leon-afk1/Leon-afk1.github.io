@@ -5,13 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Léon - AI Engineer & Researcher</title>
     <meta name="description" content="AI Engineering student specializing in machine learning, deep learning, and AI research">
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='0.9em' font-size='90'>👨‍💻</text></svg>">
-    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='0.9em' font-size='90'>L</text></svg>">
+    <link rel="stylesheet" href="styles.css?v=20260226c">
     <!-- Flag Icons CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.2.3/css/flag-icons.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <!-- ONNX Runtime Web for PyTorch MNIST model -->
     <script src="https://cdn.jsdelivr.net/npm/onnxruntime-web/dist/ort.min.js"></script>
 </head>
@@ -19,7 +19,7 @@
     <!-- Navigation -->
     <nav class="nav">
         <div class="nav-container">
-            <a href="#home" class="nav-logo">Léon M.</a>
+            <a href="#home" class="nav-logo">Léon MORALES</a>
             <ul class="nav-menu">
                 <li><a href="#about" class="nav-link">About</a></li>
                 <li><a href="#skills" class="nav-link">Skills</a></li>
@@ -74,12 +74,14 @@
             <!-- Chatbot Widget -->
             <div class="chatbot-widget">
                 <div class="chatbot-header">
-                    <h3 data-translate="chatbot.title">💬 Ask me anything!</h3>
+                    <h3 data-translate="chatbot.title">Ask me anything!</h3>
                     <button class="chatbot-minimize" id="chatbot-minimize" aria-label="Minimize chatbot">−</button>
                 </div>
                 <div class="chatbot-messages" id="chatbot-messages">
                     <div class="chatbot-message bot-message">
-                        <div class="message-avatar">🤖</div>
+                        <div class="message-avatar">
+                            <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H6l-2 2V4h16v12z"/><circle cx="9" cy="10" r="1.5"/><circle cx="15" cy="10" r="1.5"/></svg>
+                        </div>
                         <div class="message-content">
                             <p data-translate="chatbot.welcome">Hi! I'm Léon's AI assistant. Ask me anything about his experience, skills, or projects!<br><br>⏳ Note: The first response may take a bit longer as the servers wake up.</p>
                         </div>
@@ -217,6 +219,47 @@
         <div class="container">
             <h2 class="section-title">Projects</h2>
             <div class="projects-grid">
+                <article class="project-card">
+                    <div class="project-header">
+                        <h3>Human Activity Recognition via Wearable Sensors</h3>
+                        <div class="project-tags">
+                            <span class="tag">Contrastive Learning</span>
+                            <span class="tag">Time Series</span>
+                            <span class="tag">Deep Learning</span>
+                            <span class="tag">IMU/PPG</span>
+                        </div>
+                    </div>
+                    <p class="project-description">
+                        Ongoing research project at LIARA laboratory focused on fine-grained human activity recognition. 
+                        Designing a neural architecture using self-supervised contrastive learning to handle high variability 
+                        in IMU and PPG sensor data from wearable devices. The goal is to publish research findings.
+                    </p>
+                    <div class="project-links">
+                        <a href="https://www.uqac.ca/tag/liara/" class="project-link" target="_blank" rel="noopener noreferrer">UQAC LIARA</a>
+                    </div>
+                </article>
+
+                <article class="project-card">
+                    <div class="project-header">
+                        <h3>RAG Chatbot for UQAC Handbook</h3>
+                        <div class="project-tags">
+                            <span class="tag">RAG</span>
+                            <span class="tag">LLM Routing</span>
+                            <span class="tag">Web Scraping</span>
+                            <span class="tag">Streamlit</span>
+                        </div>
+                    </div>
+                    <p class="project-description">
+                        Developed an interactive chatbot based on the UQAC university handbook. Complete implementation 
+                        including web scraping, conversational memory management, semantic routing via LLM, and source 
+                        verification with traceability links.
+                    </p>
+                    <div class="project-links">
+                        <a href="https://www.uqac.ca/" class="project-link" target="_blank" rel="noopener noreferrer">UQAC</a>
+                        <a href="https://github.com/Leon-afk1/ChatBot_UQAC" class="project-link" target="_blank" rel="noopener noreferrer">View Code</a>
+                    </div>
+                </article>
+
                 <article class="project-card">
                     <div class="project-header">
                         <h3>Intelligent RAG Chatbot & Dashboard (Hackathon Winner)</h3>
@@ -404,6 +447,7 @@
                         <a href="https://www.utbm.fr/" class="project-link" target="_blank" rel="noopener noreferrer">UTBM</a>
                     </div>
                 </article>
+
             </div>
         </div>
     </section>
@@ -549,15 +593,12 @@
                     </p>
                     <div class="contact-methods">
                         <a href="mailto:leon.morales@utbm.fr" class="contact-method">
-                            <span class="contact-icon">📧</span>
                             <span>leon.morales@utbm.fr</span>
                         </a>
                         <a href="https://www.linkedin.com/in/léon-morales" class="contact-method" target="_blank" rel="noopener noreferrer">
-                            <span class="contact-icon">💼</span>
                             <span>LinkedIn Profile</span>
                         </a>
                         <a href="https://github.com/Leon-afk1" class="contact-method" target="_blank" rel="noopener noreferrer">
-                            <span class="contact-icon">👨‍💻</span>
                             <span>GitHub Portfolio</span>
                         </a>
                     </div>
@@ -596,8 +637,8 @@
         </div>
     </footer>
 
-    <script src="script.js"></script>
-    <script src="chatbot-config.js"></script>
-    <script src="chatbot-client.js"></script>
+    <script src="script.js?v=20260226b"></script>
+    <script src="chatbot-config.js?v=20260226b"></script>
+    <script src="chatbot-client.js?v=20260226b"></script>
 </body>
 </html>

@@ -19,6 +19,121 @@ NEO4J_USER = os.getenv("NEO4J_USER", "neo4j")
 NEO4J_PASSWORD = os.getenv("NEO4J_PASSWORD")
 GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
 
+# Custom Exception for all models exhausted
+class AllModelsExhaustedException(Exception):
+    """Raised when all Gemini models have reached their quota limit"""
+    pass
+
+# Model Manager for automatic rotation
+class ModelManager:
+    def __init__(self):
+        self.model_names = [
+            'gemini-3-flash-preview',
+            'gemini-2.5-flash-lite',
+            'gemini-2.5-flash',
+        ]
+        self.current_index = 0
+        self.exhausted_models = set()
+        self.current_model = None
+        
+    def initialize(self):
+        """Initialize the first available model"""
+        for i, model_name in enumerate(self.model_names):
+            try:
+                print(f"Initializing model: {model_name}")
+                test_model = genai.GenerativeModel(model_name)
+                # Test with a simple query
+                test_response = test_model.generate_content("Say 'OK'")
+                if test_response.text:
+                    self.current_model = test_model
+                    self.current_index = i
+                    print(f"✓ Successfully initialized with model: {model_name}")
+                    return True
+            except Exception as e:
+                print(f"✗ Model {model_name} failed during initialization: {e}")
+                self.exhausted_models.add(model_name)
+                continue
+        
+        print("✗ WARNING: All models failed during initialization")
+        return False
+    
+    def _is_quota_error(self, error: Exception) -> bool:
+        """Check if the error is related to quota/rate limiting"""
+        error_str = str(error).lower()
+        quota_keywords = [
+            'quota', 'rate limit', 'resource exhausted', 
+            '429', 'too many requests', 'limit exceeded',
+            'resource_exhausted'
+        ]
+        return any(keyword in error_str for keyword in quota_keywords)
+    
+    def generate_content(self, prompt: str, retry: bool = True):
+        """Generate content with automatic model rotation on quota errors"""
+        if len(self.exhausted_models) >= len(self.model_names):
+            raise AllModelsExhaustedException("All available models have reached their quota limit")
+        
+        try:
+            if self.current_model is None:
+                self.initialize()
+            
+            response = self.current_model.generate_content(prompt)
+            return response
+        
+        except Exception as e:
+            current_model_name = self.model_names[self.current_index]
+            
+            # Check if it's a quota error
+            if self._is_quota_error(e):
+                print(f"Model {current_model_name} reached quota limit")
+                self.exhausted_models.add(current_model_name)
+                
+                # Try next model if retry is enabled
+                if retry:
+                    print(f"Attempting to switch to next available model...")
+                    if self._switch_to_next_model():
+                        return self.generate_content(prompt, retry=False)
+                    else:
+                        raise AllModelsExhaustedException("All available models have reached their quota limit")
+            
+            # Re-raise non-quota errors
+            print(f"Error with model {current_model_name}: {e}")
+            raise
+    
+    def _switch_to_next_model(self) -> bool:
+        """Try to switch to the next available model"""
+        attempts = 0
+        while attempts < len(self.model_names):
+            self.current_index = (self.current_index + 1) % len(self.model_names)
+            next_model_name = self.model_names[self.current_index]
+            
+            # Skip already exhausted models
+            if next_model_name in self.exhausted_models:
+                attempts += 1
+                continue
+            
+            try:
+                print(f"Switching to model: {next_model_name}")
+                self.current_model = genai.GenerativeModel(next_model_name)
+                # Test the model
+                test_response = self.current_model.generate_content("OK")
+                if test_response.text:
+                    print(f"✓ Successfully switched to model: {next_model_name}")
+                    return True
+            except Exception as e:
+                print(f"✗ Failed to switch to {next_model_name}: {e}")
+                if self._is_quota_error(e):
+                    self.exhausted_models.add(next_model_name)
+                attempts += 1
+                continue
+        
+        return False
+    
+    def get_current_model_name(self) -> str:
+        """Get the name of the currently active model"""
+        if 0 <= self.current_index < len(self.model_names):
+            return self.model_names[self.current_index]
+        return "Unknown"
+
 # Neo4j Connection
 class Neo4jConnection:
     def __init__(self, uri, user, password):
@@ -35,42 +150,23 @@ class Neo4jConnection:
 
 # Global variables
 neo4j_conn = None
-model = None
+model_manager = None
 
 # Lifespan context manager
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     # Startup
-    global neo4j_conn, model
+    global neo4j_conn, model_manager
     print("===== Application Startup =====")
     
-    # Configure Gemini and try models in order
+    # Configure Gemini with ModelManager
     genai.configure(api_key=GEMINI_API_KEY)
+    model_manager = ModelManager()
     
-    model_names = [
-        'gemini-2.5-flash',
-        'gemini-2.5-flash-lite',
-        'gemini-3-flash',
-    ]
-    
-    model = None
-    for model_name in model_names:
-        try:
-            print(f"Trying model: {model_name}")
-            test_model = genai.GenerativeModel(model_name)
-            # Test with a simple query
-            test_response = test_model.generate_content("Say 'OK'")
-            if test_response.text:
-                model = test_model
-                print(f"✓ Gemini configured successfully with model: {model_name}")
-                break
-        except Exception as e:
-            print(f"✗ Model {model_name} failed: {e}")
-            continue
-    
-    if model is None:
-        print("✗ WARNING: All models failed, using fallback model")
-        model = genai.GenerativeModel('gemini-1.5-flash')
+    if model_manager.initialize():
+        print(f"✓ Gemini configured successfully with model: {model_manager.get_current_model_name()}")
+    else:
+        print("✗ WARNING: Could not initialize any Gemini model")
     
     # Initialize Neo4j
     try:
@@ -136,6 +232,7 @@ Neo4j Database Schema for Léon Morales Portfolio:
 ### Skills & Competencies
 - **Skill**: name, category, level, description
 - **Quality**: name, description
+- **AreaOfDevelopment**: name, description
 - **Certification**: name, url
 
 ### Projects & Activities
@@ -168,6 +265,7 @@ Neo4j Database Schema for Léon Morales Portfolio:
 - **(Person)-[:HAS_SKILL {level}]->(Skill)**
 - **(Person)-[:APPLIED_IN_PERSONAL_PROJECTS]->(Skill)**
 - **(Person)-[:HAS_QUALITY]->(Quality)**
+- **(Person)-[:WORKS_ON_IMPROVING]->(AreaOfDevelopment)**
 - **(Person)-[:WORKED_ON]->(Project)**
 - **(Person)-[:EARNED]->(Certification)**
 - **(Person)-[:SPEAKS {level}]->(Language)**
@@ -260,9 +358,11 @@ USER QUESTION:
 Generate ONLY the Cypher query. No markdown, no explanations."""
 
     try:
-        response = model.generate_content(prompt)
+        response = model_manager.generate_content(prompt)
         cypher_query = response.text.replace('```cypher', '').replace('```', '').strip()
         return cypher_query
+    except AllModelsExhaustedException:
+        raise  # Propagate this exception to be handled at the endpoint level
     except Exception as e:
         print(f"Error generating Cypher: {e}")
         return 'MATCH (p:Person {name: "Léon Morales"}) RETURN p'
@@ -305,7 +405,7 @@ TECHNOLOGY: [value or none]
 """
     
     try:
-        response = model.generate_content(prompt)
+        response = model_manager.generate_content(prompt)
         answer = response.text.strip()
         
         result = {
@@ -322,6 +422,8 @@ TECHNOLOGY: [value or none]
             if 'TECHNOLOGY:' in line: result['technology'] = line.split(':')[1].strip()
             
         return result
+    except AllModelsExhaustedException:
+        raise  # Propagate this exception to be handled at the endpoint level
     except Exception:
         return {'is_relevant': True, 'is_motivation': False, 'company_field': 'none', 'is_tech_definition': False, 'technology': 'none'}
 
@@ -354,8 +456,10 @@ Conversation History: {history_text}
 Response:"""
 
     try:
-        response = model.generate_content(prompt)
+        response = model_manager.generate_content(prompt)
         return response.text if response.parts else "I cannot generate a response right now."
+    except AllModelsExhaustedException:
+        raise  # Propagate this exception to be handled at the endpoint level
     except Exception as e:
         print(f"Error generating response: {e}")
         return "Error generating response."
@@ -367,7 +471,7 @@ async def handle_chat(chat_query: ChatQuery):
     user_query = chat_query.query
     session_id = chat_query.session_id
     
-    print(f"🤖 Query: {user_query}")
+    print(f"Query: {user_query}")
     
     try:
         # 1. Analyze Intent
@@ -377,14 +481,14 @@ async def handle_chat(chat_query: ChatQuery):
         if not intent['is_relevant']:
             # We ask Gemini to generate the polite refusal in the correct language
             refusal_prompt = f"The user asked: '{user_query}'. Politely refuse to answer because it's off-topic. Say you only answer about Léon Morales. Reply in the same language as the user."
-            resp = model.generate_content(refusal_prompt)
+            resp = model_manager.generate_content(refusal_prompt)
             return ChatResponse(response=resp.text, session_id=session_id)
 
         # 3. Handle Motivation Questions
         if intent['is_motivation']:
             field = intent['company_field']
             motiv_prompt = f"The user represents a company in '{field}' and asked: '{user_query}'. Reply in the user's language that Léon cannot speak to specific personal motivations as an AI, but would love to discuss it in an interview."
-            resp = model.generate_content(motiv_prompt)
+            resp = model_manager.generate_content(motiv_prompt)
             return ChatResponse(response=resp.text, session_id=session_id)
 
         # 4. Handle Tech Definitions (General Knowledge fallback)
@@ -402,7 +506,7 @@ async def handle_chat(chat_query: ChatQuery):
             2. Then, {skill_status} based on the portfolio.
             Reply in the user's language."""
             
-            resp = model.generate_content(def_prompt)
+            resp = model_manager.generate_content(def_prompt)
             return ChatResponse(response=resp.text, session_id=session_id)
 
         # 5. Standard RAG Flow
@@ -411,7 +515,11 @@ async def handle_chat(chat_query: ChatQuery):
         
         # Generate & Execute Cypher
         cypher = generate_cypher_query_with_gemini(user_query, convo_context)
-        context, success, _ = execute_cypher_query(cypher)
+        context, success, error_msg = execute_cypher_query(cypher)
+        
+        if not success and error_msg:
+            cypher_retry = generate_cypher_query_with_gemini(user_query, convo_context, previous_attempt=cypher, error_message=error_msg)
+            context, success, error_msg = execute_cypher_query(cypher_retry)
         
         # Generate Answer
         response_text = generate_response_with_gemini(user_query, context, history)
@@ -423,8 +531,31 @@ async def handle_chat(chat_query: ChatQuery):
             
         return ChatResponse(response=response_text, session_id=session_id)
 
+    except AllModelsExhaustedException as e:
+        print(f"ALL MODELS EXHAUSTED: {e}")
+        # Detect user's language from query
+        user_lower = user_query.lower()
+        french_words = ['qui', 'que', 'quoi', 'comment', 'pourquoi', 'où', 'quand', 'quel', 'quelle', 'est', 'sont', 'avez', 'fait', 'peut', 'peux']
+        is_french = any(word in user_lower for word in french_words)
+        
+        if is_french:
+            error_message = (
+                "Désolé, la limite de requêtes journalières gratuite pour l'API Gemini a été atteinte. "
+                "Tous les modèles disponibles ont épuisé leur quota. \n\n"
+                "Veuillez réessayer demain ou contacter Léon directement pour toute question urgente."
+            )
+        else:
+            error_message = (
+                "Sorry, the daily free request limit for the Gemini API has been reached. "
+                "All available models have exhausted their quota. \n\n"
+                "Please try again tomorrow or contact Léon directly for any urgent questions."
+            )
+        
+        return ChatResponse(response=error_message, session_id=session_id)
+    
     except Exception as e:
         print(f"CRITICAL ERROR: {e}")
+        traceback.print_exc()
         # Generic fallback
         return ChatResponse(response="An error occurred. Please try again.", session_id=session_id)
 

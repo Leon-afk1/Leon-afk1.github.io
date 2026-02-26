@@ -24,6 +24,8 @@ document.addEventListener('DOMContentLoaded', function() {
     // Chatbot translations
     const chatbotTranslations = {
         en: {
+            title: "Ask me anything!",
+            welcome: "Hi! I'm Léon's AI assistant. Ask me anything about his experience, skills, or projects!\n\nNote: The first response may take a bit longer as the servers wake up.",
             inputPlaceholder: "Ask me anything about Léon...",
             sendButton: "Send",
             errorMessage: "Sorry, I'm having trouble connecting to the server. Please try again later.",
@@ -34,6 +36,8 @@ document.addEventListener('DOMContentLoaded', function() {
             ]
         },
         fr: {
+            title: "Posez-moi vos questions !",
+            welcome: "Bonjour ! Je suis l'assistant IA de Léon. Posez-moi des questions sur son expérience, ses compétences ou ses projets !\n\nNote : La première réponse peut prendre un peu plus de temps, le temps que les serveurs redémarrent.",
             inputPlaceholder: "Posez-moi une question sur Léon...",
             sendButton: "Envoyer",
             errorMessage: "Désolé, j'ai des difficultés à me connecter au serveur. Veuillez réessayer plus tard.",
@@ -54,6 +58,19 @@ document.addEventListener('DOMContentLoaded', function() {
     function updateChatbotLanguage() {
         const lang = getCurrentLanguage();
         const t = chatbotTranslations[lang] || chatbotTranslations.en;
+        
+        // Update title
+        const chatbotTitle = document.querySelector('.chatbot-header h3');
+        if (chatbotTitle) {
+            chatbotTitle.textContent = t.title;
+        }
+        
+        // Update welcome message
+        const welcomeMessage = document.querySelector('.chatbot-message.bot-message .message-content p');
+        if (welcomeMessage) {
+            // Replace \n with <br> for HTML
+            welcomeMessage.innerHTML = t.welcome.replace(/\n/g, '<br>');
+        }
         
         // Update placeholder
         if (chatbotInput) {
@@ -129,7 +146,13 @@ document.addEventListener('DOMContentLoaded', function() {
         
         const avatar = document.createElement('div');
         avatar.className = 'message-avatar';
-        avatar.textContent = isUser ? '👤' : '🤖';
+        
+        // Use professional icons instead of emojis
+        if (isUser) {
+            avatar.innerHTML = '<svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>';
+        } else {
+            avatar.innerHTML = '<svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H6l-2 2V4h16v12z"/><circle cx="9" cy="10" r="1.5"/><circle cx="15" cy="10" r="1.5"/></svg>';
+        }
         
         const messageContent = document.createElement('div');
         messageContent.className = 'message-content';
@@ -161,7 +184,7 @@ document.addEventListener('DOMContentLoaded', function() {
         
         const avatar = document.createElement('div');
         avatar.className = 'message-avatar';
-        avatar.textContent = '🤖';
+        avatar.innerHTML = '<svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H6l-2 2V4h16v12z"/><circle cx="9" cy="10" r="1.5"/><circle cx="15" cy="10" r="1.5"/></svg>';
         
         const messageContent = document.createElement('div');
         messageContent.className = 'message-content';

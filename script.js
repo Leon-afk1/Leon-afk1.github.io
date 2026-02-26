@@ -464,6 +464,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 // Language System
 let currentLanguage = 'en';
+window.currentLanguage = 'en'; // Expose globally for chatbot
 let translations = {};
 
 // Load translations from JSON file
@@ -654,29 +655,53 @@ function updateContent() {
     document.querySelector('#projects .section-title').textContent = t.projects.title;
     const projectCards = document.querySelectorAll('.project-card');
     
+    // Project 10 (LIARA)
+    projectCards[0].querySelector('h3').textContent = t.projects.card10.title;
+    const card10Tags = projectCards[0].querySelectorAll('.tag');
+    card10Tags[0].textContent = t.projects.card10.tag1;
+    card10Tags[1].textContent = t.projects.card10.tag2;
+    card10Tags[2].textContent = t.projects.card10.tag3;
+    card10Tags[3].textContent = t.projects.card10.tag4;
+    projectCards[0].querySelector('.project-description').textContent = t.projects.card10.description;
+    const card10Links = projectCards[0].querySelectorAll('.project-link');
+    card10Links[0].textContent = t.projects.card10.link1Text;
+    card10Links[1].textContent = t.projects.card10.link2Text;
+    
+    // Project 11 (RAG UQAC)
+    projectCards[1].querySelector('h3').textContent = t.projects.card11.title;
+    const card11Tags = projectCards[1].querySelectorAll('.tag');
+    card11Tags[0].textContent = t.projects.card11.tag1;
+    card11Tags[1].textContent = t.projects.card11.tag2;
+    card11Tags[2].textContent = t.projects.card11.tag3;
+    card11Tags[3].textContent = t.projects.card11.tag4;
+    projectCards[1].querySelector('.project-description').textContent = t.projects.card11.description;
+    const card11Links = projectCards[1].querySelectorAll('.project-link');
+    card11Links[0].textContent = t.projects.card11.link1Text;
+    card11Links[1].textContent = t.projects.card11.link2Text;
+    
     // Project 1 (Hackathon)
-    projectCards[0].querySelector('h3').textContent = t.projects.card1.title;
-    const card1Tags = projectCards[0].querySelectorAll('.tag');
+    projectCards[2].querySelector('h3').textContent = t.projects.card1.title;
+    const card1Tags = projectCards[2].querySelectorAll('.tag');
     card1Tags[0].textContent = t.projects.card1.tag1;
     card1Tags[1].textContent = t.projects.card1.tag2;
     card1Tags[2].textContent = t.projects.card1.tag3;
     card1Tags[3].textContent = t.projects.card1.tag4;
     card1Tags[4].textContent = t.projects.card1.tag5;
     card1Tags[5].textContent = t.projects.card1.tag6;
-    projectCards[0].querySelector('.project-description').textContent = t.projects.card1.description;
-    const card1Links = projectCards[0].querySelectorAll('.project-link');
+    projectCards[2].querySelector('.project-description').textContent = t.projects.card1.description;
+    const card1Links = projectCards[2].querySelectorAll('.project-link');
     card1Links[0].textContent = t.projects.card1.link1Text;
     card1Links[1].textContent = t.projects.card1.link2Text;
     
     // Project 2
-    projectCards[1].querySelector('h3').textContent = t.projects.card2.title;
-    const card2Tags = projectCards[1].querySelectorAll('.tag');
+    projectCards[3].querySelector('h3').textContent = t.projects.card2.title;
+    const card2Tags = projectCards[3].querySelectorAll('.tag');
     card2Tags[0].textContent = t.projects.card2.tag1;
     card2Tags[1].textContent = t.projects.card2.tag2;
     card2Tags[2].textContent = t.projects.card2.tag3;
     card2Tags[3].textContent = t.projects.card2.tag4;
-    projectCards[1].querySelector('.project-description').textContent = t.projects.card2.description;
-    const card2Links = projectCards[1].querySelectorAll('.project-link');
+    projectCards[3].querySelector('.project-description').textContent = t.projects.card2.description;
+    const card2Links = projectCards[3].querySelectorAll('.project-link');
     card2Links[0].textContent = t.projects.card2.link1Text;
     card2Links[1].textContent = t.projects.card2.link2Text;
     card2Links[2].textContent = t.projects.card2.link3Text;
@@ -685,14 +710,14 @@ function updateContent() {
     }
     
     // Project 3 (LLM-based Chatbot)
-    projectCards[2].querySelector('h3').textContent = t.projects.card3.title;
-    const card3Tags = projectCards[2].querySelectorAll('.tag');
+    projectCards[4].querySelector('h3').textContent = t.projects.card3.title;
+    const card3Tags = projectCards[4].querySelectorAll('.tag');
     card3Tags[0].textContent = t.projects.card3.tag1;
     card3Tags[1].textContent = t.projects.card3.tag2;
     card3Tags[2].textContent = t.projects.card3.tag3;
     card3Tags[3].textContent = t.projects.card3.tag4;
-    projectCards[2].querySelector('.project-description').textContent = t.projects.card3.description;
-    const card3Links = projectCards[2].querySelectorAll('.project-link');
+    projectCards[4].querySelector('.project-description').textContent = t.projects.card3.description;
+    const card3Links = projectCards[4].querySelectorAll('.project-link');
     card3Links[0].textContent = t.projects.card3.link1Text;
     card3Links[1].textContent = t.projects.card3.link2Text;
     if (card3Links[1]) {
@@ -700,14 +725,14 @@ function updateContent() {
     }
     
     // Project 4 (Cell Classification CNN)
-    projectCards[3].querySelector('h3').textContent = t.projects.card4.title;
-    const card4Tags = projectCards[3].querySelectorAll('.tag');
+    projectCards[5].querySelector('h3').textContent = t.projects.card4.title;
+    const card4Tags = projectCards[5].querySelectorAll('.tag');
     card4Tags[0].textContent = t.projects.card4.tag1;
     card4Tags[1].textContent = t.projects.card4.tag2;
     card4Tags[2].textContent = t.projects.card4.tag3;
     card4Tags[3].textContent = t.projects.card4.tag4;
-    projectCards[3].querySelector('.project-description').textContent = t.projects.card4.description;
-    const card4Links = projectCards[3].querySelectorAll('.project-link');
+    projectCards[5].querySelector('.project-description').textContent = t.projects.card4.description;
+    const card4Links = projectCards[5].querySelectorAll('.project-link');
     card4Links[0].textContent = t.projects.card4.link1Text;
     card4Links[1].textContent = t.projects.card4.link2Text;
     if (card4Links[1]) {
@@ -715,61 +740,61 @@ function updateContent() {
     }
     
     // Project 5 (Mushroom Toxicity)
-    projectCards[4].querySelector('h3').textContent = t.projects.card5.title;
-    const card5Tags = projectCards[4].querySelectorAll('.tag');
+    projectCards[6].querySelector('h3').textContent = t.projects.card5.title;
+    const card5Tags = projectCards[6].querySelectorAll('.tag');
     card5Tags[0].textContent = t.projects.card5.tag1;
     card5Tags[1].textContent = t.projects.card5.tag2;
     card5Tags[2].textContent = t.projects.card5.tag3;
-    projectCards[4].querySelector('.project-description').textContent = t.projects.card5.description;
-    const card5Links = projectCards[4].querySelectorAll('.project-link');
+    projectCards[6].querySelector('.project-description').textContent = t.projects.card5.description;
+    const card5Links = projectCards[6].querySelectorAll('.project-link');
     card5Links[0].textContent = t.projects.card5.link1Text;
     card5Links[1].textContent = t.projects.card5.link2Text;
     
     // Project 6 (Poultry Disease Detection)
-    projectCards[5].querySelector('h3').textContent = t.projects.card6.title;
-    const card6Tags = projectCards[5].querySelectorAll('.tag');
+    projectCards[7].querySelector('h3').textContent = t.projects.card6.title;
+    const card6Tags = projectCards[7].querySelectorAll('.tag');
     card6Tags[0].textContent = t.projects.card6.tag1;
     card6Tags[1].textContent = t.projects.card6.tag2;
     card6Tags[2].textContent = t.projects.card6.tag3;
     card6Tags[3].textContent = t.projects.card6.tag4;
     card6Tags[4].textContent = t.projects.card6.tag5;
-    projectCards[5].querySelector('.project-description').textContent = t.projects.card6.description;
-    const card6Links = projectCards[5].querySelectorAll('.project-link');
+    projectCards[7].querySelector('.project-description').textContent = t.projects.card6.description;
+    const card6Links = projectCards[7].querySelectorAll('.project-link');
     card6Links[0].textContent = t.projects.card6.link1Text;
     card6Links[1].textContent = t.projects.card6.link2Text;
     
     // Project 7 (MNIST)
-    projectCards[6].querySelector('h3').textContent = t.projects.card7.title;
-    const card7Tags = projectCards[6].querySelectorAll('.tag');
+    projectCards[8].querySelector('h3').textContent = t.projects.card7.title;
+    const card7Tags = projectCards[8].querySelectorAll('.tag');
     card7Tags[0].textContent = t.projects.card7.tag1;
     card7Tags[1].textContent = t.projects.card7.tag2;
     card7Tags[2].textContent = t.projects.card7.tag3;
     card7Tags[3].textContent = t.projects.card7.tag4;
-    projectCards[6].querySelector('.project-description').textContent = t.projects.card7.description;
-    const card7Links = projectCards[6].querySelectorAll('.project-link');
+    projectCards[8].querySelector('.project-description').textContent = t.projects.card7.description;
+    const card7Links = projectCards[8].querySelectorAll('.project-link');
     card7Links[0].textContent = t.projects.card7.link1Text;
     card7Links[1].textContent = t.projects.card7.link2Text;
     
     // Project 8 (Music Genre Classification)
-    projectCards[7].querySelector('h3').textContent = t.projects.card8.title;
-    const card8Tags = projectCards[7].querySelectorAll('.tag');
+    projectCards[9].querySelector('h3').textContent = t.projects.card8.title;
+    const card8Tags = projectCards[9].querySelectorAll('.tag');
     card8Tags[0].textContent = t.projects.card8.tag1;
     card8Tags[1].textContent = t.projects.card8.tag2;
     card8Tags[2].textContent = t.projects.card8.tag3;
     card8Tags[3].textContent = t.projects.card8.tag4;
     card8Tags[4].textContent = t.projects.card8.tag5;
-    projectCards[7].querySelector('.project-description').textContent = t.projects.card8.description;
-    const card8Links = projectCards[7].querySelectorAll('.project-link');
+    projectCards[9].querySelector('.project-description').textContent = t.projects.card8.description;
+    const card8Links = projectCards[9].querySelectorAll('.project-link');
     card8Links[0].textContent = t.projects.card8.link1Text;
     card8Links[1].textContent = t.projects.card8.link2Text;
     
     // Project 9 (Tangram Solver)
-    projectCards[8].querySelector('h3').textContent = t.projects.card9.title;
-    const card9Tags = projectCards[8].querySelectorAll('.tag');
+    projectCards[10].querySelector('h3').textContent = t.projects.card9.title;
+    const card9Tags = projectCards[10].querySelectorAll('.tag');
     card9Tags[0].textContent = t.projects.card9.tag1;
     card9Tags[1].textContent = t.projects.card9.tag2;
-    projectCards[8].querySelector('.project-description').textContent = t.projects.card9.description;
-    const card9Links = projectCards[8].querySelectorAll('.project-link');
+    projectCards[10].querySelector('.project-description').textContent = t.projects.card9.description;
+    const card9Links = projectCards[10].querySelectorAll('.project-link');
     card9Links[0].textContent = t.projects.card9.link1Text;
     card9Links[1].textContent = t.projects.card9.link2Text;
     
@@ -903,6 +928,7 @@ function updateContent() {
 function setLanguage(lang) {
     console.log('setLanguage called with:', lang);
     currentLanguage = lang;
+    window.currentLanguage = lang; // Expose to window for chatbot
     localStorage.setItem('language', lang);
     
     // Update language toggle button

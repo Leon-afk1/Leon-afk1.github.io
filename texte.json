@@ -3,7 +3,7 @@
     "pageTitle": "Léon - AI Engineer & Researcher",
     "metaDescription": "AI Engineering student specializing in machine learning, deep learning, and AI research",
     "nav": {
-      "logo": "Léon M.",
+      "logo": "Léon MORALES",
       "about": "About",
       "skills": "Skills",
       "projects": "Projects",
@@ -158,6 +158,25 @@
         "description": "Implemented a solver for the classic Tangram puzzle with limited AI background and tight deadlines, my first real step into the AI world.",
         "link1Text": "View Code",
         "link2Text": "UTBM"
+      },
+      "card10": {
+        "title": "Human Activity Recognition via Wearable Sensors",
+        "tag1": "Contrastive Learning",
+        "tag2": "Time Series",
+        "tag3": "Deep Learning",
+        "tag4": "IMU/PPG",
+        "description": "Ongoing research project at LIARA laboratory focused on fine-grained human activity recognition. Designing a neural architecture using self-supervised contrastive learning to handle high variability in IMU and PPG sensor data from wearable devices. The goal is to publish research findings.",
+        "link1Text": "UQAC LIARA"
+      },
+      "card11": {
+        "title": "RAG Chatbot for UQAC Handbook",
+        "tag1": "RAG",
+        "tag2": "LLM Routing",
+        "tag3": "Web Scraping",
+        "tag4": "Streamlit",
+        "description": "Developed an interactive chatbot based on the UQAC university handbook. Complete implementation including web scraping, conversational memory management, semantic routing via LLM, and source verification with traceability links.",
+        "link1Text": "UQAC",
+        "link2Text": "View Code"
       }
     },
     "mnistDemo": {
@@ -253,7 +272,7 @@
     "pageTitle": "Léon - Ingénieur & Chercheur IA",
     "metaDescription": "Étudiant ingénieur en IA spécialisé en apprentissage machine, apprentissage profond et recherche en IA",
     "nav": {
-      "logo": "Léon M.",
+      "logo": "Léon MORALES",
       "about": "À propos",
       "skills": "Compétences",
       "projects": "Projets",
@@ -408,6 +427,25 @@
         "description": "Implémentation d'un solveur pour le puzzle classique du Tangram avec des connaissances limitées en IA et des délais serrés, mon premier vrai pas dans le monde de l'IA.",
         "link1Text": "Voir le Code",
         "link2Text": "UTBM"
+      },
+      "card10": {
+        "title": "Reconnaissance d'Activité Humaine via Bracelets Connectés",
+        "tag1": "Contrastive Learning",
+        "tag2": "Séries Temporelles",
+        "tag3": "Apprentissage Profond",
+        "tag4": "IMU/PPG",
+        "description": "Projet de recherche en cours au laboratoire LIARA sur la reconnaissance d'activités humaines à granularité fine. Conception d'une architecture neuronale utilisant l'apprentissage par contraste auto-supervisé pour gérer la forte variabilité des données des capteurs IMU et PPG. L'objectif est de publier un article scientifique.",
+        "link1Text": "UQAC LIARA"
+      },
+      "card11": {
+        "title": "Chatbot RAG Manuel UQAC",
+        "tag1": "RAG",
+        "tag2": "Routage LLM",
+        "tag3": "Web Scraping",
+        "tag4": "Streamlit",
+        "description": "Développement d'un chatbot interactif basé sur le manuel de l'UQAC. Implémentation complète incluant le web scraping, la gestion de la mémoire conversationnelle, le routage sémantique via LLM et la vérification des sources avec liens de traçabilité.",
+        "link1Text": "UQAC",
+        "link2Text": "Voir le Code"
       }
     },
      "mnistDemo": {
