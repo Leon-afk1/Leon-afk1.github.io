@@ -466,12 +466,14 @@ document.addEventListener('DOMContentLoaded', function() {
 let currentLanguage = 'en';
 window.currentLanguage = 'en'; // Expose globally for chatbot
 let translations = {};
+window.translations = {}; // Expose globally for neural network
 
 // Load translations from JSON file
 async function loadTranslations() {
     try {
         const response = await fetch('./texte.json');
         translations = await response.json();
+        window.translations = translations; // Update global reference
         console.log('Translations loaded successfully:', translations);
         
         // Set default language from localStorage or browser preference

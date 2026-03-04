@@ -6,12 +6,12 @@
     <title>Léon - AI Engineer & Researcher</title>
     <meta name="description" content="AI Engineering student specializing in machine learning, deep learning, and AI research">
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='0.9em' font-size='90'>L</text></svg>">
-    <link rel="stylesheet" href="styles.css?v=20260226c">
+    <link rel="stylesheet" href="styles.css?v=20260303b">
     <!-- Flag Icons CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.2.3/css/flag-icons.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <!-- ONNX Runtime Web for PyTorch MNIST model -->
     <script src="https://cdn.jsdelivr.net/npm/onnxruntime-web/dist/ort.min.js"></script>
 </head>
@@ -149,61 +149,31 @@
     </section>
 
     <!-- Skills Section -->
-    <section id="skills" class="skills">
+    <section id="skills" class="skills neural-skills">
         <div class="container">
-            <h2 class="section-title">Technical Skills</h2>
-            <div class="skills-grid">
+            <h2 class="section-title" data-i18n="skills.title">Technical Skills</h2>
+            <p class="section-subtitle" data-i18n="skills.neuralSubtitle">Interactive Neural Network - Explore my tech stack and expertise</p>
+            
+            <!-- Neural Network Canvas -->
+            <div class="neural-network-container">
+                <canvas id="neuralCanvas"></canvas>
+                
+                <!-- Node Labels (positioned with JS) -->
+                <div class="neural-nodes-overlay" id="neuralNodesOverlay"></div>
+            </div>
 
-                <div class="skill-category">
-                    <h3>AI & Machine Learning</h3>
-                    <ul class="skill-list">
-                        <li>Deep Learning (CNN, RNN, Transformers) - <span class="certification-badge">NVIDIA Certified</span></li>
-                        <li>Computer Vision (Object Detection, Classification)</li>
-                        <li>Natural Language Processing (NLP)</li>
-                        <li>Reinforcement Learning</li>
-                        <li>Foundational AI Principles - <span class="certification-badge">Google Certified</span></li>
-                        <li>Generative AI Concepts</li>
-                    </ul>
+            <!-- Content Panel (appears when clicking a node) -->
+            <div class="neural-content-overlay" id="neuralContentOverlay">
+                <div class="neural-content-bubble" id="neuralContentBubble">
+                    <button class="neural-close-btn" id="neuralCloseBtn">&times;</button>
+                    <div class="neural-bubble-content" id="neuralBubbleContent">
+                        <!-- Content loaded dynamically -->
+                    </div>
                 </div>
-
-                <div class="skill-category">
-                    <h3>Data Technologies & Databases</h3>
-                    <ul class="skill-list">
-                        <li>Graph Databases (Neo4j, Cypher) - <span class="certification-badge">Neo4j Certified Professional</span></li>
-                        <li>SQL Databases</li>
-                        <li>Data Manipulation & Analysis (Pandas, NumPy)</li>
-                        <li>Data Visualization (Matplotlib, Seaborn)</li>
-                        <li>Web Analytics (Google Analytics)</li>
-                    </ul>
-                </div>
-
-                <div class="skill-category">
-                    <h3>Frameworks & Libraries</h3>
-                    <ul class="skill-list">
-                        <li>PyTorch & TensorFlow</li>
-                        <li>Scikit-learn</li>
-                        <li>Hugging Face (Transformers, Datasets)</li>
-                        <li>PyTorch Lightning</li>
-                        <li>FastAPI</li>
-                        <li>Streamlit</li>
-                    </ul>
-                </div>
-
-                <div class="skill-category">
-                    <h3>Programming & Tools</h3>
-                    <ul class="skill-list">
-                        <li>Python (Advanced)</li>
-                        <li>C / C++</li>
-                        <li>Java</li>
-                        <li>Git & GitHub</li>
-                        <li>Docker (Basics)</li>
-                    </ul>
-                </div>
-
             </div>
 
             <div class="certifications-section">
-                <h3 class="subsection-title">Certifications & Badges</h3>
+                <h3 class="subsection-title" data-i18n="skills.certificationsTitle">Certifications & Badges</h3>
                 <ul class="certification-list">
                     <li><a href="https://graphacademy.neo4j.com/c/dc5d32f9-cc44-4169-96e0-cbf5075aca15/" target="_blank" rel="noopener noreferrer">Neo4j Certified Professional</a></li>
                     <li><a href="https://learn.nvidia.com/certificates?id=yu32AcCcTjG7Tnwshzvg_Q" target="_blank" rel="noopener noreferrer">NVIDIA - Fundamentals of Deep Learning</a></li>
@@ -637,8 +607,9 @@
         </div>
     </footer>
 
-    <script src="script.js?v=20260226b"></script>
-    <script src="chatbot-config.js?v=20260226b"></script>
-    <script src="chatbot-client.js?v=20260226b"></script>
+    <script src="script.js?v=20260226c"></script>
+    <script src="chatbot-config.js?v=20260226c"></script>
+    <script src="chatbot-client.js?v=20260226c"></script>
+    <script src="neural-network.js?v=20260226c"></script>
 </body>
 </html>
