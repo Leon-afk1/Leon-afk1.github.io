@@ -139,7 +139,7 @@ class NeuralNetwork {
             
             Object.entries(layers).forEach(([layer, nodesInLayer]) => {
                 const layerWidth = this.width - 2 * marginX;
-                const nodeSpacing = 65;  // Fixed spacing for uniform appearance on mobile
+                const nodeSpacing = 58;  // Tighter spacing on mobile to prevent overflow
                 
                 const totalWidth = nodeSpacing * (nodesInLayer.length - 1);
                 const startX = (this.width - totalWidth) / 2;
@@ -150,7 +150,7 @@ class NeuralNetwork {
                         ...node,
                         x: nodesInLayer.length === 1 ? this.width / 2 : startX + nodeSpacing * index,
                         y: marginY + layerHeight * (parseInt(layer) - 0.5),
-                        radius: 30,  // Match CSS node-label-inner size (60px diameter = 30px radius)
+                        radius: 26,  // Match CSS node-label-inner size (52px diameter = 26px radius)
                         pulsePhase: existingNode ? existingNode.pulsePhase : Math.random() * Math.PI * 2,
                         connections: existingNode ? existingNode.connections : [],
                         expanded: existingNode ? existingNode.expanded : false
@@ -178,11 +178,12 @@ class NeuralNetwork {
     }
     
     updateNodeLabels() {
-        // Update label positions
+        const w = this.canvas.width || 1;
+        const h = this.canvas.height || 1;
         this.nodes.forEach(node => {
             if (node.labelElement) {
-                node.labelElement.style.left = `${node.x}px`;
-                node.labelElement.style.top = `${node.y}px`;
+                node.labelElement.style.left = `${(node.x / w) * 100}%`;
+                node.labelElement.style.top  = `${(node.y / h) * 100}%`;
             }
         });
     }
@@ -273,10 +274,15 @@ class NeuralNetwork {
     }
     
     updateNodeLabelPositions() {
+        // Use percentage-based positioning so the layout is independent of
+        // browser reflow timing. The overlay is 100%×100% of the container
+        // which will always equal canvas.width × canvas.height after reflow.
+        const w = this.canvas.width || 1;
+        const h = this.canvas.height || 1;
         this.nodes.forEach(node => {
             if (node.labelElement) {
-                node.labelElement.style.left = `${node.x}px`;
-                node.labelElement.style.top = `${node.y}px`;
+                node.labelElement.style.left = `${(node.x / w) * 100}%`;
+                node.labelElement.style.top  = `${(node.y / h) * 100}%`;
                 node.labelElement.style.transform = 'translate(-50%, -50%)';
             }
         });

@@ -16,6 +16,9 @@
     <script src="https://cdn.jsdelivr.net/npm/onnxruntime-web/dist/ort.min.js"></script>
 </head>
 <body>
+    <!-- Cursor spotlight (Linear-style ambient lighting) -->
+    <div id="cursor-spotlight"></div>
+
     <!-- Navigation -->
     <nav class="nav">
         <div class="nav-container">
@@ -28,9 +31,6 @@
                 <li><a href="#contact" class="nav-link">Contact</a></li>
             </ul>
             <div class="nav-controls">
-                <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark/light mode">
-                    <span class="theme-icon">🌙</span>
-                </button>
                 <button class="language-toggle" id="language-toggle" aria-label="Switch language">
                     <span class="language-icon fi fi-fr"></span>
                 </button>
@@ -188,74 +188,95 @@
     <section id="projects" class="projects">
         <div class="container">
             <h2 class="section-title">Projects</h2>
+
+            <!-- Featured projects (Lusion-style) -->
+            <div class="featured-projects">
+                <div class="fp-header">
+                    <span class="fp-label">Selected Work</span>
+                    <div class="fp-divider"></div>
+                </div>
+                <div class="fp-list">
+                    <article class="project-card featured-card" data-accent="purple">
+                        <span class="fp-index">01</span>
+                        <div class="project-header">
+                            <h3>Human Activity Recognition via Wearable Sensors</h3>
+                            <div class="project-tags">
+                                <span class="tag">Contrastive Learning</span>
+                                <span class="tag">Time Series</span>
+                                <span class="tag">Deep Learning</span>
+                                <span class="tag">IMU/PPG</span>
+                            </div>
+                        </div>
+                        <p class="project-description">
+                            Ongoing research project at LIARA laboratory focused on fine-grained human activity recognition. 
+                            Designing a neural architecture using self-supervised contrastive learning to handle high variability 
+                            in IMU and PPG sensor data from wearable devices. The goal is to publish research findings.
+                        </p>
+                        <div class="project-links">
+                            <a href="https://www.uqac.ca/tag/liara/" class="project-link" target="_blank" rel="noopener noreferrer">UQAC LIARA</a>
+                            <a href="https://github.com/Leon-afk1/Sample-Efficient_Contrastive_Learning" class="project-link" target="_blank" rel="noopener noreferrer">View Code</a>
+                        </div>
+                    </article>
+
+                    <article class="project-card featured-card" data-accent="teal">
+                        <span class="fp-index">02</span>
+                        <div class="project-header">
+                            <h3>LLM-based Chatbot for Biologists</h3>
+                            <div class="project-tags">
+                                <span class="tag">LLM</span>
+                                <span class="tag">Graph RAG</span>
+                                <span class="tag">Biology</span>
+                                <span class="tag">Streamlit</span>
+                            </div>
+                        </div>
+                        <p class="project-description">
+                            Designed a chatbot based on open-source LLMs to help biologists query internal 
+                            graph database in natural language. Improved the knowledge graph pipeline and added 
+                            intuitive features to enhance usability and data enrichment.
+                        </p>
+                        <div class="project-links">
+                            <a href="https://ksilink.com/" class="project-link" target="_blank" rel="noopener noreferrer">Ksilink</a>
+                            <a href="#" class="project-link internship-report-link" target="_blank" rel="noopener noreferrer">Internship Report</a>
+                        </div>
+                    </article>
+
+                    <article class="project-card featured-card" data-accent="amber">
+                        <span class="fp-index">03</span>
+                        <div class="project-header">
+                            <h3>Intelligent RAG Chatbot &amp; Dashboard (Hackathon Winner)</h3>
+                            <div class="project-tags">
+                                <span class="tag">RAG</span>
+                                <span class="tag">LLM</span>
+                                <span class="tag">Google Gemini</span>
+                                <span class="tag">Streamlit</span>
+                                <span class="tag">FastAPI</span>
+                                <span class="tag">Docker</span>
+                            </div>
+                        </div>
+                        <p class="project-description">
+                            Co-developed in a team of four during a 25-hour hackathon, winning 2nd place ($1000 CAD). 
+                            This project is an expert assistant using a RAG pipeline to translate natural language 
+                            questions into secure SQL queries for a PostgreSQL database. The solution, powered by 
+                            Google Gemini, features an interactive Streamlit dashboard for chat/visualization and 
+                            a FastAPI backend, all containerized with Docker.
+                        </p>
+                        <div class="project-links">
+                            <a href="https://github.com/Leon-afk1/Hackathon_CTI_UQAC.git" class="project-link" target="_blank" rel="noopener noreferrer">View Code</a>
+                            <a href="https://www.uqac.ca/" class="project-link" target="_blank" rel="noopener noreferrer">UQAC</a>
+                        </div>
+                    </article>
+                </div>
+            </div>
+
+            <!-- All other projects grid -->
+            <div class="fp-header more-projects-header">
+                <span class="fp-label">More Projects</span>
+                <div class="fp-divider"></div>
+            </div>
             <div class="projects-grid">
-                <article class="project-card">
-                    <div class="project-header">
-                        <h3>Human Activity Recognition via Wearable Sensors</h3>
-                        <div class="project-tags">
-                            <span class="tag">Contrastive Learning</span>
-                            <span class="tag">Time Series</span>
-                            <span class="tag">Deep Learning</span>
-                            <span class="tag">IMU/PPG</span>
-                        </div>
-                    </div>
-                    <p class="project-description">
-                        Ongoing research project at LIARA laboratory focused on fine-grained human activity recognition. 
-                        Designing a neural architecture using self-supervised contrastive learning to handle high variability 
-                        in IMU and PPG sensor data from wearable devices. The goal is to publish research findings.
-                    </p>
-                    <div class="project-links">
-                        <a href="https://www.uqac.ca/tag/liara/" class="project-link" target="_blank" rel="noopener noreferrer">UQAC LIARA</a>
-                    </div>
-                </article>
 
                 <article class="project-card">
-                    <div class="project-header">
-                        <h3>RAG Chatbot for UQAC Handbook</h3>
-                        <div class="project-tags">
-                            <span class="tag">RAG</span>
-                            <span class="tag">LLM Routing</span>
-                            <span class="tag">Web Scraping</span>
-                            <span class="tag">Streamlit</span>
-                        </div>
-                    </div>
-                    <p class="project-description">
-                        Developed an interactive chatbot based on the UQAC university handbook. Complete implementation 
-                        including web scraping, conversational memory management, semantic routing via LLM, and source 
-                        verification with traceability links.
-                    </p>
-                    <div class="project-links">
-                        <a href="https://www.uqac.ca/" class="project-link" target="_blank" rel="noopener noreferrer">UQAC</a>
-                        <a href="https://github.com/Leon-afk1/ChatBot_UQAC" class="project-link" target="_blank" rel="noopener noreferrer">View Code</a>
-                    </div>
-                </article>
-
-                <article class="project-card">
-                    <div class="project-header">
-                        <h3>Intelligent RAG Chatbot & Dashboard (Hackathon Winner)</h3>
-                        <div class="project-tags">
-                            <span class="tag">RAG</span>
-                            <span class="tag">LLM</span>
-                            <span class="tag">Google Gemini</span>
-                            <span class="tag">Streamlit</span>
-                            <span class="tag">FastAPI</span>
-                            <span class="tag">Docker</span>
-                        </div>
-                    </div>
-                    <p class="project-description">
-                        Co-developed in a team of four during a 25-hour hackathon, winning 2nd place ($1000 CAD). 
-                        This project is an expert assistant using a RAG pipeline to translate natural language 
-                        questions into secure SQL queries for a PostgreSQL database. The solution, powered by 
-                        Google Gemini, features an interactive Streamlit dashboard for chat/visualization and 
-                        a FastAPI backend, all containerized with Docker.
-                    </p>
-                    <div class="project-links">
-                        <a href="https://github.com/Leon-afk1/Hackathon_CTI_UQAC.git" class="project-link" target="_blank" rel="noopener noreferrer">View Code</a>
-                        <a href="https://www.uqac.ca/" class="project-link" target="_blank" rel="noopener noreferrer">UQAC</a>
-                    </div>
-                </article>
-
-                <article class="project-card">
+                    <span class="pg-index">04</span>
                     <div class="project-header">
                         <h3>Multimodal Contrastive Learning for Drug Analysis</h3>
                         <div class="project-tags">
@@ -279,27 +300,29 @@
                 </article>
 
                 <article class="project-card">
+                    <span class="pg-index">05</span>
                     <div class="project-header">
-                        <h3>LLM-based Chatbot for Biologists</h3>
+                        <h3>RAG Chatbot for UQAC Handbook</h3>
                         <div class="project-tags">
-                            <span class="tag">LLM</span>
-                            <span class="tag">Graph RAG</span>
-                            <span class="tag">Biology</span>
+                            <span class="tag">RAG</span>
+                            <span class="tag">LLM Routing</span>
+                            <span class="tag">Web Scraping</span>
                             <span class="tag">Streamlit</span>
                         </div>
                     </div>
                     <p class="project-description">
-                        Designed a chatbot based on open-source LLMs to help biologists query internal 
-                        graph database in natural language. Improved the knowledge graph pipeline and added 
-                        intuitive features to enhance usability and data enrichment.
+                        Developed an interactive chatbot based on the UQAC university handbook. Complete implementation 
+                        including web scraping, conversational memory management, semantic routing via LLM, and source 
+                        verification with traceability links.
                     </p>
                     <div class="project-links">
-                        <a href="https://ksilink.com/" class="project-link" target="_blank" rel="noopener noreferrer">Ksilink</a>
-                        <a href="#" class="project-link internship-report-link" target="_blank" rel="noopener noreferrer">Internship Report</a>
+                        <a href="https://www.uqac.ca/" class="project-link" target="_blank" rel="noopener noreferrer">UQAC</a>
+                        <a href="https://github.com/Leon-afk1/ChatBot_UQAC" class="project-link" target="_blank" rel="noopener noreferrer">View Code</a>
                     </div>
                 </article>
 
                 <article class="project-card">
+                    <span class="pg-index">06</span>
                     <div class="project-header">
                         <h3>Cell Classification CNN</h3>
                         <div class="project-tags">
@@ -321,6 +344,7 @@
                 </article>
 
                 <article class="project-card">
+                    <span class="pg-index">07</span>
                     <div class="project-header">
                         <h3>Mushroom Toxicity Prediction</h3>
                         <div class="project-tags">
@@ -340,6 +364,7 @@
                 </article>
 
                 <article class="project-card">
+                    <span class="pg-index">08</span>
                     <div class="project-header">
                         <h3>Poultry Disease Detection</h3>
                         <div class="project-tags">
@@ -360,6 +385,7 @@
                 </article>
 
                 <article class="project-card">
+                    <span class="pg-index">09</span>
                     <div class="project-header">
                         <h3>MNIST Digit Recognition CNN</h3>
                         <div class="project-tags">
@@ -381,6 +407,7 @@
                 </article>
 
                 <article class="project-card">
+                    <span class="pg-index">10</span>
                     <div class="project-header">
                         <h3>Music Genre Classification</h3>
                         <div class="project-tags">
@@ -401,6 +428,7 @@
                 </article>
 
                 <article class="project-card">
+                    <span class="pg-index">11</span>
                     <div class="project-header">
                         <h3>Tangram Solver</h3>
                         <div class="project-tags">
@@ -476,60 +504,17 @@
                 <div class="timeline-item">
                     <div class="timeline-marker"></div>
                     <div class="timeline-content">
-                        <h3>Double Degree, Master's in Artificial Intelligence</h3>
-                        <p class="company">Université du Québec à Chicoutimi (UQAC), Canada</p>
-                        <p class="period">2025 - Present</p>
-                        <ul class="achievements">
-                            <li>Specialization in Artificial Intelligence</li>
-                            <li>Focus on advanced machine learning and deep learning techniques</li>
-                            <li>Exploring opportunities for research collaboration in Canada</li>
-                        </ul>
-                    </div>
-                </div>
-
-                <div class="timeline-item">
-                    <div class="timeline-marker"></div>
-                    <div class="timeline-content">
-                        <h3>Hackathon X UQAC - 2nd Place Winner</h3>
-                        <p class="company">Université du Québec à Chicoutimi (UQAC), Canada</p>
-                        <p class="period">November 2, 2025</p>
-                        <ul class="achievements">
-                            <li>Won 2nd place ($1000 CAD) in a 25-hour hackathon</li>
-                            <li>Co-developed an intelligent RAG chatbot using Google Gemini for SQL query generation</li>
-                            <li>Built interactive Streamlit dashboard with FastAPI backend, containerized with Docker</li>
-                            <li>Collaborated in a team of four to deliver a complete production-ready solution</li>
-                        </ul>
-                    </div>
-                </div>
-
-                <div class="timeline-item">
-                    <div class="timeline-marker"></div>
-                    <div class="timeline-content">
-                        <h3>Engineering Degree, Computer Science & Data Science</h3>
-                        <p class="company">UTBM (Université de Technologie de Belfort-Montbéliard), France</p>
-                        <p class="period">2021 – 2025</p>
-                        <ul class="achievements">
-                            <li>Strong foundation in computer science, mathematics, and data science</li>
-                            <li>Courses in AI, machine learning, and data-driven systems</li>
-                            <li>President of SKI’UTBM, leading a team and organizing a trip for 200+ students</li>
-                            <li>Twice participant in Crunch Time Challenge, solving real-world company projects in multidisciplinary teams</li>
-                        </ul>
-                    </div>
-                </div>
-
-                <div class="timeline-item">
-                    <div class="timeline-marker"></div>
-                    <div class="timeline-content">
-                        <h3>AI Engineering Intern</h3>
-                        <p class="company">Ksilink, Strasbourg, France</p>
-                        <p class="period">Sept 2024 - Feb 2025</p>
-                        <ul class="achievements">
-                            <li>Implemented a multimodal contrastive learning model for pharmacological analysis</li>
-                            <li>Built an AI-powered chatbot connecting a knowledge graph with an LLM</li>
-                            <li>Designed and trained CNNs for biomedical image classification</li>
-                        </ul>
-                        <div class="experience-links">
-                            <a href="#" class="project-link internship-report-link" target="_blank" rel="noopener noreferrer">Internship Report</a>
+                        <div class="tl-header">
+                            <h3>Double Degree, Master's in Artificial Intelligence</h3>
+                            <p class="company">Université du Québec à Chicoutimi (UQAC), Canada</p>
+                            <p class="period">2025 - Present</p>
+                        </div>
+                        <div class="tl-body">
+                            <ul class="achievements">
+                                <li>Specialization in Artificial Intelligence</li>
+                                <li>Focus on advanced machine learning and deep learning techniques</li>
+                                <li>Exploring opportunities for research collaboration in Canada</li>
+                            </ul>
                         </div>
                     </div>
                 </div>
@@ -537,14 +522,77 @@
                 <div class="timeline-item">
                     <div class="timeline-marker"></div>
                     <div class="timeline-content">
-                        <h3>Exchange Semester, Computer Science</h3>
-                        <p class="company">Yeditepe University, Istanbul, Turkey</p>
-                        <p class="period">Jan 2023 - Jun 2023</p>
-                        <ul class="achievements">
-                            <li>Erasmus exchange program focused on computer science and international teamwork</li>
-                            <li>Specialized courses in object-oriented programming</li>
-                            <li>Developed adaptability and cross-cultural collaboration skills</li>
-                        </ul>
+                        <div class="tl-header">
+                            <h3>Hackathon X UQAC - 2nd Place Winner</h3>
+                            <p class="company">Université du Québec à Chicoutimi (UQAC), Canada</p>
+                            <p class="period">November 2, 2025</p>
+                        </div>
+                        <div class="tl-body">
+                            <ul class="achievements">
+                                <li>Won 2nd place ($1000 CAD) in a 25-hour hackathon</li>
+                                <li>Co-developed an intelligent RAG chatbot using Google Gemini for SQL query generation</li>
+                                <li>Built interactive Streamlit dashboard with FastAPI backend, containerized with Docker</li>
+                                <li>Collaborated in a team of four to deliver a complete production-ready solution</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-marker"></div>
+                    <div class="timeline-content">
+                        <div class="tl-header">
+                            <h3>Engineering Degree, Computer Science & Data Science</h3>
+                            <p class="company">UTBM (Université de Technologie de Belfort-Montbéliard), France</p>
+                            <p class="period">2021 – 2025</p>
+                        </div>
+                        <div class="tl-body">
+                            <ul class="achievements">
+                                <li>Strong foundation in computer science, mathematics, and data science</li>
+                                <li>Courses in AI, machine learning, and data-driven systems</li>
+                                <li>President of SKI'UTBM, leading a team and organizing a trip for 200+ students</li>
+                                <li>Twice participant in Crunch Time Challenge, solving real-world company projects in multidisciplinary teams</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-marker"></div>
+                    <div class="timeline-content">
+                        <div class="tl-header">
+                            <h3>AI Engineering Intern</h3>
+                            <p class="company">Ksilink, Strasbourg, France</p>
+                            <p class="period">Sept 2024 - Feb 2025</p>
+                        </div>
+                        <div class="tl-body">
+                            <ul class="achievements">
+                                <li>Implemented a multimodal contrastive learning model for pharmacological analysis</li>
+                                <li>Built an AI-powered chatbot connecting a knowledge graph with an LLM</li>
+                                <li>Designed and trained CNNs for biomedical image classification</li>
+                            </ul>
+                            <div class="experience-links">
+                                <a href="#" class="project-link internship-report-link" target="_blank" rel="noopener noreferrer">Internship Report</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-marker"></div>
+                    <div class="timeline-content">
+                        <div class="tl-header">
+                            <h3>Exchange Semester, Computer Science</h3>
+                            <p class="company">Yeditepe University, Istanbul, Turkey</p>
+                            <p class="period">Jan 2023 - Jun 2023</p>
+                        </div>
+                        <div class="tl-body">
+                            <ul class="achievements">
+                                <li>Erasmus exchange program focused on computer science and international teamwork</li>
+                                <li>Specialized courses in object-oriented programming</li>
+                                <li>Developed adaptability and cross-cultural collaboration skills</li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
             </div>

@@ -1,50 +1,82 @@
-// Set dark theme as default
-document.addEventListener('DOMContentLoaded', function() {
-    // Set dark theme by default
-    document.body.setAttribute('data-theme', 'dark');
-    localStorage.setItem('theme', 'dark');
-    
-    // Update theme icon if it exists
-    const themeIcon = document.querySelector('.theme-icon');
-    if (themeIcon) {
-        themeIcon.textContent = '☀️'; // Sun icon for dark theme (to switch to light)
-    }
-});
+// Dark mode — permanent
+document.body.setAttribute('data-theme', 'dark');
 
-
-// Theme Toggle Functionality
-document.addEventListener('DOMContentLoaded', function() {
-    const themeToggle = document.getElementById('theme-toggle');
-    const themeIcon = document.querySelector('.theme-icon');
-    
-    if (!themeToggle || !themeIcon) return;
-    
-    // Load saved theme or default to dark
-    const savedTheme = localStorage.getItem('theme') || 'dark';
-    document.body.setAttribute('data-theme', savedTheme);
-    updateThemeIcon(savedTheme);
-    
-    themeToggle.addEventListener('click', function() {
-        const currentTheme = document.body.getAttribute('data-theme');
-        const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-        
-        document.body.setAttribute('data-theme', newTheme);
-        localStorage.setItem('theme', newTheme);
-        updateThemeIcon(newTheme);
-        
-        // Add rotation animation
-        themeToggle.style.transform = 'rotate(360deg)';
-        setTimeout(() => {
-            themeToggle.style.transform = 'rotate(0deg)';
-        }, 300);
+// Cursor spotlight tracking (Linear-style)
+(function initCursorSpotlight() {
+    var spotlight = document.getElementById('cursor-spotlight');
+    if (!spotlight) return;
+    var rafId = null;
+    document.addEventListener('mousemove', function(e) {
+        if (rafId) cancelAnimationFrame(rafId);
+        rafId = requestAnimationFrame(function() {
+            spotlight.style.left = e.clientX + 'px';
+            spotlight.style.top  = e.clientY + 'px';
+        });
     });
-    
-    function updateThemeIcon(theme) {
-        themeIcon.textContent = theme === 'dark' ? '☀️' : '🌙';
-    }
+})();
+
+// Card cursor-glow tracking (Linear-style border glow)
+document.addEventListener('DOMContentLoaded', function() {
+    document.querySelectorAll('.project-card, .stat, .timeline-content, .contact-method')
+        .forEach(function(card) {
+            card.addEventListener('mousemove', function(e) {
+                var r = card.getBoundingClientRect();
+                card.style.setProperty('--mouse-x', ((e.clientX - r.left) / r.width  * 100) + '%');
+                card.style.setProperty('--mouse-y', ((e.clientY - r.top)  / r.height * 100) + '%');
+            });
+        });
 });
 
+// Hero mouse parallax (hero-content layer only — no layout jank)
+(function initHeroParallax() {
+    var hero    = document.querySelector('.hero');
+    var content = document.querySelector('.hero-content');
+    if (!hero || !content) return;
+    hero.addEventListener('mousemove', function(e) {
+        var b = hero.getBoundingClientRect();
+        var x = ((e.clientX - b.left) / b.width  - 0.5) * 14;
+        var y = ((e.clientY - b.top)  / b.height - 0.5) * 9;
+        content.style.transform = 'translate(' + (-x * 0.45) + 'px, ' + (-y * 0.45) + 'px)';
+    });
+    hero.addEventListener('mouseleave', function() {
+        content.style.transition = 'transform 0.6s ease';
+        content.style.transform  = 'translate(0, 0)';
+        setTimeout(function() { content.style.transition = ''; }, 620);
+    });
+})();
 
+// Timeline accordion + scroll-entrance
+document.addEventListener('DOMContentLoaded', function() {
+    var items = Array.prototype.slice.call(document.querySelectorAll('.timeline-item'));
+    if (!items.length) return;
+
+    // IntersectionObserver: add .in-view when marker enters viewport
+    var observer = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('in-view');
+            }
+        });
+    }, { threshold: 0.15 });
+
+    items.forEach(function(item, idx) {
+        observer.observe(item);
+
+        // Accordion: click on header toggles .is-open
+        var header = item.querySelector('.tl-header');
+        if (!header) return;
+        header.addEventListener('click', function() {
+            var wasOpen = item.classList.contains('is-open');
+            // Close all
+            items.forEach(function(i) { i.classList.remove('is-open'); });
+            // Re-open this one if it was closed
+            if (!wasOpen) item.classList.add('is-open');
+        });
+    });
+
+    // Open first item by default
+    items[0].classList.add('is-open');
+});
 
 // Mobile Navigation Toggle
 document.addEventListener('DOMContentLoaded', function() {
@@ -262,16 +294,7 @@ function startTypewriterEffect(text) {
     setTimeout(typeWriter, 500);
 }
 
-// Parallax Effect for Hero Section
-window.addEventListener('scroll', function() {
-    const scrolled = window.pageYOffset;
-    const hero = document.querySelector('.hero');
-    
-    if (hero && scrolled < hero.offsetHeight) {
-        const rate = scrolled * -0.5;
-        hero.style.transform = `translateY(${rate}px)`;
-    }
-});
+// Hero scroll parallax removed — mouse parallax on .hero-content is used instead
 
 // Dynamic Stats Counter
 function animateCounter(element, target, duration = 2000) {
@@ -317,18 +340,18 @@ document.addEventListener('DOMContentLoaded', function() {
             const rect = card.getBoundingClientRect();
             const x = e.clientX - rect.left;
             const y = e.clientY - rect.top;
-            
+
             const centerX = rect.width / 2;
             const centerY = rect.height / 2;
-            
-            const rotateX = (y - centerY) / 10;
-            const rotateY = (centerX - x) / 10;
-            
-            card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateZ(10px)`;
+
+            const rotateX = Math.max(-4, Math.min(4, (y - centerY) / 20));
+            const rotateY = Math.max(-4, Math.min(4, (centerX - x) / 20));
+
+            card.style.transform = `perspective(1200px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateZ(6px)`;
         });
         
         card.addEventListener('mouseleave', function() {
-            card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) translateZ(0)';
+            card.style.transform = 'perspective(1200px) rotateX(0) rotateY(0) translateZ(0)';
         });
     });
 });
@@ -584,7 +607,7 @@ function updateContent() {
     if (statLabels[2]) statLabels[2].textContent = t.about.stat3Label;
     
     // Skills section
-    document.querySelector('#skills .section-title').textContent = t.skills.title;
+    safeUpdateElement('#skills .section-title', t.skills.title);
     const skillCategories = document.querySelectorAll('.skill-category');
     
     // Helper function to add certification badges
@@ -592,66 +615,64 @@ function updateContent() {
         return text.replace(` - ${badgeText}`, ` - <span class="certification-badge">${badgeText}</span>`);
     }
     
-    // Category 1: AI & Machine Learning
-    skillCategories[0].querySelector('h3').textContent = t.skills.category1Title;
-    const cat1Items = skillCategories[0].querySelectorAll('li');
-    
-    // Handle NVIDIA certification in both languages
-    if (currentLanguage === 'en') {
-        cat1Items[0].innerHTML = addCertificationBadge(t.skills.category1Item1, 'NVIDIA Certified');
-        cat1Items[4].innerHTML = addCertificationBadge(t.skills.category1Item5, 'Google Certified');
-    } else if (currentLanguage === 'fr') {
-        cat1Items[0].innerHTML = addCertificationBadge(t.skills.category1Item1, 'Certifié NVIDIA');
-        cat1Items[4].innerHTML = addCertificationBadge(t.skills.category1Item5, 'Certifié Google');
+    // Skill categories are replaced by the interactive neural network — only update if present
+    if (skillCategories.length >= 4) {
+        // Category 1: AI & Machine Learning
+        skillCategories[0].querySelector('h3').textContent = t.skills.category1Title;
+        const cat1Items = skillCategories[0].querySelectorAll('li');
+        
+        if (currentLanguage === 'en') {
+            cat1Items[0].innerHTML = addCertificationBadge(t.skills.category1Item1, 'NVIDIA Certified');
+            cat1Items[4].innerHTML = addCertificationBadge(t.skills.category1Item5, 'Google Certified');
+        } else if (currentLanguage === 'fr') {
+            cat1Items[0].innerHTML = addCertificationBadge(t.skills.category1Item1, 'Certifié NVIDIA');
+            cat1Items[4].innerHTML = addCertificationBadge(t.skills.category1Item5, 'Certifié Google');
+        }
+        cat1Items[1].textContent = t.skills.category1Item2;
+        cat1Items[2].textContent = t.skills.category1Item3;
+        cat1Items[3].textContent = t.skills.category1Item4;
+        cat1Items[5].textContent = t.skills.category1Item6;
+        
+        // Category 2: Data Technologies & Databases
+        skillCategories[1].querySelector('h3').textContent = t.skills.category2Title;
+        const cat2Items = skillCategories[1].querySelectorAll('li');
+        if (currentLanguage === 'en') {
+            cat2Items[0].innerHTML = addCertificationBadge(t.skills.category2Item1, 'Neo4j Certified Professional');
+        } else if (currentLanguage === 'fr') {
+            cat2Items[0].innerHTML = addCertificationBadge(t.skills.category2Item1, 'Professionnel Certifié Neo4j');
+        }
+        cat2Items[1].textContent = t.skills.category2Item2;
+        cat2Items[2].textContent = t.skills.category2Item3;
+        cat2Items[3].textContent = t.skills.category2Item4;
+        cat2Items[4].textContent = t.skills.category2Item5;
+        
+        // Category 3: Frameworks & Libraries
+        skillCategories[2].querySelector('h3').textContent = t.skills.category3Title;
+        const cat3Items = skillCategories[2].querySelectorAll('li');
+        cat3Items[0].textContent = t.skills.category3Item1;
+        cat3Items[1].textContent = t.skills.category3Item2;
+        cat3Items[2].textContent = t.skills.category3Item3;
+        cat3Items[3].textContent = t.skills.category3Item4;
+        cat3Items[4].textContent = t.skills.category3Item5;
+        cat3Items[5].textContent = t.skills.category3Item6;
+        
+        // Category 4: Programming & Tools
+        skillCategories[3].querySelector('h3').textContent = t.skills.category4Title;
+        const cat4Items = skillCategories[3].querySelectorAll('li');
+        cat4Items[0].textContent = t.skills.category4Item1;
+        cat4Items[1].textContent = t.skills.category4Item2;
+        cat4Items[2].textContent = t.skills.category4Item3;
+        cat4Items[3].textContent = t.skills.category4Item4;
+        cat4Items[4].textContent = t.skills.category4Item5;
     }
-    
-    cat1Items[1].textContent = t.skills.category1Item2;
-    cat1Items[2].textContent = t.skills.category1Item3;
-    cat1Items[3].textContent = t.skills.category1Item4;
-    cat1Items[5].textContent = t.skills.category1Item6;
-    
-    // Category 2: Data Technologies & Databases
-    skillCategories[1].querySelector('h3').textContent = t.skills.category2Title;
-    const cat2Items = skillCategories[1].querySelectorAll('li');
-    
-    // Handle Neo4j certification in both languages
-    if (currentLanguage === 'en') {
-        cat2Items[0].innerHTML = addCertificationBadge(t.skills.category2Item1, 'Neo4j Certified Professional');
-    } else if (currentLanguage === 'fr') {
-        cat2Items[0].innerHTML = addCertificationBadge(t.skills.category2Item1, 'Professionnel Certifié Neo4j');
-    }
-    
-    cat2Items[1].textContent = t.skills.category2Item2;
-    cat2Items[2].textContent = t.skills.category2Item3;
-    cat2Items[3].textContent = t.skills.category2Item4;
-    cat2Items[4].textContent = t.skills.category2Item5;
-    
-    // Category 3: Frameworks & Libraries
-    skillCategories[2].querySelector('h3').textContent = t.skills.category3Title;
-    const cat3Items = skillCategories[2].querySelectorAll('li');
-    cat3Items[0].textContent = t.skills.category3Item1;
-    cat3Items[1].textContent = t.skills.category3Item2;
-    cat3Items[2].textContent = t.skills.category3Item3;
-    cat3Items[3].textContent = t.skills.category3Item4;
-    cat3Items[4].textContent = t.skills.category3Item5;
-    cat3Items[5].textContent = t.skills.category3Item6;
-    
-    // Category 4: Programming & Tools
-    skillCategories[3].querySelector('h3').textContent = t.skills.category4Title;
-    const cat4Items = skillCategories[3].querySelectorAll('li');
-    cat4Items[0].textContent = t.skills.category4Item1;
-    cat4Items[1].textContent = t.skills.category4Item2;
-    cat4Items[2].textContent = t.skills.category4Item3;
-    cat4Items[3].textContent = t.skills.category4Item4;
-    cat4Items[4].textContent = t.skills.category4Item5;
     
     // Certifications section
-    document.querySelector('.subsection-title').textContent = t.skills.certificationsTitle;
+    safeUpdateElement('.subsection-title', t.skills.certificationsTitle);
     const certificationLinks = document.querySelectorAll('.certification-list a');
-    certificationLinks[0].textContent = t.skills.cert1;
-    certificationLinks[1].textContent = t.skills.cert2;
-    certificationLinks[2].textContent = t.skills.cert3;
-    certificationLinks[3].textContent = t.skills.cert4;
+    if (certificationLinks[0]) certificationLinks[0].textContent = t.skills.cert1;
+    if (certificationLinks[1]) certificationLinks[1].textContent = t.skills.cert2;
+    if (certificationLinks[2]) certificationLinks[2].textContent = t.skills.cert3;
+    if (certificationLinks[3]) certificationLinks[3].textContent = t.skills.cert4;
     
     // Projects section
     document.querySelector('#projects .section-title').textContent = t.projects.title;
@@ -667,19 +688,22 @@ function updateContent() {
     projectCards[0].querySelector('.project-description').textContent = t.projects.card10.description;
     const card10Links = projectCards[0].querySelectorAll('.project-link');
     card10Links[0].textContent = t.projects.card10.link1Text;
-    card10Links[1].textContent = t.projects.card10.link2Text;
+    if (card10Links[1]) card10Links[1].textContent = t.projects.card10.link2Text;
     
-    // Project 11 (RAG UQAC)
-    projectCards[1].querySelector('h3').textContent = t.projects.card11.title;
-    const card11Tags = projectCards[1].querySelectorAll('.tag');
-    card11Tags[0].textContent = t.projects.card11.tag1;
-    card11Tags[1].textContent = t.projects.card11.tag2;
-    card11Tags[2].textContent = t.projects.card11.tag3;
-    card11Tags[3].textContent = t.projects.card11.tag4;
-    projectCards[1].querySelector('.project-description').textContent = t.projects.card11.description;
-    const card11Links = projectCards[1].querySelectorAll('.project-link');
-    card11Links[0].textContent = t.projects.card11.link1Text;
-    card11Links[1].textContent = t.projects.card11.link2Text;
+    // Project 3 (LLM-based Chatbot for Biologists) — featured slot 02
+    projectCards[1].querySelector('h3').textContent = t.projects.card3.title;
+    const card3FTags = projectCards[1].querySelectorAll('.tag');
+    card3FTags[0].textContent = t.projects.card3.tag1;
+    card3FTags[1].textContent = t.projects.card3.tag2;
+    card3FTags[2].textContent = t.projects.card3.tag3;
+    card3FTags[3].textContent = t.projects.card3.tag4;
+    projectCards[1].querySelector('.project-description').textContent = t.projects.card3.description;
+    const card3FLinks = projectCards[1].querySelectorAll('.project-link');
+    card3FLinks[0].textContent = t.projects.card3.link1Text;
+    if (card3FLinks[1]) {
+        card3FLinks[1].textContent = t.projects.card3.link2Text;
+        card3FLinks[1].href = t.projects.card3.reportUrl;
+    }
     
     // Project 1 (Hackathon)
     projectCards[2].querySelector('h3').textContent = t.projects.card1.title;
@@ -711,20 +735,17 @@ function updateContent() {
         card2Links[2].href = t.projects.card2.reportUrl;
     }
     
-    // Project 3 (LLM-based Chatbot)
-    projectCards[4].querySelector('h3').textContent = t.projects.card3.title;
-    const card3Tags = projectCards[4].querySelectorAll('.tag');
-    card3Tags[0].textContent = t.projects.card3.tag1;
-    card3Tags[1].textContent = t.projects.card3.tag2;
-    card3Tags[2].textContent = t.projects.card3.tag3;
-    card3Tags[3].textContent = t.projects.card3.tag4;
-    projectCards[4].querySelector('.project-description').textContent = t.projects.card3.description;
-    const card3Links = projectCards[4].querySelectorAll('.project-link');
-    card3Links[0].textContent = t.projects.card3.link1Text;
-    card3Links[1].textContent = t.projects.card3.link2Text;
-    if (card3Links[1]) {
-        card3Links[1].href = t.projects.card3.reportUrl;
-    }
+    // Project 11 (RAG Chatbot UQAC) — moved to grid
+    projectCards[4].querySelector('h3').textContent = t.projects.card11.title;
+    const card11GTags = projectCards[4].querySelectorAll('.tag');
+    card11GTags[0].textContent = t.projects.card11.tag1;
+    card11GTags[1].textContent = t.projects.card11.tag2;
+    card11GTags[2].textContent = t.projects.card11.tag3;
+    card11GTags[3].textContent = t.projects.card11.tag4;
+    projectCards[4].querySelector('.project-description').textContent = t.projects.card11.description;
+    const card11GLinks = projectCards[4].querySelectorAll('.project-link');
+    card11GLinks[0].textContent = t.projects.card11.link1Text;
+    if (card11GLinks[1]) card11GLinks[1].textContent = t.projects.card11.link2Text;
     
     // Project 4 (Cell Classification CNN)
     projectCards[5].querySelector('h3').textContent = t.projects.card4.title;
@@ -1698,7 +1719,7 @@ document.addEventListener('DOMContentLoaded', function() {
         ctx.fillStyle = '#ffffff';
         ctx.fillRect(0, 0, canvas.width, canvas.height);
         ctx.strokeStyle = '#000000';
-        ctx.lineWidth = 8;
+        ctx.lineWidth = 22;
         ctx.lineCap = 'round';
         ctx.lineJoin = 'round';
         
