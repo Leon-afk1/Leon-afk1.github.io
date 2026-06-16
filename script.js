@@ -748,6 +748,7 @@ function updateContent() {
     projectCards[4].querySelector('.project-description').textContent = t.projects.card13.description;
     const card13Links = projectCards[4].querySelectorAll('.project-link');
     card13Links[0].textContent = t.projects.card13.link1Text;
+    if (card13Links[1]) card13Links[1].textContent = t.projects.card13.link2Text;
 
     // projectCards[5] = grid 3: Drug Analysis (card2)
     projectCards[5].querySelector('h3').textContent = t.projects.card2.title;

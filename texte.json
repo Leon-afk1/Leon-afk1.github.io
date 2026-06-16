@@ -216,7 +216,8 @@
         "tag4": "NeuroQwerty",
         "tag5": "Python",
         "description": "Developed in just one week as part of a joint initiative between UQAC and Haute École de Louvain (HEL), this web application introduces an innovative approach to Parkinson's disease detection. Rather than relying on a single biomarker, the Python backend uses XGBoost models to fuse and analyze three distinct modalities: voice analysis, keystroke dynamics (NeuroQwerty), and spiral drawing tests.",
-        "link1Text": "UQAC"
+        "link1Text": "UQAC",
+        "link2Text": "View on GitHub"
       }
     },
     "mnistDemo": {
@@ -532,7 +533,8 @@
         "tag4": "NeuroQwerty",
         "tag5": "Python",
         "description": "Développée en seulement une semaine dans le cadre d'un projet conjoint entre l'UQAC et la Haute École de Louvain (HEL), cette application web propose une approche innovante pour la détection de la maladie de Parkinson. Au lieu de se limiter à un seul biomarqueur, le backend Python utilise des modèles XGBoost pour fusionner et analyser trois modalités distinctes : l'analyse vocale, la dynamique de frappe au clavier (NeuroQwerty) et l'étude des tracés de spirales.",
-        "link1Text": "UQAC"
+        "link1Text": "UQAC",
+        "link2Text": "Voir sur GitHub"
       }
     },
      "mnistDemo": {
