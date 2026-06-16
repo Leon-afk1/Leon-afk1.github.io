@@ -81,6 +81,8 @@
     },
     "projects": {
       "title": "Projects",
+      "selectedWork": "Selected Work",
+      "moreProjects": "More Projects",
       "card1": {
         "title": "Intelligent RAG Chatbot & Dashboard (Hackathon Winner)",
         "tag1": "RAG",
@@ -195,6 +197,26 @@
         "description": "Developed an interactive chatbot based on the UQAC university handbook. Complete implementation including web scraping, conversational memory management, semantic routing via LLM, and source verification with traceability links.",
         "link1Text": "UQAC",
         "link2Text": "View Code"
+      },
+      "card12": {
+        "title": "AgroScan: AI-Powered Agricultural Diagnosis",
+        "tag1": "Flutter",
+        "tag2": "TensorFlow Lite",
+        "tag3": "Computer Vision",
+        "tag4": "Grad-CAM",
+        "tag5": "Mobile AI",
+        "description": "Mobile application for automated plant disease diagnosis, available for direct download from my GitHub. Built with Flutter, its core strength lies in an embedded AI engine integrating computer vision models optimized for edge deployment via TensorFlow Lite. The pipeline leverages advanced feature extraction (HOG, LBP) and Grad-CAM explainability so users can visually understand the model's predictions.",
+        "link1Text": "View on GitHub"
+      },
+      "card13": {
+        "title": "Multimodal Parkinson's Disease Detection",
+        "tag1": "XGBoost",
+        "tag2": "Multimodal AI",
+        "tag3": "Voice Analysis",
+        "tag4": "NeuroQwerty",
+        "tag5": "Python",
+        "description": "Developed in just one week as part of a joint initiative between UQAC and Haute École de Louvain (HEL), this web application introduces an innovative approach to Parkinson's disease detection. Rather than relying on a single biomarker, the Python backend uses XGBoost models to fuse and analyze three distinct modalities: voice analysis, keystroke dynamics (NeuroQwerty), and spiral drawing tests.",
+        "link1Text": "UQAC"
       }
     },
     "mnistDemo": {
@@ -212,11 +234,18 @@
         "predictionPlaceholder": "Draw a digit to see predictions"
     },
     "experience": {
-      "title": "Experience",
+      "title": "Experience",      
+      "item0": {
+        "title": "R&D Internship",
+        "company": "Astek Innovation Lab, Paris - La Défense, France",
+        "period": "Sept 2026 - Present",
+        "achievement1": "Final-year internship within the R&D team at the Astek Innovation Lab",
+        "achievement2": "This section will be updated with more technical details as the internship progresses"
+      },      
       "item1": {
         "title": "Double Degree, Master’s in Artificial Intelligence",
         "company": "Université du Québec à Chicoutimi (UQAC), Canada",
-        "period": "2025 - Present",
+        "period": "2025 – 2026",
         "achievement1": "Specialization in Artificial Intelligence",
         "achievement2": "Focus on advanced machine learning and deep learning techniques",
         "achievement3": "Exploring opportunities for research collaboration in Canada"
@@ -368,6 +397,8 @@
     },
     "projects": {
       "title": "Projets Principaux",
+      "selectedWork": "Travaux Sélectionnés",
+      "moreProjects": "Autres Projets",
       "card1": {
         "title": "Chatbot RAG Intelligent & Dashboard (Gagnant Hackathon)",
         "tag1": "RAG",
@@ -482,6 +513,26 @@
         "description": "Développement d'un chatbot interactif basé sur le manuel de l'UQAC. Implémentation complète incluant le web scraping, la gestion de la mémoire conversationnelle, le routage sémantique via LLM et la vérification des sources avec liens de traçabilité.",
         "link1Text": "UQAC",
         "link2Text": "Voir le Code"
+      },
+      "card12": {
+        "title": "AgroScan : Diagnostic Agricole par IA",
+        "tag1": "Flutter",
+        "tag2": "TensorFlow Lite",
+        "tag3": "Vision par Ordinateur",
+        "tag4": "Grad-CAM",
+        "tag5": "IA Mobile",
+        "description": "Application mobile pour le diagnostic automatisé des maladies des plantes, directement téléchargeable depuis mon GitHub. Conçue avec Flutter, sa force réside dans un moteur IA embarqué intégrant des modèles de vision par ordinateur optimisés pour le déploiement mobile via TensorFlow Lite. Le pipeline s'appuie sur l'extraction de caractéristiques (HOG, LBP) et des outils d'explicabilité Grad-CAM pour une compréhension visuelle des prédictions.",
+        "link1Text": "Voir sur GitHub"
+      },
+      "card13": {
+        "title": "Détection Multimodale de la Maladie de Parkinson",
+        "tag1": "XGBoost",
+        "tag2": "IA Multimodale",
+        "tag3": "Analyse Vocale",
+        "tag4": "NeuroQwerty",
+        "tag5": "Python",
+        "description": "Développée en seulement une semaine dans le cadre d'un projet conjoint entre l'UQAC et la Haute École de Louvain (HEL), cette application web propose une approche innovante pour la détection de la maladie de Parkinson. Au lieu de se limiter à un seul biomarqueur, le backend Python utilise des modèles XGBoost pour fusionner et analyser trois modalités distinctes : l'analyse vocale, la dynamique de frappe au clavier (NeuroQwerty) et l'étude des tracés de spirales.",
+        "link1Text": "UQAC"
       }
     },
      "mnistDemo": {
@@ -500,10 +551,17 @@
     },
     "experience": {
       "title": "Expérience",
+      "item0": {
+        "title": "Stage R&D",
+        "company": "Astek Innovation Lab, Paris - La Défense, France",
+        "period": "Sept 2026 - Présent",
+        "achievement1": "Stage de fin d'études au sein de l'équipe R&D du Lab Innovation d'Astek",
+        "achievement2": "Cette section sera mise à jour avec plus de détails techniques au fil de l'avancement du stage"
+      },
       "item1": {
         "title": "Double Diplôme — Maîtrise en Intelligence Artificielle",
         "company": "Université du Québec à Chicoutimi (UQAC), Canada",
-        "period": "2025 - Présent",
+        "period": "2025 – 2026",
         "achievement1": "Spécialisation en Intelligence Artificielle",
         "achievement2": "Focus sur les techniques avancées d'apprentissage machine et profond",
         "achievement3": "Exploration d'opportunités de collaboration en recherche au Canada"

@@ -6,7 +6,7 @@
     <title>Léon - AI Engineer & Researcher</title>
     <meta name="description" content="AI Engineering student specializing in machine learning, deep learning, and AI research">
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='0.9em' font-size='90'>L</text></svg>">
-    <link rel="stylesheet" href="styles.css?v=20260303b">
+    <link rel="stylesheet" href="styles.css?v=20260616a">
     <!-- Flag Icons CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.2.3/css/flag-icons.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -192,7 +192,7 @@
             <!-- Featured projects (Lusion-style) -->
             <div class="featured-projects">
                 <div class="fp-header">
-                    <span class="fp-label">Selected Work</span>
+                    <span class="fp-label" id="fp-label-selected">Selected Work</span>
                     <div class="fp-divider"></div>
                 </div>
                 <div class="fp-list">
@@ -270,13 +270,53 @@
 
             <!-- All other projects grid -->
             <div class="fp-header more-projects-header">
-                <span class="fp-label">More Projects</span>
+                <span class="fp-label" id="fp-label-more">More Projects</span>
                 <div class="fp-divider"></div>
             </div>
             <div class="projects-grid">
 
                 <article class="project-card">
                     <span class="pg-index">04</span>
+                    <div class="project-header">
+                        <h3>AgroScan: AI-Powered Agricultural Diagnosis</h3>
+                        <div class="project-tags">
+                            <span class="tag">Flutter</span>
+                            <span class="tag">TensorFlow Lite</span>
+                            <span class="tag">Computer Vision</span>
+                            <span class="tag">Grad-CAM</span>
+                            <span class="tag">Mobile AI</span>
+                        </div>
+                    </div>
+                    <p class="project-description">
+                        Mobile application for automated plant disease diagnosis, available for direct download from my GitHub. Built with Flutter, its core strength lies in an embedded AI engine integrating computer vision models optimized for edge deployment via TensorFlow Lite. The pipeline leverages advanced feature extraction (HOG, LBP) and Grad-CAM explainability so users can visually understand the model's predictions.
+                    </p>
+                    <div class="project-links">
+                        <a href="https://github.com/Leon-afk1" class="project-link" target="_blank" rel="noopener noreferrer">View on GitHub</a>
+                    </div>
+                </article>
+
+                <article class="project-card">
+                    <span class="pg-index">05</span>
+                    <div class="project-header">
+                        <h3>Multimodal Parkinson's Disease Detection</h3>
+                        <div class="project-tags">
+                            <span class="tag">XGBoost</span>
+                            <span class="tag">Multimodal AI</span>
+                            <span class="tag">Voice Analysis</span>
+                            <span class="tag">NeuroQwerty</span>
+                            <span class="tag">Python</span>
+                        </div>
+                    </div>
+                    <p class="project-description">
+                        Developed in just one week as part of a joint initiative between UQAC and Haute École de Louvain (HEL), this web application introduces an innovative approach to Parkinson's disease detection. Rather than relying on a single biomarker, the Python backend uses XGBoost models to fuse and analyze three distinct modalities: voice analysis, keystroke dynamics (NeuroQwerty), and spiral drawing tests.
+                    </p>
+                    <div class="project-links">
+                        <a href="https://www.uqac.ca/" class="project-link" target="_blank" rel="noopener noreferrer">UQAC</a>
+                    </div>
+                </article>
+
+                <article class="project-card">
+                    <span class="pg-index">06</span>
                     <div class="project-header">
                         <h3>Multimodal Contrastive Learning for Drug Analysis</h3>
                         <div class="project-tags">
@@ -300,7 +340,7 @@
                 </article>
 
                 <article class="project-card">
-                    <span class="pg-index">05</span>
+                    <span class="pg-index">07</span>
                     <div class="project-header">
                         <h3>RAG Chatbot for UQAC Handbook</h3>
                         <div class="project-tags">
@@ -322,7 +362,7 @@
                 </article>
 
                 <article class="project-card">
-                    <span class="pg-index">06</span>
+                    <span class="pg-index">08</span>
                     <div class="project-header">
                         <h3>Cell Classification CNN</h3>
                         <div class="project-tags">
@@ -344,7 +384,7 @@
                 </article>
 
                 <article class="project-card">
-                    <span class="pg-index">07</span>
+                    <span class="pg-index">09</span>
                     <div class="project-header">
                         <h3>Mushroom Toxicity Prediction</h3>
                         <div class="project-tags">
@@ -364,7 +404,7 @@
                 </article>
 
                 <article class="project-card">
-                    <span class="pg-index">08</span>
+                    <span class="pg-index">10</span>
                     <div class="project-header">
                         <h3>Poultry Disease Detection</h3>
                         <div class="project-tags">
@@ -385,7 +425,7 @@
                 </article>
 
                 <article class="project-card">
-                    <span class="pg-index">09</span>
+                    <span class="pg-index">11</span>
                     <div class="project-header">
                         <h3>MNIST Digit Recognition CNN</h3>
                         <div class="project-tags">
@@ -407,7 +447,7 @@
                 </article>
 
                 <article class="project-card">
-                    <span class="pg-index">10</span>
+                    <span class="pg-index">12</span>
                     <div class="project-header">
                         <h3>Music Genre Classification</h3>
                         <div class="project-tags">
@@ -428,7 +468,7 @@
                 </article>
 
                 <article class="project-card">
-                    <span class="pg-index">11</span>
+                    <span class="pg-index">13</span>
                     <div class="project-header">
                         <h3>Tangram Solver</h3>
                         <div class="project-tags">
@@ -505,9 +545,26 @@
                     <div class="timeline-marker"></div>
                     <div class="timeline-content">
                         <div class="tl-header">
+                            <h3>R&amp;D Internship</h3>
+                            <p class="company">Astek Innovation Lab, Paris - La Défense, France</p>
+                            <p class="period">Sept 2026 - Present</p>
+                        </div>
+                        <div class="tl-body">
+                            <ul class="achievements">
+                                <li>Final-year internship within the R&amp;D team at the Astek Innovation Lab</li>
+                                <li>This section will be updated with more technical details as the internship progresses</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-marker"></div>
+                    <div class="timeline-content">
+                        <div class="tl-header">
                             <h3>Double Degree, Master's in Artificial Intelligence</h3>
                             <p class="company">Université du Québec à Chicoutimi (UQAC), Canada</p>
-                            <p class="period">2025 - Present</p>
+                            <p class="period">2025 – 2026</p>
                         </div>
                         <div class="tl-body">
                             <ul class="achievements">

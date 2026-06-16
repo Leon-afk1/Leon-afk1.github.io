@@ -676,9 +676,15 @@ function updateContent() {
     
     // Projects section
     document.querySelector('#projects .section-title').textContent = t.projects.title;
+    // "Selected Work" / "More Projects" labels
+    const fpLabelSelected = document.getElementById('fp-label-selected');
+    if (fpLabelSelected) fpLabelSelected.textContent = t.projects.selectedWork;
+    const fpLabelMore = document.getElementById('fp-label-more');
+    if (fpLabelMore) fpLabelMore.textContent = t.projects.moreProjects;
+
     const projectCards = document.querySelectorAll('.project-card');
-    
-    // Project 10 (LIARA)
+
+    // projectCards[0] = featured 01: LIARA (card10)
     projectCards[0].querySelector('h3').textContent = t.projects.card10.title;
     const card10Tags = projectCards[0].querySelectorAll('.tag');
     card10Tags[0].textContent = t.projects.card10.tag1;
@@ -689,8 +695,8 @@ function updateContent() {
     const card10Links = projectCards[0].querySelectorAll('.project-link');
     card10Links[0].textContent = t.projects.card10.link1Text;
     if (card10Links[1]) card10Links[1].textContent = t.projects.card10.link2Text;
-    
-    // Project 3 (LLM-based Chatbot for Biologists) — featured slot 02
+
+    // projectCards[1] = featured 02: LLM-based Chatbot for Biologists (card3)
     projectCards[1].querySelector('h3').textContent = t.projects.card3.title;
     const card3FTags = projectCards[1].querySelectorAll('.tag');
     card3FTags[0].textContent = t.projects.card3.tag1;
@@ -704,8 +710,8 @@ function updateContent() {
         card3FLinks[1].textContent = t.projects.card3.link2Text;
         card3FLinks[1].href = t.projects.card3.reportUrl;
     }
-    
-    // Project 1 (Hackathon)
+
+    // projectCards[2] = featured 03: Hackathon (card1)
     projectCards[2].querySelector('h3').textContent = t.projects.card1.title;
     const card1Tags = projectCards[2].querySelectorAll('.tag');
     card1Tags[0].textContent = t.projects.card1.tag1;
@@ -718,106 +724,130 @@ function updateContent() {
     const card1Links = projectCards[2].querySelectorAll('.project-link');
     card1Links[0].textContent = t.projects.card1.link1Text;
     card1Links[1].textContent = t.projects.card1.link2Text;
-    
-    // Project 2
-    projectCards[3].querySelector('h3').textContent = t.projects.card2.title;
-    const card2Tags = projectCards[3].querySelectorAll('.tag');
+
+    // projectCards[3] = grid 1: AgroScan (card12)
+    projectCards[3].querySelector('h3').textContent = t.projects.card12.title;
+    const card12Tags = projectCards[3].querySelectorAll('.tag');
+    card12Tags[0].textContent = t.projects.card12.tag1;
+    card12Tags[1].textContent = t.projects.card12.tag2;
+    card12Tags[2].textContent = t.projects.card12.tag3;
+    card12Tags[3].textContent = t.projects.card12.tag4;
+    card12Tags[4].textContent = t.projects.card12.tag5;
+    projectCards[3].querySelector('.project-description').textContent = t.projects.card12.description;
+    const card12Links = projectCards[3].querySelectorAll('.project-link');
+    card12Links[0].textContent = t.projects.card12.link1Text;
+
+    // projectCards[4] = grid 2: Parkinson Detection (card13)
+    projectCards[4].querySelector('h3').textContent = t.projects.card13.title;
+    const card13Tags = projectCards[4].querySelectorAll('.tag');
+    card13Tags[0].textContent = t.projects.card13.tag1;
+    card13Tags[1].textContent = t.projects.card13.tag2;
+    card13Tags[2].textContent = t.projects.card13.tag3;
+    card13Tags[3].textContent = t.projects.card13.tag4;
+    card13Tags[4].textContent = t.projects.card13.tag5;
+    projectCards[4].querySelector('.project-description').textContent = t.projects.card13.description;
+    const card13Links = projectCards[4].querySelectorAll('.project-link');
+    card13Links[0].textContent = t.projects.card13.link1Text;
+
+    // projectCards[5] = grid 3: Drug Analysis (card2)
+    projectCards[5].querySelector('h3').textContent = t.projects.card2.title;
+    const card2Tags = projectCards[5].querySelectorAll('.tag');
     card2Tags[0].textContent = t.projects.card2.tag1;
     card2Tags[1].textContent = t.projects.card2.tag2;
     card2Tags[2].textContent = t.projects.card2.tag3;
     card2Tags[3].textContent = t.projects.card2.tag4;
-    projectCards[3].querySelector('.project-description').textContent = t.projects.card2.description;
-    const card2Links = projectCards[3].querySelectorAll('.project-link');
+    projectCards[5].querySelector('.project-description').textContent = t.projects.card2.description;
+    const card2Links = projectCards[5].querySelectorAll('.project-link');
     card2Links[0].textContent = t.projects.card2.link1Text;
     card2Links[1].textContent = t.projects.card2.link2Text;
-    card2Links[2].textContent = t.projects.card2.link3Text;
     if (card2Links[2]) {
+        card2Links[2].textContent = t.projects.card2.link3Text;
         card2Links[2].href = t.projects.card2.reportUrl;
     }
-    
-    // Project 11 (RAG Chatbot UQAC) — moved to grid
-    projectCards[4].querySelector('h3').textContent = t.projects.card11.title;
-    const card11GTags = projectCards[4].querySelectorAll('.tag');
+
+    // projectCards[6] = grid 4: RAG Chatbot UQAC (card11)
+    projectCards[6].querySelector('h3').textContent = t.projects.card11.title;
+    const card11GTags = projectCards[6].querySelectorAll('.tag');
     card11GTags[0].textContent = t.projects.card11.tag1;
     card11GTags[1].textContent = t.projects.card11.tag2;
     card11GTags[2].textContent = t.projects.card11.tag3;
     card11GTags[3].textContent = t.projects.card11.tag4;
-    projectCards[4].querySelector('.project-description').textContent = t.projects.card11.description;
-    const card11GLinks = projectCards[4].querySelectorAll('.project-link');
+    projectCards[6].querySelector('.project-description').textContent = t.projects.card11.description;
+    const card11GLinks = projectCards[6].querySelectorAll('.project-link');
     card11GLinks[0].textContent = t.projects.card11.link1Text;
     if (card11GLinks[1]) card11GLinks[1].textContent = t.projects.card11.link2Text;
-    
-    // Project 4 (Cell Classification CNN)
-    projectCards[5].querySelector('h3').textContent = t.projects.card4.title;
-    const card4Tags = projectCards[5].querySelectorAll('.tag');
+
+    // projectCards[7] = grid 5: Cell Classification CNN (card4)
+    projectCards[7].querySelector('h3').textContent = t.projects.card4.title;
+    const card4Tags = projectCards[7].querySelectorAll('.tag');
     card4Tags[0].textContent = t.projects.card4.tag1;
     card4Tags[1].textContent = t.projects.card4.tag2;
     card4Tags[2].textContent = t.projects.card4.tag3;
     card4Tags[3].textContent = t.projects.card4.tag4;
-    projectCards[5].querySelector('.project-description').textContent = t.projects.card4.description;
-    const card4Links = projectCards[5].querySelectorAll('.project-link');
+    projectCards[7].querySelector('.project-description').textContent = t.projects.card4.description;
+    const card4Links = projectCards[7].querySelectorAll('.project-link');
     card4Links[0].textContent = t.projects.card4.link1Text;
-    card4Links[1].textContent = t.projects.card4.link2Text;
     if (card4Links[1]) {
+        card4Links[1].textContent = t.projects.card4.link2Text;
         card4Links[1].href = t.projects.card4.reportUrl;
     }
-    
-    // Project 5 (Mushroom Toxicity)
-    projectCards[6].querySelector('h3').textContent = t.projects.card5.title;
-    const card5Tags = projectCards[6].querySelectorAll('.tag');
+
+    // projectCards[8] = grid 6: Mushroom Toxicity (card5)
+    projectCards[8].querySelector('h3').textContent = t.projects.card5.title;
+    const card5Tags = projectCards[8].querySelectorAll('.tag');
     card5Tags[0].textContent = t.projects.card5.tag1;
     card5Tags[1].textContent = t.projects.card5.tag2;
     card5Tags[2].textContent = t.projects.card5.tag3;
-    projectCards[6].querySelector('.project-description').textContent = t.projects.card5.description;
-    const card5Links = projectCards[6].querySelectorAll('.project-link');
+    projectCards[8].querySelector('.project-description').textContent = t.projects.card5.description;
+    const card5Links = projectCards[8].querySelectorAll('.project-link');
     card5Links[0].textContent = t.projects.card5.link1Text;
     card5Links[1].textContent = t.projects.card5.link2Text;
-    
-    // Project 6 (Poultry Disease Detection)
-    projectCards[7].querySelector('h3').textContent = t.projects.card6.title;
-    const card6Tags = projectCards[7].querySelectorAll('.tag');
+
+    // projectCards[9] = grid 7: Poultry Disease Detection (card6)
+    projectCards[9].querySelector('h3').textContent = t.projects.card6.title;
+    const card6Tags = projectCards[9].querySelectorAll('.tag');
     card6Tags[0].textContent = t.projects.card6.tag1;
     card6Tags[1].textContent = t.projects.card6.tag2;
     card6Tags[2].textContent = t.projects.card6.tag3;
     card6Tags[3].textContent = t.projects.card6.tag4;
     card6Tags[4].textContent = t.projects.card6.tag5;
-    projectCards[7].querySelector('.project-description').textContent = t.projects.card6.description;
-    const card6Links = projectCards[7].querySelectorAll('.project-link');
+    projectCards[9].querySelector('.project-description').textContent = t.projects.card6.description;
+    const card6Links = projectCards[9].querySelectorAll('.project-link');
     card6Links[0].textContent = t.projects.card6.link1Text;
     card6Links[1].textContent = t.projects.card6.link2Text;
-    
-    // Project 7 (MNIST)
-    projectCards[8].querySelector('h3').textContent = t.projects.card7.title;
-    const card7Tags = projectCards[8].querySelectorAll('.tag');
+
+    // projectCards[10] = grid 8: MNIST (card7)
+    projectCards[10].querySelector('h3').textContent = t.projects.card7.title;
+    const card7Tags = projectCards[10].querySelectorAll('.tag');
     card7Tags[0].textContent = t.projects.card7.tag1;
     card7Tags[1].textContent = t.projects.card7.tag2;
     card7Tags[2].textContent = t.projects.card7.tag3;
     card7Tags[3].textContent = t.projects.card7.tag4;
-    projectCards[8].querySelector('.project-description').textContent = t.projects.card7.description;
-    const card7Links = projectCards[8].querySelectorAll('.project-link');
+    projectCards[10].querySelector('.project-description').textContent = t.projects.card7.description;
+    const card7Links = projectCards[10].querySelectorAll('.project-link');
     card7Links[0].textContent = t.projects.card7.link1Text;
     card7Links[1].textContent = t.projects.card7.link2Text;
-    
-    // Project 8 (Music Genre Classification)
-    projectCards[9].querySelector('h3').textContent = t.projects.card8.title;
-    const card8Tags = projectCards[9].querySelectorAll('.tag');
+
+    // projectCards[11] = grid 9: Music Genre Classification (card8)
+    projectCards[11].querySelector('h3').textContent = t.projects.card8.title;
+    const card8Tags = projectCards[11].querySelectorAll('.tag');
     card8Tags[0].textContent = t.projects.card8.tag1;
     card8Tags[1].textContent = t.projects.card8.tag2;
     card8Tags[2].textContent = t.projects.card8.tag3;
     card8Tags[3].textContent = t.projects.card8.tag4;
     card8Tags[4].textContent = t.projects.card8.tag5;
-    projectCards[9].querySelector('.project-description').textContent = t.projects.card8.description;
-    const card8Links = projectCards[9].querySelectorAll('.project-link');
+    projectCards[11].querySelector('.project-description').textContent = t.projects.card8.description;
+    const card8Links = projectCards[11].querySelectorAll('.project-link');
     card8Links[0].textContent = t.projects.card8.link1Text;
     card8Links[1].textContent = t.projects.card8.link2Text;
-    
-    // Project 9 (Tangram Solver)
-    projectCards[10].querySelector('h3').textContent = t.projects.card9.title;
-    const card9Tags = projectCards[10].querySelectorAll('.tag');
+
+    // projectCards[12] = grid 10: Tangram Solver (card9)
+    projectCards[12].querySelector('h3').textContent = t.projects.card9.title;
+    const card9Tags = projectCards[12].querySelectorAll('.tag');
     card9Tags[0].textContent = t.projects.card9.tag1;
     card9Tags[1].textContent = t.projects.card9.tag2;
-    projectCards[10].querySelector('.project-description').textContent = t.projects.card9.description;
-    const card9Links = projectCards[10].querySelectorAll('.project-link');
+    projectCards[12].querySelector('.project-description').textContent = t.projects.card9.description;
+    const card9Links = projectCards[12].querySelectorAll('.project-link');
     card9Links[0].textContent = t.projects.card9.link1Text;
     card9Links[1].textContent = t.projects.card9.link2Text;
     
@@ -838,55 +868,63 @@ function updateContent() {
     document.querySelector('#experience .section-title').textContent = t.experience.title;
     const timelineItems = document.querySelectorAll('.timeline-item');
     
+    // Experience 0 (Astek R&D Internship)
+    timelineItems[0].querySelector('h3').textContent = t.experience.item0.title;
+    timelineItems[0].querySelector('.company').textContent = t.experience.item0.company;
+    timelineItems[0].querySelector('.period').textContent = t.experience.item0.period;
+    const exp0Achievements = timelineItems[0].querySelectorAll('.achievements li');
+    exp0Achievements[0].textContent = t.experience.item0.achievement1;
+    exp0Achievements[1].textContent = t.experience.item0.achievement2;
+    
     // Experience 1 (Double Degree)
-    timelineItems[0].querySelector('h3').textContent = t.experience.item1.title;
-    timelineItems[0].querySelector('.company').textContent = t.experience.item1.company;
-    timelineItems[0].querySelector('.period').textContent = t.experience.item1.period;
-    const exp1Achievements = timelineItems[0].querySelectorAll('.achievements li');
+    timelineItems[1].querySelector('h3').textContent = t.experience.item1.title;
+    timelineItems[1].querySelector('.company').textContent = t.experience.item1.company;
+    timelineItems[1].querySelector('.period').textContent = t.experience.item1.period;
+    const exp1Achievements = timelineItems[1].querySelectorAll('.achievements li');
     exp1Achievements[0].textContent = t.experience.item1.achievement1;
     exp1Achievements[1].textContent = t.experience.item1.achievement2;
     exp1Achievements[2].textContent = t.experience.item1.achievement3;
     
     // Experience 2 (Hackathon)
-    timelineItems[1].querySelector('h3').textContent = t.experience.item2.title;
-    timelineItems[1].querySelector('.company').textContent = t.experience.item2.company;
-    timelineItems[1].querySelector('.period').textContent = t.experience.item2.period;
-    const exp2Achievements = timelineItems[1].querySelectorAll('.achievements li');
+    timelineItems[2].querySelector('h3').textContent = t.experience.item2.title;
+    timelineItems[2].querySelector('.company').textContent = t.experience.item2.company;
+    timelineItems[2].querySelector('.period').textContent = t.experience.item2.period;
+    const exp2Achievements = timelineItems[2].querySelectorAll('.achievements li');
     exp2Achievements[0].textContent = t.experience.item2.achievement1;
     exp2Achievements[1].textContent = t.experience.item2.achievement2;
     exp2Achievements[2].textContent = t.experience.item2.achievement3;
     exp2Achievements[3].textContent = t.experience.item2.achievement4;
     
     // Experience 3 (Engineering Degree)
-    timelineItems[2].querySelector('h3').textContent = t.experience.item3.title;
-    timelineItems[2].querySelector('.company').textContent = t.experience.item3.company;
-    timelineItems[2].querySelector('.period').textContent = t.experience.item3.period;
-    const exp3Achievements = timelineItems[2].querySelectorAll('.achievements li');
+    timelineItems[3].querySelector('h3').textContent = t.experience.item3.title;
+    timelineItems[3].querySelector('.company').textContent = t.experience.item3.company;
+    timelineItems[3].querySelector('.period').textContent = t.experience.item3.period;
+    const exp3Achievements = timelineItems[3].querySelectorAll('.achievements li');
     exp3Achievements[0].textContent = t.experience.item3.achievement1;
     exp3Achievements[1].textContent = t.experience.item3.achievement2;
     exp3Achievements[2].textContent = t.experience.item3.achievement3;
     exp3Achievements[3].textContent = t.experience.item3.achievement4;
     
     // Experience 4 (Ksilink internship)
-    timelineItems[3].querySelector('h3').textContent = t.experience.item4.title;
-    timelineItems[3].querySelector('.company').textContent = t.experience.item4.company;
-    timelineItems[3].querySelector('.period').textContent = t.experience.item4.period;
-    const exp4Achievements = timelineItems[3].querySelectorAll('.achievements li');
+    timelineItems[4].querySelector('h3').textContent = t.experience.item4.title;
+    timelineItems[4].querySelector('.company').textContent = t.experience.item4.company;
+    timelineItems[4].querySelector('.period').textContent = t.experience.item4.period;
+    const exp4Achievements = timelineItems[4].querySelectorAll('.achievements li');
     exp4Achievements[0].textContent = t.experience.item4.achievement1;
     exp4Achievements[1].textContent = t.experience.item4.achievement2;
     exp4Achievements[2].textContent = t.experience.item4.achievement3;
     // Handle internship report link
-    const exp4ReportLink = timelineItems[3].querySelector('.internship-report-link');
+    const exp4ReportLink = timelineItems[4].querySelector('.internship-report-link');
     if (exp4ReportLink) {
         exp4ReportLink.textContent = t.experience.item4.reportText;
         exp4ReportLink.href = t.experience.item4.reportUrl;
     }
     
     // Experience 5 (Exchange)
-    timelineItems[4].querySelector('h3').textContent = t.experience.item5.title;
-    timelineItems[4].querySelector('.company').textContent = t.experience.item5.company;
-    timelineItems[4].querySelector('.period').textContent = t.experience.item5.period;
-    const exp5Achievements = timelineItems[4].querySelectorAll('.achievements li');
+    timelineItems[5].querySelector('h3').textContent = t.experience.item5.title;
+    timelineItems[5].querySelector('.company').textContent = t.experience.item5.company;
+    timelineItems[5].querySelector('.period').textContent = t.experience.item5.period;
+    const exp5Achievements = timelineItems[5].querySelectorAll('.achievements li');
     exp5Achievements[0].textContent = t.experience.item5.achievement1;
     exp5Achievements[1].textContent = t.experience.item5.achievement2;
     exp5Achievements[2].textContent = t.experience.item5.achievement3;
