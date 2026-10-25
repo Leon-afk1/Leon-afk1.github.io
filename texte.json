@@ -1,7 +1,7 @@
 {
   "en": {
     "pageTitle": "Léon - AI Engineer & Researcher",
-    "metaDescription": "AI Engineering student specializing in machine learning, deep learning, and AI research",
+    "metaDescription": "Léon Morales — Generative AI engineer (LLM & Graph RAG). Dual degree UTBM / UQAC. Available from April 2027, open to relocation worldwide.",
     "nav": {
       "logo": "Léon MORALES",
       "about": "About",
@@ -14,11 +14,10 @@
     "hero": {
       "greeting": "Hi, my name is",
       "name": "Léon MORALES",
-      "subtitle": "AI Student",
-      "description": "I’m 22 years old and currently finishing my engineering studies specializing in Artificial Intelligence. Passionate about solving problems with data, traveling the world, and taking on new challenges, I combine a strong academic background with hands-on project experience.",
+      "subtitle": "Generative AI Engineer — LLM & Graph RAG",
+      "description": "Dual-degree engineer (UTBM / UQAC) specializing in Generative AI and Machine Learning, currently completing my end-of-studies internship at Astek Innovation Lab. Passionate about solving problems with data, traveling the world, and taking on new challenges, I combine a strong academic background with hands-on R&D experience.",
       "buttonProjects": "View Projects",
-      "buttonContact": "Get in Touch",
-      "mazeAlgorithmLabel": "Algorithm: "
+      "buttonContact": "Get in Touch"
     },
     "about": {
       "title": "About Me",
@@ -26,7 +25,7 @@
       "paragraph2": "Outside of academics, I’ve been playing basketball for over 15 years, I love skiing (and even led a ski association with 200+ students), and I enjoy traveling—which has given me a broader perspective and adaptability in both life and work.",
       "stat1Label": "Years Studying AI",
       "stat2Label": "Projects Completed",
-      "stat3Label": "Different school over the world"
+      "stat3Label": "Different schools around the world"
     },
     "skills": {
       "title": "Technical Skills",
@@ -206,7 +205,7 @@
         "tag4": "Grad-CAM",
         "tag5": "Mobile AI",
         "description": "Mobile application for automated plant disease diagnosis, available for direct download from my GitHub. Built with Flutter, its core strength lies in an embedded AI engine integrating computer vision models optimized for edge deployment via TensorFlow Lite. The pipeline leverages advanced feature extraction (HOG, LBP) and Grad-CAM explainability so users can visually understand the model's predictions.",
-        "link1Text": "View on GitHub"
+        "link1Text": "View Code"
       },
       "card13": {
         "title": "Multimodal Parkinson's Disease Detection",
@@ -217,36 +216,38 @@
         "tag5": "Python",
         "description": "Developed in just one week as part of a joint initiative between UQAC and Haute École de Louvain (HEL), this web application introduces an innovative approach to Parkinson's disease detection. Rather than relying on a single biomarker, the Python backend uses XGBoost models to fuse and analyze three distinct modalities: voice analysis, keystroke dynamics (NeuroQwerty), and spiral drawing tests.",
         "link1Text": "UQAC",
-        "link2Text": "View on GitHub"
+        "link2Text": "View Code"
       }
     },
     "mnistDemo": {
-        "title": "Interactive MNIST Demo",
-        "description": "One of my first machine learning projects was building a Convolutional Neural Network to recognize handwritten digits from the famous MNIST dataset. This PyTorch-trained CNN runs directly in your browser using ONNX.js. Try drawing a digit below and see the model's predictions!",
-        "drawingTitle": "Draw a digit (0-9):",
-        "clearButton": "Clear",
-        "predictButton": "Predict",
-        "predictingButton": "Predicting...",
-        "previewTitle": "How the model sees it:",
-        "previewLine1": "28×28 pixels",
-        "previewLine2": "White digit on black background",
-        "previewLine3": "Normalized and centered",
-        "predictionTitle": "Model Predictions:",
-        "predictionPlaceholder": "Draw a digit to see predictions"
+      "title": "Interactive MNIST Demo",
+      "description": "One of my first machine learning projects was building a Convolutional Neural Network to recognize handwritten digits from the famous MNIST dataset. This PyTorch-trained CNN runs directly in your browser using ONNX Runtime Web. Try drawing a digit below and see the model's predictions!",
+      "drawingTitle": "Draw a digit (0-9):",
+      "clearButton": "Clear",
+      "predictButton": "Predict",
+      "predictingButton": "Predicting...",
+      "previewTitle": "How the model sees it:",
+      "previewLine1": "28×28 pixels",
+      "previewLine2": "White digit on black background",
+      "previewLine3": "Normalized and centered",
+      "predictionTitle": "Model Predictions:",
+      "predictionPlaceholder": "Draw a digit to see predictions"
     },
     "experience": {
-      "title": "Experience",      
+      "title": "Experience",
       "item0": {
-        "title": "R&D Internship",
-        "company": "Astek Innovation Lab, Paris - La Défense, France",
-        "period": "Sept 2026 - Present",
-        "achievement1": "Final-year internship within the R&D team at the Astek Innovation Lab",
-        "achievement2": "This section will be updated with more technical details as the internship progresses"
-      },      
+        "title": "AI & Data Innovation Engineer (End-of-studies internship)",
+        "company": "Astek Group – Innovation Lab, La Défense, France",
+        "period": "Sept 2026 – Feb 2027",
+        "achievement1": "End-of-studies internship in the R&D team at Astek Innovation Lab (confidential project)",
+        "achievement2": "Designing a Graph RAG pipeline in Python: a Neo4j knowledge graph provides relevant context to an LLM",
+        "achievement3": "Deploying local LLMs with Ollama and evaluating the RAG (RAGAS, LLM-as-a-judge)",
+        "achievement4": "Agentic approach to information retrieval in the graph"
+      },
       "item1": {
         "title": "Double Degree, Master’s in Artificial Intelligence",
         "company": "Université du Québec à Chicoutimi (UQAC), Canada",
-        "period": "2025 – 2026",
+        "period": "2025 – 2027 (expected)",
         "achievement1": "Specialization in Artificial Intelligence",
         "achievement2": "Focus on advanced machine learning and deep learning techniques",
         "achievement3": "Exploring opportunities for research collaboration in Canada"
@@ -263,7 +264,7 @@
       "item3": {
         "title": "Engineering Degree, Computer Science & Data Science",
         "company": "UTBM (Université de Technologie de Belfort-Montbéliard), France",
-        "period": "2021 – 2025",
+        "period": "2021 – 2027 (expected)",
         "achievement1": "Strong foundation in computer science, mathematics, and data science",
         "achievement2": "Courses in AI, machine learning, and data-driven systems",
         "achievement3": "President of SKI’UTBM, leading a team and organizing a trip for 200+ students",
@@ -286,12 +287,12 @@
         "achievement1": "Erasmus exchange program focused on computer science and international teamwork",
         "achievement2": "Specialized courses in object-oriented programming",
         "achievement3": "Developed adaptability and cross-cultural collaboration skills"
-      }      
+      }
     },
     "contact": {
       "title": "Get In Touch",
       "description": "I'm always interested in discussing new opportunities, collaborations, or innovative AI projects. Let's connect and explore how we can work together!",
-      "method1": "leon.morales@utbm.fr",
+      "method1": "leon.morales@outlook.fr",
       "method2": "LinkedIn Profile",
       "method3": "GitHub Portfolio",
       "form": {
@@ -318,7 +319,7 @@
   },
   "fr": {
     "pageTitle": "Léon - Ingénieur & Chercheur IA",
-    "metaDescription": "Étudiant ingénieur en IA spécialisé en apprentissage machine, apprentissage profond et recherche en IA",
+    "metaDescription": "Léon Morales — Ingénieur IA générative (LLM & Graph RAG). Double diplôme UTBM / UQAC. Disponible à partir d'avril 2027, mobilité internationale.",
     "nav": {
       "logo": "Léon MORALES",
       "about": "À propos",
@@ -331,11 +332,10 @@
     "hero": {
       "greeting": "Bonjour, je m'appelle",
       "name": "Léon MORALES",
-      "subtitle": "Étudiant en IA",
-      "description": "J'ai 22 ans et je termine actuellement mes études d'ingénieur spécialisées en Intelligence Artificielle. Passionné par la résolution de problèmes, les voyages et les nouveaux défis, je combine une solide formation académique avec une expérience pratique sur des projets.",
+      "subtitle": "Ingénieur IA Générative — LLM & Graph RAG",
+      "description": "Ingénieur en double diplôme (UTBM / UQAC) spécialisé en IA générative et Machine Learning, actuellement en stage de fin d'études au sein de l'Astek Innovation Lab. Passionné par la résolution de problèmes avec les données, les voyages et les nouveaux défis, je combine une solide formation académique avec une expérience pratique en R&D.",
       "buttonProjects": "Voir les Projets",
-      "buttonContact": "Me Contacter",
-      "mazeAlgorithmLabel": "Algorithme : "
+      "buttonContact": "Me Contacter"
     },
     "about": {
       "title": "À Propos de Moi",
@@ -523,7 +523,7 @@
         "tag4": "Grad-CAM",
         "tag5": "IA Mobile",
         "description": "Application mobile pour le diagnostic automatisé des maladies des plantes, directement téléchargeable depuis mon GitHub. Conçue avec Flutter, sa force réside dans un moteur IA embarqué intégrant des modèles de vision par ordinateur optimisés pour le déploiement mobile via TensorFlow Lite. Le pipeline s'appuie sur l'extraction de caractéristiques (HOG, LBP) et des outils d'explicabilité Grad-CAM pour une compréhension visuelle des prédictions.",
-        "link1Text": "Voir sur GitHub"
+        "link1Text": "Voir le code"
       },
       "card13": {
         "title": "Détection Multimodale de la Maladie de Parkinson",
@@ -534,36 +534,38 @@
         "tag5": "Python",
         "description": "Développée en seulement une semaine dans le cadre d'un projet conjoint entre l'UQAC et la Haute École de Louvain (HEL), cette application web propose une approche innovante pour la détection de la maladie de Parkinson. Au lieu de se limiter à un seul biomarqueur, le backend Python utilise des modèles XGBoost pour fusionner et analyser trois modalités distinctes : l'analyse vocale, la dynamique de frappe au clavier (NeuroQwerty) et l'étude des tracés de spirales.",
         "link1Text": "UQAC",
-        "link2Text": "Voir sur GitHub"
+        "link2Text": "Voir le code"
       }
     },
-     "mnistDemo": {
-        "title": "Démo Interactive MNIST",
-        "description": "L'un de mes premiers projets d'apprentissage machine fut la construction d'un réseau neuronal convolutif pour reconnaître les chiffres manuscrits du célèbre jeu de données MNIST. Ce CNN entraîné avec PyTorch s'exécute directement dans votre navigateur via ONNX.js. Essayez de dessiner un chiffre ci-dessous !",
-        "drawingTitle": "Dessinez un chiffre (0-9) :",
-        "clearButton": "Effacer",
-        "predictButton": "Prédire",
-        "predictingButton": "Prédiction...",
-        "previewTitle": "Ce que voit le modèle :",
-        "previewLine1": "28×28 pixels",
-        "previewLine2": "Chiffre blanc sur fond noir",
-        "previewLine3": "Normalisé et centré",
-        "predictionTitle": "Prédictions du modèle :",
-        "predictionPlaceholder": "Dessinez pour voir les prédictions"
+    "mnistDemo": {
+      "title": "Démo Interactive MNIST",
+      "description": "L'un de mes premiers projets d'apprentissage machine fut la construction d'un réseau neuronal convolutif pour reconnaître les chiffres manuscrits du célèbre jeu de données MNIST. Ce CNN entraîné avec PyTorch s'exécute directement dans votre navigateur via ONNX Runtime Web. Essayez de dessiner un chiffre ci-dessous !",
+      "drawingTitle": "Dessinez un chiffre (0-9) :",
+      "clearButton": "Effacer",
+      "predictButton": "Prédire",
+      "predictingButton": "Prédiction...",
+      "previewTitle": "Ce que voit le modèle :",
+      "previewLine1": "28×28 pixels",
+      "previewLine2": "Chiffre blanc sur fond noir",
+      "previewLine3": "Normalisé et centré",
+      "predictionTitle": "Prédictions du modèle :",
+      "predictionPlaceholder": "Dessinez pour voir les prédictions"
     },
     "experience": {
       "title": "Expérience",
       "item0": {
-        "title": "Stage R&D",
-        "company": "Astek Innovation Lab, Paris - La Défense, France",
-        "period": "Sept 2026 - Présent",
-        "achievement1": "Stage de fin d'études au sein de l'équipe R&D du Lab Innovation d'Astek",
-        "achievement2": "Cette section sera mise à jour avec plus de détails techniques au fil de l'avancement du stage"
+        "title": "Ingénieur Innovation IA & Data (stage de fin d'études)",
+        "company": "Astek Group – Innovation Lab, La Défense, France",
+        "period": "Sept 2026 – Fév 2027",
+        "achievement1": "Stage de fin d'études au sein de l'équipe R&D de l'Astek Innovation Lab (projet confidentiel)",
+        "achievement2": "Conception d'un pipeline Graph RAG en Python : un graphe de connaissances Neo4j fournit un contexte pertinent à un LLM",
+        "achievement3": "Déploiement de LLM en local avec Ollama et évaluation du RAG (RAGAS, LLM-as-a-judge)",
+        "achievement4": "Approche agentique pour la récupération d'information dans le graphe"
       },
       "item1": {
         "title": "Double Diplôme — Maîtrise en Intelligence Artificielle",
         "company": "Université du Québec à Chicoutimi (UQAC), Canada",
-        "period": "2025 – 2026",
+        "period": "2025 – 2027 (attendu)",
         "achievement1": "Spécialisation en Intelligence Artificielle",
         "achievement2": "Focus sur les techniques avancées d'apprentissage machine et profond",
         "achievement3": "Exploration d'opportunités de collaboration en recherche au Canada"
@@ -580,7 +582,7 @@
       "item3": {
         "title": "Diplôme d'Ingénieur — Informatique & Science des Données",
         "company": "UTBM (Université de Technologie de Belfort-Montbéliard), France",
-        "period": "2021 – 2025",
+        "period": "2021 – 2027 (attendu)",
         "achievement1": "Solide base en informatique, mathématiques et science des données",
         "achievement2": "Cours en IA, apprentissage machine et systèmes basés sur les données",
         "achievement3": "Président de SKI’UTBM, gestion d'équipe et organisation d'un voyage pour 200+ étudiants",
@@ -608,7 +610,7 @@
     "contact": {
       "title": "Me Contacter",
       "description": "Je suis toujours intéressé par de nouvelles opportunités, collaborations ou projets innovants en IA. Connectons-nous et explorons comment nous pouvons travailler ensemble !",
-      "method1": "leon.morales@utbm.fr",
+      "method1": "leon.morales@outlook.fr",
       "method2": "Profil LinkedIn",
       "method3": "Portfolio GitHub",
       "form": {

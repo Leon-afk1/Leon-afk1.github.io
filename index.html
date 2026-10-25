@@ -4,18 +4,27 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Léon - AI Engineer & Researcher</title>
-    <meta name="description" content="AI Engineering student specializing in machine learning, deep learning, and AI research">
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='0.9em' font-size='90'>L</text></svg>">
-    <link rel="stylesheet" href="styles.css?v=20260616a">
-    <!-- Flag Icons CSS -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.2.3/css/flag-icons.min.css">
+    <meta name="description" content="Léon Morales — Generative AI engineer (LLM &amp; Graph RAG). Dual degree UTBM / UQAC. Available from April 2027, open to relocation worldwide.">
+    <meta name="theme-color" content="#080810">
+    <link rel="canonical" href="https://leon-afk1.github.io/">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Léon MORALES">
+    <meta property="og:title" content="Léon MORALES — Generative AI Engineer (LLM &amp; Graph RAG)">
+    <meta property="og:description" content="Dual-degree engineer (UTBM / UQAC): Graph RAG, LLMs, contrastive learning. Available from April 2027.">
+    <meta property="og:url" content="https://leon-afk1.github.io/">
+    <meta property="og:image" content="https://leon-afk1.github.io/og-image.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"Person","name":"Léon Morales","jobTitle":"Generative AI Engineer","url":"https://leon-afk1.github.io/","email":"mailto:leon.morales@outlook.fr","sameAs":["https://github.com/Leon-afk1","https://www.linkedin.com/in/l%C3%A9on-morales"],"alumniOf":["UTBM","UQAC"],"knowsAbout":["Graph RAG","LLM","Machine Learning","Deep Learning","Contrastive Learning"]}</script>
+    <link rel="preload" href="texte.json" as="fetch" crossorigin>
+    <link rel="icon" href="favicon.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="styles.css?v=20261025a">
+    <link rel="stylesheet" href="enhancements.css?v=20261025a">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <!-- ONNX Runtime Web for PyTorch MNIST model -->
-    <script src="https://cdn.jsdelivr.net/npm/onnxruntime-web/dist/ort.min.js"></script>
 </head>
 <body>
+    <a class="skip-link" href="#about">Skip to content</a>
     <!-- Cursor spotlight (Linear-style ambient lighting) -->
     <div id="cursor-spotlight"></div>
 
@@ -23,7 +32,7 @@
     <nav class="nav">
         <div class="nav-container">
             <a href="#home" class="nav-logo">Léon MORALES</a>
-            <ul class="nav-menu">
+            <ul class="nav-menu" id="nav-menu">
                 <li><a href="#about" class="nav-link">About</a></li>
                 <li><a href="#skills" class="nav-link">Skills</a></li>
                 <li><a href="#projects" class="nav-link">Projects</a></li>
@@ -32,80 +41,33 @@
             </ul>
             <div class="nav-controls">
                 <button class="language-toggle" id="language-toggle" aria-label="Switch language">
-                    <span class="language-icon fi fi-fr"></span>
+                    <span class="language-icon language-code">FR</span>
                 </button>
             </div>
-            <div class="nav-toggle">
-                <span></span>
-                <span></span>
-                <span></span>
-            </div>
+            <button type="button" class="nav-toggle" aria-label="Menu" aria-expanded="false" aria-controls="nav-menu"><span></span><span></span><span></span></button>
         </div>
     </nav>
 
     <!-- Hero Section -->
     <section id="home" class="hero">
-        <!-- 
-        <div class="maze-background" id="maze-background">
-            <canvas id="maze-canvas" width="800" height="600"></canvas>
-        </div>
-        -->
-        <div class="particles-background"></div>
-        <div class="matrix-rain"></div>
         <div class="container">
             <div class="hero-content">
                 <h1 class="hero-title">
                     <span class="hero-greeting">Hi, my name is</span>
-                    <span class="hero-name glitch" data-text="Léon">Léon MORALES</span>
+                    <span class="hero-name" data-text="Léon">Léon MORALES</span>
                 </h1>
-                <p class="hero-subtitle typewriter">AI Student</p>
+                <p class="hero-subtitle typewriter">Generative AI Engineer — LLM &amp; Graph RAG</p>
                 <p class="hero-description">
-                    I’m 22 years old and currently finishing my engineering studies specializing in 
-                    Artificial Intelligence. Passionate about solving problems with data, traveling the 
-                    world, and taking on new challenges, I combine a strong academic background with 
-                    hands-on project experience.
+                    Dual-degree engineer (UTBM / UQAC) specializing in Generative AI and Machine Learning, currently completing my end-of-studies internship at Astek Innovation Lab. Passionate about solving problems with data, traveling the world, and taking on new challenges, I combine a strong academic background with hands-on R&D experience.
                 </p>
+                <p class="hero-availability"><span class="dot"></span><span id="availability-text">Available from April 2027 · Open to relocation worldwide</span></p>
                 <div class="hero-buttons">
-                    <a href="#projects" class="btn btn-primary pulse-btn">View Projects</a>
+                    <a href="#projects" class="btn btn-primary">View Projects</a>
                     <a href="#contact" class="btn btn-secondary">Get in Touch</a>
+                    <a href="CV_Leon_Morales_AI_2027_English.pdf" class="btn btn-secondary btn-cv" id="cv-download" download>Download CV</a>
                 </div>
             </div>
             
-            <!-- Chatbot Widget -->
-            <div class="chatbot-widget">
-                <div class="chatbot-header">
-                    <h3 data-translate="chatbot.title">Ask me anything!</h3>
-                    <button class="chatbot-minimize" id="chatbot-minimize" aria-label="Minimize chatbot">−</button>
-                </div>
-                <div class="chatbot-messages" id="chatbot-messages">
-                    <div class="chatbot-message bot-message">
-                        <div class="message-avatar">
-                            <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H6l-2 2V4h16v12z"/><circle cx="9" cy="10" r="1.5"/><circle cx="15" cy="10" r="1.5"/></svg>
-                        </div>
-                        <div class="message-content">
-                            <p data-translate="chatbot.welcome">Hi! I'm Léon's AI assistant. Ask me anything about his experience, skills, or projects!<br><br>⏳ Note: The first response may take a bit longer as the servers wake up.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="chatbot-input-container">
-                    <input 
-                        type="text" 
-                        id="chatbot-input" 
-                        class="chatbot-input" 
-                        placeholder="Ask about my experience, skills, projects..."
-                        data-translate-placeholder="chatbot.placeholder"
-                        autocomplete="off"
-                    />
-                    <button id="chatbot-send" class="chatbot-send" aria-label="Send message">
-                        <span>➤</span>
-                    </button>
-                </div>
-                <div class="chatbot-suggestions">
-                    <button class="suggestion-btn" data-question="What are your main skills?" data-translate="chatbot.suggestion1">Skills</button>
-                    <button class="suggestion-btn" data-question="Tell me about your projects" data-translate="chatbot.suggestion2">Projects</button>
-                    <button class="suggestion-btn" data-question="What is your experience?" data-translate="chatbot.suggestion3">Experience</button>
-                </div>
-            </div>
         </div>
     </section>
 
@@ -141,7 +103,7 @@
                     </div>
                     <div class="stat">
                         <span class="stat-number">3</span>
-                        <span class="stat-label">Different school over the world</span>
+                        <span class="stat-label">Different schools around the world</span>
                     </div>
                 </div>
             </div>
@@ -235,7 +197,7 @@
                             intuitive features to enhance usability and data enrichment.
                         </p>
                         <div class="project-links">
-                            <a href="https://ksilink.com/" class="project-link" target="_blank" rel="noopener noreferrer">Ksilink</a>
+                            <a href="https://ksilink.com/" class="project-link project-link--org" tabindex="-1" aria-hidden="true" target="_blank" rel="noopener noreferrer">Ksilink</a>
                             <a href="#" class="project-link internship-report-link" target="_blank" rel="noopener noreferrer">Internship Report</a>
                         </div>
                     </article>
@@ -262,7 +224,7 @@
                         </p>
                         <div class="project-links">
                             <a href="https://github.com/Leon-afk1/Hackathon_CTI_UQAC.git" class="project-link" target="_blank" rel="noopener noreferrer">View Code</a>
-                            <a href="https://www.uqac.ca/" class="project-link" target="_blank" rel="noopener noreferrer">UQAC</a>
+                            <a href="https://www.uqac.ca/" class="project-link project-link--org" tabindex="-1" aria-hidden="true" target="_blank" rel="noopener noreferrer">UQAC</a>
                         </div>
                     </article>
                 </div>
@@ -291,7 +253,7 @@
                         Mobile application for automated plant disease diagnosis, available for direct download from my GitHub. Built with Flutter, its core strength lies in an embedded AI engine integrating computer vision models optimized for edge deployment via TensorFlow Lite. The pipeline leverages advanced feature extraction (HOG, LBP) and Grad-CAM explainability so users can visually understand the model's predictions.
                     </p>
                     <div class="project-links">
-                        <a href="https://github.com/Leon-afk1/agroscan" class="project-link" target="_blank" rel="noopener noreferrer">View on GitHub</a>
+                        <a href="https://github.com/Leon-afk1/agroscan" class="project-link" target="_blank" rel="noopener noreferrer">View Code</a>
                     </div>
                 </article>
 
@@ -311,8 +273,8 @@
                         Developed in just one week as part of a joint initiative between UQAC and Haute École de Louvain (HEL), this web application introduces an innovative approach to Parkinson's disease detection. Rather than relying on a single biomarker, the Python backend uses XGBoost models to fuse and analyze three distinct modalities: voice analysis, keystroke dynamics (NeuroQwerty), and spiral drawing tests.
                     </p>
                     <div class="project-links">
-                        <a href="https://www.uqac.ca/" class="project-link" target="_blank" rel="noopener noreferrer">UQAC</a>
-                        <a href="https://github.com/Leon-afk1/multimodal-parkinson-detection" class="project-link" target="_blank" rel="noopener noreferrer">View on GitHub</a>
+                        <a href="https://www.uqac.ca/" class="project-link project-link--org" tabindex="-1" aria-hidden="true" target="_blank" rel="noopener noreferrer">UQAC</a>
+                        <a href="https://github.com/Leon-afk1/multimodal-parkinson-detection" class="project-link" target="_blank" rel="noopener noreferrer">View Code</a>
                     </div>
                 </article>
 
@@ -334,7 +296,7 @@
                         way for molecule generation. Used PyTorch Lightning.
                     </p>
                     <div class="project-links">
-                        <a href="https://ksilink.com/" class="project-link" target="_blank" rel="noopener noreferrer">Ksilink</a>
+                        <a href="https://ksilink.com/" class="project-link project-link--org" tabindex="-1" aria-hidden="true" target="_blank" rel="noopener noreferrer">Ksilink</a>
                         <a href="https://arxiv.org/pdf/2408.05196" class="project-link" target="_blank" rel="noopener noreferrer">Publication</a>
                         <a href="#" class="project-link internship-report-link" target="_blank" rel="noopener noreferrer">Internship Report</a>
                     </div>
@@ -357,7 +319,7 @@
                         verification with traceability links.
                     </p>
                     <div class="project-links">
-                        <a href="https://www.uqac.ca/" class="project-link" target="_blank" rel="noopener noreferrer">UQAC</a>
+                        <a href="https://www.uqac.ca/" class="project-link project-link--org" tabindex="-1" aria-hidden="true" target="_blank" rel="noopener noreferrer">UQAC</a>
                         <a href="https://github.com/Leon-afk1/ChatBot_UQAC" class="project-link" target="_blank" rel="noopener noreferrer">View Code</a>
                     </div>
                 </article>
@@ -379,7 +341,7 @@
                         then PyTorch, and finally PyTorch Lightning.
                     </p>
                     <div class="project-links">
-                        <a href="https://ksilink.com/" class="project-link" target="_blank" rel="noopener noreferrer">Ksilink</a>
+                        <a href="https://ksilink.com/" class="project-link project-link--org" tabindex="-1" aria-hidden="true" target="_blank" rel="noopener noreferrer">Ksilink</a>
                         <a href="#" class="project-link internship-report-link" target="_blank" rel="noopener noreferrer">Internship Report</a>
                     </div>
                 </article>
@@ -400,7 +362,7 @@
                     </p>
                     <div class="project-links">
                         <a href="https://github.com/Leon-afk1/poisonous_mushroom" class="project-link" target="_blank" rel="noopener noreferrer">View Code</a>
-                        <a href="https://www.utbm.fr/" class="project-link" target="_blank" rel="noopener noreferrer">UTBM</a>
+                        <a href="https://www.utbm.fr/" class="project-link project-link--org" tabindex="-1" aria-hidden="true" target="_blank" rel="noopener noreferrer">UTBM</a>
                     </div>
                 </article>
 
@@ -421,7 +383,7 @@
                     </p>
                     <div class="project-links">
                         <a href="https://github.com/Leon-afk1/CNN-to-transfertlearning" class="project-link" target="_blank" rel="noopener noreferrer">View Code</a>
-                        <a href="https://www.utbm.fr/" class="project-link" target="_blank" rel="noopener noreferrer">UTBM</a>
+                        <a href="https://www.utbm.fr/" class="project-link project-link--org" tabindex="-1" aria-hidden="true" target="_blank" rel="noopener noreferrer">UTBM</a>
                     </div>
                 </article>
 
@@ -443,7 +405,7 @@
                     </p>
                     <div class="project-links">
                         <a href="#mnist-demo" class="project-link">Try Live Demo</a>
-                        <a href="https://www.utbm.fr/" class="project-link" target="_blank" rel="noopener noreferrer">UTBM</a>
+                        <a href="https://www.utbm.fr/" class="project-link project-link--org" tabindex="-1" aria-hidden="true" target="_blank" rel="noopener noreferrer">UTBM</a>
                     </div>
                 </article>
 
@@ -464,7 +426,7 @@
                     </p>
                     <div class="project-links">
                         <a href="https://github.com/Leon-afk1/Music_type_classification" class="project-link" target="_blank" rel="noopener noreferrer">View Code</a>
-                        <a href="https://www.utbm.fr/" class="project-link" target="_blank" rel="noopener noreferrer">UTBM</a>
+                        <a href="https://www.utbm.fr/" class="project-link project-link--org" tabindex="-1" aria-hidden="true" target="_blank" rel="noopener noreferrer">UTBM</a>
                     </div>
                 </article>
 
@@ -483,56 +445,10 @@
                     </p>
                     <div class="project-links">
                         <a href="https://github.com/Leon-afk1/Tangram_solver" class="project-link" target="_blank" rel="noopener noreferrer">View Code</a>
-                        <a href="https://www.utbm.fr/" class="project-link" target="_blank" rel="noopener noreferrer">UTBM</a>
+                        <a href="https://www.utbm.fr/" class="project-link project-link--org" tabindex="-1" aria-hidden="true" target="_blank" rel="noopener noreferrer">UTBM</a>
                     </div>
                 </article>
 
-            </div>
-        </div>
-    </section>
-
-    <!-- MNIST Interactive Demo Section -->
-    <section id="mnist-demo" class="mnist-section">
-        <div class="container">
-            <h2 class="section-title">Interactive MNIST Demo</h2>
-            <div class="mnist-intro">
-                <p class="mnist-description">
-                    One of my first machine learning projects was building a Convolutional Neural Network 
-                    to recognize handwritten digits from the famous MNIST dataset. This PyTorch-trained CNN 
-                    runs directly in your browser using ONNX.js. Try drawing a digit below and see the model's predictions!
-                </p>
-            </div>
-            
-            <div class="mnist-demo-container">
-                <div class="drawing-section">
-                    <h3>Draw a digit (0-9):</h3>
-                    <canvas id="drawingCanvas" width="280" height="280"></canvas>
-                    <div class="canvas-controls">
-                        <button id="clearCanvas" class="btn btn-secondary">Clear</button>
-                        <button id="predictDigit" class="btn btn-primary">Predict</button>
-                    </div>
-                </div>
-                
-                <div class="preview-section">
-                    <h3>How the model sees it:</h3>
-                    <div class="preview-container">
-                        <canvas id="previewCanvas" width="140" height="140"></canvas>
-                        <div class="preview-info">
-                            <p>28×28 pixels</p>
-                            <p>White digit on black background</p>
-                            <p>Normalized and centered</p>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="prediction-section">
-                    <h3>Model Predictions:</h3>
-                    <div id="predictionTable" class="prediction-table">
-                        <div class="prediction-row">
-                            <span class="digit">Draw a digit to see predictions</span>
-                        </div>
-                    </div>
-                </div>
             </div>
         </div>
     </section>
@@ -546,14 +462,16 @@
                     <div class="timeline-marker"></div>
                     <div class="timeline-content">
                         <div class="tl-header">
-                            <h3>R&amp;D Internship</h3>
-                            <p class="company">Astek Innovation Lab, Paris - La Défense, France</p>
-                            <p class="period">Sept 2026 - Present</p>
+                            <h3>AI &amp; Data Innovation Engineer (End-of-studies internship)</h3>
+                            <p class="company">Astek Group – Innovation Lab, La Défense, France</p>
+                            <p class="period">Sept 2026 – Feb 2027</p>
                         </div>
                         <div class="tl-body">
                             <ul class="achievements">
-                                <li>Final-year internship within the R&amp;D team at the Astek Innovation Lab</li>
-                                <li>This section will be updated with more technical details as the internship progresses</li>
+                                <li>End-of-studies internship in the R&D team at Astek Innovation Lab (confidential project)</li>
+                                <li>Designing a Graph RAG pipeline in Python: a Neo4j knowledge graph provides relevant context to an LLM</li>
+                                <li>Deploying local LLMs with Ollama and evaluating the RAG (RAGAS, LLM-as-a-judge)</li>
+                                <li>Agentic approach to information retrieval in the graph</li>
                             </ul>
                         </div>
                     </div>
@@ -565,7 +483,7 @@
                         <div class="tl-header">
                             <h3>Double Degree, Master's in Artificial Intelligence</h3>
                             <p class="company">Université du Québec à Chicoutimi (UQAC), Canada</p>
-                            <p class="period">2025 – 2026</p>
+                            <p class="period">2025 – 2027 (expected)</p>
                         </div>
                         <div class="tl-body">
                             <ul class="achievements">
@@ -602,7 +520,7 @@
                         <div class="tl-header">
                             <h3>Engineering Degree, Computer Science & Data Science</h3>
                             <p class="company">UTBM (Université de Technologie de Belfort-Montbéliard), France</p>
-                            <p class="period">2021 – 2025</p>
+                            <p class="period">2021 – 2027 (expected)</p>
                         </div>
                         <div class="tl-body">
                             <ul class="achievements">
@@ -657,6 +575,52 @@
         </div>
     </section>
 
+    <!-- MNIST Interactive Demo Section -->
+    <section id="mnist-demo" class="mnist-section">
+        <div class="container">
+            <h2 class="section-title">Interactive MNIST Demo</h2>
+            <div class="mnist-intro">
+                <p class="mnist-description">
+                    One of my first machine learning projects was building a Convolutional Neural Network 
+                    to recognize handwritten digits from the famous MNIST dataset. This PyTorch-trained CNN 
+                    runs directly in your browser using ONNX Runtime Web. Try drawing a digit below and see the model's predictions!
+                </p>
+            </div>
+            
+            <div class="mnist-demo-container">
+                <div class="drawing-section">
+                    <h3>Draw a digit (0-9):</h3>
+                    <canvas id="drawingCanvas" width="280" height="280"></canvas>
+                    <div class="canvas-controls">
+                        <button id="clearCanvas" class="btn btn-secondary">Clear</button>
+                        <button id="predictDigit" class="btn btn-primary">Predict</button>
+                    </div>
+                </div>
+                
+                <div class="preview-section">
+                    <h3>How the model sees it:</h3>
+                    <div class="preview-container">
+                        <canvas id="previewCanvas" width="140" height="140"></canvas>
+                        <div class="preview-info">
+                            <p>28×28 pixels</p>
+                            <p>White digit on black background</p>
+                            <p>Normalized and centered</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="prediction-section">
+                    <h3>Model Predictions:</h3>
+                    <div id="predictionTable" class="prediction-table">
+                        <div class="prediction-row">
+                            <span class="digit">Draw a digit to see predictions</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Contact Section -->
     <section id="contact" class="contact">
         <div class="container">
@@ -668,14 +632,17 @@
                         or innovative AI projects. Let's connect and explore how we can work together!
                     </p>
                     <div class="contact-methods">
-                        <a href="mailto:leon.morales@utbm.fr" class="contact-method">
-                            <span>leon.morales@utbm.fr</span>
+                        <a href="mailto:leon.morales@outlook.fr" class="contact-method">
+                            <span>leon.morales@outlook.fr</span>
                         </a>
                         <a href="https://www.linkedin.com/in/léon-morales" class="contact-method" target="_blank" rel="noopener noreferrer">
                             <span>LinkedIn Profile</span>
                         </a>
                         <a href="https://github.com/Leon-afk1" class="contact-method" target="_blank" rel="noopener noreferrer">
                             <span>GitHub Portfolio</span>
+                        </a>
+                        <a href="CV_Leon_Morales_AI_2027_English.pdf" class="contact-method" id="cv-download-contact" download>
+                            <span>Download CV</span>
                         </a>
                     </div>
                 </div>
@@ -706,6 +673,43 @@
         </div>
     </section>
 
+    <!-- Floating chatbot -->
+            <!-- Chatbot Widget -->
+            <div class="chatbot-widget chatbot-floating minimized" id="chatbot-widget">
+                <div class="chatbot-header">
+                    <h3 data-translate="chatbot.title">Ask me anything!</h3>
+                    <button class="chatbot-minimize" id="chatbot-minimize" aria-label="Minimize chatbot">+</button>
+                </div>
+                <div class="chatbot-messages" id="chatbot-messages">
+                    <div class="chatbot-message bot-message">
+                        <div class="message-avatar">
+                            <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H6l-2 2V4h16v12z"/><circle cx="9" cy="10" r="1.5"/><circle cx="15" cy="10" r="1.5"/></svg>
+                        </div>
+                        <div class="message-content">
+                            <p data-translate="chatbot.welcome">Hi! I'm Léon's AI assistant. Ask me anything about his experience, skills, or projects!<br><br>⏳ Note: The first response may take a bit longer as the servers wake up.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="chatbot-input-container">
+                    <input 
+                        type="text" 
+                        id="chatbot-input" 
+                        class="chatbot-input" 
+                        placeholder="Ask about my experience, skills, projects..."
+                        data-translate-placeholder="chatbot.placeholder"
+                        autocomplete="off"
+                    />
+                    <button id="chatbot-send" class="chatbot-send" aria-label="Send message">
+                        <span>➤</span>
+                    </button>
+                </div>
+                <div class="chatbot-suggestions">
+                    <button class="suggestion-btn" data-question="What are your main skills?" data-translate="chatbot.suggestion1">Skills</button>
+                    <button class="suggestion-btn" data-question="Tell me about your projects" data-translate="chatbot.suggestion2">Projects</button>
+                    <button class="suggestion-btn" data-question="What is your experience?" data-translate="chatbot.suggestion3">Experience</button>
+                </div>
+            </div>
+
     <!-- Footer -->
     <footer class="footer">
         <div class="container">
@@ -713,9 +717,10 @@
         </div>
     </footer>
 
-    <script src="script.js?v=20260226c"></script>
-    <script src="chatbot-config.js?v=20260226c"></script>
-    <script src="chatbot-client.js?v=20260226c"></script>
-    <script src="neural-network.js?v=20260226c"></script>
+    <script src="script.js?v=20261025a"></script>
+    <script src="chatbot-config.js?v=20261025a"></script>
+    <script src="chatbot-client.js?v=20261025a"></script>
+    <script src="neural-network.js?v=20261025a"></script>
+    <script src="enhancements.js?v=20261025a"></script>
 </body>
 </html>

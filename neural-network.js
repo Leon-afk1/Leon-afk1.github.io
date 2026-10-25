@@ -44,6 +44,12 @@ class NeuralNetwork {
         
         this.width = this.canvas.width;
         this.height = this.canvas.height;
+        // Crisp rendering on HiDPI screens
+        this.dpr = Math.min(window.devicePixelRatio || 1, 2);
+        this.canvas.style.width = this.width + 'px';
+        this.canvas.style.height = this.height + 'px';
+        this.canvas.width = Math.round(this.width * this.dpr);
+        this.canvas.height = Math.round(this.height * this.dpr);
         
         // Determine orientation based on screen width
         const orientationChanged = newOrientation !== this.orientation;
@@ -178,8 +184,8 @@ class NeuralNetwork {
     }
     
     updateNodeLabels() {
-        const w = this.canvas.width || 1;
-        const h = this.canvas.height || 1;
+        const w = this.width || 1;
+        const h = this.height || 1;
         this.nodes.forEach(node => {
             if (node.labelElement) {
                 node.labelElement.style.left = `${(node.x / w) * 100}%`;
@@ -277,8 +283,8 @@ class NeuralNetwork {
         // Use percentage-based positioning so the layout is independent of
         // browser reflow timing. The overlay is 100%×100% of the container
         // which will always equal canvas.width × canvas.height after reflow.
-        const w = this.canvas.width || 1;
-        const h = this.canvas.height || 1;
+        const w = this.width || 1;
+        const h = this.height || 1;
         this.nodes.forEach(node => {
             if (node.labelElement) {
                 node.labelElement.style.left = `${(node.x / w) * 100}%`;
@@ -475,6 +481,8 @@ class NeuralNetwork {
     }
     
     animate() {
+        if (this.paused) { this.animationFrame = null; return; }
+        this.ctx.setTransform(this.dpr || 1, 0, 0, this.dpr || 1, 0, 0);
         this.ctx.clearRect(0, 0, this.width, this.height);
         
         this.drawConnections();
@@ -502,6 +510,14 @@ class NeuralNetwork {
             this.resizeCanvas();
         });
         
+        // Pause the animation loop when the canvas is off-screen
+        if ('IntersectionObserver' in window) {
+            new IntersectionObserver((entries) => {
+                this.paused = !entries[0].isIntersecting;
+                if (!this.paused && !this.animationFrame) this.animate();
+            }).observe(this.canvas);
+        }
+
         // Close panel on Escape
         document.addEventListener('keydown', (e) => {
             if (e.key === 'Escape') {

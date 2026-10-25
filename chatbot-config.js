@@ -14,15 +14,8 @@ const CHATBOT_CONFIG = {
     
     // Auto-detect environment
     getApiUrl: function() {
-        // Force production URL for testing
-        // Comment out the next line to re-enable auto-detection
-        return this.API_URLS.PRODUCTION;
-        
-        const isLocal = window.location.hostname === 'localhost' || 
-                       window.location.hostname === '127.0.0.1' ||
-                       window.location.protocol === 'file:';
-        
-        return isLocal ? this.API_URLS.LOCAL : this.API_URLS.PRODUCTION;
+        const isLocal = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+        return isLocal && window.location.search.includes('localapi') ? this.API_URLS.LOCAL : this.API_URLS.PRODUCTION;
     }
 };
 
