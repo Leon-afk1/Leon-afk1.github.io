@@ -1,0 +1,8 @@
+# Copy to terraform.tfvars (git-ignored) for local runs.
+# In CI the same values come from GitHub repository variables (TF_VAR_*).
+# The state bucket is not a variable: terraform init -backend-config="bucket=<state bucket>"
+project_id         = "my-portfolio-project"
+billing_account_id = "XXXXXX-XXXXXX-XXXXXX"
+alert_email        = "me@example.com"
+budget_amount      = 5
+budget_currency    = "EUR"

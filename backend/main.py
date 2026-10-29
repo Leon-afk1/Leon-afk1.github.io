@@ -1,12 +1,15 @@
 # main.py - Backend API for Portfolio Chatbot with Graph RAG
-from fastapi import FastAPI, HTTPException
+from fastapi import FastAPI, HTTPException, Request
 from fastapi.middleware.cors import CORSMiddleware
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 from contextlib import asynccontextmanager
 import os
 from dotenv import load_dotenv
-import google.generativeai as genai
+from google import genai
 from neo4j import GraphDatabase
+from slowapi import Limiter, _rate_limit_exceeded_handler
+from slowapi.errors import RateLimitExceeded
+from slowapi.util import get_remote_address
 from typing import List, Dict, Optional
 import json
 from collections import defaultdict
@@ -18,6 +21,10 @@ NEO4J_URI = os.getenv("NEO4J_URI", "neo4j://localhost:7687")
 NEO4J_USER = os.getenv("NEO4J_USER", "neo4j")
 NEO4J_PASSWORD = os.getenv("NEO4J_PASSWORD")
 GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
+# Comma-separated list of origins allowed to call the API (localhost is always allowed)
+ALLOWED_ORIGINS = [o.strip() for o in os.getenv("ALLOWED_ORIGINS", "https://leon-afk1.github.io").split(",") if o.strip()]
+# Per-IP limit on /chat, each request costs several Gemini calls
+CHAT_RATE_LIMIT = os.getenv("CHAT_RATE_LIMIT", "10/minute;100/day")
 
 # Custom Exception for all models exhausted
 class AllModelsExhaustedException(Exception):
@@ -26,7 +33,8 @@ class AllModelsExhaustedException(Exception):
 
 # Model Manager for automatic rotation
 class ModelManager:
-    def __init__(self):
+    def __init__(self, client: genai.Client):
+        self.client = client
         self.model_names = [
             'gemini-3.1-flash-lite',
             'gemini-3.5-flash-lite',
@@ -38,29 +46,7 @@ class ModelManager:
         ]
         self.current_index = 0
         self.exhausted_models = set()
-        self.current_model = None
-        
-    def initialize(self):
-        """Initialize the first available model"""
-        for i, model_name in enumerate(self.model_names):
-            try:
-                print(f"Initializing model: {model_name}")
-                test_model = genai.GenerativeModel(model_name)
-                # Test with a simple query
-                test_response = test_model.generate_content("Say 'OK'")
-                if test_response.text:
-                    self.current_model = test_model
-                    self.current_index = i
-                    print(f"✓ Successfully initialized with model: {model_name}")
-                    return True
-            except Exception as e:
-                print(f"✗ Model {model_name} failed during initialization: {e}")
-                self.exhausted_models.add(model_name)
-                continue
-        
-        print("✗ WARNING: All models failed during initialization")
-        return False
-    
+
     def _is_quota_error(self, error: Exception) -> bool:
         """Check if the error is related to quota/rate limiting"""
         error_str = str(error).lower()
@@ -70,67 +56,34 @@ class ModelManager:
             'resource_exhausted'
         ]
         return any(keyword in error_str for keyword in quota_keywords)
-    
-    def generate_content(self, prompt: str, retry: bool = True):
-        """Generate content with automatic model rotation on quota errors"""
-        if len(self.exhausted_models) >= len(self.model_names):
-            raise AllModelsExhaustedException("All available models have reached their quota limit")
-        
-        try:
-            if self.current_model is None:
-                self.initialize()
-            
-            response = self.current_model.generate_content(prompt)
-            return response
-        
-        except Exception as e:
-            current_model_name = self.model_names[self.current_index]
-            
-            # Check if it's a quota error
-            if self._is_quota_error(e):
-                print(f"Model {current_model_name} reached quota limit")
-                self.exhausted_models.add(current_model_name)
-                
-                # Try next model if retry is enabled
-                if retry:
-                    print(f"Attempting to switch to next available model...")
-                    if self._switch_to_next_model():
-                        return self.generate_content(prompt, retry=False)
-                    else:
-                        raise AllModelsExhaustedException("All available models have reached their quota limit")
-            
-            # Re-raise non-quota errors
-            print(f"Error with model {current_model_name}: {e}")
-            raise
-    
-    def _switch_to_next_model(self) -> bool:
-        """Try to switch to the next available model"""
-        attempts = 0
-        while attempts < len(self.model_names):
-            self.current_index = (self.current_index + 1) % len(self.model_names)
-            next_model_name = self.model_names[self.current_index]
-            
-            # Skip already exhausted models
-            if next_model_name in self.exhausted_models:
-                attempts += 1
+
+    def _is_unavailable_error(self, error: Exception) -> bool:
+        """Check if the model name does not exist or is not served for this key"""
+        error_str = str(error).lower()
+        return any(keyword in error_str for keyword in ['404', 'not_found', 'not found', 'not supported'])
+
+    def generate_content(self, prompt: str):
+        """Generate content with automatic model rotation on quota errors.
+        Models are tried lazily (no test call at startup) to keep cold starts fast and save quota."""
+        while len(self.exhausted_models) < len(self.model_names):
+            model_name = self.model_names[self.current_index]
+            if model_name in self.exhausted_models:
+                self.current_index = (self.current_index + 1) % len(self.model_names)
                 continue
-            
+
             try:
-                print(f"Switching to model: {next_model_name}")
-                self.current_model = genai.GenerativeModel(next_model_name)
-                # Test the model
-                test_response = self.current_model.generate_content("OK")
-                if test_response.text:
-                    print(f"✓ Successfully switched to model: {next_model_name}")
-                    return True
+                return self.client.models.generate_content(model=model_name, contents=prompt)
             except Exception as e:
-                print(f"✗ Failed to switch to {next_model_name}: {e}")
-                if self._is_quota_error(e):
-                    self.exhausted_models.add(next_model_name)
-                attempts += 1
-                continue
-        
-        return False
+                if self._is_quota_error(e) or self._is_unavailable_error(e):
+                    print(f"Model {model_name} unavailable, switching to next model: {e}")
+                    self.exhausted_models.add(model_name)
+                    continue
+
+                # Re-raise other errors
+                print(f"Error with model {model_name}: {e}")
+                raise
+
+        raise AllModelsExhaustedException("All available models have reached their quota limit")
     
     def get_current_model_name(self) -> str:
         """Get the name of the currently active model"""
@@ -148,9 +101,11 @@ class Neo4jConnection:
             self._driver.close()
 
     def run_query(self, query, parameters=None):
+        # Read-only transaction: queries are generated by the LLM from user input
         with self._driver.session() as session:
-            result = session.run(query, parameters)
-            return [record.data() for record in result]
+            return session.execute_read(
+                lambda tx: [record.data() for record in tx.run(query, parameters)]
+            )
 
 # Global variables
 neo4j_conn = None
@@ -164,13 +119,8 @@ async def lifespan(app: FastAPI):
     print("===== Application Startup =====")
     
     # Configure Gemini with ModelManager
-    genai.configure(api_key=GEMINI_API_KEY)
-    model_manager = ModelManager()
-    
-    if model_manager.initialize():
-        print(f"✓ Gemini configured successfully with model: {model_manager.get_current_model_name()}")
-    else:
-        print("✗ WARNING: Could not initialize any Gemini model")
+    model_manager = ModelManager(genai.Client(api_key=GEMINI_API_KEY))
+    print(f"✓ Gemini configured, first model: {model_manager.get_current_model_name()}")
     
     # Initialize Neo4j
     try:
@@ -194,19 +144,24 @@ app = FastAPI(
     lifespan=lifespan
 )
 
+# Rate limiting (per client IP, in memory per instance)
+limiter = Limiter(key_func=get_remote_address)
+app.state.limiter = limiter
+app.add_exception_handler(RateLimitExceeded, _rate_limit_exceeded_handler)
+
 # Add CORS middleware
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
-    allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
+    allow_origins=ALLOWED_ORIGINS,
+    allow_origin_regex=r"https?://(localhost|127\.0\.0\.1)(:\d+)?",
+    allow_methods=["GET", "POST"],
+    allow_headers=["Content-Type"],
 )
 
 # Models
 class ChatQuery(BaseModel):
-    query: str
-    session_id: Optional[str] = "default"
+    query: str = Field(..., min_length=1, max_length=1000)
+    session_id: Optional[str] = Field("default", max_length=100)
 
 class ChatResponse(BaseModel):
     response: str
@@ -371,11 +326,11 @@ Generate ONLY the Cypher query. No markdown, no explanations."""
         print(f"Error generating Cypher: {e}")
         return 'MATCH (p:Person {name: "Léon Morales"}) RETURN p'
 
-def execute_cypher_query(cypher_query: str) -> tuple[str, bool, str]:
+def execute_cypher_query(cypher_query: str, parameters: Optional[dict] = None) -> tuple[str, bool, str]:
     if not neo4j_conn:
         return "Neo4j connection not available.", False, "No connection"
     try:
-        results = neo4j_conn.run_query(cypher_query)
+        results = neo4j_conn.run_query(cypher_query, parameters)
         if not results:
             return "No information found in the database.", True, ""
         return json.dumps(results, indent=2, ensure_ascii=False), True, ""
@@ -461,7 +416,7 @@ Response:"""
 
     try:
         response = model_manager.generate_content(prompt)
-        return response.text if response.parts else "I cannot generate a response right now."
+        return response.text or "I cannot generate a response right now."
     except AllModelsExhaustedException:
         raise  # Propagate this exception to be handled at the endpoint level
     except Exception as e:
@@ -470,8 +425,10 @@ Response:"""
 
 # --- Main Endpoint ---
 
+# Sync endpoint: FastAPI runs it in a thread pool, so blocking Gemini/Neo4j calls don't stall other requests
 @app.post("/chat", response_model=ChatResponse)
-async def handle_chat(chat_query: ChatQuery):
+@limiter.limit(CHAT_RATE_LIMIT)
+def handle_chat(request: Request, chat_query: ChatQuery):
     user_query = chat_query.query
     session_id = chat_query.session_id
     
@@ -500,8 +457,8 @@ async def handle_chat(chat_query: ChatQuery):
             # Simplified logic: just ask Gemini to define it briefly AND mention if Léon knows it based on DB check
             tech = intent['technology']
             # Quick check if Léon has the skill
-            check_cypher = f'MATCH (p:Person {{name: "Léon Morales"}})-[:HAS_SKILL]->(s:Skill) WHERE toLower(s.name) CONTAINS toLower("{tech}") RETURN s'
-            db_res, _, _ = execute_cypher_query(check_cypher)
+            check_cypher = 'MATCH (p:Person {name: "Léon Morales"})-[:HAS_SKILL]->(s:Skill) WHERE toLower(s.name) CONTAINS toLower($tech) RETURN s'
+            db_res, _, _ = execute_cypher_query(check_cypher, {"tech": tech})
             has_skill = "No information" not in db_res
             
             skill_status = "confirm Léon has this skill" if has_skill else "state you don't have details on Léon's use of this"

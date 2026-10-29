@@ -1,27 +1,26 @@
 # Use an official Python runtime as a parent image
-FROM python:3.10-slim
+FROM python:3.12-slim
+
+ENV PYTHONDONTWRITEBYTECODE=1 \
+    PYTHONUNBUFFERED=1
 
 # Set the working directory in the container
 WORKDIR /app
 
-# Copy the requirements file into the container at /app
-COPY requirements.txt .
-
-# Install any needed packages specified in requirements.txt
+# Install dependencies first to benefit from layer caching
 # Use --no-cache-dir to reduce image size
+COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
 # Copy the rest of the application code into the container at /app
 COPY . .
 
-# Make port 8080 available to the world outside this container
-# Fly.io typically uses 8080 internally, but check their docs
+# Run as an unprivileged user
+RUN useradd --create-home --uid 1000 app
+USER app
+
+# Cloud Run injects PORT (8080 by default)
 EXPOSE 8080
 
-# Define environment variable if needed (though Fly.io uses secrets)
-# ENV NAME World
-
-# Run uvicorn when the container launches
-# Use 0.0.0.0 to listen on all available interfaces within the container
-# Use port 8080 as specified by EXPOSE
-CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8080"]
+# --proxy-headers makes the client IP (used by the rate limiter) come from X-Forwarded-For set by Cloud Run
+CMD ["sh", "-c", "exec uvicorn main:app --host 0.0.0.0 --port ${PORT:-8080} --proxy-headers --forwarded-allow-ips='*'"]
