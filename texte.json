@@ -244,7 +244,16 @@
         "description": "The chatbot on this site, designed and run as a production service. A FastAPI API turns each question into a Cypher query over a Neo4j knowledge graph, then Gemini writes the answer, switching to another model when one runs out of quota. It runs on Google Cloud Run, with the whole infrastructure described in Terraform and deployed by GitHub Actions without any stored key (Workload Identity Federation). Because an LLM writes the queries from visitor input, they run in read-only transactions; secrets stay in Secret Manager, and per-IP rate limits, a strict CORS policy, scale-to-zero and budget alerts keep the public API safe and its cost under control.",
         "link1Text": "View Code",
         "link2Text": "Infrastructure"
-      }
+      },
+      "filters": {
+        "all": "All",
+        "llm": "LLM & RAG",
+        "vision": "Vision",
+        "research": "Research",
+        "ml": "ML & Data"
+      },
+      "filtersLabel": "Filter projects",
+      "tagsLabel": "Technologies"
     },
     "mnistDemo": {
       "title": "Interactive MNIST Demo",
@@ -589,7 +598,16 @@
         "description": "Le chatbot de ce site, conçu et exploité comme un service en production. Une API FastAPI traduit chaque question en requête Cypher sur un graphe de connaissances Neo4j, puis Gemini rédige la réponse, en basculant sur un autre modèle quand l'un d'eux atteint son quota. Elle tourne sur Google Cloud Run, avec toute l'infrastructure décrite en Terraform et déployée par GitHub Actions sans aucune clé stockée (Workload Identity Federation). Comme les requêtes sont écrites par un LLM à partir des questions des visiteurs, elles s'exécutent en lecture seule ; les secrets restent dans Secret Manager, et une limite de requêtes par IP, une politique CORS stricte, la mise à l'échelle à zéro et des alertes de budget protègent l'API publique et maîtrisent son coût.",
         "link1Text": "Voir le code",
         "link2Text": "Infrastructure"
-      }
+      },
+      "filters": {
+        "all": "Tous",
+        "llm": "LLM & RAG",
+        "vision": "Vision",
+        "research": "Recherche",
+        "ml": "ML & Data"
+      },
+      "filtersLabel": "Filtrer les projets",
+      "tagsLabel": "Technologies"
     },
     "mnistDemo": {
       "title": "Démo Interactive MNIST",

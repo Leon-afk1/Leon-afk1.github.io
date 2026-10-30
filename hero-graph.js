@@ -96,7 +96,7 @@
         var title = nodeLabel(node);
         var cards = document.querySelectorAll('.project-card');
         for (var i = 0; i < cards.length; i++) {
-            var h = $('h3', cards[i]);
+            var h = $('.project-title', cards[i]);
             if (h && h.textContent.trim() === title) {
                 cards[i].scrollIntoView({ behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block: 'center' });
                 return;

@@ -18,13 +18,11 @@
 
     var CV = { en: 'CV_Leon_Morales_AI_2027_English.pdf', fr: 'CV_Leon_Morales_IA_2027_Francais.pdf' };
     var T = {
-        en: { cv: 'Download CV', avail: 'Available from April 2027 · Open to relocation worldwide', skip: 'Skip to content', filtersLabel: 'Filter projects', send: 'Send message',
+        en: { cv: 'Download CV', avail: 'Available from April 2027 · Open to relocation worldwide', skip: 'Skip to content', send: 'Send message',
               langLabel: 'Switch to French', current: 'Current', copy: 'Copy', copied: 'Copied!', menu: 'Menu',
-              filters: { all: 'All', llm: 'LLM & RAG', vision: 'Vision', research: 'Research', ml: 'ML & Data' },
               groups: ['Generative AI & LLMs', 'Machine Learning & Data', 'Languages & Tools'] },
-        fr: { cv: 'Télécharger mon CV', avail: "Disponible à partir d'avril 2027 · Mobilité internationale", skip: 'Aller au contenu', filtersLabel: 'Filtrer les projets', send: 'Envoyer le message',
+        fr: { cv: 'Télécharger mon CV', avail: "Disponible à partir d'avril 2027 · Mobilité internationale", skip: 'Aller au contenu', send: 'Envoyer le message',
               langLabel: 'Passer en anglais', current: 'En cours', copy: 'Copier', copied: 'Copié !', menu: 'Menu',
-              filters: { all: 'Tous', llm: 'LLM & RAG', vision: 'Vision', research: 'Recherche', ml: 'ML & Data' },
               groups: ['IA générative & LLM', 'Machine Learning & Data', 'Langages & outils'] }
     };
     var SKILLS = [
@@ -32,10 +30,6 @@
         ['PyTorch', 'PyTorch Lightning', 'TensorFlow / Keras', 'Scikit-learn', 'Pandas', 'NumPy', 'NLP', 'Computer Vision (CNN)', 'Contrastive learning'],
         ['Python', 'SQL (PostgreSQL)', 'Cypher', 'C / C++', 'Java', 'Git / GitHub', 'Docker', 'Neo4j', 'FastAPI', 'Streamlit', 'Google Cloud Run', 'Terraform', 'GitHub Actions', 'Weights & Biases']
     ];
-    var CATS = [['Graph RAG Assistant', 'llm'], ['Human Activity', 'research'], ['LLM-based Chatbot', 'llm'], ['Intelligent RAG', 'llm'], ['AgroScan', 'vision'],
-        ["Parkinson", 'ml'], ['Drug Analysis', 'research'], ['UQAC Handbook', 'llm'], ['Cell Classification', 'vision'],
-        ['Mushroom', 'ml'], ['Poultry', 'vision'], ['MNIST', 'vision'], ['Music Genre', 'ml'], ['Tangram', 'ml']];
-
     function lang() {
         var l = window.currentLanguage;
         try { l = l || localStorage.getItem('language'); } catch (e) {}
@@ -55,42 +49,6 @@
             wrap.appendChild(g);
         });
         host.insertBefore(wrap, net);
-    }
-
-    var activeFilter = 'all';
-    function buildProjects() {
-        var cards = $$('.project-card');
-        cards.forEach(function (card) {
-            var title = ($('h3', card) || {}).textContent || '';
-            var m = CATS.filter(function (c) { return title.indexOf(c[0]) !== -1; })[0];
-            card.dataset.cat = m ? m[1] : 'ml';
-            var tags = $$('.project-tags .tag', card);
-            if (tags.length > 4) {
-                tags.slice(4).forEach(function (t) { t.hidden = true; });
-                var more = document.createElement('span'); more.className = 'tag tag-more'; more.textContent = '+' + (tags.length - 4);
-                more.title = tags.slice(4).map(function (t) { return t.textContent; }).join(', ');
-                tags[0].parentNode.appendChild(more);
-            }
-        });
-        var anchor = $('.featured-projects'); if (!anchor) return;
-        var bar = document.createElement('div'); bar.className = 'project-filters'; bar.setAttribute('role', 'group'); bar.setAttribute('aria-label', 'Filter projects');
-        ['all', 'llm', 'vision', 'research', 'ml'].forEach(function (k) {
-            var b = document.createElement('button'); b.type = 'button'; b.className = 'filter-btn'; b.dataset.filter = k;
-            b.setAttribute('aria-pressed', k === 'all' ? 'true' : 'false');
-            b.addEventListener('click', function () { activeFilter = k; applyFilter(); });
-            bar.appendChild(b);
-        });
-        anchor.parentNode.insertBefore(bar, anchor);
-    }
-    function applyFilter() {
-        $$('.filter-btn').forEach(function (b) { b.setAttribute('aria-pressed', String(b.dataset.filter === activeFilter)); });
-        $$('.project-card').forEach(function (c) { c.hidden = activeFilter !== 'all' && c.dataset.cat !== activeFilter; });
-        var fl = $('.fp-list'), gr = $('.projects-grid');
-        var fv = fl && $$('.project-card', fl).some(function (c) { return !c.hidden; });
-        var gv = gr && $$('.project-card', gr).some(function (c) { return !c.hidden; });
-        var fh = $('.featured-projects .fp-header'), mh = $('.more-projects-header');
-        if (fl) fl.hidden = !fv; if (fh) fh.hidden = !fv;
-        if (gr) gr.hidden = !gv; if (mh) mh.hidden = !gv;
     }
 
     function buildMisc() {
@@ -121,8 +79,6 @@
         var sk = $('.skip-link'); if (sk) sk.textContent = t.skip;
         var lt = $('#language-toggle'); if (lt) lt.setAttribute('aria-label', t.langLabel);
         var nt = $('.nav-toggle'); if (nt) nt.setAttribute('aria-label', t.menu);
-        $$('.filter-btn').forEach(function (b) { b.textContent = t.filters[b.dataset.filter]; });
-        var fb = $('.project-filters'); if (fb) fb.setAttribute('aria-label', t.filtersLabel);
         var cs = $('#chatbot-send'); if (cs) cs.setAttribute('aria-label', t.send);
         $$('.skills-group h3').forEach(function (h) { h.textContent = t.groups[+h.dataset.group]; });
         var tb = $('.tl-badge'); if (tb) tb.textContent = t.current;
@@ -137,7 +93,7 @@
     }
 
     document.addEventListener('DOMContentLoaded', function () {
-        buildSkills(); buildProjects(); buildMisc(); apply();
+        buildSkills(); buildMisc(); apply();
         document.addEventListener('languageChanged', function () { setTimeout(apply, 0); });
         window.addEventListener('load', function () { setTimeout(wakeChatbot, 1200); });
     });

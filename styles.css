@@ -1285,186 +1285,64 @@ section:nth-child(even) {
 }
 
 /* Projects Section */
-.projects {
-    background: var(--bg-secondary);
-}
 
-.projects-grid {
-    display: grid;
-    grid-template-columns: repeat(6, 1fr);
-    gap: 2rem;
-    max-width: 1200px;
-    margin: 0 auto;
-}
+
+
 
 /* Asymmetric layout: two halves | wide+narrow | three-equal | two-halves | full-width */
-.projects-grid .project-card:nth-child(1)  { grid-column: span 3; }
-.projects-grid .project-card:nth-child(2)  { grid-column: span 3; }
-.projects-grid .project-card:nth-child(3)  { grid-column: span 4; }
-.projects-grid .project-card:nth-child(4)  { grid-column: span 2; }
-.projects-grid .project-card:nth-child(5)  { grid-column: span 2; }
-.projects-grid .project-card:nth-child(6)  { grid-column: span 2; }
-.projects-grid .project-card:nth-child(7)  { grid-column: span 2; }
-.projects-grid .project-card:nth-child(8)  { grid-column: span 3; }
-.projects-grid .project-card:nth-child(9)  { grid-column: span 3; }
-.projects-grid .project-card:nth-child(10) { grid-column: span 6; }
+
+
+
+
+
+
+
+
+
+
 
 /* Last card — full-width banner layout */
-.projects-grid .project-card:nth-child(10) {
-    display: grid;
-    grid-template-columns: auto 1fr auto;
-    grid-template-rows: auto auto;
-    align-items: center;
-    column-gap: 2.5rem;
-    padding: 2.25rem 2.5rem;
-}
 
-.projects-grid .project-card:nth-child(10) .project-header {
-    grid-column: 1;
-    grid-row: 1 / 3;
-    margin-bottom: 0;
-    display: flex;
-    flex-direction: column;
-    gap: 0.75rem;
-    min-width: 260px;
-}
 
-.projects-grid .project-card:nth-child(10) .project-header h3 {
-    margin-bottom: 0;
-    font-size: 1.35rem;
-}
 
-.projects-grid .project-card:nth-child(10) .project-header .project-tags {
-    margin-bottom: 0;
-}
 
-.projects-grid .project-card:nth-child(10) .project-description {
-    grid-column: 2;
-    grid-row: 1 / 3;
-    margin-bottom: 0;
-    font-size: 0.9375rem;
-    line-height: 1.7;
-    border-left: 1px solid var(--border-color);
-    padding-left: 2.5rem;
-}
 
-.projects-grid .project-card:nth-child(10) .project-links {
-    grid-column: 3;
-    grid-row: 1 / 3;
-    display: flex;
-    flex-direction: column;
-    gap: 0.75rem;
-    align-items: flex-end;
-    margin-top: 0;
-}
 
-.project-card {
-    background: var(--card-bg);
-    border-radius: 12px;
-    padding: 1.75rem;
-    box-shadow: 0 1px 3px var(--shadow-light);
-    transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1),
-                box-shadow 0.35s cubic-bezier(0.4, 0, 0.2, 1),
-                border-color 0.25s ease;
-    border: 1px solid var(--border-color);
-    position: relative;
-    overflow: hidden;
-}
 
-.project-card::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    border-radius: 12px;
-    background: radial-gradient(
-        circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
-        rgba(242, 181, 68, 0.1) 0%,
-        transparent 55%
-    );
-    opacity: 0;
-    transition: opacity 0.4s ease;
-    pointer-events: none;
-    z-index: 0;
-}
 
-.project-card:hover::before {
-    opacity: 1;
-}
 
-.project-card:hover {
-    box-shadow: 0 8px 32px var(--shadow-medium), var(--shadow-glow);
-    border-color: var(--border-hover);
-    transform: translateY(-3px);
-}
 
-.project-card > * {
-    position: relative;
-    z-index: 1;
-}
 
-.project-header {
-    margin-bottom: 1rem;
-}
 
-.project-header h3 {
-    margin-bottom: 1rem;
-    color: var(--text-primary);
-}
 
-.project-tags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.5rem;
-    margin-bottom: 1rem;
-}
 
-.tag {
-    background: var(--bg-secondary);
-    color: var(--accent-primary);
-    padding: 0.25rem 0.75rem;
-    border-radius: 4px;
-    font-size: 0.8125rem;
-    font-weight: 500;
-    border: 1px solid var(--border-color);
-}
 
-.project-description {
-    color: var(--text-secondary);
-    margin-bottom: 1.5rem;
-    line-height: 1.6;
-}
 
-.project-links {
-    display: flex;
-    gap: 1rem;
-}
 
-.project-link {
-    color: var(--accent-primary);
-    text-decoration: none;
-    font-weight: 500;
-    position: relative;
-    transition: color 0.2s ease;
-}
 
-.project-link:hover {
-    color: var(--accent-secondary);
-}
 
-.project-link::after {
-    content: '';
-    position: absolute;
-    bottom: -2px;
-    left: 0;
-    width: 0;
-    height: 1px;
-    background: var(--accent-primary);
-    transition: width 0.2s ease;
-}
 
-.project-link:hover::after {
-    width: 100%;
-}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 /* MNIST Demo Section */
 .mnist-section {
@@ -1931,113 +1809,32 @@ section:nth-child(even) {
 /* ================================================================
    FEATURED PROJECTS (Lusion-style)
    ================================================================ */
-.featured-projects {
-    margin-bottom: 5rem;
-}
 
-.fp-header {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    margin-bottom: 2.5rem;
-}
 
-.fp-label {
-    font-size: 0.72rem;
-    font-weight: 600;
-    letter-spacing: 0.18em;
-    color: var(--text-muted);
-    text-transform: uppercase;
-}
 
-.fp-divider {
-    flex: 1;
-    height: 1px;
-    background: var(--border-color);
-}
 
-.fp-list {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1.5rem;
-}
+
+
+
+
+
 
 /* Featured card overrides (inherit from .project-card) */
-.featured-card {
-    min-height: 340px;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-    padding: 2rem;
-    border-radius: 16px;
-    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1),
-                box-shadow 0.4s ease,
-                border-color 0.3s ease;
-}
 
-.fp-index {
-    position: absolute;
-    top: 1.25rem;
-    right: 1.75rem;
-    font-size: 5.5rem;
-    font-weight: 800;
-    font-family: 'Schibsted Grotesk', sans-serif;
-    line-height: 1;
-    letter-spacing: -0.05em;
-    color: rgba(var(--feat-rgb, 94, 106, 210), 0.09);
-    pointer-events: none;
-    z-index: 1;
-    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1),
-                color 0.3s ease;
-    user-select: none;
-}
 
-.featured-card:hover .fp-index {
-    color: rgba(var(--feat-rgb, 94, 106, 210), 0.18);
-    transform: scale(1.08) translateY(-4px);
-}
+
+
+
 
 /* Grid card background index — mirrors fp-index for More Projects */
-.pg-index {
-    position: absolute;
-    bottom: 1rem;
-    right: 1.5rem;
-    font-size: 5rem;
-    font-weight: 800;
-    font-family: 'Schibsted Grotesk', sans-serif;
-    line-height: 1;
-    letter-spacing: -0.05em;
-    color: rgba(242, 181, 68, 0.07);
-    pointer-events: none;
-    z-index: 1;
-    transition: color 0.3s ease, transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    user-select: none;
-}
 
-.project-card:hover .pg-index {
-    color: rgba(242, 181, 68, 0.15);
-    transform: scale(1.06) translateY(-3px);
-}
+
+
 
 /* Projects grid sub-label */
-.projects-sub-label {
-    font-size: 0.72rem;
-    font-weight: 600;
-    letter-spacing: 0.18em;
-    color: var(--text-muted);
-    text-transform: uppercase;
-    margin-bottom: 2rem;
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-}
 
-.projects-sub-label::after {
-    content: '';
-    flex: 1;
-    height: 1px;
-    background: var(--border-color);
-}
+
+
 
 /* ================================================================
    BUTTON IMPROVEMENTS
@@ -2074,16 +1871,7 @@ section:nth-child(even) {
 /* ================================================================
    TAG IMPROVEMENTS
    ================================================================ */
-.tag {
-    background: rgba(242, 181, 68, 0.08);
-    color: var(--accent-bright);
-    padding: 0.22rem 0.65rem;
-    border-radius: 5px;
-    font-size: 0.8rem;
-    font-weight: 500;
-    border: 1px solid rgba(242, 181, 68, 0.2);
-    letter-spacing: 0.01em;
-}
+
 
 /* ================================================================
    SECTION DIVIDERS & ALTERNATING BG
@@ -2243,59 +2031,14 @@ section:nth-child(even) {
 /* ================================================================
    RESPONSIVE — projects grid (tablet)
    ================================================================ */
-@media (max-width: 1024px) {
-    .projects-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
-    .projects-grid .project-card:nth-child(n) {
-        grid-column: span 1;
-    }
-    /* Reset last card banner layout at tablet */
-    .projects-grid .project-card:nth-child(8) {
-        display: block;
-        padding: 1.75rem;
-    }
-    .projects-grid .project-card:nth-child(8) .project-header {
-        min-width: unset;
-        flex-direction: row;
-        flex-wrap: wrap;
-        margin-bottom: 1rem;
-    }
-    .projects-grid .project-card:nth-child(8) .project-description {
-        border-left: none;
-        padding-left: 0;
-        margin-bottom: 1.5rem;
-    }
-    .projects-grid .project-card:nth-child(8) .project-links {
-        flex-direction: row;
-        align-items: flex-start;
-    }
-}
+
 
 /* ================================================================
    RESPONSIVE — featured projects
    ================================================================ */
-@media (max-width: 1024px) {
-    .fp-list {
-        grid-template-columns: 1fr 1fr;
-    }
-    .featured-card:last-child {
-        grid-column: 1 / -1;
-        min-height: 260px;
-    }
-}
 
-@media (max-width: 768px) {
-    .fp-list {
-        grid-template-columns: 1fr;
-    }
-    .featured-card {
-        min-height: 280px;
-    }
-    .fp-index {
-        font-size: 4rem;
-    }
-}
+
+
 
 .form-group textarea {
     resize: vertical;
@@ -2464,13 +2207,9 @@ section:nth-child(even) {
         grid-template-columns: 1fr;
     }
 
-    .projects-grid {
-        grid-template-columns: 1fr;
-    }
+    
 
-    .projects-grid .project-card:nth-child(n) {
-        grid-column: span 1;
-    }
+    
 
     .contact-content {
         grid-template-columns: 1fr;
@@ -2544,9 +2283,7 @@ section:nth-child(even) {
         flex-direction: column;
     }
 
-    .project-links {
-        flex-direction: column;
-    }
+    
 
     .contact-methods {
         gap: 0.5rem;

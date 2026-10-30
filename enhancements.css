@@ -25,15 +25,6 @@ button.nav-toggle{background:none;border:0;padding:0;color:inherit;font:inherit}
 .skills-group ul{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:.45rem}
 .skills-group li{padding:.25rem .65rem;border-radius:999px;border:1px solid var(--border-color);background:rgba(255,255,255,.04);color:var(--text-primary);font-size:.85rem}
 
-/* Project filters, tags, org meta */
-.project-filters{display:flex;flex-wrap:wrap;gap:.5rem;margin:0 0 2rem}
-.filter-btn{padding:.4rem .95rem;border-radius:999px;border:1px solid var(--border-color);background:var(--card-bg);color:var(--text-secondary);font:inherit;font-size:.85rem;cursor:pointer;transition:all .2s}
-.filter-btn:hover{border-color:var(--border-hover);color:var(--text-primary)}
-.filter-btn[aria-pressed="true"]{background:var(--gradient-primary);border-color:transparent;color:#fff}
-.project-card[hidden],.featured-projects[hidden],.more-projects-header[hidden],.projects-grid[hidden]{display:none!important}
-.tag-more{opacity:.7}
-.project-link--org{border:0!important;background:none!important;padding-left:0!important;color:var(--text-muted)!important;pointer-events:none;text-decoration:none!important;box-shadow:none!important}
-.project-link--org::after,.project-link--org::before{content:none!important}
 
 /* Timeline badge, contact */
 .tl-badge{display:inline-block;margin-left:.6rem;padding:.15rem .6rem;border-radius:999px;font-size:.7rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:#34d399;border:1px solid rgba(52,211,153,.4);vertical-align:middle}
