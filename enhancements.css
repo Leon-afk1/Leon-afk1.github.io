@@ -1,10 +1,10 @@
-/* Enhancements: a11y, floating chatbot, hero, skills chips, project filters */
+/* Enhancements: a11y, floating chatbot, hero */
 .skip-link{position:absolute;left:-999px;top:8px;z-index:3000;background:var(--accent-primary);color:#fff;padding:.6rem 1rem;border-radius:8px}
 .skip-link:focus{left:8px}
 a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible,[tabindex]:focus-visible{outline:2px solid var(--accent-bright);outline-offset:3px;border-radius:6px}
 button.nav-toggle{background:none;border:0;padding:0;color:inherit;font:inherit}
 .language-code{width:auto;height:auto;font-size:.8rem;font-weight:600;letter-spacing:.06em;color:var(--text-primary)}
-@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important;scroll-behavior:auto!important}#cursor-spotlight{display:none}}
+@media (prefers-reduced-motion:reduce) {*,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important;scroll-behavior:auto!important}#cursor-spotlight{display:none}}
 
 /* Hero: single column, calmer */
 .hero .container{grid-template-columns:1fr}
@@ -18,15 +18,3 @@ button.nav-toggle{background:none;border:0;padding:0;color:inherit;font:inherit}
 .chatbot-widget.chatbot-floating.minimized{width:auto;min-width:220px;height:56px;border-radius:999px}
 .chatbot-floating.minimized .chatbot-header{padding:.8rem 1.25rem;gap:1rem}
 
-/* Skills chips */
-.skills-chips{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1rem;margin:0 0 2.5rem}
-.skills-group{padding:1.1rem 1.25rem;border:1px solid var(--border-color);border-radius:12px;background:var(--card-bg)}
-.skills-group h3{font-size:.8rem;text-transform:uppercase;letter-spacing:.1em;color:var(--accent-bright);margin:0 0 .75rem}
-.skills-group ul{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:.45rem}
-.skills-group li{padding:.25rem .65rem;border-radius:999px;border:1px solid var(--border-color);background:rgba(255,255,255,.04);color:var(--text-primary);font-size:.85rem}
-
-
-/* Timeline badge, contact */
-.tl-badge{display:inline-block;margin-left:.6rem;padding:.15rem .6rem;border-radius:999px;font-size:.7rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:#34d399;border:1px solid rgba(52,211,153,.4);vertical-align:middle}
-.copy-email{margin-left:.5rem;padding:.25rem .7rem;border-radius:8px;border:1px solid var(--border-color);background:var(--card-bg);color:var(--text-secondary);font:inherit;font-size:.8rem;cursor:pointer}
-.copy-email:hover{border-color:var(--border-hover);color:var(--text-primary)}

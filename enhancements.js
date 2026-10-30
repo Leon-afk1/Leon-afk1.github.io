@@ -40,7 +40,7 @@
     function $$(s, r) { return Array.prototype.slice.call((r || document).querySelectorAll(s)); }
 
     function buildSkills() {
-        var host = $('.neural-skills .container'), net = $('.neural-network-container');
+        var host = $('#skills .container'), net = $('.certifications-section');
         if (!host || !net) return;
         var wrap = document.createElement('div'); wrap.className = 'skills-chips';
         SKILLS.forEach(function (items, i) {
@@ -53,7 +53,7 @@
 
     function buildMisc() {
         var first = $('.timeline-item .tl-header');
-        if (first) { var b = document.createElement('span'); b.className = 'tl-badge'; first.querySelector('h3').appendChild(b); }
+        if (first) { var b = document.createElement('span'); b.className = 'tl-badge'; first.appendChild(b); }
         var mail = $('.contact-method[href^="mailto:"]');
         if (mail && navigator.clipboard) {
             var btn = document.createElement('button'); btn.type = 'button'; btn.className = 'copy-email';

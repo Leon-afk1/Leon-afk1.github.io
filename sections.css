@@ -1,0 +1,472 @@
+/* Section titles, About, Skills, Experience, Contact.
+   Same rules as the projects: left-aligned headings, no boxes, colour only where it encodes a kind of content
+   (cyan = skills, lilac = experience, amber = actions). */
+
+.skip-link {
+    color: var(--on-accent);
+}
+
+/* Section titles */
+.section-title {
+    font-size: clamp(1.75rem, 3vw, 2.25rem);
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    line-height: 1.15;
+    text-align: left;
+    margin: 0 0 2.5rem;
+    color: var(--text-primary);
+}
+
+.subsection-title {
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin: 0 0 1rem;
+    color: var(--text-primary);
+}
+
+/* About */
+.about-content {
+    display: grid;
+    grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr);
+    gap: 3rem;
+    align-items: start;
+}
+
+.about-text p {
+    max-width: 68ch;
+    font-size: 1.05rem;
+    line-height: 1.7;
+    color: var(--text-secondary);
+}
+
+.about-text p + p {
+    margin-top: 1rem;
+}
+
+.about-stats {
+    display: grid;
+    gap: 0;
+    margin: 0;
+}
+
+.stat {
+    display: flex;
+    align-items: baseline;
+    gap: 1rem;
+    padding: 1rem 0;
+    border-top: 1px solid var(--border-color);
+}
+
+.stat:last-child {
+    border-bottom: 1px solid var(--border-color);
+}
+
+.stat-number {
+    min-width: 3ch;
+    font-size: 1.75rem;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    color: var(--text-primary);
+}
+
+.stat-label {
+    font-size: 0.95rem;
+    color: var(--text-secondary);
+}
+
+/* Skills */
+.skills-chips {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 2rem 3rem;
+}
+
+.skills-group h3 {
+    font-size: 1.05rem;
+    font-weight: 700;
+    margin: 0 0 0.9rem;
+    padding-bottom: 0.6rem;
+    border-bottom: 1px solid var(--border-color);
+    color: var(--text-primary);
+}
+
+.skills-group ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 0.45rem;
+}
+
+.skills-group li {
+    font-size: 0.95rem;
+    color: var(--text-secondary);
+}
+
+.skills-group li::before {
+    content: '';
+    display: inline-block;
+    width: 0.45rem;
+    height: 0.45rem;
+    margin-right: 0.6rem;
+    border-radius: 50%;
+    background: var(--node-skill);
+    vertical-align: 0.1em;
+}
+
+.certifications-section {
+    margin-top: 3.5rem;
+}
+
+.certification-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem 2rem;
+}
+
+.certification-list a {
+    color: var(--text-primary);
+    text-decoration: underline;
+    text-decoration-color: rgba(232, 236, 242, 0.3);
+    text-underline-offset: 3px;
+}
+
+.certification-list a:hover {
+    text-decoration-color: var(--accent-primary);
+}
+
+/* Experience: a real chronology, so a timeline with lilac markers (experience colour of the hero graph) */
+.timeline {
+    position: relative;
+    max-width: 52rem;
+    padding-left: 2rem;
+}
+
+.timeline::before {
+    content: '';
+    position: absolute;
+    left: 0.4rem;
+    top: 0.5rem;
+    bottom: 0.5rem;
+    width: 1px;
+    background: var(--border-color);
+}
+
+.timeline-item {
+    position: relative;
+    padding: 0 0 2rem;
+}
+
+.timeline-marker {
+    position: absolute;
+    left: -2rem;
+    top: 0.45rem;
+    width: 0.8rem;
+    height: 0.8rem;
+    border-radius: 50%;
+    background: var(--bg-primary);
+    border: 2px solid var(--node-experience);
+}
+
+.timeline-item.is-open .timeline-marker {
+    background: var(--node-experience);
+}
+
+.tl-header {
+    position: relative;
+    padding-right: 2rem;
+    cursor: pointer;
+    border-radius: 6px;
+}
+
+.tl-header::after {
+    content: '';
+    position: absolute;
+    right: 0.4rem;
+    top: 0.55rem;
+    width: 0.5rem;
+    height: 0.5rem;
+    border-right: 2px solid var(--text-muted);
+    border-bottom: 2px solid var(--text-muted);
+    transform: rotate(45deg);
+    transition: transform 0.2s ease;
+}
+
+.timeline-item.is-open .tl-header::after {
+    transform: rotate(-135deg);
+    top: 0.8rem;
+}
+
+.tl-header:focus-visible {
+    outline: 2px solid var(--accent-primary);
+    outline-offset: 4px;
+}
+
+.tl-header h3 {
+    font-size: 1.15rem;
+    font-weight: 700;
+    line-height: 1.35;
+    margin: 0;
+    color: var(--text-primary);
+}
+
+.company {
+    margin: 0.3rem 0 0;
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: var(--text-secondary);
+}
+
+.period {
+    margin: 0.15rem 0 0;
+    font-size: 0.875rem;
+    color: var(--text-muted);
+}
+
+.tl-body {
+    display: none;
+    margin-top: 0.9rem;
+}
+
+.timeline-item.is-open .tl-body {
+    display: block;
+}
+
+.achievements {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 0.5rem;
+    max-width: 68ch;
+}
+
+.achievements li {
+    position: relative;
+    padding-left: 1rem;
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: var(--text-secondary);
+}
+
+.achievements li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.7em;
+    width: 0.35rem;
+    height: 1px;
+    background: var(--text-muted);
+}
+
+.experience-links {
+    margin-top: 0.9rem;
+}
+
+.tl-badge {
+    display: inline-block;
+    margin-top: 0.4rem;
+    padding: 0.1rem 0.55rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+    vertical-align: 0.2em;
+    color: var(--node-experience);
+    border: 1px solid rgba(185, 163, 245, 0.45);
+    border-radius: 999px;
+}
+
+/* Contact */
+.contact-content {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr);
+    gap: 3rem;
+    align-items: start;
+}
+
+.contact-description {
+    max-width: 52ch;
+    font-size: 1.05rem;
+    line-height: 1.7;
+    color: var(--text-secondary);
+    margin: 0 0 1.5rem;
+}
+
+.contact-methods {
+    display: grid;
+    border-top: 1px solid var(--border-color);
+}
+
+.contact-method {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 0.9rem 0;
+    border-bottom: 1px solid var(--border-color);
+    color: var(--text-primary);
+    font-weight: 500;
+    text-decoration: none;
+}
+
+.contact-method:hover span {
+    text-decoration: underline;
+    text-decoration-color: var(--accent-primary);
+    text-underline-offset: 3px;
+}
+
+/* The copy button sits on the email row */
+.contact-methods .copy-email {
+    justify-self: start;
+    margin: -2.65rem 0 0 auto;
+    padding: 0.3rem 0.75rem;
+    font: inherit;
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+    background: transparent;
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    cursor: pointer;
+    position: relative;
+}
+
+.contact-methods .copy-email:hover {
+    color: var(--text-primary);
+    border-color: rgba(232, 236, 242, 0.3);
+}
+
+.contact-form {
+    padding: 1.75rem;
+    background: var(--surface);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+}
+
+.form-group + .form-group {
+    margin-top: 1.1rem;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.4rem;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.form-group input,
+.form-group textarea {
+    width: 100%;
+    padding: 0.7rem 0.9rem;
+    font: inherit;
+    font-size: 0.95rem;
+    color: var(--text-primary);
+    background: var(--bg-primary);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+}
+
+.form-group textarea {
+    resize: vertical;
+    min-height: 8rem;
+}
+
+.form-group input:focus-visible,
+.form-group textarea:focus-visible {
+    outline: 2px solid var(--accent-primary);
+    outline-offset: 1px;
+}
+
+.contact-form .btn {
+    margin-top: 1.25rem;
+}
+
+.form-status {
+    margin-top: 1rem;
+}
+
+.form-success,
+.form-error {
+    padding: 0.75rem;
+    font-size: 0.9rem;
+    border-radius: 6px;
+}
+
+.form-success {
+    color: #6EE7B7;
+    background: rgba(16, 185, 129, 0.1);
+    border: 1px solid rgba(16, 185, 129, 0.3);
+}
+
+.form-error {
+    color: #FCA5A5;
+    background: rgba(239, 68, 68, 0.1);
+    border: 1px solid rgba(239, 68, 68, 0.3);
+}
+
+@media (max-width: 900px) {
+    .about-content,
+    .contact-content {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .skills-chips {
+        grid-template-columns: minmax(0, 1fr);
+    }
+}
+
+/* MNIST demo: aligned with the rest of the page */
+.mnist-intro {
+    text-align: left;
+    max-width: none;
+    margin: 0;
+}
+
+.mnist-description {
+    max-width: 68ch;
+    margin: 0 0 2.5rem;
+    font-size: 1.05rem;
+    line-height: 1.7;
+    color: var(--text-secondary);
+}
+
+.mnist-demo-container h3 {
+    font-size: 1.05rem;
+    font-weight: 700;
+    text-align: left;
+}
+
+.drawing-section,
+.preview-section,
+.prediction-section {
+    text-align: left;
+    align-items: flex-start;
+}
+
+.canvas-controls {
+    justify-content: flex-start;
+}
+
+.preview-container {
+    align-items: flex-start;
+}
+
+#drawingCanvas {
+    margin: 1rem 0;
+}
+
+.preview-info {
+    text-align: left;
+}
+
+.prediction-table {
+    margin: 1rem 0 0;
+}
+
+.prediction-row .prediction-placeholder {
+    font-size: 0.95rem;
+    font-weight: 400;
+    color: var(--text-secondary);
+}

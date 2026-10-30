@@ -1,37 +1,38 @@
 // Dark mode — permanent
 document.body.setAttribute('data-theme', 'dark');
 
-// Timeline accordion + scroll-entrance
+// Timeline accordion: one entry open at a time, headers act as buttons
 document.addEventListener('DOMContentLoaded', function() {
     var items = Array.prototype.slice.call(document.querySelectorAll('.timeline-item'));
     if (!items.length) return;
 
-    // IntersectionObserver: add .in-view when marker enters viewport
-    var observer = new IntersectionObserver(function(entries) {
-        entries.forEach(function(entry) {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('in-view');
-            }
+    function setOpen(item) {
+        items.forEach(function(i) {
+            var open = i === item;
+            i.classList.toggle('is-open', open);
+            var header = i.querySelector('.tl-header');
+            if (header) header.setAttribute('aria-expanded', String(open));
         });
-    }, { threshold: 0.15 });
+    }
 
-    items.forEach(function(item, idx) {
-        observer.observe(item);
-
-        // Accordion: click on header toggles .is-open
+    items.forEach(function(item) {
         var header = item.querySelector('.tl-header');
         if (!header) return;
+        header.setAttribute('role', 'button');
+        header.setAttribute('tabindex', '0');
         header.addEventListener('click', function() {
-            var wasOpen = item.classList.contains('is-open');
-            // Close all
-            items.forEach(function(i) { i.classList.remove('is-open'); });
-            // Re-open this one if it was closed
-            if (!wasOpen) item.classList.add('is-open');
+            setOpen(item.classList.contains('is-open') ? null : item);
+        });
+        header.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                header.click();
+            }
         });
     });
 
     // Open first item by default
-    items[0].classList.add('is-open');
+    setOpen(items[0]);
 });
 
 // Mobile Navigation Toggle
@@ -193,41 +194,6 @@ function showNotification(message, type = 'info') {
     }, 5000);
 }
 
-// Dynamic Stats Counter
-function animateCounter(element, target, duration = 2000) {
-    let start = 0;
-    const increment = target / (duration / 16);
-    
-    function updateCounter() {
-        start += increment;
-        if (start < target) {
-            element.textContent = Math.floor(start) + '+';
-            requestAnimationFrame(updateCounter);
-        } else {
-            element.textContent = target + '+';
-        }
-    }
-    
-    updateCounter();
-}
-
-// Trigger counter animation when stats come into view
-const statsObserver = new IntersectionObserver(function(entries) {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            const statNumber = entry.target.querySelector('.stat-number');
-            const targetValue = parseInt(statNumber.textContent);
-            animateCounter(statNumber, targetValue);
-            statsObserver.unobserve(entry.target);
-        }
-    });
-}, { threshold: 0.5 });
-
-document.addEventListener('DOMContentLoaded', function() {
-    const stats = document.querySelectorAll('.stat');
-    stats.forEach(stat => statsObserver.observe(stat));
-});
-
 // Theme Toggle (Future Enhancement)
 // Keyboard Navigation Support
 document.addEventListener('keydown', function(e) {
@@ -361,7 +327,7 @@ document.addEventListener('DOMContentLoaded', function() {
 let currentLanguage = 'en';
 window.currentLanguage = 'en'; // Expose globally for chatbot
 let translations = {};
-window.translations = {}; // Expose globally for neural network
+window.translations = {}; // Exposed globally for the other scripts
 
 // Load translations from JSON file
 async function loadTranslations() {
@@ -425,7 +391,6 @@ function updateContent() {
     // Navigation
     safeUpdateElement('.nav-logo', t.nav.logo);
     safeUpdateElement('.nav-link[href="#about"]', t.nav.about);
-    safeUpdateElement('[data-i18n="skills.neuralSubtitle"]', t.skills.neuralSubtitle);
     safeUpdateElement('a[href="#skills"]', t.nav.skills);
     safeUpdateElement('a[href="#projects"]', t.nav.projects);
     safeUpdateElement('a[href="#experience"]', t.nav.experience);
@@ -479,64 +444,6 @@ function updateContent() {
     
     // Skills section
     safeUpdateElement('#skills .section-title', t.skills.title);
-    const skillCategories = document.querySelectorAll('.skill-category');
-    
-    // Helper function to add certification badges
-    function addCertificationBadge(text, badgeText) {
-        return text.replace(` - ${badgeText}`, ` - <span class="certification-badge">${badgeText}</span>`);
-    }
-    
-    // Skill categories are replaced by the interactive neural network — only update if present
-    if (skillCategories.length >= 4) {
-        // Category 1: AI & Machine Learning
-        skillCategories[0].querySelector('h3').textContent = t.skills.category1Title;
-        const cat1Items = skillCategories[0].querySelectorAll('li');
-        
-        if (currentLanguage === 'en') {
-            cat1Items[0].innerHTML = addCertificationBadge(t.skills.category1Item1, 'NVIDIA Certified');
-            cat1Items[4].innerHTML = addCertificationBadge(t.skills.category1Item5, 'Google Certified');
-        } else if (currentLanguage === 'fr') {
-            cat1Items[0].innerHTML = addCertificationBadge(t.skills.category1Item1, 'Certifié NVIDIA');
-            cat1Items[4].innerHTML = addCertificationBadge(t.skills.category1Item5, 'Certifié Google');
-        }
-        cat1Items[1].textContent = t.skills.category1Item2;
-        cat1Items[2].textContent = t.skills.category1Item3;
-        cat1Items[3].textContent = t.skills.category1Item4;
-        cat1Items[5].textContent = t.skills.category1Item6;
-        
-        // Category 2: Data Technologies & Databases
-        skillCategories[1].querySelector('h3').textContent = t.skills.category2Title;
-        const cat2Items = skillCategories[1].querySelectorAll('li');
-        if (currentLanguage === 'en') {
-            cat2Items[0].innerHTML = addCertificationBadge(t.skills.category2Item1, 'Neo4j Certified Professional');
-        } else if (currentLanguage === 'fr') {
-            cat2Items[0].innerHTML = addCertificationBadge(t.skills.category2Item1, 'Professionnel Certifié Neo4j');
-        }
-        cat2Items[1].textContent = t.skills.category2Item2;
-        cat2Items[2].textContent = t.skills.category2Item3;
-        cat2Items[3].textContent = t.skills.category2Item4;
-        cat2Items[4].textContent = t.skills.category2Item5;
-        
-        // Category 3: Frameworks & Libraries
-        skillCategories[2].querySelector('h3').textContent = t.skills.category3Title;
-        const cat3Items = skillCategories[2].querySelectorAll('li');
-        cat3Items[0].textContent = t.skills.category3Item1;
-        cat3Items[1].textContent = t.skills.category3Item2;
-        cat3Items[2].textContent = t.skills.category3Item3;
-        cat3Items[3].textContent = t.skills.category3Item4;
-        cat3Items[4].textContent = t.skills.category3Item5;
-        cat3Items[5].textContent = t.skills.category3Item6;
-        
-        // Category 4: Programming & Tools
-        skillCategories[3].querySelector('h3').textContent = t.skills.category4Title;
-        const cat4Items = skillCategories[3].querySelectorAll('li');
-        cat4Items[0].textContent = t.skills.category4Item1;
-        cat4Items[1].textContent = t.skills.category4Item2;
-        cat4Items[2].textContent = t.skills.category4Item3;
-        cat4Items[3].textContent = t.skills.category4Item4;
-        cat4Items[4].textContent = t.skills.category4Item5;
-    }
-    
     // Certifications section
     safeUpdateElement('.subsection-title', t.skills.certificationsTitle);
     const certificationLinks = document.querySelectorAll('.certification-list a');
