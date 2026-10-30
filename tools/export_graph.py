@@ -41,6 +41,11 @@ PROJECT_CARDS = {
     "Tangram Solver": "card9",
     "Intelligent RAG Chatbot & Dashboard": "card1",
     "Personal AI Chatbot (Portfolio RAG)": "card14",
+    "Human Activity Recognition via Wearable Sensors": "card10",
+    "AgroScan: AI-Powered Agricultural Diagnosis": "card12",
+    "Multimodal Parkinson's Disease Detection": "card13",
+    "RAG Chatbot for UQAC Handbook": "card11",
+    "Poultry Disease Detection": "card6",
 }
 
 MAX_SKILLS = 18
