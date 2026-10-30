@@ -1,5 +1,5 @@
 # main.py - Backend API for Portfolio Chatbot with Graph RAG
-from fastapi import FastAPI, HTTPException, Request
+from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel, Field
 from contextlib import asynccontextmanager
@@ -12,8 +12,11 @@ from slowapi.errors import RateLimitExceeded
 from slowapi.util import get_remote_address
 from typing import List, Dict, Optional
 import json
-from collections import defaultdict
+import threading
+import time
 import traceback
+from collections import OrderedDict
+from concurrent.futures import ThreadPoolExecutor
 
 # Load environment variables
 load_dotenv()
@@ -25,6 +28,9 @@ GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
 ALLOWED_ORIGINS = [o.strip() for o in os.getenv("ALLOWED_ORIGINS", "https://leon-afk1.github.io").split(",") if o.strip()]
 # Per-IP limit on /chat, each request costs several Gemini calls
 CHAT_RATE_LIMIT = os.getenv("CHAT_RATE_LIMIT", "10/minute;100/day")
+# A model that hit its quota is retried after this delay; an unknown model name after a day
+QUOTA_RETRY_SECONDS = 3600
+UNAVAILABLE_RETRY_SECONDS = 86400
 
 # Custom Exception for all models exhausted
 class AllModelsExhaustedException(Exception):
@@ -45,7 +51,8 @@ class ModelManager:
             'gemini-2.5-flash',
         ]
         self.current_index = 0
-        self.exhausted_models = set()
+        # model name -> time (epoch seconds) until which it is skipped
+        self.unavailable_until: Dict[str, float] = {}
 
     def _is_quota_error(self, error: Exception) -> bool:
         """Check if the error is related to quota/rate limiting"""
@@ -63,25 +70,25 @@ class ModelManager:
         return any(keyword in error_str for keyword in ['404', 'not_found', 'not found', 'not supported'])
 
     def generate_content(self, prompt: str):
-        """Generate content with automatic model rotation on quota errors.
-        Models are tried lazily (no test call at startup) to keep cold starts fast and save quota."""
-        while len(self.exhausted_models) < len(self.model_names):
-            model_name = self.model_names[self.current_index]
-            if model_name in self.exhausted_models:
-                self.current_index = (self.current_index + 1) % len(self.model_names)
+        """Generate content with the first model of the list that is not set aside.
+        A model hitting its quota is skipped for QUOTA_RETRY_SECONDS, an unknown one for UNAVAILABLE_RETRY_SECONDS,
+        so the preferred model comes back once its quota resets. Models are tried lazily (no test call at startup)."""
+        for index, model_name in enumerate(self.model_names):
+            if self.unavailable_until.get(model_name, 0) > time.time():
                 continue
-
             try:
-                return self.client.models.generate_content(model=model_name, contents=prompt)
+                response = self.client.models.generate_content(model=model_name, contents=prompt)
+                self.current_index = index
+                return response
             except Exception as e:
-                if self._is_quota_error(e) or self._is_unavailable_error(e):
-                    print(f"Model {model_name} unavailable, switching to next model: {e}")
-                    self.exhausted_models.add(model_name)
-                    continue
-
-                # Re-raise other errors
-                print(f"Error with model {model_name}: {e}")
-                raise
+                if self._is_quota_error(e):
+                    self.unavailable_until[model_name] = time.time() + QUOTA_RETRY_SECONDS
+                elif self._is_unavailable_error(e):
+                    self.unavailable_until[model_name] = time.time() + UNAVAILABLE_RETRY_SECONDS
+                else:
+                    print(f"Error with model {model_name}: {e}")
+                    raise
+                print(f"Model {model_name} unavailable, switching to next model: {e}")
 
         raise AllModelsExhaustedException("All available models have reached their quota limit")
     
@@ -167,7 +174,44 @@ class ChatResponse(BaseModel):
     response: str
     session_id: str
 
-conversation_history: Dict[str, List[Dict[str, str]]] = defaultdict(list)
+class SessionStore:
+    """Last turns of each conversation. Bounded so that many session ids cannot exhaust the instance memory:
+    least recently used sessions are evicted beyond max_sessions, and sessions expire after ttl seconds."""
+
+    def __init__(self, max_sessions: int = 500, ttl: float = 3600, max_turns: int = 10):
+        self.max_sessions, self.ttl, self.max_turns = max_sessions, ttl, max_turns
+        self._data: "OrderedDict[str, tuple]" = OrderedDict()  # session_id -> (last_seen, turns)
+        self._lock = threading.Lock()  # the endpoint runs in a thread pool
+
+    def _evict(self, now: float):
+        while self._data:
+            last_seen = next(iter(self._data.values()))[0]
+            if len(self._data) > self.max_sessions or now - last_seen > self.ttl:
+                self._data.popitem(last=False)
+            else:
+                break
+
+    def get(self, session_id: str) -> List[Dict[str, str]]:
+        with self._lock:
+            self._evict(time.time())
+            entry = self._data.get(session_id)
+            return list(entry[1]) if entry else []
+
+    def append(self, session_id: str, user: str, assistant: str):
+        with self._lock:
+            now = time.time()
+            turns = self._data.pop(session_id, (now, []))[1]
+            turns.append({"user": user, "assistant": assistant})
+            self._data[session_id] = (now, turns[-self.max_turns:])
+            self._evict(now)
+
+    def __len__(self):
+        return len(self._data)
+
+
+sessions = SessionStore()
+# Intent analysis and Cypher generation are independent Gemini calls: run them in parallel
+executor = ThreadPoolExecutor(max_workers=8)
 
 # --- Simplified RAG Functions ---
 
@@ -288,8 +332,6 @@ Neo4j Database Schema for Léon Morales Portfolio:
 - Always use MATCH (p:Person {name: "Léon Morales"}) to start queries about Léon
 - Use parameterized queries with $name variable
 """
-
-# Note: Assurez-vous d'inclure la variable DATABASE_SCHEMA complète ici comme dans votre fichier original
 
 def generate_cypher_query_with_gemini(user_query: str, conversation_context: str = "", previous_attempt: str = "", error_message: str = "") -> str:
     """Generate Cypher query. Always instructed to use English for the DB interaction."""
@@ -434,9 +476,14 @@ def handle_chat(request: Request, chat_query: ChatQuery):
     
     print(f"Query: {user_query}")
     
+    history = sessions.get(session_id)
+    convo_context = "\n".join([f"Q: {m['user']}\nA: {m['assistant']}" for m in history[-3:]])
+
     try:
-        # 1. Analyze Intent
-        intent = analyze_question_intent(user_query)
+        # 1. Analyze intent, and generate the Cypher query at the same time (discarded if off-topic)
+        intent_future = executor.submit(analyze_question_intent, user_query)
+        cypher_future = executor.submit(generate_cypher_query_with_gemini, user_query, convo_context)
+        intent = intent_future.result()
         
         # 2. Handle Non-Relevant / Off-topic
         if not intent['is_relevant']:
@@ -470,12 +517,8 @@ def handle_chat(request: Request, chat_query: ChatQuery):
             resp = model_manager.generate_content(def_prompt)
             return ChatResponse(response=resp.text, session_id=session_id)
 
-        # 5. Standard RAG Flow
-        history = conversation_history[session_id]
-        convo_context = "\n".join([f"Q: {m['user']}\nA: {m['assistant']}" for m in history[-3:]])
-        
-        # Generate & Execute Cypher
-        cypher = generate_cypher_query_with_gemini(user_query, convo_context)
+        # 5. Standard RAG Flow: execute the Cypher generated in parallel with the intent
+        cypher = cypher_future.result()
         context, success, error_msg = execute_cypher_query(cypher)
         
         if not success and error_msg:
@@ -485,10 +528,7 @@ def handle_chat(request: Request, chat_query: ChatQuery):
         # Generate Answer
         response_text = generate_response_with_gemini(user_query, context, history)
         
-        # Update History
-        conversation_history[session_id].append({"user": user_query, "assistant": response_text})
-        if len(conversation_history[session_id]) > 10:
-            conversation_history[session_id].pop(0)
+        sessions.append(session_id, user_query, response_text)
             
         return ChatResponse(response=response_text, session_id=session_id)
 

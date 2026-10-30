@@ -10,3 +10,6 @@ __pycache__/
 .gitignore
 Dockerfile
 README.md
+tests/
+requirements-dev.txt
+.pytest_cache/

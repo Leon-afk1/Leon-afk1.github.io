@@ -6,14 +6,17 @@ on:
     paths:
       - 'backend/**'
       - '.github/workflows/deploy-backend.yml'
+  pull_request:
+    paths:
+      - 'backend/**'
+      - '.github/workflows/deploy-backend.yml'
   workflow_dispatch:
 
 permissions:
   contents: read
-  id-token: write # OIDC token for Workload Identity Federation
 
 concurrency:
-  group: deploy-backend
+  group: deploy-backend-${{ github.ref }}
   cancel-in-progress: false
 
 env:
@@ -22,8 +25,36 @@ env:
   IMAGE: ${{ vars.GCP_REGION }}-docker.pkg.dev/${{ vars.GCP_PROJECT_ID }}/portfolio/chatbot:${{ github.sha }}
 
 jobs:
-  deploy:
+  test:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: backend
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+
+      - name: Set up Python
+        uses: actions/setup-python@v7
+        with:
+          python-version: '3.12'
+          cache: pip
+          cache-dependency-path: backend/requirements-dev.txt
+
+      - name: Install dependencies
+        run: pip install -r requirements-dev.txt
+
+      - name: Run tests
+        run: pytest -q
+
+  deploy:
+    needs: test
+    # Pull requests only run the tests
+    if: github.event_name != 'pull_request'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write # OIDC token for Workload Identity Federation
     steps:
       - name: Checkout
         uses: actions/checkout@v7
