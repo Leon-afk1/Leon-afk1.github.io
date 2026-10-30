@@ -1,5 +1,3 @@
-// Dark mode — permanent
-document.body.setAttribute('data-theme', 'dark');
 
 // Timeline accordion: one entry open at a time, headers act as buttons
 document.addEventListener('DOMContentLoaded', function() {
@@ -194,7 +192,6 @@ function showNotification(message, type = 'info') {
     }, 5000);
 }
 
-// Theme Toggle (Future Enhancement)
 // Keyboard Navigation Support
 document.addEventListener('keydown', function(e) {
     // ESC key closes mobile menu
@@ -335,13 +332,11 @@ async function loadTranslations() {
         const response = await fetch('./texte.json');
         translations = await response.json();
         window.translations = translations; // Update global reference
-        console.log('Translations loaded successfully:', translations);
         
         // Set default language from localStorage or browser preference
         const savedLanguage = localStorage.getItem('language') || 
                              (navigator.language.startsWith('fr') ? 'fr' : 'en');
         
-        console.log('Setting initial language to:', savedLanguage);
         setLanguage(savedLanguage);
     } catch (error) {
         console.error('Error loading translations:', error);
@@ -370,11 +365,9 @@ function safeUpdateElement(selector, content, attribute = 'textContent') {
 // Update page content with current language
 function updateContent() {
     if (!translations[currentLanguage]) {
-        console.log('No translations available for language:', currentLanguage);
         return;
     }
     
-    console.log('Updating content to language:', currentLanguage);
     const t = translations[currentLanguage];
     
     // Update debug indicator immediately
@@ -395,39 +388,28 @@ function updateContent() {
     safeUpdateElement('a[href="#projects"]', t.nav.projects);
     safeUpdateElement('a[href="#experience"]', t.nav.experience);
     safeUpdateElement('a[href="#contact"]', t.nav.contact);
-    safeUpdateElement('#theme-toggle', t.nav.themeToggleLabel, 'aria-label');
     
-    // Hero section - using direct updates for testing
-    const heroGreeting = document.querySelector('.hero-greeting');
+    // Hero section
     const heroName = document.querySelector('.hero-name');
     const heroSubtitle = document.querySelector('.hero-subtitle');
     const heroDescription = document.querySelector('.hero-description');
     const btnPrimary = document.querySelector('.hero-buttons a[href="#projects"]');
     const btnSecondary = document.querySelector('.hero-buttons a[href="#contact"]');
     
-    if (heroGreeting) {
-        heroGreeting.textContent = t.hero.greeting;
-        console.log('Updated hero greeting to:', t.hero.greeting);
-    }
     if (heroName) {
         heroName.textContent = t.hero.name;
-        console.log('Updated hero name to:', t.hero.name);
     }
     if (heroSubtitle) {
         heroSubtitle.textContent = t.hero.subtitle;
-        console.log('Updated hero subtitle to:', t.hero.subtitle);
     }
     if (heroDescription) {
         heroDescription.textContent = t.hero.description;
-        console.log('Updated hero description');
     }
     if (btnPrimary) {
         btnPrimary.textContent = t.hero.buttonProjects;
-        console.log('Updated primary button to:', t.hero.buttonProjects);
     }
     if (btnSecondary) {
         btnSecondary.textContent = t.hero.buttonContact;
-        console.log('Updated secondary button to:', t.hero.buttonContact);
     }
     
     // About section
@@ -555,7 +537,6 @@ function updateContent() {
 
 // Set language and update interface
 function setLanguage(lang) {
-    console.log('setLanguage called with:', lang);
     currentLanguage = lang;
     window.currentLanguage = lang; // Expose to window for chatbot
     localStorage.setItem('language', lang);
@@ -563,15 +544,12 @@ function setLanguage(lang) {
     // Update language toggle button
     const languageIcon = document.querySelector('.language-icon');
     if (languageIcon) {
-        // Show the flag of the language you can switch TO
+        // Show the code of the language you can switch to
         if (lang === 'en') {
-            // Show French flag (can switch to French)
             languageIcon.className = 'language-icon language-code'; languageIcon.textContent = 'FR';
         } else {
-            // Show UK flag (can switch to English)
             languageIcon.className = 'language-icon language-code'; languageIcon.textContent = 'EN';
         }
-        console.log('Language icon updated with flag-icons');
     } else {
         console.warn('Language icon element not found');
     }
@@ -588,14 +566,11 @@ function setLanguage(lang) {
 
 // Initialize language system
 function initializeLanguageSystem() {
-    console.log('Initializing language system...');
     const languageToggle = document.getElementById('language-toggle');
     
     if (languageToggle) {
-        console.log('Language toggle button found, adding event listener...');
         languageToggle.addEventListener('click', function() {
             const newLanguage = currentLanguage === 'en' ? 'fr' : 'en';
-            console.log('Switching language from', currentLanguage, 'to', newLanguage);
             setLanguage(newLanguage);
             
             // Add rotation animation
@@ -617,32 +592,6 @@ document.addEventListener('DOMContentLoaded', function() {
     // Initialize language system
     initializeLanguageSystem();
 });
-
-console.log('Portfolio website loaded successfully!');
-
-// Test function for debugging (can be called from browser console)
-window.testLanguageSystem = function() {
-    console.log('Current language:', currentLanguage);
-    console.log('Available translations:', Object.keys(translations));
-    console.log('French translations loaded:', !!translations.fr);
-    console.log('English translations loaded:', !!translations.en);
-    
-    if (translations.fr) {
-        console.log('Sample French text:', translations.fr.hero.greeting);
-    }
-    if (translations.en) {
-        console.log('Sample English text:', translations.en.hero.greeting);
-    }
-};
-
-// Test function to manually switch language
-window.switchToFrench = function() {
-    setLanguage('fr');
-};
-
-window.switchToEnglish = function() {
-    setLanguage('en');
-};
 
 // MNIST Digit Recognition Demo
 document.addEventListener('DOMContentLoaded', function() {
@@ -709,7 +658,6 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Update preview canvas to show how the model sees the image
     function updatePreview() {
-        console.log('Updating preview...');
         // Get the processed image data
         const processedData = preprocessCanvasAdvanced();
         
@@ -761,7 +709,6 @@ document.addEventListener('DOMContentLoaded', function() {
     
     function handleTouchStart(e) {
         e.preventDefault();
-        console.log('Touch start detected'); // Debug log
         if (e.touches.length === 1) {
             const pos = getTouchPos(e);
             isDrawing = true;
@@ -787,7 +734,6 @@ document.addEventListener('DOMContentLoaded', function() {
     
     function handleTouchEnd(e) {
         e.preventDefault();
-        console.log('Touch end detected'); // Debug log
         if (isDrawing) {
             isDrawing = false;
             ctx.beginPath();
@@ -820,19 +766,14 @@ document.addEventListener('DOMContentLoaded', function() {
     // Load your PyTorch model using ONNX.js
     async function loadModel() {
         try {
-            console.log('Loading ONNX model with ONNX Runtime Web...');
             
             // Use ONNX Runtime Web API
             const session = await ort.InferenceSession.create('./mnist_model.onnx');
             model = session;
             
-            console.log('Your PyTorch MNIST model loaded successfully!');
-            console.log('Model input names:', session.inputNames);
-            console.log('Model output names:', session.outputNames);
             return true;
         } catch (error) {
             console.error('Error loading model:', error);
-            console.log('Using demo mode - model loading failed');
             model = null; // Ensure model is null for fallback
             return false;
         }
@@ -840,7 +781,6 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Advanced preprocessing with proper centering and padding
     function preprocessCanvasAdvanced() {
-        console.log('Starting advanced preprocessing...');
         // Get image data from canvas
         const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
         const pixels = imageData.data;
@@ -869,12 +809,10 @@ document.addEventListener('DOMContentLoaded', function() {
         }
         
         if (!hasContent) {
-            console.log('No content detected, returning empty array');
             // Return empty normalized array
             return new Array(784).fill((0 - 0.1307) / 0.3081);
         }
         
-        console.log('Bounding box:', {minX, maxX, minY, maxY});
         
         // Add padding around the digit
         const padding = 20;
@@ -915,8 +853,6 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         }
         
-        console.log('Preprocessing complete. Sample values:', result.slice(300, 310));
-        console.log('Min/Max values:', Math.min(...result), Math.max(...result));
         
         return result;
     }
@@ -929,37 +865,28 @@ document.addEventListener('DOMContentLoaded', function() {
     // Predict using your PyTorch model
     async function predictWithModel(inputData) {
         if (!model) {
-            console.log('Model not loaded, using demo predictions');
             return demoPredict(); // Fallback to demo if model not loaded
         }
         
         try {
-            console.log('Running actual model prediction...');
             
             // Debug: Check input data format
-            console.log('Input data length:', inputData.length);
-            console.log('Input data sample (first 10 values):', inputData.slice(0, 10));
             
             // Prepare input tensor for ONNX Runtime Web
             const float32Data = new Float32Array(inputData);
             const inputTensor = new ort.Tensor('float32', float32Data, [1, 1, 28, 28]);
             
-            console.log('Input tensor shape:', inputTensor.dims);
-            console.log('Input tensor type:', inputTensor.type);
             
             // Run inference with proper input mapping
             const feeds = {};
             feeds[model.inputNames[0]] = inputTensor;
             
-            console.log('Running model inference with input name:', model.inputNames[0]);
             const outputMap = await model.run(feeds);
-            console.log('Output map keys:', Object.keys(outputMap));
             
             const outputTensorName = model.outputNames[0];
             const outputTensor = outputMap[outputTensorName];
             const predictions = Array.from(outputTensor.data);
             
-            console.log('Raw model outputs:', predictions);
             
             // Apply softmax to get probabilities
             const maxLogit = Math.max(...predictions);
@@ -967,7 +894,6 @@ document.addEventListener('DOMContentLoaded', function() {
             const sumExp = expValues.reduce((a, b) => a + b, 0);
             const probabilities = expValues.map(x => x / sumExp);
             
-            console.log('Probabilities after softmax:', probabilities);
             
             // Create prediction objects
             const results = probabilities.map((prob, digit) => ({
@@ -977,13 +903,11 @@ document.addEventListener('DOMContentLoaded', function() {
             
             // Sort by confidence and return top 5
             results.sort((a, b) => b.confidence - a.confidence);
-            console.log('Top 5 predictions:', results.slice(0, 5));
             
             return results.slice(0, 5);
             
         } catch (error) {
             console.error('Prediction error:', error);
-            console.log('Falling back to demo predictions');
             return demoPredict(); // Fallback to demo
         }
     }
@@ -1052,7 +976,6 @@ document.addEventListener('DOMContentLoaded', function() {
             const mean = inputData.reduce((a, b) => a + b) / inputData.length;
             const min = Math.min(...inputData);
             const max = Math.max(...inputData);
-            console.log(`Input stats - Mean: ${mean.toFixed(4)}, Min: ${min.toFixed(4)}, Max: ${max.toFixed(4)}`);
             
             predictBtn.textContent = t.mnistDemo?.predictingButton || 'Predicting...';
             predictBtn.disabled = true;

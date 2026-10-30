@@ -8,11 +8,9 @@
       "skills": "Skills",
       "projects": "Projects",
       "experience": "Experience",
-      "contact": "Contact",
-      "themeToggleLabel": "Toggle dark/light mode"
+      "contact": "Contact"
     },
     "hero": {
-      "greeting": "Hi, my name is",
       "name": "Léon MORALES",
       "subtitle": "Generative AI Engineer — LLM & Graph RAG",
       "description": "Dual-degree engineer (UTBM / UQAC) specializing in Generative AI and Machine Learning, currently completing my end-of-studies internship at Astek Innovation Lab. Passionate about solving problems with data, traveling the world, and taking on new challenges, I combine a strong academic background with hands-on R&D experience.",
@@ -44,32 +42,6 @@
     },
     "skills": {
       "title": "Technical Skills",
-      "category1Title": "AI & Machine Learning",
-      "category1Item1": "Deep Learning (CNN, RNN, Transformers) - NVIDIA Certified",
-      "category1Item2": "Computer Vision (Object Detection, Classification)",
-      "category1Item3": "Natural Language Processing (NLP)",
-      "category1Item4": "Reinforcement Learning",
-      "category1Item5": "Foundational AI Principles - Google Certified",
-      "category1Item6": "Generative AI Concepts",
-      "category2Title": "Data Technologies & Databases",
-      "category2Item1": "Graph Databases (Neo4j, Cypher) - Neo4j Certified Professional",
-      "category2Item2": "SQL Databases",
-      "category2Item3": "Data Manipulation & Analysis (Pandas, NumPy)",
-      "category2Item4": "Data Visualization (Matplotlib, Seaborn)",
-      "category2Item5": "Web Analytics (Google Analytics)",
-      "category3Title": "Frameworks & Libraries",
-      "category3Item1": "PyTorch & TensorFlow",
-      "category3Item2": "Scikit-learn",
-      "category3Item3": "Hugging Face (Transformers, Datasets)",
-      "category3Item4": "PyTorch Lightning",
-      "category3Item5": "FastAPI",
-      "category3Item6": "Streamlit",
-      "category4Title": "Programming & Tools",
-      "category4Item1": "Python (Advanced)",
-      "category4Item2": "C / C++",
-      "category4Item3": "Java",
-      "category4Item4": "Git & GitHub",
-      "category4Item5": "Docker (Basics)",
       "certificationsTitle": "Certifications & Badges",
       "certifications": [
         {
@@ -94,8 +66,6 @@
     },
     "projects": {
       "title": "Projects",
-      "selectedWork": "Selected Work",
-      "moreProjects": "More Projects",
       "card1": {
         "title": "Intelligent RAG Chatbot & Dashboard (Hackathon Winner)",
         "tag1": "RAG",
@@ -396,11 +366,9 @@
       "skills": "Compétences",
       "projects": "Projets",
       "experience": "Expérience",
-      "contact": "Contact",
-      "themeToggleLabel": "Basculer mode sombre/clair"
+      "contact": "Contact"
     },
     "hero": {
-      "greeting": "Bonjour, je m'appelle",
       "name": "Léon MORALES",
       "subtitle": "Ingénieur IA Générative — LLM & Graph RAG",
       "description": "Ingénieur en double diplôme (UTBM / UQAC) spécialisé en IA générative et Machine Learning, actuellement en stage de fin d'études au sein de l'Astek Innovation Lab. Passionné par la résolution de problèmes avec les données, les voyages et les nouveaux défis, je combine une solide formation académique avec une expérience pratique en R&D.",
@@ -432,32 +400,6 @@
     },
     "skills": {
       "title": "Compétences Techniques",
-      "category1Title": "IA & Apprentissage Machine",
-      "category1Item1": "Apprentissage Profond (CNN, RNN, Transformers) - Certifié NVIDIA",
-      "category1Item2": "Vision par Ordinateur (Détection d'objets, Classification)",
-      "category1Item3": "Traitement du Langage Naturel (NLP)",
-      "category1Item4": "Apprentissage par Renforcement",
-      "category1Item5": "Principes Fondamentaux de l'IA - Certifié Google",
-      "category1Item6": "Concepts d'IA Générative",
-      "category2Title": "Technologies de Données & Bases de Données",
-      "category2Item1": "Bases de Données Graphiques (Neo4j, Cypher) - Professionnel Certifié Neo4j",
-      "category2Item2": "Bases de Données SQL",
-      "category2Item3": "Manipulation & Analyse de Données (Pandas, NumPy)",
-      "category2Item4": "Visualisation de Données (Matplotlib, Seaborn)",
-      "category2Item5": "Analyse Web (Google Analytics)",
-      "category3Title": "Frameworks & Librairies",
-      "category3Item1": "PyTorch & TensorFlow",
-      "category3Item2": "Scikit-learn",
-      "category3Item3": "Hugging Face (Transformers, Datasets)",
-      "category3Item4": "PyTorch Lightning",
-      "category3Item5": "FastAPI",
-      "category3Item6": "Streamlit",
-      "category4Title": "Programmation & Outils",
-      "category4Item1": "Python (Avancé)",
-      "category4Item2": "C / C++",
-      "category4Item3": "Java",
-      "category4Item4": "Git & GitHub",
-      "category4Item5": "Docker (Bases)",
       "certificationsTitle": "Certifications & Badges",
       "certifications": [
         {
@@ -482,8 +424,6 @@
     },
     "projects": {
       "title": "Projets Principaux",
-      "selectedWork": "Travaux Sélectionnés",
-      "moreProjects": "Autres Projets",
       "card1": {
         "title": "Chatbot RAG Intelligent & Dashboard (Gagnant Hackathon)",
         "tag1": "RAG",
