@@ -1,15 +1,13 @@
 // Configuration file for the chatbot
-// Update this file with your Hugging Face Space URL
 
 const CHATBOT_CONFIG = {
     // Backend API URLs
     API_URLS: {
         // Use this for local development
         LOCAL: 'http://localhost:8080',
-        
-        // REPLACE THIS with your Hugging Face Space URL
-        // Format: https://your-username-space-name.hf.space
-        PRODUCTION: 'https://leon-mls-chatbot-portfolio.hf.space'
+
+        // Cloud Run service (terraform output service_url, see infra/README.md)
+        PRODUCTION: 'https://portfolio-chatbot-ls5myalnna-ew.a.run.app'
     },
     
     // Auto-detect environment

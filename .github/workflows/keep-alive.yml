@@ -2,22 +2,25 @@ name: Keep Services Alive
 
 on:
   schedule:
-    # S'exécute toutes les 12 heures (pour garder HF Space actif)
+    # S'exécute toutes les 12 heures (pour éviter la mise en pause de l'instance Neo4j Aura gratuite)
     - cron: '0 */12 * * *'
   workflow_dispatch: # Permet de lancer le script manuellement via l'interface GitHub pour tester
+
+permissions:
+  contents: read
 
 jobs:
   ping-neo4j:
     runs-on: ubuntu-latest
-    
+
     steps:
       - name: Récupération du code (Checkout)
-        uses: actions/checkout@v3
+        uses: actions/checkout@v7
 
       - name: Installation de Python
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@v7
         with:
-          python-version: '3.9'
+          python-version: '3.12'
 
       - name: Installation du driver Neo4j
         run: pip install neo4j
@@ -28,23 +31,3 @@ jobs:
           NEO4J_USER: ${{ secrets.NEO4J_USER }}
           NEO4J_PASSWORD: ${{ secrets.NEO4J_PASSWORD }}
         run: python neo4j_keep_alive.py
-
-  ping-huggingface:
-    runs-on: ubuntu-latest
-    
-    steps:
-      - name: Récupération du code (Checkout)
-        uses: actions/checkout@v3
-
-      - name: Installation de Python
-        uses: actions/setup-python@v4
-        with:
-          python-version: '3.9'
-
-      - name: Installation de requests
-        run: pip install requests
-
-      - name: Lancement du script de ping Hugging Face
-        env:
-          HF_SPACE_URL: ${{ secrets.HF_SPACE_URL }}
-        run: python hf_keep_alive.py

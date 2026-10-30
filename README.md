@@ -9,7 +9,8 @@ Static, dependency-free portfolio (HTML / CSS / vanilla JS).
 - `texte.json` — EN/FR content (language saved in `localStorage`).
 - `neural-network.js` — interactive skills network (paused when off-screen, HiDPI aware).
 - `script.js` — navigation, i18n, form, MNIST demo (ONNX Runtime Web is loaded only when the demo nears the viewport).
-- `chatbot-*.js` — floating Graph RAG chatbot (backend on Hugging Face Space, woken up in the background on page load).
+- `chatbot-*.js` — floating Graph RAG chatbot (backend on Cloud Run, woken up in the background on page load).
+- `backend/` — FastAPI Graph RAG API (Neo4j + Gemini); `infra/` — Terraform for Cloud Run, secrets, budget and alerts (see `infra/README.md`). Pushes to `main` touching these folders are deployed by GitHub Actions.
 - `CV_Leon_Morales_AI_2027_English.pdf`, `CV_Leon_Morales_IA_2027_Francais.pdf` — CVs linked from the hero and contact sections.
 
 ## Maintenance notes

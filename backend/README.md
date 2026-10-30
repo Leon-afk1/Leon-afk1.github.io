@@ -12,7 +12,7 @@ Backend API pour le chatbot du portfolio de Léon utilisant Graph RAG (Retrieval
 
 ## 📋 Prérequis
 
-- Python 3.10+
+- Python 3.12+
 - Neo4j Database (local ou cloud)
 - Google Gemini API Key
 
@@ -25,18 +25,16 @@ pip install -r requirements.txt
 
 2. **Configuration des variables d'environnement:**
 
-Copier `.env.example` vers `.env` et remplir les valeurs:
-
-```bash
-cp .env.example .env
-```
-
-Éditer `.env` avec vos credentials:
+Créer un fichier `.env` (non versionné) avec vos credentials:
 ```env
 NEO4J_URI=neo4j://localhost:7687
 NEO4J_USER=neo4j
 NEO4J_PASSWORD=your_password
 GEMINI_API_KEY=your_api_key
+
+# Optionnel
+ALLOWED_ORIGINS=https://leon-afk1.github.io   # origines CORS, séparées par des virgules (localhost toujours autorisé)
+CHAT_RATE_LIMIT=10/minute;100/day             # limite par IP sur /chat
 ```
 
 ## 🗄️ Configuration Neo4j
@@ -95,13 +93,18 @@ docker build -t portfolio-chatbot-backend .
 
 ### Run le container:
 ```bash
-docker run -p 8080:8080 \
-  -e NEO4J_URI=your_uri \
-  -e NEO4J_USER=your_user \
-  -e NEO4J_PASSWORD=your_password \
-  -e GEMINI_API_KEY=your_key \
-  portfolio-chatbot-backend
+docker run -p 8080:8080 --env-file .env portfolio-chatbot-backend
 ```
+
+Le conteneur écoute sur `$PORT` (8080 par défaut), comme sur Cloud Run.
+
+## ☁️ Déploiement
+
+En production, l'API tourne sur Cloud Run : https://portfolio-chatbot-ls5myalnna-ew.a.run.app
+
+Chaque push sur `main` qui modifie `backend/` déclenche `.github/workflows/deploy-backend.yml`
+(build, push vers Artifact Registry, nouvelle révision Cloud Run, test `/health`).
+Les secrets viennent de Secret Manager. L'infrastructure est décrite dans `../infra/` (voir `../infra/README.md`).
 
 ## 📚 Documentation API
 
@@ -158,17 +161,18 @@ print(response.json()["response"])
 
 Pour adapter le chatbot à vos besoins:
 
-1. **Modifier les intents**: Éditer `detect_query_intent()` dans `main.py`
-2. **Ajouter des requêtes**: Modifier `build_cypher_query()` 
-3. **Changer le formatage**: Adapter `format_results_by_type()`
-4. **Ajuster le prompt**: Modifier `generate_response_with_gemini()`
+1. **Modifier les intents**: Éditer `analyze_question_intent()` dans `main.py`
+2. **Adapter le schéma du graphe**: Modifier `DATABASE_SCHEMA`, utilisé par `generate_cypher_query_with_gemini()`
+3. **Ajuster le prompt de réponse**: Modifier `generate_response_with_gemini()`
+4. **Changer les modèles**: Modifier la liste `ModelManager.model_names`
 
 ## 📝 Notes
 
-- En production, remplacer `allow_origins=["*"]` par votre domaine dans CORS
-- Utiliser des variables d'environnement sécurisées (secrets) en production
+- CORS limité à `ALLOWED_ORIGINS` et à localhost
+- Limite de requêtes par IP sur `/chat` (`CHAT_RATE_LIMIT`, en mémoire par instance)
+- Les requêtes Cypher générées par le LLM s'exécutent dans une transaction en lecture seule
+- Les modèles Gemini sont essayés à la demande, dans l'ordre de `ModelManager.model_names` ; un modèle épuisé (429) ou inexistant (404) est sauté
 - Considérer l'ajout d'un cache pour optimiser les performances
-- Implémenter rate limiting pour éviter les abus
 
 ## 🐛 Dépannage
 
