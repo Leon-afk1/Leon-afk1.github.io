@@ -18,11 +18,11 @@
 
     var CV = { en: 'CV_Leon_Morales_AI_2027_English.pdf', fr: 'CV_Leon_Morales_IA_2027_Francais.pdf' };
     var T = {
-        en: { cv: 'Download CV', avail: 'Available from April 2027 · Open to relocation worldwide', skip: 'Skip to content',
+        en: { cv: 'Download CV', avail: 'Available from April 2027 · Open to relocation worldwide', skip: 'Skip to content', filtersLabel: 'Filter projects', send: 'Send message',
               langLabel: 'Switch to French', current: 'Current', copy: 'Copy', copied: 'Copied!', menu: 'Menu',
               filters: { all: 'All', llm: 'LLM & RAG', vision: 'Vision', research: 'Research', ml: 'ML & Data' },
               groups: ['Generative AI & LLMs', 'Machine Learning & Data', 'Languages & Tools'] },
-        fr: { cv: 'Télécharger mon CV', avail: "Disponible à partir d'avril 2027 · Mobilité internationale", skip: 'Aller au contenu',
+        fr: { cv: 'Télécharger mon CV', avail: "Disponible à partir d'avril 2027 · Mobilité internationale", skip: 'Aller au contenu', filtersLabel: 'Filtrer les projets', send: 'Envoyer le message',
               langLabel: 'Passer en anglais', current: 'En cours', copy: 'Copier', copied: 'Copié !', menu: 'Menu',
               filters: { all: 'Tous', llm: 'LLM & RAG', vision: 'Vision', research: 'Recherche', ml: 'ML & Data' },
               groups: ['IA générative & LLM', 'Machine Learning & Data', 'Langages & outils'] }
@@ -30,9 +30,9 @@
     var SKILLS = [
         ['LLM (Ollama, Hugging Face)', 'RAG / Graph RAG', 'LangChain', 'Embeddings', 'ChromaDB', 'Neo4j vector index', 'Fine-tuning', 'RAGAS'],
         ['PyTorch', 'PyTorch Lightning', 'TensorFlow / Keras', 'Scikit-learn', 'Pandas', 'NumPy', 'NLP', 'Computer Vision (CNN)', 'Contrastive learning'],
-        ['Python', 'SQL (PostgreSQL)', 'Cypher', 'C / C++', 'Java', 'Git / GitHub', 'Docker', 'Neo4j', 'FastAPI', 'Streamlit', 'Weights & Biases']
+        ['Python', 'SQL (PostgreSQL)', 'Cypher', 'C / C++', 'Java', 'Git / GitHub', 'Docker', 'Neo4j', 'FastAPI', 'Streamlit', 'Google Cloud Run', 'Terraform', 'GitHub Actions', 'Weights & Biases']
     ];
-    var CATS = [['Human Activity', 'research'], ['LLM-based Chatbot', 'llm'], ['Intelligent RAG', 'llm'], ['AgroScan', 'vision'],
+    var CATS = [['Graph RAG Assistant', 'llm'], ['Human Activity', 'research'], ['LLM-based Chatbot', 'llm'], ['Intelligent RAG', 'llm'], ['AgroScan', 'vision'],
         ["Parkinson", 'ml'], ['Drug Analysis', 'research'], ['UQAC Handbook', 'llm'], ['Cell Classification', 'vision'],
         ['Mushroom', 'ml'], ['Poultry', 'vision'], ['MNIST', 'vision'], ['Music Genre', 'ml'], ['Tangram', 'ml']];
 
@@ -122,6 +122,8 @@
         var lt = $('#language-toggle'); if (lt) lt.setAttribute('aria-label', t.langLabel);
         var nt = $('.nav-toggle'); if (nt) nt.setAttribute('aria-label', t.menu);
         $$('.filter-btn').forEach(function (b) { b.textContent = t.filters[b.dataset.filter]; });
+        var fb = $('.project-filters'); if (fb) fb.setAttribute('aria-label', t.filtersLabel);
+        var cs = $('#chatbot-send'); if (cs) cs.setAttribute('aria-label', t.send);
         $$('.skills-group h3').forEach(function (h) { h.textContent = t.groups[+h.dataset.group]; });
         var tb = $('.tl-badge'); if (tb) tb.textContent = t.current;
         var cp = $('.copy-email'); if (cp) { cp.textContent = t.copy; cp.setAttribute('aria-label', t.copy + ' email'); }

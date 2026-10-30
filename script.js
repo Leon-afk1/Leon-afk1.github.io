@@ -552,7 +552,8 @@ function updateContent() {
     
     // Navigation
     safeUpdateElement('.nav-logo', t.nav.logo);
-    safeUpdateElement('a[href="#about"]', t.nav.about);
+    safeUpdateElement('.nav-link[href="#about"]', t.nav.about);
+    safeUpdateElement('[data-i18n="skills.neuralSubtitle"]', t.skills.neuralSubtitle);
     safeUpdateElement('a[href="#skills"]', t.nav.skills);
     safeUpdateElement('a[href="#projects"]', t.nav.projects);
     safeUpdateElement('a[href="#experience"]', t.nav.experience);
@@ -725,40 +726,54 @@ function updateContent() {
     card1Links[0].textContent = t.projects.card1.link1Text;
     card1Links[1].textContent = t.projects.card1.link2Text;
 
-    // projectCards[3] = grid 1: AgroScan (card12)
-    projectCards[3].querySelector('h3').textContent = t.projects.card12.title;
-    const card12Tags = projectCards[3].querySelectorAll('.tag');
+    // projectCards[3] = grid 1: Portfolio Graph RAG Assistant (card14)
+    projectCards[3].querySelector('h3').textContent = t.projects.card14.title;
+    const card14Tags = projectCards[3].querySelectorAll('.tag');
+    card14Tags[0].textContent = t.projects.card14.tag1;
+    card14Tags[1].textContent = t.projects.card14.tag2;
+    card14Tags[2].textContent = t.projects.card14.tag3;
+    card14Tags[3].textContent = t.projects.card14.tag4;
+    card14Tags[4].textContent = t.projects.card14.tag5;
+    card14Tags[5].textContent = t.projects.card14.tag6;
+    projectCards[3].querySelector('.project-description').textContent = t.projects.card14.description;
+    const card14Links = projectCards[3].querySelectorAll('.project-link');
+    card14Links[0].textContent = t.projects.card14.link1Text;
+    card14Links[1].textContent = t.projects.card14.link2Text;
+
+    // projectCards[4] = grid 2: AgroScan (card12)
+    projectCards[4].querySelector('h3').textContent = t.projects.card12.title;
+    const card12Tags = projectCards[4].querySelectorAll('.tag');
     card12Tags[0].textContent = t.projects.card12.tag1;
     card12Tags[1].textContent = t.projects.card12.tag2;
     card12Tags[2].textContent = t.projects.card12.tag3;
     card12Tags[3].textContent = t.projects.card12.tag4;
     card12Tags[4].textContent = t.projects.card12.tag5;
-    projectCards[3].querySelector('.project-description').textContent = t.projects.card12.description;
-    const card12Links = projectCards[3].querySelectorAll('.project-link');
+    projectCards[4].querySelector('.project-description').textContent = t.projects.card12.description;
+    const card12Links = projectCards[4].querySelectorAll('.project-link');
     card12Links[0].textContent = t.projects.card12.link1Text;
 
-    // projectCards[4] = grid 2: Parkinson Detection (card13)
-    projectCards[4].querySelector('h3').textContent = t.projects.card13.title;
-    const card13Tags = projectCards[4].querySelectorAll('.tag');
+    // projectCards[5] = grid 3: Parkinson Detection (card13)
+    projectCards[5].querySelector('h3').textContent = t.projects.card13.title;
+    const card13Tags = projectCards[5].querySelectorAll('.tag');
     card13Tags[0].textContent = t.projects.card13.tag1;
     card13Tags[1].textContent = t.projects.card13.tag2;
     card13Tags[2].textContent = t.projects.card13.tag3;
     card13Tags[3].textContent = t.projects.card13.tag4;
     card13Tags[4].textContent = t.projects.card13.tag5;
-    projectCards[4].querySelector('.project-description').textContent = t.projects.card13.description;
-    const card13Links = projectCards[4].querySelectorAll('.project-link');
+    projectCards[5].querySelector('.project-description').textContent = t.projects.card13.description;
+    const card13Links = projectCards[5].querySelectorAll('.project-link');
     card13Links[0].textContent = t.projects.card13.link1Text;
     if (card13Links[1]) card13Links[1].textContent = t.projects.card13.link2Text;
 
-    // projectCards[5] = grid 3: Drug Analysis (card2)
-    projectCards[5].querySelector('h3').textContent = t.projects.card2.title;
-    const card2Tags = projectCards[5].querySelectorAll('.tag');
+    // projectCards[6] = grid 4: Drug Analysis (card2)
+    projectCards[6].querySelector('h3').textContent = t.projects.card2.title;
+    const card2Tags = projectCards[6].querySelectorAll('.tag');
     card2Tags[0].textContent = t.projects.card2.tag1;
     card2Tags[1].textContent = t.projects.card2.tag2;
     card2Tags[2].textContent = t.projects.card2.tag3;
     card2Tags[3].textContent = t.projects.card2.tag4;
-    projectCards[5].querySelector('.project-description').textContent = t.projects.card2.description;
-    const card2Links = projectCards[5].querySelectorAll('.project-link');
+    projectCards[6].querySelector('.project-description').textContent = t.projects.card2.description;
+    const card2Links = projectCards[6].querySelectorAll('.project-link');
     card2Links[0].textContent = t.projects.card2.link1Text;
     card2Links[1].textContent = t.projects.card2.link2Text;
     if (card2Links[2]) {
@@ -766,89 +781,89 @@ function updateContent() {
         card2Links[2].href = t.projects.card2.reportUrl;
     }
 
-    // projectCards[6] = grid 4: RAG Chatbot UQAC (card11)
-    projectCards[6].querySelector('h3').textContent = t.projects.card11.title;
-    const card11GTags = projectCards[6].querySelectorAll('.tag');
+    // projectCards[7] = grid 5: RAG Chatbot UQAC (card11)
+    projectCards[7].querySelector('h3').textContent = t.projects.card11.title;
+    const card11GTags = projectCards[7].querySelectorAll('.tag');
     card11GTags[0].textContent = t.projects.card11.tag1;
     card11GTags[1].textContent = t.projects.card11.tag2;
     card11GTags[2].textContent = t.projects.card11.tag3;
     card11GTags[3].textContent = t.projects.card11.tag4;
-    projectCards[6].querySelector('.project-description').textContent = t.projects.card11.description;
-    const card11GLinks = projectCards[6].querySelectorAll('.project-link');
+    projectCards[7].querySelector('.project-description').textContent = t.projects.card11.description;
+    const card11GLinks = projectCards[7].querySelectorAll('.project-link');
     card11GLinks[0].textContent = t.projects.card11.link1Text;
     if (card11GLinks[1]) card11GLinks[1].textContent = t.projects.card11.link2Text;
 
-    // projectCards[7] = grid 5: Cell Classification CNN (card4)
-    projectCards[7].querySelector('h3').textContent = t.projects.card4.title;
-    const card4Tags = projectCards[7].querySelectorAll('.tag');
+    // projectCards[8] = grid 6: Cell Classification CNN (card4)
+    projectCards[8].querySelector('h3').textContent = t.projects.card4.title;
+    const card4Tags = projectCards[8].querySelectorAll('.tag');
     card4Tags[0].textContent = t.projects.card4.tag1;
     card4Tags[1].textContent = t.projects.card4.tag2;
     card4Tags[2].textContent = t.projects.card4.tag3;
     card4Tags[3].textContent = t.projects.card4.tag4;
-    projectCards[7].querySelector('.project-description').textContent = t.projects.card4.description;
-    const card4Links = projectCards[7].querySelectorAll('.project-link');
+    projectCards[8].querySelector('.project-description').textContent = t.projects.card4.description;
+    const card4Links = projectCards[8].querySelectorAll('.project-link');
     card4Links[0].textContent = t.projects.card4.link1Text;
     if (card4Links[1]) {
         card4Links[1].textContent = t.projects.card4.link2Text;
         card4Links[1].href = t.projects.card4.reportUrl;
     }
 
-    // projectCards[8] = grid 6: Mushroom Toxicity (card5)
-    projectCards[8].querySelector('h3').textContent = t.projects.card5.title;
-    const card5Tags = projectCards[8].querySelectorAll('.tag');
+    // projectCards[9] = grid 7: Mushroom Toxicity (card5)
+    projectCards[9].querySelector('h3').textContent = t.projects.card5.title;
+    const card5Tags = projectCards[9].querySelectorAll('.tag');
     card5Tags[0].textContent = t.projects.card5.tag1;
     card5Tags[1].textContent = t.projects.card5.tag2;
     card5Tags[2].textContent = t.projects.card5.tag3;
-    projectCards[8].querySelector('.project-description').textContent = t.projects.card5.description;
-    const card5Links = projectCards[8].querySelectorAll('.project-link');
+    projectCards[9].querySelector('.project-description').textContent = t.projects.card5.description;
+    const card5Links = projectCards[9].querySelectorAll('.project-link');
     card5Links[0].textContent = t.projects.card5.link1Text;
     card5Links[1].textContent = t.projects.card5.link2Text;
 
-    // projectCards[9] = grid 7: Poultry Disease Detection (card6)
-    projectCards[9].querySelector('h3').textContent = t.projects.card6.title;
-    const card6Tags = projectCards[9].querySelectorAll('.tag');
+    // projectCards[10] = grid 8: Poultry Disease Detection (card6)
+    projectCards[10].querySelector('h3').textContent = t.projects.card6.title;
+    const card6Tags = projectCards[10].querySelectorAll('.tag');
     card6Tags[0].textContent = t.projects.card6.tag1;
     card6Tags[1].textContent = t.projects.card6.tag2;
     card6Tags[2].textContent = t.projects.card6.tag3;
     card6Tags[3].textContent = t.projects.card6.tag4;
     card6Tags[4].textContent = t.projects.card6.tag5;
-    projectCards[9].querySelector('.project-description').textContent = t.projects.card6.description;
-    const card6Links = projectCards[9].querySelectorAll('.project-link');
+    projectCards[10].querySelector('.project-description').textContent = t.projects.card6.description;
+    const card6Links = projectCards[10].querySelectorAll('.project-link');
     card6Links[0].textContent = t.projects.card6.link1Text;
     card6Links[1].textContent = t.projects.card6.link2Text;
 
-    // projectCards[10] = grid 8: MNIST (card7)
-    projectCards[10].querySelector('h3').textContent = t.projects.card7.title;
-    const card7Tags = projectCards[10].querySelectorAll('.tag');
+    // projectCards[11] = grid 9: MNIST (card7)
+    projectCards[11].querySelector('h3').textContent = t.projects.card7.title;
+    const card7Tags = projectCards[11].querySelectorAll('.tag');
     card7Tags[0].textContent = t.projects.card7.tag1;
     card7Tags[1].textContent = t.projects.card7.tag2;
     card7Tags[2].textContent = t.projects.card7.tag3;
     card7Tags[3].textContent = t.projects.card7.tag4;
-    projectCards[10].querySelector('.project-description').textContent = t.projects.card7.description;
-    const card7Links = projectCards[10].querySelectorAll('.project-link');
+    projectCards[11].querySelector('.project-description').textContent = t.projects.card7.description;
+    const card7Links = projectCards[11].querySelectorAll('.project-link');
     card7Links[0].textContent = t.projects.card7.link1Text;
     card7Links[1].textContent = t.projects.card7.link2Text;
 
-    // projectCards[11] = grid 9: Music Genre Classification (card8)
-    projectCards[11].querySelector('h3').textContent = t.projects.card8.title;
-    const card8Tags = projectCards[11].querySelectorAll('.tag');
+    // projectCards[12] = grid 10: Music Genre Classification (card8)
+    projectCards[12].querySelector('h3').textContent = t.projects.card8.title;
+    const card8Tags = projectCards[12].querySelectorAll('.tag');
     card8Tags[0].textContent = t.projects.card8.tag1;
     card8Tags[1].textContent = t.projects.card8.tag2;
     card8Tags[2].textContent = t.projects.card8.tag3;
     card8Tags[3].textContent = t.projects.card8.tag4;
     card8Tags[4].textContent = t.projects.card8.tag5;
-    projectCards[11].querySelector('.project-description').textContent = t.projects.card8.description;
-    const card8Links = projectCards[11].querySelectorAll('.project-link');
+    projectCards[12].querySelector('.project-description').textContent = t.projects.card8.description;
+    const card8Links = projectCards[12].querySelectorAll('.project-link');
     card8Links[0].textContent = t.projects.card8.link1Text;
     card8Links[1].textContent = t.projects.card8.link2Text;
 
-    // projectCards[12] = grid 10: Tangram Solver (card9)
-    projectCards[12].querySelector('h3').textContent = t.projects.card9.title;
-    const card9Tags = projectCards[12].querySelectorAll('.tag');
+    // projectCards[13] = grid 11: Tangram Solver (card9)
+    projectCards[13].querySelector('h3').textContent = t.projects.card9.title;
+    const card9Tags = projectCards[13].querySelectorAll('.tag');
     card9Tags[0].textContent = t.projects.card9.tag1;
     card9Tags[1].textContent = t.projects.card9.tag2;
-    projectCards[12].querySelector('.project-description').textContent = t.projects.card9.description;
-    const card9Links = projectCards[12].querySelectorAll('.project-link');
+    projectCards[13].querySelector('.project-description').textContent = t.projects.card9.description;
+    const card9Links = projectCards[13].querySelectorAll('.project-link');
     card9Links[0].textContent = t.projects.card9.link1Text;
     card9Links[1].textContent = t.projects.card9.link2Text;
     
@@ -864,6 +879,8 @@ function updateContent() {
     previewInfo[1].textContent = t.mnistDemo.previewLine2;
     previewInfo[2].textContent = t.mnistDemo.previewLine3;
     document.querySelector('.prediction-section h3').textContent = t.mnistDemo.predictionTitle;
+    const predictionPlaceholder = document.querySelector('#predictionTable .prediction-placeholder');
+    if (predictionPlaceholder) predictionPlaceholder.textContent = t.mnistDemo.predictionPlaceholder;
     
     // Experience section
     document.querySelector('#experience .section-title').textContent = t.experience.title;
@@ -1445,7 +1462,7 @@ document.addEventListener('DOMContentLoaded', function() {
         if (predictions.length === 0) {
             const t = translations[currentLanguage] || translations['en'] || {};
             const placeholder = t.mnistDemo?.predictionPlaceholder || 'Draw a digit to see predictions';
-            predictionTable.innerHTML = `<div class="prediction-row"><span class="digit">${placeholder}</span></div>`;
+            predictionTable.innerHTML = `<div class="prediction-row"><span class="digit prediction-placeholder">${placeholder}</span></div>`;
             return;
         }
         

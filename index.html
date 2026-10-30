@@ -240,6 +240,28 @@
                 <article class="project-card">
                     <span class="pg-index">04</span>
                     <div class="project-header">
+                        <h3>Graph RAG Assistant for This Portfolio</h3>
+                        <div class="project-tags">
+                            <span class="tag">Graph RAG</span>
+                            <span class="tag">Neo4j</span>
+                            <span class="tag">Google Cloud Run</span>
+                            <span class="tag">Terraform</span>
+                            <span class="tag">GitHub Actions</span>
+                            <span class="tag">LLM Security</span>
+                        </div>
+                    </div>
+                    <p class="project-description">
+                        The chatbot on this site, designed and run as a production service. A FastAPI API turns each question into a Cypher query over a Neo4j knowledge graph, then Gemini writes the answer, switching to another model when one runs out of quota. It runs on Google Cloud Run, with the whole infrastructure described in Terraform and deployed by GitHub Actions without any stored key (Workload Identity Federation). Because an LLM writes the queries from visitor input, they run in read-only transactions; secrets stay in Secret Manager, and per-IP rate limits, a strict CORS policy, scale-to-zero and budget alerts keep the public API safe and its cost under control.
+                    </p>
+                    <div class="project-links">
+                        <a href="https://github.com/Leon-afk1/Leon-afk1.github.io/tree/main/backend" class="project-link" target="_blank" rel="noopener noreferrer">View Code</a>
+                        <a href="https://github.com/Leon-afk1/Leon-afk1.github.io/tree/main/infra" class="project-link" target="_blank" rel="noopener noreferrer">Infrastructure</a>
+                    </div>
+                </article>
+
+                <article class="project-card">
+                    <span class="pg-index">05</span>
+                    <div class="project-header">
                         <h3>AgroScan: AI-Powered Agricultural Diagnosis</h3>
                         <div class="project-tags">
                             <span class="tag">Flutter</span>
@@ -258,7 +280,7 @@
                 </article>
 
                 <article class="project-card">
-                    <span class="pg-index">05</span>
+                    <span class="pg-index">06</span>
                     <div class="project-header">
                         <h3>Multimodal Parkinson's Disease Detection</h3>
                         <div class="project-tags">
@@ -279,7 +301,7 @@
                 </article>
 
                 <article class="project-card">
-                    <span class="pg-index">06</span>
+                    <span class="pg-index">07</span>
                     <div class="project-header">
                         <h3>Multimodal Contrastive Learning for Drug Analysis</h3>
                         <div class="project-tags">
@@ -303,7 +325,7 @@
                 </article>
 
                 <article class="project-card">
-                    <span class="pg-index">07</span>
+                    <span class="pg-index">08</span>
                     <div class="project-header">
                         <h3>RAG Chatbot for UQAC Handbook</h3>
                         <div class="project-tags">
@@ -325,7 +347,7 @@
                 </article>
 
                 <article class="project-card">
-                    <span class="pg-index">08</span>
+                    <span class="pg-index">09</span>
                     <div class="project-header">
                         <h3>Cell Classification CNN</h3>
                         <div class="project-tags">
@@ -347,7 +369,7 @@
                 </article>
 
                 <article class="project-card">
-                    <span class="pg-index">09</span>
+                    <span class="pg-index">10</span>
                     <div class="project-header">
                         <h3>Mushroom Toxicity Prediction</h3>
                         <div class="project-tags">
@@ -367,7 +389,7 @@
                 </article>
 
                 <article class="project-card">
-                    <span class="pg-index">10</span>
+                    <span class="pg-index">11</span>
                     <div class="project-header">
                         <h3>Poultry Disease Detection</h3>
                         <div class="project-tags">
@@ -388,7 +410,7 @@
                 </article>
 
                 <article class="project-card">
-                    <span class="pg-index">11</span>
+                    <span class="pg-index">12</span>
                     <div class="project-header">
                         <h3>MNIST Digit Recognition CNN</h3>
                         <div class="project-tags">
@@ -410,7 +432,7 @@
                 </article>
 
                 <article class="project-card">
-                    <span class="pg-index">12</span>
+                    <span class="pg-index">13</span>
                     <div class="project-header">
                         <h3>Music Genre Classification</h3>
                         <div class="project-tags">
@@ -431,7 +453,7 @@
                 </article>
 
                 <article class="project-card">
-                    <span class="pg-index">13</span>
+                    <span class="pg-index">14</span>
                     <div class="project-header">
                         <h3>Tangram Solver</h3>
                         <div class="project-tags">
@@ -613,7 +635,7 @@
                     <h3>Model Predictions:</h3>
                     <div id="predictionTable" class="prediction-table">
                         <div class="prediction-row">
-                            <span class="digit">Draw a digit to see predictions</span>
+                            <span class="digit prediction-placeholder">Draw a digit to see predictions</span>
                         </div>
                     </div>
                 </div>
@@ -717,10 +739,10 @@
         </div>
     </footer>
 
-    <script src="script.js?v=20261025a"></script>
+    <script src="script.js?v=20261030a"></script>
     <script src="chatbot-config.js?v=20261030a"></script>
     <script src="chatbot-client.js?v=20261025a"></script>
     <script src="neural-network.js?v=20261025a"></script>
-    <script src="enhancements.js?v=20261025a"></script>
+    <script src="enhancements.js?v=20261030a"></script>
 </body>
 </html>
