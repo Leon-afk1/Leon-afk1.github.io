@@ -232,7 +232,8 @@
         "2024": "UTBM, then internship at Ksilink",
         "2023": "UTBM, then Yeditepe (Istanbul)",
         "2022": "UTBM"
-      }
+      },
+      "citedByAssistant": "Cited by the assistant: {names}"
     },
     "mnistDemo": {
       "title": "Interactive MNIST Demo",
@@ -594,7 +595,8 @@
         "2024": "UTBM, puis stage chez Ksilink",
         "2023": "UTBM, puis Yeditepe (Istanbul)",
         "2022": "UTBM"
-      }
+      },
+      "citedByAssistant": "Cités par l'assistant : {names}"
     },
     "mnistDemo": {
       "title": "Démo Interactive MNIST",

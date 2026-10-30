@@ -144,6 +144,7 @@ document.addEventListener('DOMContentLoaded', function() {
             const data = await response.json();
             removeLoadingMessage();
             addMessage(data.response || t.error);
+            lightGraphs(data.response || '');
         } catch (error) {
             removeLoadingMessage();
             addMessage(error.message === 'rate' ? t.rateLimited : t.error);
@@ -152,6 +153,18 @@ document.addEventListener('DOMContentLoaded', function() {
             chatbotInput.focus();
         }
     }
+
+    // Answers light up the cited nodes in the hero and projects graphs
+    function lightGraphs(answer) {
+        if (window.heroGraph) window.heroGraph.highlight(answer);
+        if (window.portfolioProjects && window.portfolioProjects.highlightText) window.portfolioProjects.highlightText(answer);
+    }
+
+    // Shared with the hero question box: same conversation, and its exchanges appear here
+    window.portfolioChat = {
+        sessionId: SESSION_ID,
+        addExchange: (question, answer) => { addMessage(question, true); addMessage(answer); }
+    };
 
     chatbotSend.addEventListener('click', () => sendMessage(chatbotInput.value));
     chatbotInput.addEventListener('keydown', (e) => {

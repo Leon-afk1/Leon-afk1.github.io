@@ -18,7 +18,8 @@
     var graph = null;
     var nodeEls = {};
     var edgeEls = [];
-    var sessionId = 'hero-' + Math.random().toString(36).slice(2, 10);
+    // Same conversation as the floating chatbot when it is on the page
+    function sessionId() { return window.portfolioChat ? window.portfolioChat.sessionId : 'hero'; }
 
     function $(s, r) { return (r || document).querySelector(s); }
 
@@ -141,7 +142,7 @@
         fetch(api + '/chat', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ query: question, session_id: sessionId, language: lang() })
+            body: JSON.stringify({ query: question, session_id: sessionId(), language: lang() })
         }).then(function (r) {
             if (r.status === 429) throw new Error('rate');
             if (!r.ok) throw new Error('http');
@@ -149,6 +150,7 @@
         }).then(function (data) {
             box.innerHTML = formatAnswer(data.response || '');
             highlight(data.response || '');
+            if (window.portfolioChat) window.portfolioChat.addExchange(question, data.response || '');
         }).catch(function (e) {
             box.classList.add('is-error');
             box.innerHTML = '<p>' + escapeHtml(e.message === 'rate' ? t.askRateLimited : t.askError) + '</p>';
@@ -181,6 +183,9 @@
         });
         if (graph) updateLabels();
     }
+
+    // Used by the floating chatbot to light up the nodes cited in its answers
+    window.heroGraph = { highlight: function (answer) { if (graph) highlight(answer); } };
 
     document.addEventListener('DOMContentLoaded', function () {
         var svg = $('#hero-graph-svg'), form = $('#hero-ask');

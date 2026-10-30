@@ -274,9 +274,27 @@
         resetCaption();
     }
 
-    // Used by the hero graph and the experience constellation
+    // Lights the projects and skills named in an assistant answer (floating chatbot)
+    function highlightText(answer) {
+        var t = texts();
+        if (!t || !graph || activeSkill) return;
+        var text = answer.toLowerCase(), set = {}, names = [];
+        graph.nodes.forEach(function (n) {
+            if (n.type !== 'project' && n.type !== 'skill') return;
+            var labels = [n.label];
+            if (n.card && t.projects[n.card]) labels.push(t.projects[n.card].title);
+            var hit = labels.some(function (l) { return l.length > 2 && text.indexOf(l.toLowerCase()) !== -1; });
+            if (hit) { set[n.id] = 1; names.push(labels[labels.length - 1]); }
+        });
+        if (!names.length) return;
+        light(set);
+        caption(t.projects.citedByAssistant.replace('{names}', names.join(', ')));
+    }
+
+    // Used by the hero graph, the experience constellation and the floating chatbot
     window.portfolioProjects = {
         list: PROJECTS,
+        highlightText: highlightText,
         open: function (key) {
             if (activeFilter !== 'all') { activeFilter = 'all'; applyFilter(); }
             setOpen(key, true);
