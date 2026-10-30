@@ -19,10 +19,10 @@
     var CV = { en: 'CV_Leon_Morales_AI_2027_English.pdf', fr: 'CV_Leon_Morales_IA_2027_Francais.pdf' };
     var T = {
         en: { cv: 'Download CV', avail: 'Available from April 2027 · Open to relocation worldwide', skip: 'Skip to content', send: 'Send message',
-              langLabel: 'Switch to French', current: 'Current', copy: 'Copy', copied: 'Copied!', menu: 'Menu',
+              langLabel: 'Switch to French', copy: 'Copy', copied: 'Copied!', menu: 'Menu',
               groups: ['Generative AI & LLMs', 'Machine Learning & Data', 'Cloud & DevOps', 'Languages & Tools'] },
         fr: { cv: 'Télécharger mon CV', avail: "Disponible à partir d'avril 2027 · Mobilité internationale", skip: 'Aller au contenu', send: 'Envoyer le message',
-              langLabel: 'Passer en anglais', current: 'En cours', copy: 'Copier', copied: 'Copié !', menu: 'Menu',
+              langLabel: 'Passer en anglais', copy: 'Copier', copied: 'Copié !', menu: 'Menu',
               groups: ['IA générative & LLM', 'Machine Learning & Data', 'Cloud & DevOps', 'Langages & outils'] }
     };
     var SKILLS = [
@@ -88,8 +88,6 @@
     }
 
     function buildMisc() {
-        var first = $('.timeline-item .tl-header');
-        if (first) { var b = document.createElement('span'); b.className = 'tl-badge'; first.appendChild(b); }
         var mail = $('.contact-method[href^="mailto:"]');
         if (mail && navigator.clipboard) {
             var btn = document.createElement('button'); btn.type = 'button'; btn.className = 'copy-email';
@@ -117,7 +115,6 @@
         var nt = $('.nav-toggle'); if (nt) nt.setAttribute('aria-label', t.menu);
         var cs = $('#chatbot-send'); if (cs) cs.setAttribute('aria-label', t.send);
         $$('.skills-group h3').forEach(function (h) { h.textContent = t.groups[+h.dataset.group]; });
-        var tb = $('.tl-badge'); if (tb) tb.textContent = t.current;
         renderCerts();
         var cp = $('.copy-email'); if (cp) { cp.textContent = t.copy; cp.setAttribute('aria-label', t.copy + ' email'); }
     }

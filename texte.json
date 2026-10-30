@@ -246,7 +246,10 @@
       "previewLine2": "White digit on black background",
       "previewLine3": "Normalized and centered",
       "predictionTitle": "Model Predictions:",
-      "predictionPlaceholder": "Draw a digit to see predictions"
+      "predictionPlaceholder": "Draw a digit to see predictions",
+      "drawFirst": "Draw a digit in the white square first.",
+      "modelError": "The model could not be loaded. Check your connection, then reload the page to try the demo.",
+      "predictError": "The prediction failed. Clear the canvas and try again."
     },
     "experience": {
       "title": "Experience",
@@ -312,7 +315,8 @@
         "UQAC": "UQAC, master's in AI",
         "Hackathon": "Hackathon",
         "Astek": "Astek internship"
-      }
+      },
+      "current": "Current"
     },
     "contact": {
       "title": "Get In Touch",
@@ -604,7 +608,10 @@
       "previewLine2": "Chiffre blanc sur fond noir",
       "previewLine3": "Normalisé et centré",
       "predictionTitle": "Prédictions du modèle :",
-      "predictionPlaceholder": "Dessinez pour voir les prédictions"
+      "predictionPlaceholder": "Dessinez pour voir les prédictions",
+      "drawFirst": "Dessinez d'abord un chiffre dans le carré blanc.",
+      "modelError": "Le modèle n'a pas pu être chargé. Vérifiez votre connexion, puis rechargez la page pour essayer la démo.",
+      "predictError": "La prédiction a échoué. Effacez le dessin et réessayez."
     },
     "experience": {
       "title": "Expérience",
@@ -670,7 +677,8 @@
         "UQAC": "UQAC, maîtrise en IA",
         "Hackathon": "Hackathon",
         "Astek": "Stage Astek"
-      }
+      },
+      "current": "En cours"
     },
     "contact": {
       "title": "Me Contacter",
