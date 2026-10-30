@@ -1,0 +1,49 @@
+name: Sync knowledge graph
+
+# Re-export graph.json (hero and projects graphs) from Neo4j, commit only if it changed.
+# The layout uses a fixed seed, so an unchanged graph gives an identical file.
+on:
+  schedule:
+    - cron: '0 6 * * 1' # every Monday
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: sync-graph
+  cancel-in-progress: false
+
+jobs:
+  export:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+
+      - name: Set up Python
+        uses: actions/setup-python@v7
+        with:
+          python-version: '3.12'
+
+      - name: Install dependencies
+        run: pip install neo4j==6.4.1 python-dotenv==1.2.4
+
+      - name: Export graph.json
+        env:
+          NEO4J_URI: ${{ secrets.NEO4J_URI }}
+          NEO4J_USER: ${{ secrets.NEO4J_USER }}
+          NEO4J_PASSWORD: ${{ secrets.NEO4J_PASSWORD }}
+        run: python tools/export_graph.py
+
+      - name: Commit if changed
+        run: |
+          if git diff --quiet graph.json; then
+            echo "graph.json unchanged"
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add graph.json
+          git commit -m "Sync graph.json from Neo4j"
+          git push
