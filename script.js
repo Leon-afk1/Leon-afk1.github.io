@@ -1,50 +1,6 @@
 // Dark mode — permanent
 document.body.setAttribute('data-theme', 'dark');
 
-// Cursor spotlight tracking (Linear-style)
-(function initCursorSpotlight() {
-    var spotlight = document.getElementById('cursor-spotlight');
-    if (!spotlight) return;
-    var rafId = null;
-    document.addEventListener('mousemove', function(e) {
-        if (rafId) cancelAnimationFrame(rafId);
-        rafId = requestAnimationFrame(function() {
-            spotlight.style.left = e.clientX + 'px';
-            spotlight.style.top  = e.clientY + 'px';
-        });
-    });
-})();
-
-// Card cursor-glow tracking (Linear-style border glow)
-document.addEventListener('DOMContentLoaded', function() {
-    document.querySelectorAll('.project-card, .stat, .timeline-content, .contact-method')
-        .forEach(function(card) {
-            card.addEventListener('mousemove', function(e) {
-                var r = card.getBoundingClientRect();
-                card.style.setProperty('--mouse-x', ((e.clientX - r.left) / r.width  * 100) + '%');
-                card.style.setProperty('--mouse-y', ((e.clientY - r.top)  / r.height * 100) + '%');
-            });
-        });
-});
-
-// Hero mouse parallax (hero-content layer only — no layout jank)
-(function initHeroParallax() {
-    var hero    = document.querySelector('.hero');
-    var content = document.querySelector('.hero-content');
-    if (!hero || !content) return;
-    hero.addEventListener('mousemove', function(e) {
-        var b = hero.getBoundingClientRect();
-        var x = ((e.clientX - b.left) / b.width  - 0.5) * 14;
-        var y = ((e.clientY - b.top)  / b.height - 0.5) * 9;
-        content.style.transform = 'translate(' + (-x * 0.45) + 'px, ' + (-y * 0.45) + 'px)';
-    });
-    hero.addEventListener('mouseleave', function() {
-        content.style.transition = 'transform 0.6s ease';
-        content.style.transform  = 'translate(0, 0)';
-        setTimeout(function() { content.style.transition = ''; }, 620);
-    });
-})();
-
 // Timeline accordion + scroll-entrance
 document.addEventListener('DOMContentLoaded', function() {
     var items = Array.prototype.slice.call(document.querySelectorAll('.timeline-item'));
@@ -173,33 +129,6 @@ window.addEventListener('scroll', function() {
     }
 });
 
-// Intersection Observer for Animations
-const observerOptions = {
-    threshold: 0.1,
-    rootMargin: '0px 0px -50px 0px'
-};
-
-const observer = new IntersectionObserver(function(entries) {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            entry.target.style.opacity = '1';
-            entry.target.style.transform = 'translateY(0)';
-        }
-    });
-}, observerOptions);
-
-// Observe elements for animation
-document.addEventListener('DOMContentLoaded', function() {
-    const animatedElements = document.querySelectorAll('.skill-category, .project-card, .timeline-item, .stat');
-    
-    animatedElements.forEach(el => {
-        el.style.opacity = '0';
-        el.style.transform = 'translateY(30px)';
-        el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-        observer.observe(el);
-    });
-});
-
 // Email validation helper
 function isValidEmail(email) {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -263,38 +192,6 @@ function showNotification(message, type = 'info') {
         }, 300);
     }, 5000);
 }
-
-// Typing Animation for Hero Text
-let typewriterActive = false;
-
-function startTypewriterEffect(text) {
-    const heroSubtitle = document.querySelector('.hero-subtitle');
-    if (!heroSubtitle || typewriterActive) return;
-    
-    typewriterActive = true;
-    heroSubtitle.textContent = '';
-    heroSubtitle.style.borderRight = '2px solid rgba(255, 255, 255, 0.7)';
-    
-    let i = 0;
-    function typeWriter() {
-        if (i < text.length) {
-            heroSubtitle.textContent += text.charAt(i);
-            i++;
-            setTimeout(typeWriter, 100);
-        } else {
-            // Remove cursor after typing is complete
-            setTimeout(() => {
-                heroSubtitle.style.borderRight = 'none';
-                typewriterActive = false;
-            }, 1000);
-        }
-    }
-    
-    // Start typing after a delay
-    setTimeout(typeWriter, 500);
-}
-
-// Hero scroll parallax removed — mouse parallax on .hero-content is used instead
 
 // Dynamic Stats Counter
 function animateCounter(element, target, duration = 2000) {
@@ -565,8 +462,8 @@ function updateContent() {
     const heroName = document.querySelector('.hero-name');
     const heroSubtitle = document.querySelector('.hero-subtitle');
     const heroDescription = document.querySelector('.hero-description');
-    const btnPrimary = document.querySelector('.hero-buttons .btn-primary');
-    const btnSecondary = document.querySelector('.hero-buttons .btn-secondary');
+    const btnPrimary = document.querySelector('.hero-buttons a[href="#projects"]');
+    const btnSecondary = document.querySelector('.hero-buttons a[href="#contact"]');
     
     if (heroGreeting) {
         heroGreeting.textContent = t.hero.greeting;
@@ -574,12 +471,10 @@ function updateContent() {
     }
     if (heroName) {
         heroName.textContent = t.hero.name;
-        heroName.setAttribute('data-text', t.hero.name.split(' ')[0]);
         console.log('Updated hero name to:', t.hero.name);
     }
     if (heroSubtitle) {
-        // Use typewriter effect for hero subtitle
-        startTypewriterEffect(t.hero.subtitle);
+        heroSubtitle.textContent = t.hero.subtitle;
         console.log('Updated hero subtitle to:', t.hero.subtitle);
     }
     if (heroDescription) {

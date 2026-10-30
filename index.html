@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Léon - AI Engineer & Researcher</title>
     <meta name="description" content="Léon Morales — Generative AI engineer (LLM &amp; Graph RAG). Dual degree UTBM / UQAC. Available from April 2027, open to relocation worldwide.">
-    <meta name="theme-color" content="#080810">
+    <meta name="theme-color" content="#1B2230">
     <link rel="canonical" href="https://leon-afk1.github.io/">
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="Léon MORALES">
@@ -17,16 +17,15 @@
     <script type="application/ld+json">{"@context":"https://schema.org","@type":"Person","name":"Léon Morales","jobTitle":"Generative AI Engineer","url":"https://leon-afk1.github.io/","email":"mailto:leon.morales@outlook.fr","sameAs":["https://github.com/Leon-afk1","https://www.linkedin.com/in/l%C3%A9on-morales"],"alumniOf":["UTBM","UQAC"],"knowsAbout":["Graph RAG","LLM","Machine Learning","Deep Learning","Contrastive Learning"]}</script>
     <link rel="preload" href="texte.json" as="fetch" crossorigin>
     <link rel="icon" href="favicon.svg" type="image/svg+xml">
-    <link rel="stylesheet" href="styles.css?v=20261025a">
+    <link rel="stylesheet" href="styles.css?v=20261030a">
     <link rel="stylesheet" href="enhancements.css?v=20261025a">
+    <link rel="stylesheet" href="hero.css?v=20261030a">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 </head>
 <body>
     <a class="skip-link" href="#about">Skip to content</a>
-    <!-- Cursor spotlight (Linear-style ambient lighting) -->
-    <div id="cursor-spotlight"></div>
 
     <!-- Navigation -->
     <nav class="nav">
@@ -50,24 +49,43 @@
 
     <!-- Hero Section -->
     <section id="home" class="hero">
-        <div class="container">
+        <div class="container hero-layout">
             <div class="hero-content">
                 <h1 class="hero-title">
-                    <span class="hero-greeting">Hi, my name is</span>
-                    <span class="hero-name" data-text="Léon">Léon MORALES</span>
+                    <span class="hero-name">Léon MORALES</span>
                 </h1>
-                <p class="hero-subtitle typewriter">Generative AI Engineer — LLM &amp; Graph RAG</p>
+                <p class="hero-subtitle">Generative AI Engineer — LLM &amp; Graph RAG</p>
                 <p class="hero-description">
                     Dual-degree engineer (UTBM / UQAC) specializing in Generative AI and Machine Learning, currently completing my end-of-studies internship at Astek Innovation Lab. Passionate about solving problems with data, traveling the world, and taking on new challenges, I combine a strong academic background with hands-on R&D experience.
                 </p>
+
+                <form class="hero-ask" id="hero-ask">
+                    <label class="hero-ask-label" for="hero-ask-input">Ask my knowledge graph</label>
+                    <div class="hero-ask-row">
+                        <input type="text" id="hero-ask-input" class="hero-ask-input" maxlength="500" autocomplete="off" placeholder="e.g. Which projects use Graph RAG?" required>
+                        <button type="submit" class="btn btn-primary hero-ask-submit">Ask</button>
+                    </div>
+                    <div class="hero-ask-suggestions"></div>
+                    <div class="hero-ask-answer" id="hero-ask-answer" aria-live="polite" hidden></div>
+                </form>
+
                 <p class="hero-availability"><span class="dot"></span><span id="availability-text">Available from April 2027 · Open to relocation worldwide</span></p>
                 <div class="hero-buttons">
-                    <a href="#projects" class="btn btn-primary">View Projects</a>
+                    <a href="#projects" class="btn btn-secondary">View Projects</a>
                     <a href="#contact" class="btn btn-secondary">Get in Touch</a>
                     <a href="CV_Leon_Morales_AI_2027_English.pdf" class="btn btn-secondary btn-cv" id="cv-download" download>Download CV</a>
                 </div>
             </div>
-            
+
+            <figure class="hero-graph">
+                <svg id="hero-graph-svg" class="hero-graph-svg" role="img" aria-labelledby="hero-graph-title"><title id="hero-graph-title">Léon's knowledge graph, exported from the Neo4j database the assistant queries</title></svg>
+                <figcaption class="hero-graph-legend">
+                    <span class="legend-item legend-project">Projects</span>
+                    <span class="legend-item legend-skill">Skills</span>
+                    <span class="legend-item legend-experience">Experience and education</span>
+                    <span class="hero-graph-hint">Nodes mentioned in the answer light up.</span>
+                </figcaption>
+            </figure>
         </div>
     </section>
 
@@ -159,7 +177,6 @@
                 </div>
                 <div class="fp-list">
                     <article class="project-card featured-card" data-accent="purple">
-                        <span class="fp-index">01</span>
                         <div class="project-header">
                             <h3>Human Activity Recognition via Wearable Sensors</h3>
                             <div class="project-tags">
@@ -181,7 +198,6 @@
                     </article>
 
                     <article class="project-card featured-card" data-accent="teal">
-                        <span class="fp-index">02</span>
                         <div class="project-header">
                             <h3>LLM-based Chatbot for Biologists</h3>
                             <div class="project-tags">
@@ -203,7 +219,6 @@
                     </article>
 
                     <article class="project-card featured-card" data-accent="amber">
-                        <span class="fp-index">03</span>
                         <div class="project-header">
                             <h3>Intelligent RAG Chatbot &amp; Dashboard (Hackathon Winner)</h3>
                             <div class="project-tags">
@@ -238,7 +253,6 @@
             <div class="projects-grid">
 
                 <article class="project-card">
-                    <span class="pg-index">04</span>
                     <div class="project-header">
                         <h3>Graph RAG Assistant for This Portfolio</h3>
                         <div class="project-tags">
@@ -260,7 +274,6 @@
                 </article>
 
                 <article class="project-card">
-                    <span class="pg-index">05</span>
                     <div class="project-header">
                         <h3>AgroScan: AI-Powered Agricultural Diagnosis</h3>
                         <div class="project-tags">
@@ -280,7 +293,6 @@
                 </article>
 
                 <article class="project-card">
-                    <span class="pg-index">06</span>
                     <div class="project-header">
                         <h3>Multimodal Parkinson's Disease Detection</h3>
                         <div class="project-tags">
@@ -301,7 +313,6 @@
                 </article>
 
                 <article class="project-card">
-                    <span class="pg-index">07</span>
                     <div class="project-header">
                         <h3>Multimodal Contrastive Learning for Drug Analysis</h3>
                         <div class="project-tags">
@@ -325,7 +336,6 @@
                 </article>
 
                 <article class="project-card">
-                    <span class="pg-index">08</span>
                     <div class="project-header">
                         <h3>RAG Chatbot for UQAC Handbook</h3>
                         <div class="project-tags">
@@ -347,7 +357,6 @@
                 </article>
 
                 <article class="project-card">
-                    <span class="pg-index">09</span>
                     <div class="project-header">
                         <h3>Cell Classification CNN</h3>
                         <div class="project-tags">
@@ -369,7 +378,6 @@
                 </article>
 
                 <article class="project-card">
-                    <span class="pg-index">10</span>
                     <div class="project-header">
                         <h3>Mushroom Toxicity Prediction</h3>
                         <div class="project-tags">
@@ -389,7 +397,6 @@
                 </article>
 
                 <article class="project-card">
-                    <span class="pg-index">11</span>
                     <div class="project-header">
                         <h3>Poultry Disease Detection</h3>
                         <div class="project-tags">
@@ -410,7 +417,6 @@
                 </article>
 
                 <article class="project-card">
-                    <span class="pg-index">12</span>
                     <div class="project-header">
                         <h3>MNIST Digit Recognition CNN</h3>
                         <div class="project-tags">
@@ -432,7 +438,6 @@
                 </article>
 
                 <article class="project-card">
-                    <span class="pg-index">13</span>
                     <div class="project-header">
                         <h3>Music Genre Classification</h3>
                         <div class="project-tags">
@@ -453,7 +458,6 @@
                 </article>
 
                 <article class="project-card">
-                    <span class="pg-index">14</span>
                     <div class="project-header">
                         <h3>Tangram Solver</h3>
                         <div class="project-tags">
@@ -744,5 +748,6 @@
     <script src="chatbot-client.js?v=20261025a"></script>
     <script src="neural-network.js?v=20261025a"></script>
     <script src="enhancements.js?v=20261030a"></script>
+    <script src="hero-graph.js?v=20261030a"></script>
 </body>
 </html>

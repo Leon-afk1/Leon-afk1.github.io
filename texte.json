@@ -17,7 +17,22 @@
       "subtitle": "Generative AI Engineer — LLM & Graph RAG",
       "description": "Dual-degree engineer (UTBM / UQAC) specializing in Generative AI and Machine Learning, currently completing my end-of-studies internship at Astek Innovation Lab. Passionate about solving problems with data, traveling the world, and taking on new challenges, I combine a strong academic background with hands-on R&D experience.",
       "buttonProjects": "View Projects",
-      "buttonContact": "Get in Touch"
+      "buttonContact": "Get in Touch",
+      "askLabel": "Ask my knowledge graph",
+      "askPlaceholder": "e.g. Which projects use Graph RAG?",
+      "askButton": "Ask",
+      "askLoading": "Querying the graph…",
+      "askError": "The assistant did not answer. Try again in a moment, or use the chat button at the bottom right.",
+      "askRateLimited": "Too many questions in a short time. Wait a minute, then ask again.",
+      "askSuggestions": [
+        "Which projects use Graph RAG?",
+        "What did Léon do at Ksilink?"
+      ],
+      "graphTitle": "Léon's knowledge graph, exported from the Neo4j database the assistant queries",
+      "graphHint": "Nodes mentioned in the answer light up.",
+      "legendProjects": "Projects",
+      "legendSkills": "Skills",
+      "legendExperience": "Experience and education"
     },
     "about": {
       "title": "About Me",
@@ -347,7 +362,22 @@
       "subtitle": "Ingénieur IA Générative — LLM & Graph RAG",
       "description": "Ingénieur en double diplôme (UTBM / UQAC) spécialisé en IA générative et Machine Learning, actuellement en stage de fin d'études au sein de l'Astek Innovation Lab. Passionné par la résolution de problèmes avec les données, les voyages et les nouveaux défis, je combine une solide formation académique avec une expérience pratique en R&D.",
       "buttonProjects": "Voir les Projets",
-      "buttonContact": "Me Contacter"
+      "buttonContact": "Me Contacter",
+      "askLabel": "Interrogez mon graphe de connaissances",
+      "askPlaceholder": "Ex. : quels projets utilisent le Graph RAG ?",
+      "askButton": "Demander",
+      "askLoading": "Interrogation du graphe…",
+      "askError": "L'assistant n'a pas répondu. Réessayez dans un instant, ou utilisez le bouton de discussion en bas à droite.",
+      "askRateLimited": "Trop de questions en peu de temps. Attendez une minute, puis reposez votre question.",
+      "askSuggestions": [
+        "Quels projets utilisent le Graph RAG ?",
+        "Qu'a fait Léon chez Ksilink ?"
+      ],
+      "graphTitle": "Le graphe de connaissances de Léon, exporté de la base Neo4j qu'interroge l'assistant",
+      "graphHint": "Les nœuds cités dans la réponse s'allument.",
+      "legendProjects": "Projets",
+      "legendSkills": "Compétences",
+      "legendExperience": "Expériences et études"
     },
     "about": {
       "title": "À Propos de Moi",

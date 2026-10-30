@@ -1,0 +1,772 @@
+{
+ "width": 1000,
+ "height": 720,
+ "nodes": [
+  {
+   "id": "leon",
+   "type": "person",
+   "label": "Léon Morales",
+   "x": 527.7,
+   "y": 337.9
+  },
+  {
+   "id": "p:Cell Classification CNN",
+   "type": "project",
+   "label": "Cell Classification CNN",
+   "card": "card4",
+   "x": 246.1,
+   "y": 274.6
+  },
+  {
+   "id": "p:Industrial Document R&D Agentic Platform",
+   "type": "project",
+   "label": "Industrial Document R&D Agentic Platform",
+   "x": 734.8,
+   "y": 384.5
+  },
+  {
+   "id": "p:Intelligent RAG Chatbot & Dashboard",
+   "type": "project",
+   "label": "Intelligent RAG Chatbot & Dashboard",
+   "card": "card1",
+   "x": 665.4,
+   "y": 80.0
+  },
+  {
+   "id": "p:LLM Chatbot for Biologists",
+   "type": "project",
+   "label": "LLM Chatbot for Biologists",
+   "card": "card3",
+   "x": 676.8,
+   "y": 340.8
+  },
+  {
+   "id": "p:MNIST Digit Recognition Demo",
+   "type": "project",
+   "label": "MNIST Digit Recognition Demo",
+   "card": "card7",
+   "x": 446.0,
+   "y": 48.2
+  },
+  {
+   "id": "p:Multimodal Contrastive Learning",
+   "type": "project",
+   "label": "Multimodal Contrastive Learning",
+   "card": "card2",
+   "x": 287.8,
+   "y": 203.8
+  },
+  {
+   "id": "p:Mushroom Toxicity Prediction",
+   "type": "project",
+   "label": "Mushroom Toxicity Prediction",
+   "card": "card5",
+   "x": 339.7,
+   "y": 370.8
+  },
+  {
+   "id": "p:Music Genre Classification",
+   "type": "project",
+   "label": "Music Genre Classification",
+   "card": "card8",
+   "x": 236.6,
+   "y": 373.5
+  },
+  {
+   "id": "p:Personal AI Chatbot (Portfolio RAG)",
+   "type": "project",
+   "label": "Personal AI Chatbot (Portfolio RAG)",
+   "card": "card14",
+   "x": 734.5,
+   "y": 301.9
+  },
+  {
+   "id": "p:Portfolio Website",
+   "type": "project",
+   "label": "Portfolio Website",
+   "x": 870.0,
+   "y": 152.2
+  },
+  {
+   "id": "p:Tangram Solver",
+   "type": "project",
+   "label": "Tangram Solver",
+   "card": "card9",
+   "x": 386.5,
+   "y": 98.9
+  },
+  {
+   "id": "e:UTBM_Degree",
+   "type": "experience",
+   "label": "UTBM",
+   "x": 290.0,
+   "y": 312.4
+  },
+  {
+   "id": "e:UQAC_Degree",
+   "type": "experience",
+   "label": "UQAC",
+   "x": 298.1,
+   "y": 463.6
+  },
+  {
+   "id": "e:Yeditepe_Exchange",
+   "type": "experience",
+   "label": "Yeditepe",
+   "x": 689.0,
+   "y": 680.0
+  },
+  {
+   "id": "e:Ksilink_Internship",
+   "type": "experience",
+   "label": "Ksilink",
+   "x": 413.6,
+   "y": 281.0
+  },
+  {
+   "id": "e:Astek_RND_Internship",
+   "type": "experience",
+   "label": "Astek",
+   "x": 682.4,
+   "y": 409.4
+  },
+  {
+   "id": "e:Hackathon_UQAC_2025",
+   "type": "experience",
+   "label": "Hackathon UQAC",
+   "x": 620.6,
+   "y": 40.0
+  },
+  {
+   "id": "e:SKIUTBM_Presidency",
+   "type": "experience",
+   "label": "SKI'UTBM",
+   "x": 477.7,
+   "y": 680.0
+  },
+  {
+   "id": "s:Python",
+   "type": "skill",
+   "label": "Python",
+   "x": 499.4,
+   "y": 239.9
+  },
+  {
+   "id": "s:Docker",
+   "type": "skill",
+   "label": "Docker",
+   "x": 742.1,
+   "y": 209.4
+  },
+  {
+   "id": "s:Git",
+   "type": "skill",
+   "label": "Git",
+   "x": 645.4,
+   "y": 204.9
+  },
+  {
+   "id": "s:Cypher",
+   "type": "skill",
+   "label": "Cypher",
+   "x": 839.2,
+   "y": 343.2
+  },
+  {
+   "id": "s:Deep Learning",
+   "type": "skill",
+   "label": "Deep Learning",
+   "x": 130.0,
+   "y": 359.8
+  },
+  {
+   "id": "s:FastAPI",
+   "type": "skill",
+   "label": "FastAPI",
+   "x": 528.4,
+   "y": 147.0
+  },
+  {
+   "id": "s:Graph RAG",
+   "type": "skill",
+   "label": "Graph RAG",
+   "x": 824.3,
+   "y": 432.3
+  },
+  {
+   "id": "s:Knowledge Graph",
+   "type": "skill",
+   "label": "Knowledge Graph",
+   "x": 769.8,
+   "y": 495.3
+  },
+  {
+   "id": "s:NLP",
+   "type": "skill",
+   "label": "NLP",
+   "x": 554.5,
+   "y": 516.1
+  },
+  {
+   "id": "s:Neo4j",
+   "type": "skill",
+   "label": "Neo4j",
+   "x": 690.7,
+   "y": 513.6
+  },
+  {
+   "id": "s:Pandas",
+   "type": "skill",
+   "label": "Pandas",
+   "x": 139.1,
+   "y": 281.8
+  },
+  {
+   "id": "s:PyTorch",
+   "type": "skill",
+   "label": "PyTorch",
+   "x": 243.4,
+   "y": 152.8
+  },
+  {
+   "id": "s:TensorFlow",
+   "type": "skill",
+   "label": "TensorFlow",
+   "x": 179.8,
+   "y": 442.6
+  },
+  {
+   "id": "s:Weights & Biases",
+   "type": "skill",
+   "label": "Weights & Biases",
+   "x": 155.0,
+   "y": 204.4
+  },
+  {
+   "id": "s:Computer Vision",
+   "type": "skill",
+   "label": "Computer Vision",
+   "x": 266.6,
+   "y": 44.4
+  },
+  {
+   "id": "s:Data Visualization",
+   "type": "skill",
+   "label": "Data Visualization",
+   "x": 251.0,
+   "y": 516.2
+  },
+  {
+   "id": "s:Machine Learning",
+   "type": "skill",
+   "label": "Machine Learning",
+   "x": 131.7,
+   "y": 521.0
+  },
+  {
+   "id": "s:Streamlit",
+   "type": "skill",
+   "label": "Streamlit",
+   "x": 747.0,
+   "y": 88.5
+  }
+ ],
+ "edges": [
+  [
+   "e:Astek_RND_Internship",
+   "p:Industrial Document R&D Agentic Platform"
+  ],
+  [
+   "e:Astek_RND_Internship",
+   "s:Cypher"
+  ],
+  [
+   "e:Astek_RND_Internship",
+   "s:Docker"
+  ],
+  [
+   "e:Astek_RND_Internship",
+   "s:Git"
+  ],
+  [
+   "e:Astek_RND_Internship",
+   "s:Graph RAG"
+  ],
+  [
+   "e:Astek_RND_Internship",
+   "s:Knowledge Graph"
+  ],
+  [
+   "e:Astek_RND_Internship",
+   "s:NLP"
+  ],
+  [
+   "e:Astek_RND_Internship",
+   "s:Neo4j"
+  ],
+  [
+   "e:Astek_RND_Internship",
+   "s:Python"
+  ],
+  [
+   "e:Hackathon_UQAC_2025",
+   "p:Intelligent RAG Chatbot & Dashboard"
+  ],
+  [
+   "e:Hackathon_UQAC_2025",
+   "s:Docker"
+  ],
+  [
+   "e:Hackathon_UQAC_2025",
+   "s:FastAPI"
+  ],
+  [
+   "e:Hackathon_UQAC_2025",
+   "s:Python"
+  ],
+  [
+   "e:Hackathon_UQAC_2025",
+   "s:Streamlit"
+  ],
+  [
+   "e:Ksilink_Internship",
+   "p:Cell Classification CNN"
+  ],
+  [
+   "e:Ksilink_Internship",
+   "p:LLM Chatbot for Biologists"
+  ],
+  [
+   "e:Ksilink_Internship",
+   "p:Multimodal Contrastive Learning"
+  ],
+  [
+   "e:Ksilink_Internship",
+   "s:Computer Vision"
+  ],
+  [
+   "e:Ksilink_Internship",
+   "s:Cypher"
+  ],
+  [
+   "e:Ksilink_Internship",
+   "s:Data Visualization"
+  ],
+  [
+   "e:Ksilink_Internship",
+   "s:Deep Learning"
+  ],
+  [
+   "e:Ksilink_Internship",
+   "s:Docker"
+  ],
+  [
+   "e:Ksilink_Internship",
+   "s:Graph RAG"
+  ],
+  [
+   "e:Ksilink_Internship",
+   "s:Knowledge Graph"
+  ],
+  [
+   "e:Ksilink_Internship",
+   "s:NLP"
+  ],
+  [
+   "e:Ksilink_Internship",
+   "s:Neo4j"
+  ],
+  [
+   "e:Ksilink_Internship",
+   "s:Pandas"
+  ],
+  [
+   "e:Ksilink_Internship",
+   "s:PyTorch"
+  ],
+  [
+   "e:Ksilink_Internship",
+   "s:Python"
+  ],
+  [
+   "e:Ksilink_Internship",
+   "s:Streamlit"
+  ],
+  [
+   "e:Ksilink_Internship",
+   "s:TensorFlow"
+  ],
+  [
+   "e:Ksilink_Internship",
+   "s:Weights & Biases"
+  ],
+  [
+   "e:UQAC_Degree",
+   "s:Deep Learning"
+  ],
+  [
+   "e:UQAC_Degree",
+   "s:Machine Learning"
+  ],
+  [
+   "e:UQAC_Degree",
+   "s:NLP"
+  ],
+  [
+   "e:UQAC_Degree",
+   "s:PyTorch"
+  ],
+  [
+   "e:UQAC_Degree",
+   "s:TensorFlow"
+  ],
+  [
+   "e:UTBM_Degree",
+   "p:Mushroom Toxicity Prediction"
+  ],
+  [
+   "e:UTBM_Degree",
+   "p:Music Genre Classification"
+  ],
+  [
+   "e:UTBM_Degree",
+   "p:Tangram Solver"
+  ],
+  [
+   "e:UTBM_Degree",
+   "s:Data Visualization"
+  ],
+  [
+   "e:UTBM_Degree",
+   "s:FastAPI"
+  ],
+  [
+   "e:UTBM_Degree",
+   "s:Git"
+  ],
+  [
+   "e:UTBM_Degree",
+   "s:Machine Learning"
+  ],
+  [
+   "e:UTBM_Degree",
+   "s:Python"
+  ],
+  [
+   "e:UTBM_Degree",
+   "s:TensorFlow"
+  ],
+  [
+   "e:UTBM_Degree",
+   "s:Weights & Biases"
+  ],
+  [
+   "leon",
+   "e:Astek_RND_Internship"
+  ],
+  [
+   "leon",
+   "e:Hackathon_UQAC_2025"
+  ],
+  [
+   "leon",
+   "e:Ksilink_Internship"
+  ],
+  [
+   "leon",
+   "e:SKIUTBM_Presidency"
+  ],
+  [
+   "leon",
+   "e:UQAC_Degree"
+  ],
+  [
+   "leon",
+   "e:UTBM_Degree"
+  ],
+  [
+   "leon",
+   "e:Yeditepe_Exchange"
+  ],
+  [
+   "leon",
+   "p:Cell Classification CNN"
+  ],
+  [
+   "leon",
+   "p:Industrial Document R&D Agentic Platform"
+  ],
+  [
+   "leon",
+   "p:Intelligent RAG Chatbot & Dashboard"
+  ],
+  [
+   "leon",
+   "p:LLM Chatbot for Biologists"
+  ],
+  [
+   "leon",
+   "p:MNIST Digit Recognition Demo"
+  ],
+  [
+   "leon",
+   "p:Multimodal Contrastive Learning"
+  ],
+  [
+   "leon",
+   "p:Mushroom Toxicity Prediction"
+  ],
+  [
+   "leon",
+   "p:Music Genre Classification"
+  ],
+  [
+   "leon",
+   "p:Personal AI Chatbot (Portfolio RAG)"
+  ],
+  [
+   "leon",
+   "p:Portfolio Website"
+  ],
+  [
+   "leon",
+   "p:Tangram Solver"
+  ],
+  [
+   "p:Cell Classification CNN",
+   "s:Computer Vision"
+  ],
+  [
+   "p:Cell Classification CNN",
+   "s:Data Visualization"
+  ],
+  [
+   "p:Cell Classification CNN",
+   "s:Deep Learning"
+  ],
+  [
+   "p:Cell Classification CNN",
+   "s:Pandas"
+  ],
+  [
+   "p:Cell Classification CNN",
+   "s:PyTorch"
+  ],
+  [
+   "p:Cell Classification CNN",
+   "s:Python"
+  ],
+  [
+   "p:Cell Classification CNN",
+   "s:TensorFlow"
+  ],
+  [
+   "p:Cell Classification CNN",
+   "s:Weights & Biases"
+  ],
+  [
+   "p:Industrial Document R&D Agentic Platform",
+   "s:Cypher"
+  ],
+  [
+   "p:Industrial Document R&D Agentic Platform",
+   "s:Docker"
+  ],
+  [
+   "p:Industrial Document R&D Agentic Platform",
+   "s:Git"
+  ],
+  [
+   "p:Industrial Document R&D Agentic Platform",
+   "s:Graph RAG"
+  ],
+  [
+   "p:Industrial Document R&D Agentic Platform",
+   "s:Knowledge Graph"
+  ],
+  [
+   "p:Industrial Document R&D Agentic Platform",
+   "s:NLP"
+  ],
+  [
+   "p:Industrial Document R&D Agentic Platform",
+   "s:Neo4j"
+  ],
+  [
+   "p:Industrial Document R&D Agentic Platform",
+   "s:Python"
+  ],
+  [
+   "p:Intelligent RAG Chatbot & Dashboard",
+   "s:Docker"
+  ],
+  [
+   "p:Intelligent RAG Chatbot & Dashboard",
+   "s:FastAPI"
+  ],
+  [
+   "p:Intelligent RAG Chatbot & Dashboard",
+   "s:Python"
+  ],
+  [
+   "p:Intelligent RAG Chatbot & Dashboard",
+   "s:Streamlit"
+  ],
+  [
+   "p:LLM Chatbot for Biologists",
+   "s:Cypher"
+  ],
+  [
+   "p:LLM Chatbot for Biologists",
+   "s:Docker"
+  ],
+  [
+   "p:LLM Chatbot for Biologists",
+   "s:Graph RAG"
+  ],
+  [
+   "p:LLM Chatbot for Biologists",
+   "s:Knowledge Graph"
+  ],
+  [
+   "p:LLM Chatbot for Biologists",
+   "s:NLP"
+  ],
+  [
+   "p:LLM Chatbot for Biologists",
+   "s:Neo4j"
+  ],
+  [
+   "p:LLM Chatbot for Biologists",
+   "s:Python"
+  ],
+  [
+   "p:LLM Chatbot for Biologists",
+   "s:Streamlit"
+  ],
+  [
+   "p:MNIST Digit Recognition Demo",
+   "s:Computer Vision"
+  ],
+  [
+   "p:MNIST Digit Recognition Demo",
+   "s:Git"
+  ],
+  [
+   "p:MNIST Digit Recognition Demo",
+   "s:PyTorch"
+  ],
+  [
+   "p:MNIST Digit Recognition Demo",
+   "s:Python"
+  ],
+  [
+   "p:Multimodal Contrastive Learning",
+   "s:Computer Vision"
+  ],
+  [
+   "p:Multimodal Contrastive Learning",
+   "s:Deep Learning"
+  ],
+  [
+   "p:Multimodal Contrastive Learning",
+   "s:Pandas"
+  ],
+  [
+   "p:Multimodal Contrastive Learning",
+   "s:PyTorch"
+  ],
+  [
+   "p:Multimodal Contrastive Learning",
+   "s:Python"
+  ],
+  [
+   "p:Multimodal Contrastive Learning",
+   "s:Weights & Biases"
+  ],
+  [
+   "p:Mushroom Toxicity Prediction",
+   "s:FastAPI"
+  ],
+  [
+   "p:Mushroom Toxicity Prediction",
+   "s:Machine Learning"
+  ],
+  [
+   "p:Mushroom Toxicity Prediction",
+   "s:Pandas"
+  ],
+  [
+   "p:Mushroom Toxicity Prediction",
+   "s:Python"
+  ],
+  [
+   "p:Music Genre Classification",
+   "s:Data Visualization"
+  ],
+  [
+   "p:Music Genre Classification",
+   "s:Deep Learning"
+  ],
+  [
+   "p:Music Genre Classification",
+   "s:Machine Learning"
+  ],
+  [
+   "p:Music Genre Classification",
+   "s:Pandas"
+  ],
+  [
+   "p:Music Genre Classification",
+   "s:Python"
+  ],
+  [
+   "p:Music Genre Classification",
+   "s:TensorFlow"
+  ],
+  [
+   "p:Music Genre Classification",
+   "s:Weights & Biases"
+  ],
+  [
+   "p:Personal AI Chatbot (Portfolio RAG)",
+   "s:Cypher"
+  ],
+  [
+   "p:Personal AI Chatbot (Portfolio RAG)",
+   "s:Docker"
+  ],
+  [
+   "p:Personal AI Chatbot (Portfolio RAG)",
+   "s:FastAPI"
+  ],
+  [
+   "p:Personal AI Chatbot (Portfolio RAG)",
+   "s:Git"
+  ],
+  [
+   "p:Personal AI Chatbot (Portfolio RAG)",
+   "s:Graph RAG"
+  ],
+  [
+   "p:Personal AI Chatbot (Portfolio RAG)",
+   "s:Knowledge Graph"
+  ],
+  [
+   "p:Personal AI Chatbot (Portfolio RAG)",
+   "s:Neo4j"
+  ],
+  [
+   "p:Personal AI Chatbot (Portfolio RAG)",
+   "s:Python"
+  ],
+  [
+   "p:Portfolio Website",
+   "s:Git"
+  ],
+  [
+   "p:Tangram Solver",
+   "s:Python"
+  ]
+ ]
+}
