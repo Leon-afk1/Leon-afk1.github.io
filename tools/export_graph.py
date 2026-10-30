@@ -49,6 +49,8 @@ PROJECT_CARDS = {
 }
 
 MAX_SKILLS = 18
+# Always shown, even if used by a single project: the cloud stack of the portfolio assistant
+FEATURED_SKILLS = ["Google Cloud Run", "Terraform", "GitHub Actions"]
 WIDTH, HEIGHT = 1000, 720
 
 
@@ -83,7 +85,7 @@ for l in links:
     if l["src"] in shown_sources:
         skill_sources.setdefault(l["skill"], set()).add(l["src"])
 skills = sorted((s for s, src in skill_sources.items() if len(src) >= 2), key=lambda s: (-len(skill_sources[s]), s))
-skills = skills[:MAX_SKILLS]
+skills = skills[:MAX_SKILLS] + [s for s in FEATURED_SKILLS if s in skill_sources and s not in skills[:MAX_SKILLS]]
 
 # --- Nodes and edges
 nodes = [{"id": "leon", "type": "person", "label": "Léon Morales"}]

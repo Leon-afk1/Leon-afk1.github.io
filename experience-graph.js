@@ -48,7 +48,8 @@
         var svg = document.getElementById('experience-map-svg');
         if (!t || !svg || !window.portfolioProjects) return;
         svg.innerHTML = '';
-        var title = svgEl('title'); title.textContent = t.experience.mapLabel; svg.appendChild(title);
+        // aria-label rather than <title>: a <title> shows as a tooltip that hides part of the map
+        svg.setAttribute('aria-label', t.experience.mapLabel);
 
         // Projects first, to know how many lanes they need above the bands
         var projects = window.portfolioProjects.list.slice().sort(function (a, b) { return a.start.localeCompare(b.start); });
@@ -98,9 +99,13 @@
             var g = svgEl('g', { 'class': 'em-project', transform: 'translate(' + n.x + ' ' + y + ')' });
             g.appendChild(svgEl('circle', { r: 8 }));
             var label = svgEl('text', { x: 13, y: 5 });
-            label.textContent = p.title.length > 26 ? p.title.slice(0, 25).trim() + '…' : p.title;
+            var short = p.title.length > 26 ? p.title.slice(0, 25).trim() + '…' : p.title;
+            label.textContent = short;
             g.appendChild(label);
-            var tip = svgEl('title'); tip.textContent = p.title; g.appendChild(tip);
+            // Full title on hover or focus, raised above the other nodes
+            g.addEventListener('mouseenter', function () { label.textContent = p.title; svg.appendChild(g); });
+            g.addEventListener('focus', function () { label.textContent = p.title; });
+            ['mouseleave', 'blur'].forEach(function (ev) { g.addEventListener(ev, function () { label.textContent = short; }); });
             g.setAttribute('aria-label', p.title);
             activate(g, function () { window.portfolioProjects.open(n.p.key); });
             svg.appendChild(g);

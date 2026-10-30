@@ -163,7 +163,7 @@
         $('.hero-ask-label').textContent = t.askLabel;
         $('#hero-ask-input').placeholder = t.askPlaceholder;
         $('.hero-ask-submit').textContent = t.askButton;
-        $('#hero-graph-title').textContent = t.graphTitle;
+        $('#hero-graph-svg').setAttribute('aria-label', t.graphTitle);
         $('.legend-project').textContent = t.legendProjects;
         $('.legend-skill').textContent = t.legendSkills;
         $('.legend-experience').textContent = t.legendExperience;
@@ -194,7 +194,7 @@
         applyTexts();
         document.addEventListener('languageChanged', function () { setTimeout(applyTexts, 0); });
 
-        fetch('graph.json?v=20261030a').then(function (r) { return r.json(); }).then(function (data) {
+        fetch('graph.json?v=20261031a').then(function (r) { return r.json(); }).then(function (data) {
             graph = data;
             render(svg);
         }).catch(function () { $('.hero-graph').hidden = true; });

@@ -71,10 +71,26 @@
       "category4Item4": "Git & GitHub",
       "category4Item5": "Docker (Basics)",
       "certificationsTitle": "Certifications & Badges",
-      "cert1": "Neo4j Certified Professional",
-      "cert2": "NVIDIA - Fundamentals of Deep Learning",
-      "cert3": "Google - AI Fundamentals",
-      "cert4": "Google - Get started with Google Analytics"
+      "certifications": [
+        {
+          "issuer": "Neo4j",
+          "name": "Neo4j Certified Professional"
+        },
+        {
+          "issuer": "NVIDIA",
+          "name": "Fundamentals of Deep Learning"
+        },
+        {
+          "issuer": "Google",
+          "name": "AI Fundamentals"
+        },
+        {
+          "issuer": "Google",
+          "name": "Get started with Google Analytics"
+        }
+      ],
+      "certLink": "View certificate",
+      "certCount": "{n} verifiable certifications"
     },
     "projects": {
       "title": "Projects",
@@ -431,10 +447,26 @@
       "category4Item4": "Git & GitHub",
       "category4Item5": "Docker (Bases)",
       "certificationsTitle": "Certifications & Badges",
-      "cert1": "Professionnel Certifié Neo4j",
-      "cert2": "NVIDIA - Fondamentaux de l'Apprentissage Profond",
-      "cert3": "Google - Fondamentaux de l'IA",
-      "cert4": "Google - Commencer avec Google Analytics"
+      "certifications": [
+        {
+          "issuer": "Neo4j",
+          "name": "Professionnel certifié Neo4j"
+        },
+        {
+          "issuer": "NVIDIA",
+          "name": "Fondamentaux de l'apprentissage profond"
+        },
+        {
+          "issuer": "Google",
+          "name": "Fondamentaux de l'IA"
+        },
+        {
+          "issuer": "Google",
+          "name": "Premiers pas avec Google Analytics"
+        }
+      ],
+      "certLink": "Voir le certificat",
+      "certCount": "{n} certifications vérifiables"
     },
     "projects": {
       "title": "Projets Principaux",

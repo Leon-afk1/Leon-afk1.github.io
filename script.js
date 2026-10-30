@@ -446,12 +446,6 @@ function updateContent() {
     safeUpdateElement('#skills .section-title', t.skills.title);
     // Certifications section
     safeUpdateElement('.subsection-title', t.skills.certificationsTitle);
-    const certificationLinks = document.querySelectorAll('.certification-list a');
-    if (certificationLinks[0]) certificationLinks[0].textContent = t.skills.cert1;
-    if (certificationLinks[1]) certificationLinks[1].textContent = t.skills.cert2;
-    if (certificationLinks[2]) certificationLinks[2].textContent = t.skills.cert3;
-    if (certificationLinks[3]) certificationLinks[3].textContent = t.skills.cert4;
-    
     // Projects section
     document.querySelector('#projects .section-title').textContent = t.projects.title;
     // MNIST Demo section

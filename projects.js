@@ -172,8 +172,8 @@
 
         var aside = el('aside', 'projects-graph');
         aside.setAttribute('aria-label', t.projects.graphLabel);
-        var svg = svgEl('svg', { 'class': 'projects-graph-svg', role: 'img' });
-        var title = svgEl('title'); title.textContent = t.projects.graphLabel; svg.appendChild(title);
+        // aria-label rather than <title>: a <title> shows as a tooltip that hides part of the graph
+        var svg = svgEl('svg', { 'class': 'projects-graph-svg', role: 'img', 'aria-label': t.projects.graphLabel });
         aside.appendChild(svg);
         var caption = el('p', 'projects-graph-caption');
         caption.setAttribute('aria-live', 'polite');
@@ -295,7 +295,7 @@
     document.addEventListener('languageChanged', function () { setTimeout(render, 0); });
     document.addEventListener('DOMContentLoaded', function () {
         render();
-        fetch('graph.json?v=20261030b').then(function (r) { return r.json(); }).then(function (data) {
+        fetch('graph.json?v=20261031a').then(function (r) { return r.json(); }).then(function (data) {
             graph = data;
             data.nodes.forEach(function (n) { if (n.card) nodeByCard[n.card] = n.id; });
             var cardById = {};
