@@ -6,269 +6,309 @@
    "id": "leon",
    "type": "person",
    "label": "Léon Morales",
-   "x": 527.7,
-   "y": 337.9
+   "x": 463.3,
+   "y": 360.0
+  },
+  {
+   "id": "p:AgroScan: AI-Powered Agricultural Diagnosis",
+   "type": "project",
+   "label": "AgroScan: AI-Powered Agricultural Diagnosis",
+   "card": "card12",
+   "x": 587.7,
+   "y": 106.1
   },
   {
    "id": "p:Cell Classification CNN",
    "type": "project",
    "label": "Cell Classification CNN",
    "card": "card4",
-   "x": 246.1,
-   "y": 274.6
+   "x": 762.0,
+   "y": 220.7
+  },
+  {
+   "id": "p:Human Activity Recognition via Wearable Sensors",
+   "type": "project",
+   "label": "Human Activity Recognition via Wearable Sensors",
+   "card": "card10",
+   "x": 772.6,
+   "y": 299.1
   },
   {
    "id": "p:Industrial Document R&D Agentic Platform",
    "type": "project",
    "label": "Industrial Document R&D Agentic Platform",
-   "x": 734.8,
-   "y": 384.5
+   "x": 279.3,
+   "y": 183.2
   },
   {
    "id": "p:Intelligent RAG Chatbot & Dashboard",
    "type": "project",
    "label": "Intelligent RAG Chatbot & Dashboard",
    "card": "card1",
-   "x": 665.4,
-   "y": 80.0
+   "x": 172.6,
+   "y": 402.9
   },
   {
    "id": "p:LLM Chatbot for Biologists",
    "type": "project",
    "label": "LLM Chatbot for Biologists",
    "card": "card3",
-   "x": 676.8,
-   "y": 340.8
+   "x": 310.8,
+   "y": 134.5
   },
   {
    "id": "p:MNIST Digit Recognition Demo",
    "type": "project",
    "label": "MNIST Digit Recognition Demo",
    "card": "card7",
-   "x": 446.0,
-   "y": 48.2
+   "x": 600.2,
+   "y": 162.8
   },
   {
    "id": "p:Multimodal Contrastive Learning",
    "type": "project",
    "label": "Multimodal Contrastive Learning",
    "card": "card2",
-   "x": 287.8,
-   "y": 203.8
+   "x": 716.6,
+   "y": 184.8
+  },
+  {
+   "id": "p:Multimodal Parkinson's Disease Detection",
+   "type": "project",
+   "label": "Multimodal Parkinson's Disease Detection",
+   "card": "card13",
+   "x": 671.8,
+   "y": 519.6
   },
   {
    "id": "p:Mushroom Toxicity Prediction",
    "type": "project",
    "label": "Mushroom Toxicity Prediction",
    "card": "card5",
-   "x": 339.7,
-   "y": 370.8
+   "x": 576.8,
+   "y": 533.6
   },
   {
    "id": "p:Music Genre Classification",
    "type": "project",
    "label": "Music Genre Classification",
    "card": "card8",
-   "x": 236.6,
-   "y": 373.5
+   "x": 777.5,
+   "y": 436.4
   },
   {
    "id": "p:Personal AI Chatbot (Portfolio RAG)",
    "type": "project",
    "label": "Personal AI Chatbot (Portfolio RAG)",
    "card": "card14",
-   "x": 734.5,
-   "y": 301.9
+   "x": 238.8,
+   "y": 236.8
   },
   {
    "id": "p:Portfolio Website",
    "type": "project",
    "label": "Portfolio Website",
-   "x": 870.0,
-   "y": 152.2
+   "x": 148.0,
+   "y": 531.7
+  },
+  {
+   "id": "p:Poultry Disease Detection",
+   "type": "project",
+   "label": "Poultry Disease Detection",
+   "card": "card6",
+   "x": 673.8,
+   "y": 223.9
+  },
+  {
+   "id": "p:RAG Chatbot for UQAC Handbook",
+   "type": "project",
+   "label": "RAG Chatbot for UQAC Handbook",
+   "card": "card11",
+   "x": 403.0,
+   "y": 257.3
   },
   {
    "id": "p:Tangram Solver",
    "type": "project",
    "label": "Tangram Solver",
    "card": "card9",
-   "x": 386.5,
-   "y": 98.9
+   "x": 486.7,
+   "y": 569.5
   },
   {
    "id": "e:UTBM_Degree",
    "type": "experience",
    "label": "UTBM",
-   "x": 290.0,
-   "y": 312.4
+   "x": 612.6,
+   "y": 439.0
   },
   {
    "id": "e:UQAC_Degree",
    "type": "experience",
    "label": "UQAC",
-   "x": 298.1,
-   "y": 463.6
+   "x": 665.0,
+   "y": 308.7
   },
   {
    "id": "e:Yeditepe_Exchange",
    "type": "experience",
    "label": "Yeditepe",
-   "x": 689.0,
+   "x": 386.6,
    "y": 680.0
   },
   {
    "id": "e:Ksilink_Internship",
    "type": "experience",
    "label": "Ksilink",
-   "x": 413.6,
-   "y": 281.0
+   "x": 515.6,
+   "y": 177.4
   },
   {
    "id": "e:Astek_RND_Internship",
    "type": "experience",
    "label": "Astek",
-   "x": 682.4,
-   "y": 409.4
+   "x": 224.8,
+   "y": 163.3
   },
   {
    "id": "e:Hackathon_UQAC_2025",
    "type": "experience",
    "label": "Hackathon UQAC",
-   "x": 620.6,
-   "y": 40.0
+   "x": 230.9,
+   "y": 423.9
   },
   {
    "id": "e:SKIUTBM_Presidency",
    "type": "experience",
    "label": "SKI'UTBM",
-   "x": 477.7,
+   "x": 236.9,
    "y": 680.0
   },
   {
    "id": "s:Python",
    "type": "skill",
    "label": "Python",
-   "x": 499.4,
-   "y": 239.9
-  },
-  {
-   "id": "s:Docker",
-   "type": "skill",
-   "label": "Docker",
-   "x": 742.1,
-   "y": 209.4
-  },
-  {
-   "id": "s:Git",
-   "type": "skill",
-   "label": "Git",
-   "x": 645.4,
-   "y": 204.9
-  },
-  {
-   "id": "s:Cypher",
-   "type": "skill",
-   "label": "Cypher",
-   "x": 839.2,
-   "y": 343.2
+   "x": 573.3,
+   "y": 313.1
   },
   {
    "id": "s:Deep Learning",
    "type": "skill",
    "label": "Deep Learning",
-   "x": 130.0,
-   "y": 359.8
+   "x": 864.0,
+   "y": 227.3
   },
   {
-   "id": "s:FastAPI",
+   "id": "s:Docker",
    "type": "skill",
-   "label": "FastAPI",
-   "x": 528.4,
-   "y": 147.0
-  },
-  {
-   "id": "s:Graph RAG",
-   "type": "skill",
-   "label": "Graph RAG",
-   "x": 824.3,
-   "y": 432.3
-  },
-  {
-   "id": "s:Knowledge Graph",
-   "type": "skill",
-   "label": "Knowledge Graph",
-   "x": 769.8,
-   "y": 495.3
-  },
-  {
-   "id": "s:NLP",
-   "type": "skill",
-   "label": "NLP",
-   "x": 554.5,
-   "y": 516.1
-  },
-  {
-   "id": "s:Neo4j",
-   "type": "skill",
-   "label": "Neo4j",
-   "x": 690.7,
-   "y": 513.6
-  },
-  {
-   "id": "s:Pandas",
-   "type": "skill",
-   "label": "Pandas",
-   "x": 139.1,
-   "y": 281.8
-  },
-  {
-   "id": "s:PyTorch",
-   "type": "skill",
-   "label": "PyTorch",
-   "x": 243.4,
-   "y": 152.8
-  },
-  {
-   "id": "s:TensorFlow",
-   "type": "skill",
-   "label": "TensorFlow",
-   "x": 179.8,
-   "y": 442.6
-  },
-  {
-   "id": "s:Weights & Biases",
-   "type": "skill",
-   "label": "Weights & Biases",
-   "x": 155.0,
-   "y": 204.4
+   "label": "Docker",
+   "x": 130.8,
+   "y": 239.6
   },
   {
    "id": "s:Computer Vision",
    "type": "skill",
    "label": "Computer Vision",
-   "x": 266.6,
-   "y": 44.4
+   "x": 703.7,
+   "y": 40.0
   },
   {
-   "id": "s:Data Visualization",
+   "id": "s:Git",
    "type": "skill",
-   "label": "Data Visualization",
-   "x": 251.0,
-   "y": 516.2
+   "label": "Git",
+   "x": 324.4,
+   "y": 339.3
+  },
+  {
+   "id": "s:NLP",
+   "type": "skill",
+   "label": "NLP",
+   "x": 426.9,
+   "y": 96.1
+  },
+  {
+   "id": "s:PyTorch",
+   "type": "skill",
+   "label": "PyTorch",
+   "x": 819.2,
+   "y": 129.7
+  },
+  {
+   "id": "s:Cypher",
+   "type": "skill",
+   "label": "Cypher",
+   "x": 236.9,
+   "y": 40.0
+  },
+  {
+   "id": "s:FastAPI",
+   "type": "skill",
+   "label": "FastAPI",
+   "x": 326.1,
+   "y": 502.9
+  },
+  {
+   "id": "s:Graph RAG",
+   "type": "skill",
+   "label": "Graph RAG",
+   "x": 306.7,
+   "y": 40.0
+  },
+  {
+   "id": "s:Knowledge Graph",
+   "type": "skill",
+   "label": "Knowledge Graph",
+   "x": 130.0,
+   "y": 98.7
   },
   {
    "id": "s:Machine Learning",
    "type": "skill",
    "label": "Machine Learning",
-   "x": 131.7,
-   "y": 521.0
+   "x": 790.4,
+   "y": 570.1
+  },
+  {
+   "id": "s:Neo4j",
+   "type": "skill",
+   "label": "Neo4j",
+   "x": 172.5,
+   "y": 40.0
+  },
+  {
+   "id": "s:Pandas",
+   "type": "skill",
+   "label": "Pandas",
+   "x": 735.4,
+   "y": 372.0
   },
   {
    "id": "s:Streamlit",
    "type": "skill",
    "label": "Streamlit",
-   "x": 747.0,
-   "y": 88.5
+   "x": 185.4,
+   "y": 296.2
+  },
+  {
+   "id": "s:TensorFlow",
+   "type": "skill",
+   "label": "TensorFlow",
+   "x": 842.0,
+   "y": 366.1
+  },
+  {
+   "id": "s:Weights & Biases",
+   "type": "skill",
+   "label": "Weights & Biases",
+   "x": 870.0,
+   "y": 302.3
+  },
+  {
+   "id": "s:CNN",
+   "type": "skill",
+   "label": "CNN",
+   "x": 790.1,
+   "y": 40.0
   }
  ],
  "edges": [
@@ -342,15 +382,15 @@
   ],
   [
    "e:Ksilink_Internship",
+   "s:CNN"
+  ],
+  [
+   "e:Ksilink_Internship",
    "s:Computer Vision"
   ],
   [
    "e:Ksilink_Internship",
    "s:Cypher"
-  ],
-  [
-   "e:Ksilink_Internship",
-   "s:Data Visualization"
   ],
   [
    "e:Ksilink_Internship",
@@ -402,6 +442,22 @@
   ],
   [
    "e:UQAC_Degree",
+   "p:AgroScan: AI-Powered Agricultural Diagnosis"
+  ],
+  [
+   "e:UQAC_Degree",
+   "p:Human Activity Recognition via Wearable Sensors"
+  ],
+  [
+   "e:UQAC_Degree",
+   "p:Multimodal Parkinson's Disease Detection"
+  ],
+  [
+   "e:UQAC_Degree",
+   "p:RAG Chatbot for UQAC Handbook"
+  ],
+  [
+   "e:UQAC_Degree",
    "s:Deep Learning"
   ],
   [
@@ -430,11 +486,11 @@
   ],
   [
    "e:UTBM_Degree",
-   "p:Tangram Solver"
+   "p:Poultry Disease Detection"
   ],
   [
    "e:UTBM_Degree",
-   "s:Data Visualization"
+   "p:Tangram Solver"
   ],
   [
    "e:UTBM_Degree",
@@ -490,7 +546,15 @@
   ],
   [
    "leon",
+   "p:AgroScan: AI-Powered Agricultural Diagnosis"
+  ],
+  [
+   "leon",
    "p:Cell Classification CNN"
+  ],
+  [
+   "leon",
+   "p:Human Activity Recognition via Wearable Sensors"
   ],
   [
    "leon",
@@ -514,6 +578,10 @@
   ],
   [
    "leon",
+   "p:Multimodal Parkinson's Disease Detection"
+  ],
+  [
+   "leon",
    "p:Mushroom Toxicity Prediction"
   ],
   [
@@ -530,15 +598,31 @@
   ],
   [
    "leon",
+   "p:Poultry Disease Detection"
+  ],
+  [
+   "leon",
+   "p:RAG Chatbot for UQAC Handbook"
+  ],
+  [
+   "leon",
    "p:Tangram Solver"
+  ],
+  [
+   "p:AgroScan: AI-Powered Agricultural Diagnosis",
+   "s:Computer Vision"
+  ],
+  [
+   "p:AgroScan: AI-Powered Agricultural Diagnosis",
+   "s:Python"
+  ],
+  [
+   "p:Cell Classification CNN",
+   "s:CNN"
   ],
   [
    "p:Cell Classification CNN",
    "s:Computer Vision"
-  ],
-  [
-   "p:Cell Classification CNN",
-   "s:Data Visualization"
   ],
   [
    "p:Cell Classification CNN",
@@ -565,6 +649,18 @@
    "s:Weights & Biases"
   ],
   [
+   "p:Human Activity Recognition via Wearable Sensors",
+   "s:Deep Learning"
+  ],
+  [
+   "p:Human Activity Recognition via Wearable Sensors",
+   "s:PyTorch"
+  ],
+  [
+   "p:Human Activity Recognition via Wearable Sensors",
+   "s:Python"
+  ],
+  [
    "p:Industrial Document R&D Agentic Platform",
    "s:Cypher"
   ],
@@ -643,6 +739,10 @@
   [
    "p:LLM Chatbot for Biologists",
    "s:Streamlit"
+  ],
+  [
+   "p:MNIST Digit Recognition Demo",
+   "s:CNN"
   ],
   [
    "p:MNIST Digit Recognition Demo",
@@ -685,6 +785,14 @@
    "s:Weights & Biases"
   ],
   [
+   "p:Multimodal Parkinson's Disease Detection",
+   "s:Machine Learning"
+  ],
+  [
+   "p:Multimodal Parkinson's Disease Detection",
+   "s:Python"
+  ],
+  [
    "p:Mushroom Toxicity Prediction",
    "s:FastAPI"
   ],
@@ -699,10 +807,6 @@
   [
    "p:Mushroom Toxicity Prediction",
    "s:Python"
-  ],
-  [
-   "p:Music Genre Classification",
-   "s:Data Visualization"
   ],
   [
    "p:Music Genre Classification",
@@ -763,6 +867,34 @@
   [
    "p:Portfolio Website",
    "s:Git"
+  ],
+  [
+   "p:Poultry Disease Detection",
+   "s:CNN"
+  ],
+  [
+   "p:Poultry Disease Detection",
+   "s:Computer Vision"
+  ],
+  [
+   "p:Poultry Disease Detection",
+   "s:Deep Learning"
+  ],
+  [
+   "p:Poultry Disease Detection",
+   "s:Python"
+  ],
+  [
+   "p:RAG Chatbot for UQAC Handbook",
+   "s:NLP"
+  ],
+  [
+   "p:RAG Chatbot for UQAC Handbook",
+   "s:Python"
+  ],
+  [
+   "p:RAG Chatbot for UQAC Handbook",
+   "s:Streamlit"
   ],
   [
    "p:Tangram Solver",

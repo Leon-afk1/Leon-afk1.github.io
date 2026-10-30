@@ -170,6 +170,12 @@ for _ in range(300):
                         node["x"] = round(min(WIDTH - MARGIN_R, max(MARGIN_L, node["x"] + sign * ux * push)), 1)
                         node["y"] = round(min(HEIGHT - MARGIN_Y, max(MARGIN_Y, node["y"] + sign * uy * push)), 1)
                 moved = True
+    # Keep the area of Léon's label (centred above his node) clear
+    leon = nodes[0]
+    for n in nodes[1:]:
+        if abs(n["x"] - leon["x"]) < 110 and leon["y"] - 70 < n["y"] < leon["y"] + 10:
+            n["x"] = round(leon["x"] + (110 if n["x"] >= leon["x"] else -110), 1)
+            moved = True
     if not moved:
         break
 
