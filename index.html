@@ -20,11 +20,11 @@
     <link rel="stylesheet" href="styles.css?v=20261030c">
     <link rel="stylesheet" href="enhancements.css?v=20261030b">
     <link rel="stylesheet" href="hero.css?v=20261030a">
-    <link rel="stylesheet" href="projects.css?v=20261030a">
-    <link rel="stylesheet" href="sections.css?v=20261030a">
+    <link rel="stylesheet" href="projects.css?v=20261030b">
+    <link rel="stylesheet" href="sections.css?v=20261030b">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 </head>
 <body>
     <a class="skip-link" href="#about">Skip to content</a>
@@ -134,6 +134,11 @@
     <section id="skills" class="skills">
         <div class="container">
             <h2 class="section-title" data-i18n="skills.title">Technical Skills</h2>
+            <div class="cypher-head" data-rows="3" aria-hidden="true">
+                <pre><code>MATCH (leon:Person {name: "Léon Morales"})-[:HAS_SKILL]-&gt;(s:Skill)
+RETURN s.category, collect(s.name) AS skills</code></pre>
+                <p class="cypher-result"></p>
+            </div>
             <div class="certifications-section">
                 <h3 class="subsection-title" data-i18n="skills.certificationsTitle">Certifications & Badges</h3>
                 <ul class="certification-list">
@@ -150,6 +155,13 @@
     <section id="projects" class="projects">
         <div class="container">
             <h2 class="section-title">Projects</h2>
+            <div class="cypher-head" data-rows="14" aria-hidden="true">
+                <pre><code>MATCH (leon:Person {name: "Léon Morales"})-[:WORKED_ON]-&gt;(p:Project)
+OPTIONAL MATCH (p)-[:UTILIZED_SKILL]-&gt;(s:Skill)
+RETURN p, collect(s.name) AS skills
+ORDER BY p.startDate DESC</code></pre>
+                <p class="cypher-result"></p>
+            </div>
 
             <div id="projects-list" class="projects-list"></div>
             <noscript><p><a href="https://github.com/Leon-afk1">github.com/Leon-afk1</a></p></noscript>
@@ -160,6 +172,17 @@
     <section id="experience" class="experience">
         <div class="container">
             <h2 class="section-title">Experience</h2>
+            <div class="cypher-head" data-rows="6" aria-hidden="true">
+                <pre><code>MATCH (leon:Person {name: "Léon Morales"})-[:HAS_EXPERIENCE]-&gt;(e:Experience)
+OPTIONAL MATCH (e)-[:INCLUDED_PROJECT]-&gt;(p:Project)
+RETURN e, collect(p.name) AS projects
+ORDER BY e.startDate DESC</code></pre>
+                <p class="cypher-result"></p>
+            </div>
+            <figure class="experience-map">
+                <div class="experience-map-scroll"><svg id="experience-map-svg" class="experience-map-svg" role="img"></svg></div>
+                <figcaption id="experience-map-hint" class="experience-map-hint"></figcaption>
+            </figure>
             <div class="timeline">
                 <div class="timeline-item">
                     <div class="timeline-marker"></div>
@@ -186,7 +209,7 @@
                         <div class="tl-header">
                             <h3>Double Degree, Master's in Artificial Intelligence</h3>
                             <p class="company">Université du Québec à Chicoutimi (UQAC), Canada</p>
-                            <p class="period">2025 – 2027 (expected)</p>
+                            <p class="period">Sept 2025 – 2027 (expected)</p>
                         </div>
                         <div class="tl-body">
                             <ul class="achievements">
@@ -424,7 +447,9 @@
     <script src="chatbot-config.js?v=20261030a"></script>
     <script src="chatbot-client.js?v=20261025a"></script>
     <script src="enhancements.js?v=20261030c"></script>
-    <script src="projects.js?v=20261030a"></script>
-    <script src="hero-graph.js?v=20261030b"></script>
+    <script src="projects.js?v=20261030b"></script>
+    <script src="experience-graph.js?v=20261030a"></script>
+    <script src="cypher-heads.js?v=20261030a"></script>
+    <script src="hero-graph.js?v=20261030c"></script>
 </body>
 </html>

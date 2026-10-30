@@ -236,7 +236,17 @@
         "ml": "ML & Data"
       },
       "filtersLabel": "Filter projects",
-      "tagsLabel": "Technologies"
+      "tagsLabel": "Technologies",
+      "graphLabel": "Projects and the skills they use, from the knowledge graph",
+      "graphHint": "Hover a project to light up its skills. Click a skill to see every project that uses it.",
+      "skillMatch": "{skill}: {n} projects. Click again or press Escape to clear.",
+      "yearContext": {
+        "2026": "UQAC, then internship at Astek",
+        "2025": "UTBM, then UQAC from September",
+        "2024": "UTBM, then internship at Ksilink",
+        "2023": "UTBM, then Yeditepe (Istanbul)",
+        "2022": "UTBM"
+      }
     },
     "mnistDemo": {
       "title": "Interactive MNIST Demo",
@@ -266,7 +276,7 @@
       "item1": {
         "title": "Double Degree, Master’s in Artificial Intelligence",
         "company": "Université du Québec à Chicoutimi (UQAC), Canada",
-        "period": "2025 – 2027 (expected)",
+        "period": "Sept 2025 – 2027 (expected)",
         "achievement1": "Specialization in Artificial Intelligence",
         "achievement2": "Focus on advanced machine learning and deep learning techniques",
         "achievement3": "Exploring opportunities for research collaboration in Canada"
@@ -306,6 +316,16 @@
         "achievement1": "Erasmus exchange program focused on computer science and international teamwork",
         "achievement2": "Specialized courses in object-oriented programming",
         "achievement3": "Developed adaptability and cross-cultural collaboration skills"
+      },
+      "mapLabel": "Timeline of experiences and the projects done in each",
+      "mapHint": "Click a band to open the experience, or a project to see it in the Projects section.",
+      "bands": {
+        "UTBM": "UTBM, engineering degree",
+        "Yeditepe": "Yeditepe",
+        "Ksilink": "Ksilink internship",
+        "UQAC": "UQAC, master's in AI",
+        "Hackathon": "Hackathon",
+        "Astek": "Astek internship"
       }
     },
     "contact": {
@@ -334,6 +354,9 @@
     },
     "footer": {
       "copyright": "© 2025 Léon"
+    },
+    "cypher": {
+      "rows": "✓ {n} rows returned"
     }
   },
   "fr": {
@@ -573,7 +596,17 @@
         "ml": "ML & Data"
       },
       "filtersLabel": "Filtrer les projets",
-      "tagsLabel": "Technologies"
+      "tagsLabel": "Technologies",
+      "graphLabel": "Les projets et les compétences qu'ils utilisent, d'après le graphe de connaissances",
+      "graphHint": "Survolez un projet pour allumer ses compétences. Cliquez une compétence pour voir tous les projets qui l'utilisent.",
+      "skillMatch": "{skill} : {n} projets. Cliquez à nouveau ou appuyez sur Échap pour effacer.",
+      "yearContext": {
+        "2026": "UQAC, puis stage chez Astek",
+        "2025": "UTBM, puis UQAC à partir de septembre",
+        "2024": "UTBM, puis stage chez Ksilink",
+        "2023": "UTBM, puis Yeditepe (Istanbul)",
+        "2022": "UTBM"
+      }
     },
     "mnistDemo": {
       "title": "Démo Interactive MNIST",
@@ -603,7 +636,7 @@
       "item1": {
         "title": "Double Diplôme — Maîtrise en Intelligence Artificielle",
         "company": "Université du Québec à Chicoutimi (UQAC), Canada",
-        "period": "2025 – 2027 (attendu)",
+        "period": "Sept 2025 – 2027 (attendu)",
         "achievement1": "Spécialisation en Intelligence Artificielle",
         "achievement2": "Focus sur les techniques avancées d'apprentissage machine et profond",
         "achievement3": "Exploration d'opportunités de collaboration en recherche au Canada"
@@ -643,6 +676,16 @@
         "achievement1": "Programme d'échange Erasmus axé sur l'informatique et le travail d'équipe international",
         "achievement2": "Cours spécialisés en programmation orientée objet",
         "achievement3": "Développement de l'adaptabilité et des compétences de collaboration interculturelle"
+      },
+      "mapLabel": "Frise des expériences et des projets réalisés dans chacune",
+      "mapHint": "Cliquez une bande pour ouvrir l'expérience, ou un projet pour le voir dans la section Projets.",
+      "bands": {
+        "UTBM": "UTBM, diplôme d'ingénieur",
+        "Yeditepe": "Yeditepe",
+        "Ksilink": "Stage Ksilink",
+        "UQAC": "UQAC, maîtrise en IA",
+        "Hackathon": "Hackathon",
+        "Astek": "Stage Astek"
       }
     },
     "contact": {
@@ -671,6 +714,9 @@
     },
     "footer": {
       "copyright": "© 2025 Léon"
+    },
+    "cypher": {
+      "rows": "✓ {n} lignes renvoyées"
     }
   }
 }

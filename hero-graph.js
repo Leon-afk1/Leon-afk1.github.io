@@ -93,15 +93,7 @@
     }
 
     function scrollToCard(node) {
-        var title = nodeLabel(node);
-        var cards = document.querySelectorAll('.project-card');
-        for (var i = 0; i < cards.length; i++) {
-            var h = $('.project-title', cards[i]);
-            if (h && h.textContent.trim() === title) {
-                cards[i].scrollIntoView({ behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block: 'center' });
-                return;
-            }
-        }
+        if (window.portfolioProjects) window.portfolioProjects.open(node.card);
     }
 
     // Light up nodes whose name appears in the answer (Léon himself is always part of it)

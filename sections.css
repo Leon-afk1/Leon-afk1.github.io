@@ -470,3 +470,146 @@
     font-weight: 400;
     color: var(--text-secondary);
 }
+
+/* Cypher section openers */
+.cypher-head {
+    margin: -1.25rem 0 2.5rem;
+    max-width: 52rem;
+}
+
+.cypher-head pre {
+    margin: 0;
+    padding: 0.9rem 1.1rem;
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    font-size: 0.85rem;
+    line-height: 1.7;
+    white-space: pre-wrap;
+    color: var(--text-secondary);
+    background: rgba(0, 0, 0, 0.18);
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+}
+
+.cy-kw { color: #E39CF5; }
+.cy-label { color: var(--node-skill); }
+.cy-rel { color: var(--node-experience); }
+.cy-str { color: var(--node-project); }
+
+.cy-caret {
+    display: inline-block;
+    width: 0.55em;
+    height: 1.1em;
+    vertical-align: -0.2em;
+    background: var(--text-primary);
+    animation: cy-blink 1s steps(1) infinite;
+}
+
+@keyframes cy-blink {
+    50% { opacity: 0; }
+}
+
+.cypher-result {
+    margin: 0.5rem 0 0;
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    font-size: 0.78rem;
+    color: #6EE7B7;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.cypher-head.is-done .cypher-result {
+    opacity: 1;
+}
+
+/* Experience constellation */
+.experience-map {
+    margin: 0 0 3rem;
+}
+
+.experience-map-scroll {
+    overflow-x: auto;
+    padding-bottom: 0.5rem;
+}
+
+.experience-map-svg {
+    display: block;
+    width: 100%;
+    min-width: 860px;
+    height: auto;
+}
+
+.em-year-line {
+    stroke: var(--border-color);
+}
+
+.em-year {
+    font-size: 13px;
+    fill: var(--text-muted);
+}
+
+.em-link {
+    stroke: rgba(242, 181, 68, 0.35);
+    stroke-width: 1.2;
+    stroke-dasharray: 3 3;
+}
+
+.em-band {
+    cursor: pointer;
+}
+
+.em-band rect {
+    fill: rgba(185, 163, 245, 0.12);
+    stroke: rgba(185, 163, 245, 0.45);
+    transition: fill 0.2s ease;
+}
+
+.em-band:hover rect,
+.em-band:focus-visible rect {
+    fill: rgba(185, 163, 245, 0.28);
+}
+
+.em-band text {
+    font-size: 12.5px;
+    font-weight: 600;
+    fill: var(--node-experience);
+    pointer-events: none;
+}
+
+.em-project {
+    cursor: pointer;
+}
+
+.em-project circle {
+    fill: var(--node-project);
+    stroke: var(--bg-primary);
+    stroke-width: 3;
+}
+
+.em-project text {
+    font-size: 12.5px;
+    fill: var(--text-secondary);
+    pointer-events: none;
+}
+
+.em-project:hover text,
+.em-project:focus-visible text {
+    fill: var(--text-primary);
+    font-weight: 600;
+}
+
+.em-band:focus-visible,
+.em-project:focus-visible {
+    outline: 2px solid var(--accent-primary);
+    outline-offset: 2px;
+}
+
+.experience-map-hint {
+    margin-top: 0.5rem;
+    font-size: 0.9rem;
+    color: var(--text-muted);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .cy-caret { animation: none; }
+    .cypher-result { transition: none; }
+}
