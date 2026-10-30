@@ -13,11 +13,11 @@
         { key: 'card11', cat: 'llm', start: '2026-01', exp: 'UQAC', links: [{ href: 'https://www.uqac.ca/', org: true }, { href: 'https://github.com/Leon-afk1/ChatBot_UQAC' }] },
         { key: 'card1', featured: true, cat: 'llm', start: '2025-11', exp: 'Hackathon', links: [{ href: 'https://github.com/Leon-afk1/Hackathon_CTI_UQAC.git' }, { href: 'https://www.uqac.ca/', org: true }] },
         { key: 'card14', cat: 'llm', start: '2025-11', exp: null, links: [{ href: 'https://github.com/Leon-afk1/Leon-afk1.github.io/tree/main/backend' }, { href: 'https://github.com/Leon-afk1/Leon-afk1.github.io/tree/main/infra' }] },
-        { key: 'card7', cat: 'vision', start: '2025-10', exp: null, links: [{ href: '#mnist-demo', internal: true }, { href: 'https://www.utbm.fr/', org: true }] },
         { key: 'card6', cat: 'vision', start: '2025-03', exp: 'UTBM', links: [{ href: 'https://github.com/Leon-afk1/CNN-to-transfertlearning' }, { href: 'https://www.utbm.fr/', org: true }] },
         { key: 'card3', featured: true, cat: 'llm', start: '2024-12', exp: 'Ksilink', links: [{ href: 'https://ksilink.com/', org: true }, { href: 'report' }] },
         { key: 'card2', cat: 'research', start: '2024-09', exp: 'Ksilink', links: [{ href: 'https://ksilink.com/', org: true }, { href: 'https://arxiv.org/pdf/2408.05196' }, { href: 'report' }] },
         { key: 'card4', cat: 'vision', start: '2024-09', exp: 'Ksilink', links: [{ href: 'https://ksilink.com/', org: true }, { href: 'report' }] },
+        { key: 'card7', cat: 'vision', start: '2024-09', exp: 'Ksilink', links: [{ href: '#mnist-demo', internal: true }, { href: 'https://ksilink.com/', org: true }] },
         { key: 'card8', cat: 'ml', start: '2024-03', exp: 'UTBM', links: [{ href: 'https://github.com/Leon-afk1/Music_type_classification' }, { href: 'https://www.utbm.fr/', org: true }] },
         { key: 'card5', cat: 'ml', start: '2023-10', exp: 'UTBM', links: [{ href: 'https://github.com/Leon-afk1/poisonous_mushroom' }, { href: 'https://www.utbm.fr/', org: true }] },
         { key: 'card9', cat: 'ml', start: '2022-04', exp: 'UTBM', links: [{ href: 'https://github.com/Leon-afk1/Tangram_solver' }, { href: 'https://www.utbm.fr/', org: true }] }
@@ -295,7 +295,7 @@
     document.addEventListener('languageChanged', function () { setTimeout(render, 0); });
     document.addEventListener('DOMContentLoaded', function () {
         render();
-        fetch('graph.json?v=20261031a').then(function (r) { return r.json(); }).then(function (data) {
+        fetch('graph.json?v=20261031e').then(function (r) { return r.json(); }).then(function (data) {
             graph = data;
             data.nodes.forEach(function (n) { if (n.card) nodeByCard[n.card] = n.id; });
             var cardById = {};

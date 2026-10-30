@@ -6,7 +6,7 @@
    "id": "leon",
    "type": "person",
    "label": "Léon Morales",
-   "x": 543.2,
+   "x": 533.2,
    "y": 360.0
   },
   {
@@ -14,322 +14,322 @@
    "type": "project",
    "label": "AgroScan: AI-Powered Agricultural Diagnosis",
    "card": "card12",
-   "x": 710.2,
-   "y": 323.3
+   "x": 710.4,
+   "y": 322.6
   },
   {
    "id": "p:Cell Classification CNN",
    "type": "project",
    "label": "Cell Classification CNN",
    "card": "card4",
-   "x": 811.3,
-   "y": 328.7
+   "x": 810.6,
+   "y": 309.8
   },
   {
    "id": "p:Human Activity Recognition via Wearable Sensors",
    "type": "project",
    "label": "Human Activity Recognition via Wearable Sensors",
    "card": "card10",
-   "x": 769.7,
-   "y": 424.8
+   "x": 768.0,
+   "y": 411.5
   },
   {
    "id": "p:Industrial Document R&D Agentic Platform",
    "type": "project",
    "label": "Industrial Document R&D Agentic Platform",
-   "x": 500.3,
-   "y": 138.7
+   "x": 472.3,
+   "y": 160.5
   },
   {
    "id": "p:Intelligent RAG Chatbot & Dashboard",
    "type": "project",
    "label": "Intelligent RAG Chatbot & Dashboard",
    "card": "card1",
-   "x": 341.0,
-   "y": 394.3
+   "x": 388.4,
+   "y": 436.4
   },
   {
    "id": "p:LLM Chatbot for Biologists",
    "type": "project",
    "label": "LLM Chatbot for Biologists",
    "card": "card3",
-   "x": 521.3,
-   "y": 193.8
+   "x": 545.3,
+   "y": 185.4
   },
   {
    "id": "p:MNIST Digit Recognition Demo",
    "type": "project",
    "label": "MNIST Digit Recognition Demo",
    "card": "card7",
-   "x": 709.1,
-   "y": 197.9
+   "x": 708.0,
+   "y": 185.9
   },
   {
    "id": "p:Multimodal Contrastive Learning",
    "type": "project",
    "label": "Multimodal Contrastive Learning",
    "card": "card2",
-   "x": 767.8,
-   "y": 366.9
+   "x": 772.9,
+   "y": 353.8
   },
   {
    "id": "p:Multimodal Parkinson's Disease Detection",
    "type": "project",
    "label": "Multimodal Parkinson's Disease Detection",
    "card": "card13",
-   "x": 626.2,
-   "y": 614.0
+   "x": 635.5,
+   "y": 611.4
   },
   {
    "id": "p:Mushroom Toxicity Prediction",
    "type": "project",
    "label": "Mushroom Toxicity Prediction",
    "card": "card5",
-   "x": 573.7,
-   "y": 582.1
+   "x": 590.2,
+   "y": 575.3
   },
   {
    "id": "p:Music Genre Classification",
    "type": "project",
    "label": "Music Genre Classification",
    "card": "card8",
-   "x": 732.7,
-   "y": 550.5
+   "x": 741.8,
+   "y": 538.1
   },
   {
    "id": "p:Personal AI Chatbot (Portfolio RAG)",
    "type": "project",
    "label": "Personal AI Chatbot (Portfolio RAG)",
    "card": "card14",
-   "x": 348.1,
-   "y": 181.9
+   "x": 371.9,
+   "y": 178.1
   },
   {
    "id": "p:Portfolio Website",
    "type": "project",
    "label": "Portfolio Website",
-   "x": 248.6,
-   "y": 307.3
+   "x": 258.6,
+   "y": 345.5
   },
   {
    "id": "p:Poultry Disease Detection",
    "type": "project",
    "label": "Poultry Disease Detection",
    "card": "card6",
-   "x": 759.0,
-   "y": 281.5
+   "x": 755.8,
+   "y": 269.0
   },
   {
    "id": "p:RAG Chatbot for UQAC Handbook",
    "type": "project",
    "label": "RAG Chatbot for UQAC Handbook",
    "card": "card11",
-   "x": 517.4,
-   "y": 469.1
+   "x": 537.2,
+   "y": 467.0
   },
   {
    "id": "p:Tangram Solver",
    "type": "project",
    "label": "Tangram Solver",
    "card": "card9",
-   "x": 492.5,
-   "y": 593.6
+   "x": 506.0,
+   "y": 591.9
   },
   {
    "id": "e:UTBM_Degree",
    "type": "experience",
    "label": "UTBM",
-   "x": 603.1,
-   "y": 500.7
+   "x": 612.6,
+   "y": 493.5
   },
   {
    "id": "e:UQAC_Degree",
    "type": "experience",
    "label": "UQAC",
-   "x": 724.1,
-   "y": 460.5
+   "x": 735.7,
+   "y": 459.7
   },
   {
    "id": "e:Yeditepe_Exchange",
    "type": "experience",
    "label": "Yeditepe",
-   "x": 689.9,
-   "y": 40.0
+   "x": 234.5,
+   "y": 240.2
   },
   {
    "id": "e:Ksilink_Internship",
    "type": "experience",
    "label": "Ksilink",
-   "x": 657.7,
-   "y": 256.8
+   "x": 672.3,
+   "y": 245.4
   },
   {
    "id": "e:Astek_RND_Internship",
    "type": "experience",
    "label": "Astek",
-   "x": 452.5,
-   "y": 171.5
+   "x": 523.1,
+   "y": 131.8
   },
   {
    "id": "e:Hackathon_UQAC_2025",
    "type": "experience",
    "label": "Hackathon UQAC",
-   "x": 379.4,
-   "y": 437.7
+   "x": 364.8,
+   "y": 383.4
   },
   {
    "id": "e:SKIUTBM_Presidency",
    "type": "experience",
    "label": "SKI'UTBM",
-   "x": 323.2,
-   "y": 641.7
+   "x": 317.6,
+   "y": 634.0
   },
   {
    "id": "s:Python",
    "type": "skill",
    "label": "Python",
-   "x": 598.7,
-   "y": 376.6
+   "x": 643.2,
+   "y": 364.6
   },
   {
    "id": "s:Deep Learning",
    "type": "skill",
    "label": "Deep Learning",
-   "x": 867.2,
-   "y": 396.9
+   "x": 869.3,
+   "y": 378.8
   },
   {
    "id": "s:Docker",
    "type": "skill",
    "label": "Docker",
-   "x": 391.9,
-   "y": 250.8
+   "x": 417.4,
+   "y": 238.5
   },
   {
    "id": "s:Computer Vision",
    "type": "skill",
    "label": "Computer Vision",
-   "x": 848.5,
-   "y": 210.6
+   "x": 846.1,
+   "y": 194.5
   },
   {
    "id": "s:Git",
    "type": "skill",
    "label": "Git",
-   "x": 461.7,
-   "y": 271.3
+   "x": 474.7,
+   "y": 268.7
   },
   {
    "id": "s:NLP",
    "type": "skill",
    "label": "NLP",
-   "x": 565.5,
-   "y": 276.8
+   "x": 585.3,
+   "y": 272.0
   },
   {
    "id": "s:PyTorch",
    "type": "skill",
    "label": "PyTorch",
    "x": 870.0,
-   "y": 300.9
+   "y": 285.2
   },
   {
    "id": "s:Cypher",
    "type": "skill",
    "label": "Cypher",
-   "x": 408.6,
-   "y": 84.8
+   "x": 483.1,
+   "y": 40
   },
   {
    "id": "s:FastAPI",
    "type": "skill",
    "label": "FastAPI",
-   "x": 384.5,
-   "y": 502.1
+   "x": 412.2,
+   "y": 496.9
   },
   {
    "id": "s:Graph RAG",
    "type": "skill",
    "label": "Graph RAG",
-   "x": 503.4,
-   "y": 40
+   "x": 426.5,
+   "y": 52.8
   },
   {
    "id": "s:Knowledge Graph",
    "type": "skill",
    "label": "Knowledge Graph",
-   "x": 560.7,
-   "y": 48.9
+   "x": 599.0,
+   "y": 40
   },
   {
    "id": "s:Machine Learning",
    "type": "skill",
    "label": "Machine Learning",
-   "x": 704.3,
+   "x": 716.5,
    "y": 680.0
   },
   {
    "id": "s:Neo4j",
    "type": "skill",
    "label": "Neo4j",
-   "x": 445.4,
+   "x": 541.0,
    "y": 40
   },
   {
    "id": "s:Pandas",
    "type": "skill",
    "label": "Pandas",
-   "x": 772.4,
-   "y": 508.3
+   "x": 786.0,
+   "y": 497.6
   },
   {
    "id": "s:Streamlit",
    "type": "skill",
    "label": "Streamlit",
-   "x": 432.8,
-   "y": 355.8
+   "x": 423.2,
+   "y": 349.3
   },
   {
    "id": "s:TensorFlow",
    "type": "skill",
    "label": "TensorFlow",
-   "x": 830.2,
-   "y": 512.8
+   "x": 843.9,
+   "y": 493.8
   },
   {
    "id": "s:Weights & Biases",
    "type": "skill",
    "label": "Weights & Biases",
-   "x": 852.8,
-   "y": 458.5
+   "x": 861.6,
+   "y": 438.6
   },
   {
    "id": "s:CNN",
    "type": "skill",
    "label": "CNN",
-   "x": 858.4,
-   "y": 133.6
+   "x": 851.2,
+   "y": 113.4
   },
   {
    "id": "s:Google Cloud Run",
    "type": "skill",
    "label": "Google Cloud Run",
-   "x": 130,
-   "y": 40
+   "x": 130.0,
+   "y": 40.0
   },
   {
    "id": "s:Terraform",
    "type": "skill",
    "label": "Terraform",
-   "x": 187.9,
-   "y": 40
+   "x": 260.5,
+   "y": 40.0
   },
   {
    "id": "s:GitHub Actions",
    "type": "skill",
    "label": "GitHub Actions",
    "x": 130.0,
-   "y": 208.2
+   "y": 262.0
   }
  ],
  "edges": [
@@ -396,6 +396,10 @@
   [
    "e:Ksilink_Internship",
    "p:LLM Chatbot for Biologists"
+  ],
+  [
+   "e:Ksilink_Internship",
+   "p:MNIST Digit Recognition Demo"
   ],
   [
    "e:Ksilink_Internship",

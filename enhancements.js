@@ -108,7 +108,7 @@
     function apply() {
         var l = lang(), t = T[l];
         document.documentElement.lang = l;
-        $$('#cv-download, #cv-download-contact').forEach(function (a) {
+        $$('#cv-download, #cv-download-contact, #cv-download-footer').forEach(function (a) {
             a.href = CV[l]; var s = $('span', a); (s || a).textContent = t.cv;
         });
         var av = $('#availability-text'); if (av) av.textContent = t.avail;

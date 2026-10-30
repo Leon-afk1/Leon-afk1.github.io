@@ -545,45 +545,12 @@ function updateContent() {
     document.querySelector('.btn-text').textContent = t.contact.form.submitButton;
     document.querySelector('.btn-loading').textContent = t.contact.form.submitButtonLoading;
     
-    // Chatbot
-    if (t.chatbot) {
-        const chatbotTitle = document.querySelector('[data-translate="chatbot.title"]');
-        if (chatbotTitle) chatbotTitle.textContent = t.chatbot.title;
-        
-        const chatbotWelcome = document.querySelector('[data-translate="chatbot.welcome"]');
-        if (chatbotWelcome) chatbotWelcome.textContent = t.chatbot.welcome;
-        
-        const chatbotInput = document.querySelector('[data-translate-placeholder="chatbot.placeholder"]');
-        if (chatbotInput) chatbotInput.placeholder = t.chatbot.placeholder;
-        
-        const suggestionBtns = document.querySelectorAll('.suggestion-btn');
-        if (suggestionBtns[0]) suggestionBtns[0].textContent = t.chatbot.suggestion1;
-        if (suggestionBtns[1]) suggestionBtns[1].textContent = t.chatbot.suggestion2;
-        if (suggestionBtns[2]) suggestionBtns[2].textContent = t.chatbot.suggestion3;
-        
-        // Update data-question attributes based on language
-        const suggestions = {
-            en: [
-                "What are your main skills?",
-                "Tell me about your projects",
-                "What is your experience?"
-            ],
-            fr: [
-                "Quelles sont tes compétences principales ?",
-                "Parle-moi de tes projets",
-                "Quelle est ton expérience ?"
-            ]
-        };
-        
-        suggestionBtns.forEach((btn, index) => {
-            if (suggestions[currentLanguage] && suggestions[currentLanguage][index]) {
-                btn.setAttribute('data-question', suggestions[currentLanguage][index]);
-            }
-        });
-    }
-    
     // Footer
-    document.querySelector('.footer p').textContent = t.footer.copyright.replace(/20\d\d/, new Date().getFullYear());
+    document.querySelector('.footer-copyright').textContent = t.footer.copyright.replace(/20\d\d/, new Date().getFullYear());
+    document.querySelector('.footer-role').textContent = t.footer.role;
+    const footerBuilt = document.querySelector('.footer-built');
+    footerBuilt.firstChild.textContent = t.footer.built + ' ';
+    footerBuilt.querySelector('a').textContent = t.footer.source;
 }
 
 // Set language and update interface

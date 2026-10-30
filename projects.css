@@ -39,7 +39,7 @@
 .project-row:focus-visible,
 .project-link:focus-visible,
 .pg-skill:focus-visible {
-    outline: 2px solid var(--accent-primary);
+    outline: 2px solid var(--accent-text);
     outline-offset: 2px;
 }
 
@@ -141,7 +141,7 @@
 
 .project-row:hover,
 .project-card.is-match .project-row {
-    background: linear-gradient(90deg, rgba(242, 181, 68, 0.08), transparent 75%);
+    background: linear-gradient(90deg, rgba(93, 187, 138, 0.08), transparent 75%);
     border-left-color: var(--node-project);
 }
 
@@ -218,9 +218,9 @@
 .project-link {
     font-weight: 600;
     font-size: 0.95rem;
-    color: var(--accent-primary);
+    color: var(--accent-text);
     text-decoration: underline;
-    text-decoration-color: rgba(242, 181, 68, 0.35);
+    text-decoration-color: rgba(93, 187, 138, 0.35);
     text-underline-offset: 3px;
 }
 
@@ -285,7 +285,7 @@
 }
 
 .has-focus .pg-edge.is-lit {
-    stroke: rgba(242, 181, 68, 0.75);
+    stroke: rgba(93, 187, 138, 0.75);
     stroke-width: 2;
     opacity: 1;
 }

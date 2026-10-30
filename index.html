@@ -17,11 +17,11 @@
     <script type="application/ld+json">{"@context":"https://schema.org","@type":"Person","name":"Léon Morales","jobTitle":"Generative AI Engineer","url":"https://leon-afk1.github.io/","email":"mailto:leon.morales@outlook.fr","sameAs":["https://github.com/Leon-afk1","https://www.linkedin.com/in/l%C3%A9on-morales"],"alumniOf":["UTBM","UQAC"],"knowsAbout":["Graph RAG","LLM","Machine Learning","Deep Learning","Contrastive Learning"]}</script>
     <link rel="preload" href="texte.json" as="fetch" crossorigin>
     <link rel="icon" href="favicon.svg" type="image/svg+xml">
-    <link rel="stylesheet" href="styles.css?v=20261031c">
-    <link rel="stylesheet" href="enhancements.css?v=20261030b">
-    <link rel="stylesheet" href="hero.css?v=20261030a">
-    <link rel="stylesheet" href="projects.css?v=20261031b">
-    <link rel="stylesheet" href="sections.css?v=20261031c">
+    <link rel="stylesheet" href="styles.css?v=20261031f">
+    <link rel="stylesheet" href="enhancements.css?v=20261031e">
+    <link rel="stylesheet" href="hero.css?v=20261031e">
+    <link rel="stylesheet" href="projects.css?v=20261031e">
+    <link rel="stylesheet" href="sections.css?v=20261031e">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -307,9 +307,7 @@ ORDER BY e.startDate DESC</code></pre>
             <h2 class="section-title">Interactive MNIST Demo</h2>
             <div class="mnist-intro">
                 <p class="mnist-description">
-                    One of my first machine learning projects was building a Convolutional Neural Network 
-                    to recognize handwritten digits from the famous MNIST dataset. This PyTorch-trained CNN 
-                    runs directly in your browser using ONNX Runtime Web. Try drawing a digit below and see the model's predictions!
+                    My first project at Ksilink (September 2024) was a convolutional neural network recognizing handwritten digits from the MNIST dataset, to test and understand the method. This PyTorch-trained CNN runs directly in your browser with ONNX Runtime Web. Draw a digit below and see the model's predictions.
                 </p>
             </div>
             
@@ -404,7 +402,7 @@ ORDER BY e.startDate DESC</code></pre>
             <div class="chatbot-widget chatbot-floating minimized" id="chatbot-widget">
                 <div class="chatbot-header">
                     <h3 data-translate="chatbot.title">Ask me anything!</h3>
-                    <button class="chatbot-minimize" id="chatbot-minimize" aria-label="Minimize chatbot">+</button>
+                    <button class="chatbot-minimize" id="chatbot-minimize" aria-label="Open the assistant" aria-expanded="false" aria-controls="chatbot-messages">+</button>
                 </div>
                 <div class="chatbot-messages" id="chatbot-messages">
                     <div class="chatbot-message bot-message">
@@ -412,7 +410,7 @@ ORDER BY e.startDate DESC</code></pre>
                             <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H6l-2 2V4h16v12z"/><circle cx="9" cy="10" r="1.5"/><circle cx="15" cy="10" r="1.5"/></svg>
                         </div>
                         <div class="message-content">
-                            <p data-translate="chatbot.welcome">Hi! I'm Léon's AI assistant. Ask me anything about his experience, skills, or projects!<br><br>⏳ Note: The first response may take a bit longer as the servers wake up.</p>
+                            <p data-translate="chatbot.welcome">Hi! I'm Léon's AI assistant. I answer from his knowledge graph: ask me about his experience, skills or projects.</p>
                         </div>
                     </div>
                 </div>
@@ -438,18 +436,29 @@ ORDER BY e.startDate DESC</code></pre>
 
     <!-- Footer -->
     <footer class="footer">
-        <div class="container">
-            <p>&copy; 2025 Léon</p>
+        <div class="container footer-layout">
+            <div class="footer-id">
+                <p class="footer-name">Léon Morales</p>
+                <p class="footer-role">Generative AI Engineer — LLM &amp; Graph RAG</p>
+            </div>
+            <ul class="footer-links">
+                <li><a href="mailto:leon.morales@outlook.fr">leon.morales@outlook.fr</a></li>
+                <li><a href="https://www.linkedin.com/in/léon-morales" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
+                <li><a href="https://github.com/Leon-afk1" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+                <li><a href="CV_Leon_Morales_AI_2027_English.pdf" id="cv-download-footer" download>Download CV</a></li>
+            </ul>
+            <p class="footer-built">Static site on GitHub Pages, assistant on Google Cloud Run. <a href="https://github.com/Leon-afk1/Leon-afk1.github.io" target="_blank" rel="noopener noreferrer">Source code</a></p>
+            <p class="footer-copyright">&copy; 2026 Léon Morales</p>
         </div>
     </footer>
 
-    <script src="script.js?v=20261031d"></script>
+    <script src="script.js?v=20261031e"></script>
     <script src="chatbot-config.js?v=20261030a"></script>
-    <script src="chatbot-client.js?v=20261025a"></script>
-    <script src="enhancements.js?v=20261031d"></script>
-    <script src="projects.js?v=20261031c"></script>
-    <script src="experience-graph.js?v=20261031b"></script>
+    <script src="chatbot-client.js?v=20261031e"></script>
+    <script src="enhancements.js?v=20261031e"></script>
+    <script src="projects.js?v=20261031e"></script>
+    <script src="experience-graph.js?v=20261031e"></script>
     <script src="cypher-heads.js?v=20261030a"></script>
-    <script src="hero-graph.js?v=20261031d"></script>
+    <script src="hero-graph.js?v=20261031e"></script>
 </body>
 </html>
