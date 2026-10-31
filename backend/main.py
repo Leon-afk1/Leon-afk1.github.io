@@ -78,6 +78,11 @@ class ModelManager:
         error_str = f"{type(error).__name__} {error}".lower()
         return any(keyword in error_str for keyword in ['timeout', 'timed out', 'deadline', '504'])
 
+    def _is_overloaded_error(self, error: Exception) -> bool:
+        """503: the model is temporarily overloaded (\"high demand\")"""
+        error_str = str(error).lower()
+        return any(keyword in error_str for keyword in ['503', 'unavailable', 'overloaded', 'high demand'])
+
     def _is_unavailable_error(self, error: Exception) -> bool:
         """Check if the model name does not exist or is not served for this key"""
         error_str = str(error).lower()
@@ -85,7 +90,7 @@ class ModelManager:
 
     def generate_content(self, prompt: str):
         """Generate content with the first model of the list that is not set aside.
-        A model hitting its quota is skipped for QUOTA_RETRY_SECONDS, a slow one for SLOW_RETRY_SECONDS,
+        A model hitting its quota is skipped for QUOTA_RETRY_SECONDS, a slow or overloaded one for SLOW_RETRY_SECONDS,
         an unknown one for UNAVAILABLE_RETRY_SECONDS,
         so the preferred model comes back once its quota resets. Models are tried lazily (no test call at startup)."""
         timeouts = 0
@@ -104,6 +109,8 @@ class ModelManager:
                     timeouts += 1
                     if timeouts >= MAX_TIMEOUTS_PER_CALL:
                         raise AllModelsExhaustedException("Gemini is too slow right now")
+                elif self._is_overloaded_error(e):
+                    self.unavailable_until[model_name] = time.time() + SLOW_RETRY_SECONDS
                 elif self._is_unavailable_error(e):
                     self.unavailable_until[model_name] = time.time() + UNAVAILABLE_RETRY_SECONDS
                 else:
@@ -355,6 +362,21 @@ Neo4j Database Schema for Léon Morales Portfolio:
 - The main person is named "Léon Morales"
 - Always use MATCH (p:Person {name: "Léon Morales"}) to start queries about Léon
 - Use parameterized queries with $name variable
+- Project.startDate / Project.endDate and Experience.startDate / Experience.endDate are dates: to answer "first", "latest", "before" or "since", ORDER BY or compare them
+- Projects done during an internship or a degree: (Experience)-[:INCLUDED_PROJECT]->(Project); find the experience through its institution, e.g. (e:Experience)-[:AT_INSTITUTION]->(i:Institution) WHERE toLower(i.name) CONTAINS "ksilink"
+- Return the useful properties (name, description, dates, skills), not only names
+
+## Examples
+Question: What was Léon's first project at Ksilink?
+MATCH (p:Person {name: "Léon Morales"})-[:HAS_EXPERIENCE]->(e:Experience)-[:AT_INSTITUTION]->(i:Institution)
+WHERE toLower(i.name) CONTAINS "ksilink"
+MATCH (e)-[:INCLUDED_PROJECT]->(pr:Project)
+RETURN pr.name, pr.description, pr.startDate ORDER BY pr.startDate ASC LIMIT 1
+
+Question: Which projects use Neo4j?
+MATCH (p:Person {name: "Léon Morales"})-[:WORKED_ON]->(pr:Project)-[:UTILIZED_SKILL]->(s:Skill)
+WHERE toLower(s.name) CONTAINS "neo4j"
+RETURN pr.name, pr.description, pr.startDate ORDER BY pr.startDate DESC
 """
 
 def generate_cypher_query_with_gemini(user_query: str, conversation_context: str = "", previous_attempt: str = "", error_message: str = "") -> str:
@@ -399,7 +421,8 @@ def execute_cypher_query(cypher_query: str, parameters: Optional[dict] = None) -
         results = neo4j_conn.run_query(cypher_query, parameters)
         if not results:
             return "No information found in the database.", True, ""
-        return json.dumps(results, indent=2, ensure_ascii=False), True, ""
+        # default=str: Neo4j dates are not JSON serializable
+        return json.dumps(results, indent=2, ensure_ascii=False, default=str), True, ""
     except Exception as e:
         return "", False, str(e)
 

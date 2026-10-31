@@ -1,6 +1,7 @@
 """Backend tests with fake Gemini and Neo4j clients (no network).
     cd backend && pip install -r requirements-dev.txt && pytest
 """
+import datetime
 import os
 import sys
 import time
@@ -49,7 +50,7 @@ class FakeNeo4j:
 
     def run_query(self, query, parameters=None):
         self.queries.append(query)
-        return [{"x.name": "Graph RAG assistant"}]
+        return [{"x.name": "Graph RAG assistant", "x.startDate": datetime.date(2024, 9, 1)}]
 
     def close(self):
         pass
@@ -99,6 +100,16 @@ def test_request_gives_up_after_two_timeouts():
     with pytest.raises(main.AllModelsExhaustedException):
         mm.generate_content("hi")
     assert len(client.models.calls) == main.MAX_TIMEOUTS_PER_CALL
+
+
+def test_overloaded_model_is_skipped():
+    client = FakeClient({NAMES[0]: Exception("503 UNAVAILABLE: This model is currently experiencing high demand")})
+    assert main.ModelManager(client).generate_content("hi").text == f"answer from {NAMES[1]}"
+
+
+def test_query_results_with_dates_are_serialized(client):
+    context, ok, error = main.execute_cypher_query("MATCH (x) RETURN x")
+    assert ok and not error and "2024-09-01" in context
 
 
 def test_all_models_exhausted():
