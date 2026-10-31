@@ -359,8 +359,8 @@ Neo4j Database Schema for Léon Morales Portfolio:
 - Multiple labels can be applied to nodes (e.g., Experience:Education, Experience:Internship)
 - Array properties: achievements, skills, courses, target_roles, preferred_locations
 - Questions about the job Léon is looking for, his availability, contract, locations or work permit: read (Person)-[:SEEKS]->(InternshipPreferences) and Person.status
-- Questions about his strengths: (Person)-[:HAS_QUALITY]->(Quality); what he is improving: (Person)-[:WORKS_ON_IMPROVING]->(AreaOfDevelopment)
-- Relationship properties: level (for HAS_SKILL, SPEAKS), year (for BORN_IN), period (for INCLUDED_LOCATION)
+- Questions about his strengths: (Person)-[r:HAS_QUALITY]->(Quality) ORDER BY r.primary DESC (his main strengths have r.primary = true: present them first); what he is improving: (Person)-[:WORKS_ON_IMPROVING]->(AreaOfDevelopment)
+- Relationship properties: level (for HAS_SKILL, SPEAKS), primary (for HAS_QUALITY), year (for BORN_IN), period (for INCLUDED_LOCATION)
 - The main person is named "Léon Morales"
 - Always use MATCH (p:Person {name: "Léon Morales"}) to start queries about Léon
 - Use parameterized queries with $name variable
