@@ -46,6 +46,7 @@ PROJECT_CARDS = {
     "Multimodal Parkinson's Disease Detection": "card13",
     "RAG Chatbot for UQAC Handbook": "card11",
     "Poultry Disease Detection": "card6",
+    "Agentic Graph RAG Platform for Novels": "card15",
 }
 
 MAX_SKILLS = 18

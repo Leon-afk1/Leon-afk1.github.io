@@ -7,6 +7,7 @@
     'use strict';
 
     var PROJECTS = [
+        { key: 'card15', featured: true, cat: 'llm', start: '2026-09', exp: 'Astek', links: [{ href: 'https://astekgroup.fr/', org: true }] },
         { key: 'card10', featured: true, cat: 'research', start: '2026-03', exp: 'UQAC', links: [{ href: 'https://www.uqac.ca/tag/liara/', org: true }, { href: 'https://github.com/Leon-afk1/Sample-Efficient_Contrastive_Learning' }] },
         { key: 'card13', cat: 'ml', start: '2026-05', exp: 'UQAC', links: [{ href: 'https://www.uqac.ca/', org: true }, { href: 'https://github.com/Leon-afk1/multimodal-parkinson-detection' }] },
         { key: 'card12', cat: 'vision', start: '2026-05', exp: 'UQAC', links: [{ href: 'https://github.com/Leon-afk1/agroscan' }] },
@@ -313,7 +314,7 @@
     document.addEventListener('languageChanged', function () { setTimeout(render, 0); });
     document.addEventListener('DOMContentLoaded', function () {
         render();
-        fetch('graph.json?v=20261031e').then(function (r) { return r.json(); }).then(function (data) {
+        fetch('graph.json?v=20261031k').then(function (r) { return r.json(); }).then(function (data) {
             graph = data;
             data.nodes.forEach(function (n) { if (n.card) nodeByCard[n.card] = n.id; });
             var cardById = {};

@@ -233,7 +233,18 @@
         "2023": "UTBM, then Yeditepe (Istanbul)",
         "2022": "UTBM"
       },
-      "citedByAssistant": "Cited by the assistant: {names}"
+      "citedByAssistant": "Cited by the assistant: {names}",
+      "card15": {
+        "title": "Agentic Graph RAG Platform for Novels",
+        "tag1": "Graph RAG",
+        "tag2": "Neo4j",
+        "tag3": "Agentic workflows",
+        "tag4": "Ollama",
+        "tag5": "RAGAS",
+        "tag6": "LLM-as-a-Judge",
+        "description": "My current end-of-studies internship project in the R&D team of Astek Innovation Lab (confidential). The platform automatically builds a knowledge graph from novels and answers questions with an agentic Graph RAG pipeline in Python: a Neo4j knowledge graph provides the context to LLMs deployed locally with Ollama, an agent decides how to explore the graph, and the answers are evaluated with RAGAS and LLM-as-a-judge.",
+        "link1Text": "Astek Innovation Lab"
+      }
     },
     "mnistDemo": {
       "title": "Interactive MNIST Demo",
@@ -596,7 +607,18 @@
         "2023": "UTBM, puis Yeditepe (Istanbul)",
         "2022": "UTBM"
       },
-      "citedByAssistant": "Cités par l'assistant : {names}"
+      "citedByAssistant": "Cités par l'assistant : {names}",
+      "card15": {
+        "title": "Plateforme agentique de Graph RAG sur des romans",
+        "tag1": "Graph RAG",
+        "tag2": "Neo4j",
+        "tag3": "Workflows agentiques",
+        "tag4": "Ollama",
+        "tag5": "RAGAS",
+        "tag6": "LLM-as-a-Judge",
+        "description": "Mon projet actuel de stage de fin d'études dans l'équipe R&D de l'Astek Innovation Lab (confidentiel). La plateforme construit automatiquement un graphe de connaissances à partir de romans et répond aux questions avec un pipeline Graph RAG agentique en Python : un graphe Neo4j fournit le contexte à des LLM déployés en local avec Ollama, un agent décide comment explorer le graphe, et les réponses sont évaluées avec RAGAS et LLM-as-a-judge.",
+        "link1Text": "Astek Innovation Lab"
+      }
     },
     "mnistDemo": {
       "title": "Démo Interactive MNIST",
