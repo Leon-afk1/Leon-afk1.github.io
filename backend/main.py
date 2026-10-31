@@ -6,6 +6,7 @@ from contextlib import asynccontextmanager
 import os
 from dotenv import load_dotenv
 from google import genai
+from google.genai import types as genai_types
 from neo4j import GraphDatabase
 from slowapi import Limiter, _rate_limit_exceeded_handler
 from slowapi.errors import RateLimitExceeded
@@ -31,6 +32,12 @@ CHAT_RATE_LIMIT = os.getenv("CHAT_RATE_LIMIT", "10/minute;100/day")
 # A model that hit its quota is retried after this delay; an unknown model name after a day
 QUOTA_RETRY_SECONDS = 3600
 UNAVAILABLE_RETRY_SECONDS = 86400
+# Gemini latency has spikes: a call taking longer than this is abandoned and the next model is tried,
+# so a request stays well under the 60 s Cloud Run timeout. A slow model is set aside for SLOW_RETRY_SECONDS.
+GEMINI_TIMEOUT_SECONDS = float(os.getenv("GEMINI_TIMEOUT_SECONDS", "12"))
+SLOW_RETRY_SECONDS = 120
+# At most this many timeouts in one call, then the request gives up instead of trying every model
+MAX_TIMEOUTS_PER_CALL = 2
 
 # Custom Exception for all models exhausted
 class AllModelsExhaustedException(Exception):
@@ -64,6 +71,13 @@ class ModelManager:
         ]
         return any(keyword in error_str for keyword in quota_keywords)
 
+    def _is_timeout_error(self, error: Exception) -> bool:
+        """Client-side timeout, or the API giving up (504 DEADLINE_EXCEEDED)"""
+        if isinstance(error, TimeoutError):
+            return True
+        error_str = f"{type(error).__name__} {error}".lower()
+        return any(keyword in error_str for keyword in ['timeout', 'timed out', 'deadline', '504'])
+
     def _is_unavailable_error(self, error: Exception) -> bool:
         """Check if the model name does not exist or is not served for this key"""
         error_str = str(error).lower()
@@ -71,8 +85,10 @@ class ModelManager:
 
     def generate_content(self, prompt: str):
         """Generate content with the first model of the list that is not set aside.
-        A model hitting its quota is skipped for QUOTA_RETRY_SECONDS, an unknown one for UNAVAILABLE_RETRY_SECONDS,
+        A model hitting its quota is skipped for QUOTA_RETRY_SECONDS, a slow one for SLOW_RETRY_SECONDS,
+        an unknown one for UNAVAILABLE_RETRY_SECONDS,
         so the preferred model comes back once its quota resets. Models are tried lazily (no test call at startup)."""
+        timeouts = 0
         for index, model_name in enumerate(self.model_names):
             if self.unavailable_until.get(model_name, 0) > time.time():
                 continue
@@ -83,6 +99,11 @@ class ModelManager:
             except Exception as e:
                 if self._is_quota_error(e):
                     self.unavailable_until[model_name] = time.time() + QUOTA_RETRY_SECONDS
+                elif self._is_timeout_error(e):
+                    self.unavailable_until[model_name] = time.time() + SLOW_RETRY_SECONDS
+                    timeouts += 1
+                    if timeouts >= MAX_TIMEOUTS_PER_CALL:
+                        raise AllModelsExhaustedException("Gemini is too slow right now")
                 elif self._is_unavailable_error(e):
                     self.unavailable_until[model_name] = time.time() + UNAVAILABLE_RETRY_SECONDS
                 else:
@@ -126,7 +147,10 @@ async def lifespan(app: FastAPI):
     print("===== Application Startup =====")
     
     # Configure Gemini with ModelManager
-    model_manager = ModelManager(genai.Client(api_key=GEMINI_API_KEY))
+    model_manager = ModelManager(genai.Client(
+        api_key=GEMINI_API_KEY,
+        http_options=genai_types.HttpOptions(timeout=int(GEMINI_TIMEOUT_SECONDS * 1000)),  # milliseconds
+    ))
     print(f"✓ Gemini configured, first model: {model_manager.get_current_model_name()}")
     
     # Initialize Neo4j
@@ -541,17 +565,15 @@ def handle_chat(request: Request, chat_query: ChatQuery):
         
         if is_french:
             error_message = (
-                "Désolé, la limite de requêtes journalières gratuite pour l'API Gemini a été atteinte. "
-                "Tous les modèles disponibles ont épuisé leur quota. \n\n"
-                "Veuillez réessayer demain ou contacter Léon directement pour toute question urgente."
+                "L'assistant est momentanément indisponible : le service Gemini est surchargé ou a atteint son quota. "
+                "Réessayez dans quelques minutes, ou écrivez directement à Léon : leon.morales@outlook.fr"
             )
         else:
             error_message = (
-                "Sorry, the daily free request limit for the Gemini API has been reached. "
-                "All available models have exhausted their quota. \n\n"
-                "Please try again tomorrow or contact Léon directly for any urgent questions."
+                "The assistant is temporarily unavailable: the Gemini service is overloaded or has reached its quota. "
+                "Try again in a few minutes, or write to Léon directly: leon.morales@outlook.fr"
             )
-        
+
         return ChatResponse(response=error_message, session_id=session_id)
     
     except Exception as e:

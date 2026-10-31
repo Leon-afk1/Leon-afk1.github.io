@@ -80,6 +80,27 @@ def test_quota_exhausted_model_comes_back_after_delay(monkeypatch):
     assert mm.generate_content("hi").text == f"answer from {NAMES[0]}"   # preferred model is back
 
 
+def test_slow_model_is_set_aside_then_retried(monkeypatch):
+    client = FakeClient({NAMES[0]: TimeoutError("read timed out")})
+    mm = main.ModelManager(client)
+    assert mm.generate_content("hi").text == f"answer from {NAMES[1]}"
+    # The API giving up (504) counts as slow too
+    client.models.failures = {NAMES[1]: Exception("504 DEADLINE_EXCEEDED")}
+    assert mm.generate_content("hi").text == f"answer from {NAMES[2]}"
+    client.models.failures.clear()
+    now = time.time()
+    monkeypatch.setattr(main.time, "time", lambda: now + main.SLOW_RETRY_SECONDS + 1)
+    assert mm.generate_content("hi").text == f"answer from {NAMES[0]}"
+
+
+def test_request_gives_up_after_two_timeouts():
+    client = FakeClient({n: TimeoutError("read timed out") for n in NAMES})
+    mm = main.ModelManager(client)
+    with pytest.raises(main.AllModelsExhaustedException):
+        mm.generate_content("hi")
+    assert len(client.models.calls) == main.MAX_TIMEOUTS_PER_CALL
+
+
 def test_all_models_exhausted():
     mm = main.ModelManager(FakeClient({n: Exception("429") for n in NAMES}))
     with pytest.raises(main.AllModelsExhaustedException):
