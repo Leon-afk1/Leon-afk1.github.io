@@ -257,7 +257,7 @@ Neo4j Database Schema for Léon Morales Portfolio:
 
 ### Experience Types (all share base Experience label)
 - **Experience**: identifier, startDate, endDate, description
-- **Education** (additional): degree, field, type
+- **Education** (additional): degree, field, type, specialization, gpa, courses (array)
 - **Internship** (additional): role, report_en, report_fr
 - **Leadership** (additional): role, achievements (array)
 - **Job** (additional): role
@@ -267,7 +267,7 @@ Neo4j Database Schema for Léon Morales Portfolio:
 - **Skill**: name, category, level, description
 - **Quality**: name, description
 - **AreaOfDevelopment**: name, description
-- **Certification**: name, url
+- **Certification**: name, url, date
 
 ### Projects & Activities
 - **Project**: name, type, source, status, startDate, endDate, description, difficulty, url, reportUrl_en, reportUrl_fr, skills (array), experienceId
@@ -286,7 +286,7 @@ Neo4j Database Schema for Léon Morales Portfolio:
 ### Communication & Preferences
 - **Language**: name
 - **ContactInfo**: type, value
-- **InternshipPreferences**: identifier, availability_start_possible, availability_start_ideal, availability_start_latest, duration_min_weeks, contract_type, mobility, remote_preference, preferred_sectors, company_size_preference, role_preference, canada_work_status, salary_expectation
+- **InternshipPreferences**: identifier, availability_start_ideal, contract_type, target_roles (array), role_preference, mobility, preferred_locations (array), remote_preference, preferred_sectors, company_size_preference, canada_work_status (work authorization). Despite its label, it holds Léon's current job search (permanent position or VIE from April 2027)
 - **Anecdote**: name, story
 
 ---
@@ -357,7 +357,9 @@ Neo4j Database Schema for Léon Morales Portfolio:
 
 ## Notes
 - Multiple labels can be applied to nodes (e.g., Experience:Education, Experience:Internship)
-- Array properties: achievements, skills
+- Array properties: achievements, skills, courses, target_roles, preferred_locations
+- Questions about the job Léon is looking for, his availability, contract, locations or work permit: read (Person)-[:SEEKS]->(InternshipPreferences) and Person.status
+- Questions about his strengths: (Person)-[:HAS_QUALITY]->(Quality); what he is improving: (Person)-[:WORKS_ON_IMPROVING]->(AreaOfDevelopment)
 - Relationship properties: level (for HAS_SKILL, SPEAKS), year (for BORN_IN), period (for INCLUDED_LOCATION)
 - The main person is named "Léon Morales"
 - Always use MATCH (p:Person {name: "Léon Morales"}) to start queries about Léon

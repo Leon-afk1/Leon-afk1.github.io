@@ -84,7 +84,7 @@
         "tag2": "Cell Morphology",
         "tag3": "PyTorch",
         "tag4": "Drug Discovery",
-        "description": "Implemented a multimodal contrastive learning model inspired by the paper Cell Morphology Guided Small Molecule Generation with GFlowNets. Integrated molecular SMILES data with cell image features to build a shared latent space, paving the way for molecule generation. Used PyTorch Lightning.",
+        "description": "Multimodal contrastive learning model inspired by the paper Cell Morphology Guided Small Molecule Generation with GFlowNets: molecular SMILES data and cell image features in a shared latent space, with PyTorch Lightning. Abandoned: the paper's data contained many very similar molecules (isomers), which made matching pairs easy to build, and Ksilink's data had no such structure. I then moved on to the chatbot for biologists.",
         "link1Text": "Ksilink",
         "link2Text": "Publication",
         "link3Text": "Internship Report",
@@ -96,7 +96,7 @@
         "tag2": "Graph RAG",
         "tag3": "Biology",
         "tag4": "Streamlit",
-        "description": "Designed a chatbot based on open-source LLMs to help biologists query internal graph database in natural language. Improved the knowledge graph pipeline and added intuitive features to enhance usability and data enrichment.",
+        "description": "Designed a chatbot based on open-source LLMs that lets biologists query the internal graph database in natural language, to find links between proteins, molecules and other biological entities more easily. Improved the knowledge graph pipeline and added features for usability and data enrichment.",
         "link1Text": "Ksilink",
         "link2Text": "Internship Report",
         "reportUrl": "./internship-report-en.pdf"
@@ -107,7 +107,7 @@
         "tag2": "PyTorch Lightning",
         "tag3": "TensorFlow",
         "tag4": "CNN",
-        "description": "Built a convolutional neural network to classify 4 types of cells from internal datasets, achieving 85%+ accuracy despite noisy labels. Implemented in TensorFlow, then PyTorch, and finally PyTorch Lightning.",
+        "description": "Built a convolutional neural network to classify 4 types of cells from internal datasets, reaching about 85% accuracy. That was in line with expectations: even the researchers struggled to tell these cells apart, and some images were mislabeled. Implemented in TensorFlow, then PyTorch, and finally PyTorch Lightning.",
         "link1Text": "Ksilink",
         "link2Text": "Internship Report",
         "reportUrl": "./internship-report-en.pdf"
@@ -167,7 +167,7 @@
         "tag2": "Time Series",
         "tag3": "Deep Learning",
         "tag4": "IMU/PPG",
-        "description": "Ongoing research project at LIARA laboratory focused on fine-grained human activity recognition. Designing a neural architecture using self-supervised contrastive learning to handle high variability in IMU and PPG sensor data from wearable devices. The goal is to publish research findings.",
+        "description": "Ongoing research project at LIARA laboratory focused on fine-grained human activity recognition. Designing a neural architecture using self-supervised contrastive learning to handle high variability in IMU and PPG sensor data from wearable devices. The dataset was collected in the lab with about twenty participants of varied ages and professions. The goal is to publish research findings.",
         "link1Text": "UQAC LIARA",
         "link2Text": "View Code"
       },
@@ -188,7 +188,7 @@
         "tag3": "Computer Vision",
         "tag4": "Grad-CAM",
         "tag5": "Mobile AI",
-        "description": "Mobile application for automated plant disease diagnosis, available for direct download from my GitHub. Built with Flutter, its core strength lies in an embedded AI engine integrating computer vision models optimized for edge deployment via TensorFlow Lite. The pipeline leverages advanced feature extraction (HOG, LBP) and Grad-CAM explainability so users can visually understand the model's predictions.",
+        "description": "Mobile application for automated plant disease diagnosis (36 classes), available for direct download from my GitHub. Built with Flutter around an embedded AI engine: computer vision models optimized for edge deployment with TensorFlow Lite, feature extraction (HOG, LBP) and Grad-CAM explanations so users can see why the model made its prediction. To generalize beyond photos taken in a laboratory, the models were trained on several datasets.",
         "link1Text": "View Code"
       },
       "card13": {
@@ -198,7 +198,7 @@
         "tag3": "Voice Analysis",
         "tag4": "NeuroQwerty",
         "tag5": "Python",
-        "description": "Developed in just one week as part of a joint initiative between UQAC and Haute École de Louvain (HEL), this web application introduces an innovative approach to Parkinson's disease detection. Rather than relying on a single biomarker, the Python backend uses XGBoost models to fuse and analyze three distinct modalities: voice analysis, keystroke dynamics (NeuroQwerty), and spiral drawing tests.",
+        "description": "Developed in one week during a joint initiative between UQAC and Haute École de Louvain (HEL). Rather than relying on a single biomarker, the Python backend uses XGBoost models on three modalities: voice analysis, keystroke dynamics (NeuroQwerty) and spiral drawing tests. Each modality reaches over 90% accuracy on its own; since no public dataset combines the three, the fusion was tested on a simulated dataset, with good results.",
         "link1Text": "UQAC",
         "link2Text": "View Code"
       },
@@ -239,10 +239,10 @@
         "tag1": "Graph RAG",
         "tag2": "Neo4j",
         "tag3": "Agentic workflows",
-        "tag4": "Ollama",
-        "tag5": "RAGAS",
+        "tag4": "LangChain",
+        "tag5": "Ollama",
         "tag6": "LLM-as-a-Judge",
-        "description": "My current end-of-studies internship project in the R&D team of Astek Innovation Lab (confidential). The platform automatically builds a knowledge graph from novels and answers questions with an agentic Graph RAG pipeline in Python: a Neo4j knowledge graph provides the context to LLMs deployed locally with Ollama, an agent decides how to explore the graph, and the answers are evaluated with RAGAS and LLM-as-a-judge.",
+        "description": "My current end-of-studies internship project in the R&D team of Astek Innovation Lab (confidential). The challenge is handling the context of an entire novel, far more text than an LLM can take in at once. The platform automatically builds a Neo4j knowledge graph from the novel and explores it with agentic workflows written with LangChain, on local, private LLMs (Ollama) so that no data leaves the company. The results are evaluated with RAGAS and LLM-as-a-judge.",
         "link1Text": "Astek Innovation Lab"
       }
     },
@@ -270,17 +270,17 @@
         "company": "Astek Group – Innovation Lab, La Défense, France",
         "period": "Sept 2026 – Feb 2027",
         "achievement1": "End-of-studies internship in the R&D team at Astek Innovation Lab (confidential project)",
-        "achievement2": "Designing a Graph RAG pipeline in Python: a Neo4j knowledge graph provides relevant context to an LLM",
-        "achievement3": "Deploying local LLMs with Ollama and evaluating the RAG (RAGAS, LLM-as-a-judge)",
-        "achievement4": "Agentic approach to information retrieval in the graph"
+        "achievement2": "Handling the context of entire novels with a knowledge graph built automatically in Neo4j (Graph RAG)",
+        "achievement3": "Agentic workflows with LangChain on local, private LLMs (Ollama), so that no data leaves the company",
+        "achievement4": "Evaluation with RAGAS and LLM-as-a-judge, in a research approach"
       },
       "item1": {
         "title": "Double Degree, Master’s in Artificial Intelligence",
         "company": "Université du Québec à Chicoutimi (UQAC), Canada",
         "period": "Sept 2025 – 2027 (expected)",
         "achievement1": "Specialization in Artificial Intelligence",
-        "achievement2": "Focus on advanced machine learning and deep learning techniques",
-        "achievement3": "Exploring opportunities for research collaboration in Canada"
+        "achievement2": "GPA 3.92 / 4.3: machine learning, deep learning, neural networks, ML for big data, IT project management",
+        "achievement3": "Research project at the LIARA laboratory on human activity recognition"
       },
       "item2": {
         "title": "Hackathon X UQAC - 2nd Place Winner",
@@ -458,7 +458,7 @@
         "tag2": "Morphologie Cellulaire",
         "tag3": "PyTorch",
         "tag4": "Découverte Médicaments",
-        "description": "Implémentation d'un modèle d'apprentissage contrastif multimodal inspiré du papier 'Cell Morphology Guided Small Molecule Generation with GFlowNets'. Intégration des données moléculaires SMILES avec les caractéristiques d'images cellulaires pour construire un espace latent partagé, ouvrant la voie à la génération de molécules. Utilisation de PyTorch Lightning.",
+        "description": "Modèle d'apprentissage contrastif multimodal inspiré du papier Cell Morphology Guided Small Molecule Generation with GFlowNets : données moléculaires SMILES et caractéristiques d'images cellulaires dans un espace latent partagé, avec PyTorch Lightning. Abandonné : les données du papier contenaient beaucoup de molécules très proches (isomères), ce qui facilitait la création de paires, et les données de Ksilink n'avaient pas cette structure. Je suis ensuite passé au chatbot pour biologistes.",
         "link1Text": "Ksilink",
         "link2Text": "Publication",
         "link3Text": "Rapport de Stage",
@@ -470,7 +470,7 @@
         "tag2": "Graph RAG",
         "tag3": "Biologie",
         "tag4": "Streamlit",
-        "description": "Conception d'un chatbot basé sur des LLMs open-source pour aider les biologistes à interroger la base de données graphiques internes en langage naturel. Amélioration du pipeline du graphe de connaissances et ajout de fonctionnalités intuitives pour améliorer l'utilisabilité et l'enrichissement des données.",
+        "description": "Conception d'un chatbot basé sur des LLM open source qui permet aux biologistes d'interroger la base de données graphe interne en langage naturel, pour identifier plus facilement les liens entre protéines, molécules et autres entités biologiques. Amélioration du pipeline du graphe de connaissances et ajout de fonctionnalités d'utilisation et d'enrichissement des données.",
         "link1Text": "Ksilink",
         "link2Text": "Rapport de Stage",
         "reportUrl": "./rapport-de-stage-fr.pdf"
@@ -481,7 +481,7 @@
         "tag2": "PyTorch Lightning",
         "tag3": "TensorFlow",
         "tag4": "CNN",
-        "description": "Construction d'un réseau neuronal convolutif pour classifier 4 types de cellules à partir de jeux de données internes, atteignant une précision de 85%+ malgré des étiquettes bruitées. Implémenté en TensorFlow, puis PyTorch, et enfin PyTorch Lightning.",
+        "description": "Construction d'un réseau neuronal convolutif pour classifier 4 types de cellules à partir de jeux de données internes, avec une précision d'environ 85 %. C'était le résultat attendu : même les chercheurs avaient du mal à distinguer ces cellules, et certaines images étaient mal étiquetées. Implémenté en TensorFlow, puis PyTorch, et enfin PyTorch Lightning.",
         "link1Text": "Ksilink",
         "link2Text": "Rapport de Stage",
         "reportUrl": "./rapport-de-stage-fr.pdf"
@@ -541,7 +541,7 @@
         "tag2": "Séries Temporelles",
         "tag3": "Apprentissage Profond",
         "tag4": "IMU/PPG",
-        "description": "Projet de recherche en cours au laboratoire LIARA sur la reconnaissance d'activités humaines à granularité fine. Conception d'une architecture neuronale utilisant l'apprentissage par contraste auto-supervisé pour gérer la forte variabilité des données des capteurs IMU et PPG. L'objectif est de publier un article scientifique.",
+        "description": "Projet de recherche en cours au laboratoire LIARA sur la reconnaissance d'activités humaines à granularité fine. Conception d'une architecture neuronale utilisant l'apprentissage par contraste auto-supervisé pour gérer la forte variabilité des données des capteurs IMU et PPG. Le jeu de données a été collecté au laboratoire auprès d'une vingtaine de participants d'âges et de professions variés. L'objectif est de publier un article scientifique.",
         "link1Text": "UQAC LIARA",
         "link2Text": "Voir le Code"
       },
@@ -562,7 +562,7 @@
         "tag3": "Vision par Ordinateur",
         "tag4": "Grad-CAM",
         "tag5": "IA Mobile",
-        "description": "Application mobile pour le diagnostic automatisé des maladies des plantes, directement téléchargeable depuis mon GitHub. Conçue avec Flutter, sa force réside dans un moteur IA embarqué intégrant des modèles de vision par ordinateur optimisés pour le déploiement mobile via TensorFlow Lite. Le pipeline s'appuie sur l'extraction de caractéristiques (HOG, LBP) et des outils d'explicabilité Grad-CAM pour une compréhension visuelle des prédictions.",
+        "description": "Application mobile de diagnostic automatisé des maladies des plantes (36 classes), téléchargeable depuis mon GitHub. Conçue avec Flutter autour d'un moteur IA embarqué : modèles de vision par ordinateur optimisés pour le mobile avec TensorFlow Lite, extraction de caractéristiques (HOG, LBP) et explications Grad-CAM pour comprendre visuellement les prédictions. Pour généraliser au-delà des photos prises en laboratoire, les modèles ont été entraînés sur plusieurs jeux de données.",
         "link1Text": "Voir le code"
       },
       "card13": {
@@ -572,7 +572,7 @@
         "tag3": "Analyse Vocale",
         "tag4": "NeuroQwerty",
         "tag5": "Python",
-        "description": "Développée en seulement une semaine dans le cadre d'un projet conjoint entre l'UQAC et la Haute École de Louvain (HEL), cette application web propose une approche innovante pour la détection de la maladie de Parkinson. Au lieu de se limiter à un seul biomarqueur, le backend Python utilise des modèles XGBoost pour fusionner et analyser trois modalités distinctes : l'analyse vocale, la dynamique de frappe au clavier (NeuroQwerty) et l'étude des tracés de spirales.",
+        "description": "Développée en une semaine dans le cadre d'un projet conjoint entre l'UQAC et la Haute École de Louvain (HEL). Au lieu d'un seul biomarqueur, le backend Python utilise des modèles XGBoost sur trois modalités : l'analyse vocale, la dynamique de frappe au clavier (NeuroQwerty) et le tracé de spirales. Chaque modalité dépasse 90 % de précision ; aucun jeu de données public ne réunissant les trois, la fusion a été testée sur un jeu de données simulé, avec de bons résultats.",
         "link1Text": "UQAC",
         "link2Text": "Voir le code"
       },
@@ -613,10 +613,10 @@
         "tag1": "Graph RAG",
         "tag2": "Neo4j",
         "tag3": "Workflows agentiques",
-        "tag4": "Ollama",
-        "tag5": "RAGAS",
+        "tag4": "LangChain",
+        "tag5": "Ollama",
         "tag6": "LLM-as-a-Judge",
-        "description": "Mon projet actuel de stage de fin d'études dans l'équipe R&D de l'Astek Innovation Lab (confidentiel). La plateforme construit automatiquement un graphe de connaissances à partir de romans et répond aux questions avec un pipeline Graph RAG agentique en Python : un graphe Neo4j fournit le contexte à des LLM déployés en local avec Ollama, un agent décide comment explorer le graphe, et les réponses sont évaluées avec RAGAS et LLM-as-a-judge.",
+        "description": "Mon projet actuel de stage de fin d'études dans l'équipe R&D de l'Astek Innovation Lab (confidentiel). L'enjeu est de gérer le contexte d'un roman entier, bien plus de texte qu'un LLM ne peut en lire d'un coup. La plateforme construit automatiquement un graphe de connaissances Neo4j à partir du roman et l'explore avec des workflows agentiques écrits avec LangChain, sur des LLM locaux et privés (Ollama) pour qu'aucune donnée ne sorte de l'entreprise. Les résultats sont évalués avec RAGAS et LLM-as-a-judge.",
         "link1Text": "Astek Innovation Lab"
       }
     },
@@ -644,17 +644,17 @@
         "company": "Astek Group – Innovation Lab, La Défense, France",
         "period": "Sept 2026 – Fév 2027",
         "achievement1": "Stage de fin d'études au sein de l'équipe R&D de l'Astek Innovation Lab (projet confidentiel)",
-        "achievement2": "Conception d'un pipeline Graph RAG en Python : un graphe de connaissances Neo4j fournit un contexte pertinent à un LLM",
-        "achievement3": "Déploiement de LLM en local avec Ollama et évaluation du RAG (RAGAS, LLM-as-a-judge)",
-        "achievement4": "Approche agentique pour la récupération d'information dans le graphe"
+        "achievement2": "Gestion du contexte de romans entiers avec un graphe de connaissances construit automatiquement dans Neo4j (Graph RAG)",
+        "achievement3": "Workflows agentiques avec LangChain sur des LLM locaux et privés (Ollama), pour qu'aucune donnée ne sorte de l'entreprise",
+        "achievement4": "Évaluation avec RAGAS et LLM-as-a-judge, dans une démarche de recherche"
       },
       "item1": {
         "title": "Double Diplôme — Maîtrise en Intelligence Artificielle",
         "company": "Université du Québec à Chicoutimi (UQAC), Canada",
         "period": "Sept 2025 – 2027 (attendu)",
         "achievement1": "Spécialisation en Intelligence Artificielle",
-        "achievement2": "Focus sur les techniques avancées d'apprentissage machine et profond",
-        "achievement3": "Exploration d'opportunités de collaboration en recherche au Canada"
+        "achievement2": "Moyenne 3,92 / 4,3 : apprentissage automatique, apprentissage profond, réseaux de neurones, ML pour données massives, gestion de projets informatiques",
+        "achievement3": "Projet de recherche au laboratoire LIARA sur la reconnaissance d'activités humaines"
       },
       "item2": {
         "title": "Hackathon X UQAC - Gagnant 2e Place",
