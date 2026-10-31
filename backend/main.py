@@ -366,6 +366,7 @@ Neo4j Database Schema for Léon Morales Portfolio:
 - Use parameterized queries with $name variable
 - Project.startDate / Project.endDate and Experience.startDate / Experience.endDate are dates: to answer "first", "latest", "before" or "since", ORDER BY or compare them
 - Projects done during an internship or a degree: (Experience)-[:INCLUDED_PROJECT]->(Project); find the experience through its institution, e.g. (e:Experience)-[:AT_INSTITUTION]->(i:Institution) WHERE toLower(i.name) CONTAINS "ksilink"
+- Some labs and partners are not Institution nodes (e.g. the LIARA lab, Haute École de Louvain): look for them in Project.source or Project.description too, e.g. WHERE toLower(pr.source) CONTAINS "liara" OR toLower(pr.description) CONTAINS "liara"
 - Return the useful properties (name, description, dates, skills), not only names
 
 ## Examples
