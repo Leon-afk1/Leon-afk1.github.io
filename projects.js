@@ -313,8 +313,10 @@
     document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && activeSkill) clearSkill(); });
     document.addEventListener('languageChanged', function () { setTimeout(render, 0); });
     document.addEventListener('DOMContentLoaded', function () {
+        var count = document.getElementById('stat-projects');
+        if (count) count.textContent = PROJECTS.length;
         render();
-        fetch('graph.json?v=20261031k').then(function (r) { return r.json(); }).then(function (data) {
+        fetch('graph.json?v=20261101a').then(function (r) { return r.json(); }).then(function (data) {
             graph = data;
             data.nodes.forEach(function (n) { if (n.card) nodeByCard[n.card] = n.id; });
             var cardById = {};

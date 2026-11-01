@@ -18,15 +18,15 @@
 
     var CV = { en: 'CV_Leon_Morales_AI_2027_English.pdf', fr: 'CV_Leon_Morales_IA_2027_Francais.pdf' };
     var T = {
-        en: { cv: 'Download CV', avail: 'Available from April 2027 · Open to relocation worldwide', skip: 'Skip to content', send: 'Send message',
+        en: { cv: 'Download CV', avail: 'Full-time or VIE · Available from April 2027 · Open to relocation worldwide', skip: 'Skip to content', send: 'Send message',
               langLabel: 'Switch to French', copy: 'Copy', copied: 'Copied!', menu: 'Menu',
               groups: ['Generative AI & LLMs', 'Machine Learning & Data', 'Cloud & DevOps', 'Languages & Tools'] },
-        fr: { cv: 'Télécharger mon CV', avail: "Disponible à partir d'avril 2027 · Mobilité internationale", skip: 'Aller au contenu', send: 'Envoyer le message',
+        fr: { cv: 'Télécharger mon CV', avail: "CDI ou VIE · Disponible dès avril 2027 · Mobilité internationale", skip: 'Aller au contenu', send: 'Envoyer le message',
               langLabel: 'Passer en anglais', copy: 'Copier', copied: 'Copié !', menu: 'Menu',
               groups: ['IA générative & LLM', 'Machine Learning & Data', 'Cloud & DevOps', 'Langages & outils'] }
     };
     var SKILLS = [
-        ['LLM (Ollama, Hugging Face)', 'RAG / Graph RAG', 'LangChain', 'Embeddings', 'ChromaDB', 'Neo4j vector index', 'Fine-tuning', 'RAGAS'],
+        ['LLM (Ollama, Hugging Face)', 'RAG / Graph RAG', 'LangChain', 'Embeddings', 'ChromaDB', 'Neo4j vector index', 'Fine-tuning', 'LLM-as-a-judge'],
         ['PyTorch', 'PyTorch Lightning', 'TensorFlow / Keras', 'Scikit-learn', 'Pandas', 'NumPy', 'NLP', 'Computer Vision (CNN)', 'Contrastive learning'],
         ['Google Cloud Run', 'Artifact Registry', 'Secret Manager', 'Cloud Monitoring', 'Terraform (IaC)', 'GitHub Actions (CI/CD)', 'Workload Identity Federation', 'Docker'],
         ['Python', 'SQL (PostgreSQL)', 'Cypher', 'C / C++', 'Java', 'Git / GitHub', 'Neo4j', 'FastAPI', 'Streamlit', 'Weights & Biases']
@@ -34,9 +34,8 @@
     // Certifications, in the order of the links in index.html: issuer monogram and skills validated (from Neo4j)
     var CERTS = [
         { mono: 'N4J', skills: ['Neo4j', 'Cypher'] },
-        { mono: 'NV', skills: ['Deep Learning'] },
-        { mono: 'G', skills: ['AI Fundamentals'] },
-        { mono: 'G', skills: ['Web Analytics'] }
+        { mono: 'NV', skills: ['Data Analysis', 'Machine Learning'] },
+        { mono: 'G', skills: ['AI Fundamentals'] }
     ];
     function lang() {
         var l = window.currentLanguage;

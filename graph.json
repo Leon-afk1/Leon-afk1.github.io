@@ -6,337 +6,337 @@
    "id": "leon",
    "type": "person",
    "label": "Léon Morales",
-   "x": 550.4,
+   "x": 496.3,
    "y": 360.0
-  },
-  {
-   "id": "p:Agentic Graph RAG Platform for Novels",
-   "type": "project",
-   "label": "Agentic Graph RAG Platform for Novels",
-   "card": "card15",
-   "x": 405.7,
-   "y": 303.5
   },
   {
    "id": "p:AgroScan: AI-Powered Agricultural Diagnosis",
    "type": "project",
    "label": "AgroScan: AI-Powered Agricultural Diagnosis",
    "card": "card12",
-   "x": 747.6,
-   "y": 320.6
+   "x": 616.8,
+   "y": 491.6
   },
   {
    "id": "p:Cell Classification CNN",
    "type": "project",
    "label": "Cell Classification CNN",
    "card": "card4",
-   "x": 766.7,
-   "y": 216.5
+   "x": 687.5,
+   "y": 570.8
+  },
+  {
+   "id": "p:Graph RAG Platform for Novels",
+   "type": "project",
+   "label": "Graph RAG Platform for Novels",
+   "card": "card15",
+   "x": 634.4,
+   "y": 196.1
   },
   {
    "id": "p:Human Activity Recognition via Wearable Sensors",
    "type": "project",
    "label": "Human Activity Recognition via Wearable Sensors",
    "card": "card10",
-   "x": 764.9,
-   "y": 427.5
+   "x": 571.4,
+   "y": 593.3
   },
   {
    "id": "p:Intelligent RAG Chatbot & Dashboard",
    "type": "project",
    "label": "Intelligent RAG Chatbot & Dashboard",
    "card": "card1",
-   "x": 451.8,
-   "y": 590.7
+   "x": 343.3,
+   "y": 209.2
   },
   {
    "id": "p:LLM Chatbot for Biologists",
    "type": "project",
    "label": "LLM Chatbot for Biologists",
    "card": "card3",
-   "x": 386.8,
-   "y": 381.8
+   "x": 602.3,
+   "y": 245.7
   },
   {
    "id": "p:MNIST Digit Recognition Demo",
    "type": "project",
    "label": "MNIST Digit Recognition Demo",
    "card": "card7",
-   "x": 610.4,
-   "y": 162.1
+   "x": 719.3,
+   "y": 411.9
   },
   {
    "id": "p:Multimodal Contrastive Learning",
    "type": "project",
    "label": "Multimodal Contrastive Learning",
    "card": "card2",
-   "x": 716.7,
-   "y": 245.7
+   "x": 629.7,
+   "y": 565.5
   },
   {
    "id": "p:Multimodal Parkinson's Disease Detection",
    "type": "project",
    "label": "Multimodal Parkinson's Disease Detection",
    "card": "card13",
-   "x": 720.3,
-   "y": 607.2
+   "x": 310.3,
+   "y": 565.8
   },
   {
    "id": "p:Mushroom Toxicity Prediction",
    "type": "project",
    "label": "Mushroom Toxicity Prediction",
    "card": "card5",
-   "x": 703.2,
-   "y": 540.8
+   "x": 362.8,
+   "y": 539.7
   },
   {
    "id": "p:Music Genre Classification",
    "type": "project",
    "label": "Music Genre Classification",
    "card": "card8",
-   "x": 823.9,
-   "y": 435.9
+   "x": 464.0,
+   "y": 636.6
   },
   {
    "id": "p:Personal AI Chatbot (Portfolio RAG)",
    "type": "project",
    "label": "Personal AI Chatbot (Portfolio RAG)",
    "card": "card14",
-   "x": 349.4,
-   "y": 245.4
+   "x": 551.0,
+   "y": 127.9
   },
   {
    "id": "p:Portfolio Website",
    "type": "project",
    "label": "Portfolio Website",
-   "x": 328.4,
-   "y": 95.0
+   "x": 337.0,
+   "y": 87.9
   },
   {
    "id": "p:Poultry Disease Detection",
    "type": "project",
    "label": "Poultry Disease Detection",
    "card": "card6",
-   "x": 688.5,
-   "y": 191.1
+   "x": 689.2,
+   "y": 499.8
   },
   {
    "id": "p:RAG Chatbot for UQAC Handbook",
    "type": "project",
    "label": "RAG Chatbot for UQAC Handbook",
    "card": "card11",
-   "x": 547.9,
-   "y": 580.2
+   "x": 379.1,
+   "y": 403.6
   },
   {
    "id": "p:Tangram Solver",
    "type": "project",
    "label": "Tangram Solver",
    "card": "card9",
-   "x": 636.1,
-   "y": 595.0
+   "x": 271.5,
+   "y": 460.2
   },
   {
    "id": "e:UTBM_Degree",
    "type": "experience",
    "label": "UTBM",
-   "x": 684.7,
-   "y": 374.4
+   "x": 420.8,
+   "y": 493.3
   },
   {
    "id": "e:UQAC_Degree",
    "type": "experience",
    "label": "UQAC",
-   "x": 734.3,
-   "y": 491.9
+   "x": 515.3,
+   "y": 578.9
   },
   {
    "id": "e:Yeditepe_Exchange",
    "type": "experience",
    "label": "Yeditepe",
-   "x": 379.9,
-   "y": 40
+   "x": 860.6,
+   "y": 298.9
   },
   {
    "id": "e:Ksilink_Internship",
    "type": "experience",
    "label": "Ksilink",
-   "x": 572.8,
-   "y": 234.4
+   "x": 644.0,
+   "y": 402.2
   },
   {
    "id": "e:Astek_RND_Internship",
    "type": "experience",
    "label": "Astek",
-   "x": 355.6,
-   "y": 332.8
+   "x": 579.2,
+   "y": 178.5
   },
   {
    "id": "e:Hackathon_UQAC_2025",
    "type": "experience",
    "label": "Hackathon UQAC",
-   "x": 424.5,
-   "y": 539.5
+   "x": 307.9,
+   "y": 255.1
   },
   {
    "id": "e:SKIUTBM_Presidency",
    "type": "experience",
    "label": "SKI'UTBM",
-   "x": 371.6,
-   "y": 680.0
+   "x": 130.0,
+   "y": 323.9
   },
   {
    "id": "s:Python",
    "type": "skill",
    "label": "Python",
-   "x": 593.7,
-   "y": 398.5
+   "x": 505.9,
+   "y": 417.1
   },
   {
    "id": "s:Deep Learning",
    "type": "skill",
    "label": "Deep Learning",
-   "x": 816.0,
-   "y": 293.5
+   "x": 675.6,
+   "y": 659.4
   },
   {
    "id": "s:Docker",
    "type": "skill",
    "label": "Docker",
-   "x": 339.1,
-   "y": 440.0
+   "x": 474.6,
+   "y": 155.8
   },
   {
    "id": "s:Computer Vision",
    "type": "skill",
    "label": "Computer Vision",
-   "x": 753.4,
-   "y": 114.8
+   "x": 801.6,
+   "y": 540.0
   },
   {
    "id": "s:Git",
    "type": "skill",
    "label": "Git",
-   "x": 473.3,
-   "y": 196.2
+   "x": 501.8,
+   "y": 243.0
   },
   {
    "id": "s:NLP",
    "type": "skill",
    "label": "NLP",
-   "x": 483.8,
-   "y": 438.4
+   "x": 606.3,
+   "y": 332.1
   },
   {
    "id": "s:PyTorch",
    "type": "skill",
    "label": "PyTorch",
-   "x": 691.8,
-   "y": 298.1
+   "x": 740.1,
+   "y": 611.0
   },
   {
    "id": "s:Cypher",
    "type": "skill",
    "label": "Cypher",
-   "x": 271.5,
-   "y": 362.7
+   "x": 741.7,
+   "y": 207.2
   },
   {
    "id": "s:FastAPI",
    "type": "skill",
    "label": "FastAPI",
-   "x": 515.1,
-   "y": 503.3
+   "x": 303.8,
+   "y": 326.4
   },
   {
    "id": "s:Graph RAG",
    "type": "skill",
    "label": "Graph RAG",
-   "x": 263.2,
-   "y": 303.0
+   "x": 688.4,
+   "y": 110.9
   },
   {
    "id": "s:Knowledge Graph",
    "type": "skill",
    "label": "Knowledge Graph",
-   "x": 343.3,
-   "y": 187.8
+   "x": 633.4,
+   "y": 79.1
   },
   {
    "id": "s:Machine Learning",
    "type": "skill",
    "label": "Machine Learning",
-   "x": 849.9,
-   "y": 594.8
+   "x": 339.2,
+   "y": 680.0
   },
   {
    "id": "s:Neo4j",
    "type": "skill",
    "label": "Neo4j",
-   "x": 278.7,
-   "y": 243.7
+   "x": 731.1,
+   "y": 150.2
   },
   {
    "id": "s:Pandas",
    "type": "skill",
    "label": "Pandas",
-   "x": 812.6,
-   "y": 356.6
+   "x": 563.4,
+   "y": 680
   },
   {
    "id": "s:Streamlit",
    "type": "skill",
    "label": "Streamlit",
-   "x": 366.7,
-   "y": 545.1
+   "x": 416.4,
+   "y": 261.1
   },
   {
    "id": "s:TensorFlow",
    "type": "skill",
    "label": "TensorFlow",
-   "x": 870,
-   "y": 364.5
+   "x": 505.4,
+   "y": 680
   },
   {
    "id": "s:Weights & Biases",
    "type": "skill",
    "label": "Weights & Biases",
-   "x": 852.8,
-   "y": 244.1
+   "x": 621.4,
+   "y": 680
   },
   {
    "id": "s:CNN",
    "type": "skill",
    "label": "CNN",
-   "x": 693.3,
-   "y": 41.5
+   "x": 870.0,
+   "y": 501.2
   },
   {
    "id": "s:Google Cloud Run",
    "type": "skill",
    "label": "Google Cloud Run",
-   "x": 130,
-   "y": 40
+   "x": 778.8,
+   "y": 40.0
   },
   {
    "id": "s:Terraform",
    "type": "skill",
    "label": "Terraform",
-   "x": 437.9,
-   "y": 40
+   "x": 854.8,
+   "y": 40.0
   },
   {
    "id": "s:GitHub Actions",
    "type": "skill",
    "label": "GitHub Actions",
-   "x": 187.9,
-   "y": 40
+   "x": 231.6,
+   "y": 40.0
   }
  ],
  "edges": [
   [
    "e:Astek_RND_Internship",
-   "p:Agentic Graph RAG Platform for Novels"
+   "p:Graph RAG Platform for Novels"
   ],
   [
    "e:Astek_RND_Internship",
@@ -572,15 +572,15 @@
   ],
   [
    "leon",
-   "p:Agentic Graph RAG Platform for Novels"
-  ],
-  [
-   "leon",
    "p:AgroScan: AI-Powered Agricultural Diagnosis"
   ],
   [
    "leon",
    "p:Cell Classification CNN"
+  ],
+  [
+   "leon",
+   "p:Graph RAG Platform for Novels"
   ],
   [
    "leon",
@@ -635,38 +635,6 @@
    "p:Tangram Solver"
   ],
   [
-   "p:Agentic Graph RAG Platform for Novels",
-   "s:Cypher"
-  ],
-  [
-   "p:Agentic Graph RAG Platform for Novels",
-   "s:Docker"
-  ],
-  [
-   "p:Agentic Graph RAG Platform for Novels",
-   "s:Git"
-  ],
-  [
-   "p:Agentic Graph RAG Platform for Novels",
-   "s:Graph RAG"
-  ],
-  [
-   "p:Agentic Graph RAG Platform for Novels",
-   "s:Knowledge Graph"
-  ],
-  [
-   "p:Agentic Graph RAG Platform for Novels",
-   "s:NLP"
-  ],
-  [
-   "p:Agentic Graph RAG Platform for Novels",
-   "s:Neo4j"
-  ],
-  [
-   "p:Agentic Graph RAG Platform for Novels",
-   "s:Python"
-  ],
-  [
    "p:AgroScan: AI-Powered Agricultural Diagnosis",
    "s:Computer Vision"
   ],
@@ -705,6 +673,38 @@
   [
    "p:Cell Classification CNN",
    "s:Weights & Biases"
+  ],
+  [
+   "p:Graph RAG Platform for Novels",
+   "s:Cypher"
+  ],
+  [
+   "p:Graph RAG Platform for Novels",
+   "s:Docker"
+  ],
+  [
+   "p:Graph RAG Platform for Novels",
+   "s:Git"
+  ],
+  [
+   "p:Graph RAG Platform for Novels",
+   "s:Graph RAG"
+  ],
+  [
+   "p:Graph RAG Platform for Novels",
+   "s:Knowledge Graph"
+  ],
+  [
+   "p:Graph RAG Platform for Novels",
+   "s:NLP"
+  ],
+  [
+   "p:Graph RAG Platform for Novels",
+   "s:Neo4j"
+  ],
+  [
+   "p:Graph RAG Platform for Novels",
+   "s:Python"
   ],
   [
    "p:Human Activity Recognition via Wearable Sensors",

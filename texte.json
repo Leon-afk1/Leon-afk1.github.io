@@ -36,7 +36,7 @@
       "title": "About Me",
       "paragraph1": "I’m an engineering student with an international journey that shaped both my technical and personal skills. After starting my studies at the University of Technology of Belfort-Montbéliard (UTBM) in France, I had the opportunity to spend a semester abroad at Yeditepe University in Istanbul, where I strengthened my expertise in computer science. Today, I am pursuing a double degree at the University of Quebec in Chicoutimi (UQAC), focusing on Artificial Intelligence.",
       "paragraph2": "Outside of academics, I’ve been playing basketball for over 15 years, I love skiing (and even led a ski association with 200+ students), and I enjoy traveling—which has given me a broader perspective and adaptability in both life and work.",
-      "stat1Label": "Years Studying AI",
+      "stat1Label": "AI R&D experiences",
       "stat2Label": "Projects Completed",
       "stat3Label": "Different schools around the world"
     },
@@ -49,16 +49,12 @@
           "name": "Neo4j Certified Professional"
         },
         {
-          "issuer": "NVIDIA",
-          "name": "Fundamentals of Deep Learning"
+          "issuer": "NVIDIA Deep Learning Institute",
+          "name": "Accelerating End-to-End Data Science Workflows"
         },
         {
           "issuer": "Google",
           "name": "AI Fundamentals"
-        },
-        {
-          "issuer": "Google",
-          "name": "Get started with Google Analytics"
         }
       ],
       "certLink": "View certificate",
@@ -235,14 +231,14 @@
       },
       "citedByAssistant": "Cited by the assistant: {names}",
       "card15": {
-        "title": "Agentic Graph RAG Platform for Novels",
+        "title": "Graph RAG Platform for Novels",
         "tag1": "Graph RAG",
         "tag2": "Neo4j",
-        "tag3": "Agentic workflows",
+        "tag3": "Graph propagation",
         "tag4": "LangChain",
         "tag5": "Ollama",
         "tag6": "LLM-as-a-Judge",
-        "description": "My current end-of-studies internship project in the R&D team of Astek Innovation Lab (confidential). The challenge is handling the context of an entire novel, far more text than an LLM can take in at once. The platform automatically builds a Neo4j knowledge graph from the novel and explores it with agentic workflows written with LangChain, on local, private LLMs (Ollama) so that no data leaves the company. The results are evaluated with RAGAS and LLM-as-a-judge.",
+        "description": "My current end-of-studies internship project in the R&D team of Astek Innovation Lab (confidential). The challenge is handling the context of an entire novel, far more text than an LLM can take in at once. The platform automatically builds a Neo4j knowledge graph from the novel, then a graph propagation method selects the most relevant context to give the LLM. Everything runs on local, private LLMs (Ollama) so that no data leaves the company, and the answers are evaluated with LLM-as-a-judge. The next step of the project is an agentic approach.",
         "link1Text": "Astek Innovation Lab"
       }
     },
@@ -266,13 +262,13 @@
     "experience": {
       "title": "Experience",
       "item0": {
-        "title": "AI & Data Innovation Engineer (End-of-studies internship)",
+        "title": "Generative AI Engineer Intern (Graph RAG)",
         "company": "Astek Group – Innovation Lab, La Défense, France",
         "period": "Sept 2026 – Feb 2027",
         "achievement1": "End-of-studies internship in the R&D team at Astek Innovation Lab (confidential project)",
         "achievement2": "Handling the context of entire novels with a knowledge graph built automatically in Neo4j (Graph RAG)",
-        "achievement3": "Agentic workflows with LangChain on local, private LLMs (Ollama), so that no data leaves the company",
-        "achievement4": "Evaluation with RAGAS and LLM-as-a-judge, in a research approach"
+        "achievement3": "Graph propagation method to select the most relevant context to give the LLM",
+        "achievement4": "Local, private LLMs (Ollama) so that no data leaves the company; evaluation with LLM-as-a-judge"
       },
       "item1": {
         "title": "Double Degree, Master’s in Artificial Intelligence",
@@ -410,7 +406,7 @@
       "title": "À Propos de Moi",
       "paragraph1": "Je suis un étudiant ingénieur avec un parcours international qui a façonné mes compétences techniques et personnelles. Après avoir commencé mes études à l'Université de Technologie de Belfort-Montbéliard (UTBM) en France, j'ai eu l'opportunité de passer un semestre à l'étranger à l'Université Yeditepe à Istanbul, où j'ai renforcé mon expertise en informatique. Aujourd'hui, je poursuis un double diplôme à l'Université du Québec à Chicoutimi (UQAC), centré sur l'Intelligence Artificielle.",
       "paragraph2": "En dehors des études, je joue au basketball depuis plus de 15 ans, j'adore skier (j'ai même dirigé une association de ski comptant plus de 200 étudiants) et j'aime voyager, ce qui m'a donné une perspective plus large et une grande adaptabilité dans la vie et le travail.",
-      "stat1Label": "Années d'Études en IA",
+      "stat1Label": "Expériences R&D en IA",
       "stat2Label": "Projets Réalisés",
       "stat3Label": "Écoles différentes dans le monde"
     },
@@ -423,16 +419,12 @@
           "name": "Professionnel certifié Neo4j"
         },
         {
-          "issuer": "NVIDIA",
-          "name": "Fondamentaux de l'apprentissage profond"
+          "issuer": "NVIDIA Deep Learning Institute",
+          "name": "Accelerating End-to-End Data Science Workflows"
         },
         {
           "issuer": "Google",
           "name": "Fondamentaux de l'IA"
-        },
-        {
-          "issuer": "Google",
-          "name": "Premiers pas avec Google Analytics"
         }
       ],
       "certLink": "Voir le certificat",
@@ -609,14 +601,14 @@
       },
       "citedByAssistant": "Cités par l'assistant : {names}",
       "card15": {
-        "title": "Plateforme agentique de Graph RAG sur des romans",
+        "title": "Plateforme Graph RAG sur des romans",
         "tag1": "Graph RAG",
         "tag2": "Neo4j",
-        "tag3": "Workflows agentiques",
+        "tag3": "Propagation dans le graphe",
         "tag4": "LangChain",
         "tag5": "Ollama",
         "tag6": "LLM-as-a-Judge",
-        "description": "Mon projet actuel de stage de fin d'études dans l'équipe R&D de l'Astek Innovation Lab (confidentiel). L'enjeu est de gérer le contexte d'un roman entier, bien plus de texte qu'un LLM ne peut en lire d'un coup. La plateforme construit automatiquement un graphe de connaissances Neo4j à partir du roman et l'explore avec des workflows agentiques écrits avec LangChain, sur des LLM locaux et privés (Ollama) pour qu'aucune donnée ne sorte de l'entreprise. Les résultats sont évalués avec RAGAS et LLM-as-a-judge.",
+        "description": "Mon projet actuel de stage de fin d'études dans l'équipe R&D de l'Astek Innovation Lab (confidentiel). L'enjeu est de gérer le contexte d'un roman entier, bien plus de texte qu'un LLM ne peut en lire d'un coup. La plateforme construit automatiquement un graphe de connaissances Neo4j à partir du roman, puis une méthode de propagation dans le graphe sélectionne le contexte le plus pertinent à fournir au LLM. Tout tourne sur des LLM locaux et privés (Ollama) pour qu'aucune donnée ne sorte de l'entreprise, et les réponses sont évaluées par LLM-as-a-judge. La prochaine étape du projet est une approche agentique.",
         "link1Text": "Astek Innovation Lab"
       }
     },
@@ -640,13 +632,13 @@
     "experience": {
       "title": "Expérience",
       "item0": {
-        "title": "Ingénieur Innovation IA & Data (stage de fin d'études)",
+        "title": "Ingénieur IA Générative (Graph RAG) — stage de fin d'études",
         "company": "Astek Group – Innovation Lab, La Défense, France",
         "period": "Sept 2026 – Fév 2027",
         "achievement1": "Stage de fin d'études au sein de l'équipe R&D de l'Astek Innovation Lab (projet confidentiel)",
         "achievement2": "Gestion du contexte de romans entiers avec un graphe de connaissances construit automatiquement dans Neo4j (Graph RAG)",
-        "achievement3": "Workflows agentiques avec LangChain sur des LLM locaux et privés (Ollama), pour qu'aucune donnée ne sorte de l'entreprise",
-        "achievement4": "Évaluation avec RAGAS et LLM-as-a-judge, dans une démarche de recherche"
+        "achievement3": "Méthode de propagation dans le graphe pour sélectionner le contexte le plus pertinent à fournir au LLM",
+        "achievement4": "LLM locaux et privés (Ollama), pour qu'aucune donnée ne sorte de l'entreprise ; évaluation par LLM-as-a-judge"
       },
       "item1": {
         "title": "Double Diplôme — Maîtrise en Intelligence Artificielle",
