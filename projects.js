@@ -349,7 +349,7 @@
     document.addEventListener('languageChanged', function () { setTimeout(render, 0); });
     document.addEventListener('DOMContentLoaded', function () {
         render();
-        fetch('graph.json?v=20261101a').then(function (r) { return r.json(); }).then(function (data) {
+        fetch('graph.json?v=20261108b').then(function (r) { return r.json(); }).then(function (data) {
             graph = data;
             data.nodes.forEach(function (n) { if (n.card) nodeByCard[n.card] = n.id; });
             var cardById = {};
