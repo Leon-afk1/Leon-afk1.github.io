@@ -47,15 +47,13 @@
     function $$(s, r) { return Array.prototype.slice.call((r || document).querySelectorAll(s)); }
 
     function buildSkills() {
-        var host = $('#skills .container'), net = $('.certifications-section');
-        if (!host || !net) return;
-        var wrap = document.createElement('div'); wrap.className = 'skills-chips';
+        var host = $('.skills-lists');
+        if (!host) return;
         SKILLS.forEach(function (items, i) {
             var g = document.createElement('div'); g.className = 'skills-group';
             g.innerHTML = '<h3 data-group="' + i + '"></h3><ul>' + items.map(function (x) { return '<li>' + x.replace('&', '&amp;') + '</li>'; }).join('') + '</ul>';
-            wrap.appendChild(g);
+            host.appendChild(g);
         });
-        host.insertBefore(wrap, net);
     }
 
     // Rebuild the plain certification links as badges (the links stay the fallback without JS)

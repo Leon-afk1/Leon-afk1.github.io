@@ -14,7 +14,9 @@ Bilingual EN/FR: every text lives in `texte.json`; the English HTML is the fallb
 | `i18n.js` | Loads `texte.json`, applies static texts, dispatches `languageChanged` |
 | `nav.js` | Mobile menu, smooth scrolling, active link |
 | `hero-graph.js` | Hero: knowledge graph (`graph.json`) and question box; cited nodes light up |
-| `projects.js` | Projects by year next to the sticky projects/skills graph |
+| `field-shader.js` | WebGL light of the hero (tinted by the cited nodes, still at rest) and liquid-metal monogram |
+| `liquid-glass.js` | Refraction of the hero capsule (SVG displacement map, Chromium; blurred glass elsewhere) |
+| `projects.js` | Featured projects, index by year, and the projects/skills graph of the Skills section |
 | `experience-graph.js` | Constellation of experiences and projects over time |
 | `timeline.js` | Experience timeline |
 | `cypher-heads.js` | Cypher query shown at the top of Skills, Projects and Experience |

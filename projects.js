@@ -1,6 +1,6 @@
-// Projects section: one chapter per year (large year that lights up when on screen) next to a sticky
-// projects/skills graph (graph.json). Hovering a project lights its skills; clicking a skill in the graph
-// highlights every project that uses it. Texts come from texte.json.
+// Projects section: the featured projects in full, then the others in a compact index by year.
+// The projects/skills graph (graph.json) lives in the Skills section: clicking a skill lists its projects.
+// Texts come from texte.json.
 // start = first commit or start date (see Neo4j); exp = experience it belongs to (used by experience-graph.js).
 // A link href of 'report' points to the translated internship report; org links are shown as context.
 (function () {
@@ -29,14 +29,12 @@
     var activeFilter = 'all';
     var activeSkill = null;
     var openKeys = {};
-    PROJECTS.forEach(function (p) { if (p.featured) openKeys[p.key] = true; });
 
     var graph = null;         // graph.json
     var skillsByCard = {};    // card key -> [skill names]
     var nodeByCard = {};      // card key -> graph node id
     var graphEls = null;      // { svg, nodes: {id: g}, edges: [line] }
     var rows = {};            // card key -> li
-    var chapterObserver = null;
 
     function $(s, r) { return (r || document).querySelector(s); }
     function el(tag, className, text) {
@@ -62,7 +60,51 @@
     }
     function reduceMotion() { return matchMedia('(prefers-reduced-motion: reduce)').matches; }
 
-    // ---------- List
+    function tagList(p, t) {
+        var tags = el('ul', 'project-tags');
+        tags.setAttribute('aria-label', t.projects.tagsLabel);
+        tagsOf(p).forEach(function (tag) { tags.appendChild(el('li', 'tag', tag)); });
+        return tags;
+    }
+
+    function linkList(cfg, p) {
+        var links = el('div', 'project-links');
+        cfg.links.forEach(function (l, i) {
+            if (l.org) return;
+            var a = el('a', 'project-link', p['link' + (i + 1) + 'Text']);
+            a.href = l.href === 'report' ? p.reportUrl : l.href;
+            if (!l.internal) { a.target = '_blank'; a.rel = 'noopener noreferrer'; }
+            links.appendChild(a);
+        });
+        return links;
+    }
+
+    // ---------- Featured projects
+
+    function renderFeature(cfg, t) {
+        var p = t.projects[cfg.key];
+        var li = el('li', 'project-feature');
+        li.dataset.key = cfg.key;
+
+        var head = el('div', 'project-feature-head');
+        var title = el('h3', 'project-feature-title', p.title);
+        title.id = 'project-' + cfg.key;
+        title.tabIndex = -1;
+        head.appendChild(title);
+        var org = orgOf(cfg, p);
+        head.appendChild(el('p', 'project-org', org ? org + ', ' + cfg.start.slice(0, 4) : cfg.start.slice(0, 4)));
+        head.appendChild(linkList(cfg, p));
+        li.appendChild(head);
+
+        var body = el('div', 'project-feature-body');
+        body.appendChild(el('p', 'project-description', p.description));
+        body.appendChild(tagList(p, t));
+        li.appendChild(body);
+        rows[cfg.key] = li;
+        return li;
+    }
+
+    // ---------- Index of the other projects
 
     function renderRow(cfg, t) {
         var p = t.projects[cfg.key];
@@ -80,26 +122,14 @@
 
         var detail = el('div', 'project-detail');
         detail.id = 'project-' + cfg.key + '-detail';
-        detail.appendChild(el('p', 'project-description', p.description));
-        var tags = el('ul', 'project-tags');
-        tags.setAttribute('aria-label', t.projects.tagsLabel);
-        tagsOf(p).forEach(function (tag) { tags.appendChild(el('li', 'tag', tag)); });
-        detail.appendChild(tags);
-        var links = el('div', 'project-links');
-        cfg.links.forEach(function (l, i) {
-            if (l.org) return;
-            var a = el('a', 'project-link', p['link' + (i + 1) + 'Text']);
-            a.href = l.href === 'report' ? p.reportUrl : l.href;
-            if (!l.internal) { a.target = '_blank'; a.rel = 'noopener noreferrer'; }
-            links.appendChild(a);
-        });
-        detail.appendChild(links);
+        var inner = el('div', 'project-detail-inner');
+        inner.appendChild(el('p', 'project-description', p.description));
+        inner.appendChild(tagList(p, t));
+        inner.appendChild(linkList(cfg, p));
+        detail.appendChild(inner);
         li.appendChild(detail);
 
         head.addEventListener('click', function () { setOpen(cfg.key, !openKeys[cfg.key]); });
-        head.addEventListener('mouseenter', function () { focusProject(cfg.key); });
-        head.addEventListener('focus', function () { focusProject(cfg.key); });
-        head.addEventListener('mouseleave', function () { if (!activeSkill) { light(null); resetCaption(); } });
         rows[cfg.key] = li;
         return li;
     }
@@ -107,9 +137,10 @@
     function setOpen(key, open) {
         openKeys[key] = open;
         var li = rows[key];
-        if (!li) return;
+        var row = li && $('.project-row', li);
+        if (!row) return;
         li.classList.toggle('is-open', open);
-        $('.project-row', li).setAttribute('aria-expanded', String(open));
+        row.setAttribute('aria-expanded', String(open));
     }
 
     function applyFilter() {
@@ -132,6 +163,12 @@
         root.innerHTML = '';
         rows = {};
 
+        var featured = el('ol', 'projects-featured');
+        PROJECTS.filter(function (cfg) { return cfg.featured; }).forEach(function (cfg) { featured.appendChild(renderFeature(cfg, t)); });
+        root.appendChild(featured);
+
+        var indexHead = el('div', 'projects-index-head');
+        indexHead.appendChild(el('h3', 'projects-index-title', t.projects.otherTitle));
         var bar = el('div', 'project-filters');
         bar.setAttribute('role', 'group');
         bar.setAttribute('aria-label', t.projects.filtersLabel);
@@ -142,54 +179,51 @@
             b.addEventListener('click', function () { activeFilter = k; applyFilter(); });
             bar.appendChild(b);
         });
-        root.appendChild(bar);
+        indexHead.appendChild(bar);
+        root.appendChild(indexHead);
 
-        var layout = el('div', 'projects-layout');
         var list = el('div', 'projects-chapters');
         var byYear = {};
-        PROJECTS.forEach(function (cfg) { (byYear[cfg.start.slice(0, 4)] = byYear[cfg.start.slice(0, 4)] || []).push(cfg); });
-        if (chapterObserver) chapterObserver.disconnect();
-        chapterObserver = 'IntersectionObserver' in window ? new IntersectionObserver(function (entries) {
-            entries.forEach(function (e) { e.target.classList.toggle('is-current', e.isIntersecting); });
-        }, { rootMargin: '-35% 0px -45% 0px' }) : null;
-
+        PROJECTS.filter(function (cfg) { return !cfg.featured; }).forEach(function (cfg) {
+            (byYear[cfg.start.slice(0, 4)] = byYear[cfg.start.slice(0, 4)] || []).push(cfg);
+        });
         Object.keys(byYear).sort().reverse().forEach(function (year) {
             var ch = el('div', 'year-chapter');
             ch.setAttribute('role', 'group');
             ch.setAttribute('aria-labelledby', 'year-' + year);
-            var head = el('div', 'year-head');
-            var num = el('h3', 'year-num', year);
+            var num = el('h4', 'year-num', year);
             num.id = 'year-' + year;
-            head.appendChild(num);
-            head.appendChild(el('p', 'year-context', (t.projects.yearContext || {})[year] || ''));
-            ch.appendChild(head);
+            ch.appendChild(num);
             var ol = el('ol', 'project-rows');
             byYear[year].forEach(function (cfg) { ol.appendChild(renderRow(cfg, t)); });
             ch.appendChild(ol);
             list.appendChild(ch);
-            if (chapterObserver) chapterObserver.observe(ch); else ch.classList.add('is-current');
         });
-        layout.appendChild(list);
-
-        var aside = el('aside', 'projects-graph');
-        aside.setAttribute('aria-label', t.projects.graphLabel);
-        // aria-label rather than <title>: a <title> shows as a tooltip that hides part of the graph
-        var svg = svgEl('svg', { 'class': 'projects-graph-svg', role: 'img', 'aria-label': t.projects.graphLabel });
-        aside.appendChild(svg);
-        var caption = el('p', 'projects-graph-caption');
-        caption.setAttribute('aria-live', 'polite');
-        aside.appendChild(caption);
-        layout.appendChild(aside);
-        root.appendChild(layout);
+        root.appendChild(list);
 
         PROJECTS.forEach(function (cfg) { setOpen(cfg.key, !!openKeys[cfg.key]); });
         applyFilter();
+        renderSkillsGraph(t);
+    }
+
+    // ---------- Projects/skills graph, in the Skills section
+
+    function renderSkillsGraph(t) {
+        var host = $('#skills-graph');
+        if (!host) return;
+        host.innerHTML = '';
+        host.setAttribute('aria-label', t.projects.graphLabel);
+        // aria-label rather than <title>: a <title> shows as a tooltip that hides part of the graph
+        var svg = svgEl('svg', { 'class': 'projects-graph-svg', role: 'img', 'aria-label': t.projects.graphLabel });
+        host.appendChild(svg);
+        var cap = el('p', 'projects-graph-caption');
+        cap.setAttribute('aria-live', 'polite');
+        host.appendChild(cap);
+        host.appendChild(el('ul', 'skill-projects'));
         if (graph) renderGraph(svg, t);
         resetCaption();
         if (activeSkill) focusSkill(activeSkill);
     }
-
-    // ---------- Graph
 
     function renderGraph(svg, t) {
         var keep = {};
@@ -209,9 +243,9 @@
         Object.keys(keep).forEach(function (id) {
             var n = keep[id], isSkill = n.type === 'skill';
             var g = svgEl('g', { 'class': 'pg-node ' + (isSkill ? 'pg-skill' : 'pg-project'), transform: 'translate(' + n.x + ' ' + n.y + ')' });
-            g.appendChild(svgEl('circle', { r: isSkill ? 10 : 13 }));
+            g.appendChild(svgEl('circle', { r: isSkill ? 13 : 9 }));
             var left = n.x > cx + 150;
-            var label = svgEl('text', { x: left ? -18 : 18, y: 7, 'text-anchor': left ? 'end' : 'start' });
+            var label = svgEl('text', { x: left ? -20 : 20, y: 8, 'text-anchor': left ? 'end' : 'start' });
             label.textContent = n.card && t.projects[n.card] ? t.projects[n.card].title : n.label;
             g.appendChild(label);
             if (isSkill) {
@@ -239,29 +273,30 @@
     function caption(text) { var c = $('.projects-graph-caption'); if (c) c.textContent = text; }
     function resetCaption() { var t = texts(); if (t) caption(t.projects.graphHint); }
 
-    function focusProject(key) {
-        if (activeSkill) return;
-        var id = nodeByCard[key];
-        if (!id) { light(null); return; }
-        var set = {}; set[id] = 1;
-        (skillsByCard[key] || []).forEach(function (s) { set['s:' + s] = 1; });
-        light(set);
-        caption((skillsByCard[key] || []).join(', '));
+    function listSkillProjects(configs, t) {
+        var host = $('.skill-projects');
+        if (!host) return;
+        host.innerHTML = '';
+        configs.forEach(function (cfg) {
+            var li = el('li');
+            var b = el('button', 'skill-project', t.projects[cfg.key].title);
+            b.type = 'button';
+            b.addEventListener('click', function () { window.portfolioProjects.open(cfg.key); });
+            li.appendChild(b);
+            host.appendChild(li);
+        });
     }
 
     function focusSkill(skill) {
         var t = texts();
         activeSkill = skill;
-        var set = {}, count = 0;
+        var set = {};
+        var matches = PROJECTS.filter(function (cfg) { return (skillsByCard[cfg.key] || []).indexOf(skill) !== -1; });
         set['s:' + skill] = 1;
-        PROJECTS.forEach(function (cfg) {
-            var match = (skillsByCard[cfg.key] || []).indexOf(skill) !== -1;
-            if (match) { set[nodeByCard[cfg.key]] = 1; count++; }
-            var li = rows[cfg.key];
-            if (li) { li.classList.toggle('is-match', match); li.classList.toggle('is-dim', !match); }
-        });
+        matches.forEach(function (cfg) { set[nodeByCard[cfg.key]] = 1; });
         light(set);
-        caption(t.projects.skillMatch.replace('{skill}', skill).replace('{n}', count));
+        caption(t.projects.skillMatch.replace('{skill}', skill).replace('{n}', matches.length));
+        listSkillProjects(matches, t);
     }
 
     function toggleSkill(skill) {
@@ -269,10 +304,11 @@
     }
 
     function clearSkill() {
+        var t = texts();
         activeSkill = null;
-        Object.keys(rows).forEach(function (k) { rows[k].classList.remove('is-match', 'is-dim'); });
         light(null);
         resetCaption();
+        if (t) listSkillProjects([], t);
     }
 
     // Lights the projects and skills named in an assistant answer (floating chatbot)
@@ -300,21 +336,18 @@
             if (activeFilter !== 'all') { activeFilter = 'all'; applyFilter(); }
             setOpen(key, true);
             var li = rows[key];
-            if (li) {
-                li.scrollIntoView({ behavior: reduceMotion() ? 'auto' : 'smooth', block: 'center' });
-                $('.project-row', li).focus({ preventScroll: true });
-            }
+            if (!li) return;
+            li.scrollIntoView({ behavior: reduceMotion() ? 'auto' : 'smooth', block: 'center' });
+            ($('.project-row', li) || $('.project-feature-title', li)).focus({ preventScroll: true });
         }
     };
 
     document.addEventListener('click', function (e) {
-        if (activeSkill && !e.target.closest('.pg-skill') && !e.target.closest('.project-row')) clearSkill();
+        if (activeSkill && !e.target.closest('.pg-skill') && !e.target.closest('.skill-project')) clearSkill();
     });
     document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && activeSkill) clearSkill(); });
     document.addEventListener('languageChanged', function () { setTimeout(render, 0); });
     document.addEventListener('DOMContentLoaded', function () {
-        var count = document.getElementById('stat-projects');
-        if (count) count.textContent = PROJECTS.length;
         render();
         fetch('graph.json?v=20261101a').then(function (r) { return r.json(); }).then(function (data) {
             graph = data;

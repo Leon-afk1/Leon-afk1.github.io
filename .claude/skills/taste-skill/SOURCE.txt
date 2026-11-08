@@ -1,0 +1,2 @@
+https://github.com/Leonxlnx/taste-skill/tree/f6b76575f949707b4e3c37cd86cb44b0b98643e8/skills/taste-skill
+Instructions only: assets/ and scripts/ are not included, and the Stop hook was removed from the frontmatter.

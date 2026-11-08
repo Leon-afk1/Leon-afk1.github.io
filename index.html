@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Léon - AI Engineer & Researcher</title>
+    <title>Léon Morales - Generative AI Engineer</title>
     <meta name="description" content="Léon Morales — Generative AI engineer (LLM &amp; Graph RAG). Dual degree UTBM / UQAC. Available from April 2027, open to relocation worldwide.">
-    <meta name="theme-color" content="#1B2230">
+    <meta name="theme-color" content="#161C28">
     <link rel="canonical" href="https://leon-afk1.github.io/">
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="Léon MORALES">
@@ -17,29 +17,30 @@
     <script type="application/ld+json">{"@context":"https://schema.org","@type":"Person","name":"Léon Morales","jobTitle":"Generative AI Engineer","url":"https://leon-afk1.github.io/","email":"mailto:leon.morales@outlook.fr","sameAs":["https://github.com/Leon-afk1","https://www.linkedin.com/in/l%C3%A9on-morales"],"alumniOf":["UTBM","UQAC"],"knowsAbout":["Graph RAG","LLM","Machine Learning","Deep Learning","Contrastive Learning"]}</script>
     <link rel="preload" href="texte.json" as="fetch" crossorigin>
     <link rel="icon" href="favicon.svg" type="image/svg+xml">
-    <link rel="stylesheet" href="base.css?v=20261031h">
-    <link rel="stylesheet" href="nav.css?v=20261031h">
-    <link rel="stylesheet" href="chatbot.css?v=20261031h">
-    <link rel="stylesheet" href="mnist.css?v=20261031i">
-    <link rel="stylesheet" href="hero.css?v=20261031h">
-    <link rel="stylesheet" href="projects.css?v=20261031e">
-    <link rel="stylesheet" href="sections.css?v=20261031e">
+    <link rel="stylesheet" href="base.css?v=20261108a">
+    <link rel="stylesheet" href="nav.css?v=20261108a">
+    <link rel="stylesheet" href="chatbot.css?v=20261108a">
+    <link rel="stylesheet" href="mnist.css?v=20261108a">
+    <link rel="stylesheet" href="hero.css?v=20261108a">
+    <link rel="stylesheet" href="projects.css?v=20261108a">
+    <link rel="stylesheet" href="sections.css?v=20261108a">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 </head>
 <body>
-    <a class="skip-link" href="#about">Skip to content</a>
+    <a class="skip-link" href="#projects">Skip to content</a>
 
     <!-- Navigation -->
     <nav class="nav">
         <div class="nav-container">
+            <a href="#home" class="nav-mark" aria-label="Léon Morales"><canvas id="liquid-mark" aria-hidden="true"></canvas></a>
             <a href="#home" class="nav-logo">Léon MORALES</a>
             <ul class="nav-menu" id="nav-menu">
-                <li><a href="#about" class="nav-link">About</a></li>
-                <li><a href="#skills" class="nav-link">Skills</a></li>
                 <li><a href="#projects" class="nav-link">Projects</a></li>
                 <li><a href="#experience" class="nav-link">Experience</a></li>
+                <li><a href="#skills" class="nav-link">Skills</a></li>
+                <li><a href="#about" class="nav-link">About</a></li>
                 <li><a href="#contact" class="nav-link">Contact</a></li>
             </ul>
             <div class="nav-controls">
@@ -53,30 +54,17 @@
 
     <!-- Hero Section -->
     <section id="home" class="hero">
+        <canvas id="hero-field" class="hero-field" aria-hidden="true"></canvas>
+
         <div class="container hero-layout">
-            <div class="hero-content">
+            <div class="hero-content hero-content--top">
                 <h1 class="hero-title">
                     <span class="hero-name">Léon MORALES</span>
                 </h1>
                 <p class="hero-subtitle">Generative AI Engineer — LLM &amp; Graph RAG</p>
-                <p class="hero-description">
-                    Dual-degree engineer (UTBM / UQAC) specializing in Generative AI and Machine Learning, currently completing my end-of-studies internship at Astek Innovation Lab. Passionate about solving problems with data, traveling the world, and taking on new challenges, I combine a strong academic background with hands-on R&D experience.
-                </p>
-
-                <form class="hero-ask" id="hero-ask">
-                    <label class="hero-ask-label" for="hero-ask-input">Ask my knowledge graph</label>
-                    <div class="hero-ask-row">
-                        <input type="text" id="hero-ask-input" class="hero-ask-input" maxlength="500" autocomplete="off" placeholder="e.g. Which projects use Graph RAG?" required>
-                        <button type="submit" class="btn btn-primary hero-ask-submit">Ask</button>
-                    </div>
-                    <div class="hero-ask-suggestions"></div>
-                    <div class="hero-ask-answer" id="hero-ask-answer" aria-live="polite" hidden></div>
-                </form>
-
-                <p class="hero-availability"><span class="dot"></span><span id="availability-text">Full-time or VIE · Available from April 2027 · Open to relocation worldwide</span></p>
+                <p class="hero-availability"><span id="availability-text">Full-time or VIE · Available from April 2027 · Open to relocation worldwide</span></p>
                 <div class="hero-buttons">
-                    <a href="#projects" class="btn btn-secondary">View Projects</a>
-                    <a href="#contact" class="btn btn-secondary">Get in Touch</a>
+                    <a href="#projects" class="btn btn-primary">View Projects</a>
                     <a href="CV_Leon_Morales_AI_2027_English.pdf" class="btn btn-secondary btn-cv" id="cv-download" download>Download CV</a>
                 </div>
             </div>
@@ -90,64 +78,17 @@
                     <span class="hero-graph-hint">Nodes mentioned in the answer light up.</span>
                 </figcaption>
             </figure>
-        </div>
-    </section>
 
-    <!-- About Section -->
-    <section id="about" class="about">
-        <div class="container">            
-            <h2 class="section-title">About Me</h2>
-            <div class="about-content">
-                <div class="about-text">
-                    <p>
-                        I’m an engineering student with an international journey that shaped both my 
-                        technical and personal skills. After starting my studies at the University of 
-                        Technology of Belfort-Montbéliard (UTBM) in France, I had the opportunity to spend 
-                        a semester abroad at Yeditepe University in Istanbul, where I strengthened my 
-                        expertise in computer science. Today, I am pursuing a double degree at the University
-                        of Quebec in Chicoutimi (UQAC), focusing on Artificial Intelligence.
-                    </p>
-                    <p>
-                        Outside of academics, I’ve been playing basketball for over 15 years, I love 
-                        skiing (and even led a ski association with 200+ students), and I enjoy 
-                        traveling—which has given me a broader perspective and adaptability in both 
-                        life and work.
-                    </p>
-                </div>
-                <div class="about-stats">
-                    <div class="stat">
-                        <span class="stat-number">3</span>
-                        <span class="stat-label">AI R&amp;D experiences</span>
+            <div class="hero-content hero-content--ask">
+                <form class="hero-ask" id="hero-ask">
+                    <label class="hero-ask-label" for="hero-ask-input">Ask my knowledge graph</label>
+                    <div class="hero-ask-row">
+                        <input type="text" id="hero-ask-input" class="hero-ask-input" maxlength="500" autocomplete="off" placeholder="e.g. Which projects use Graph RAG?" required>
+                        <button type="submit" class="btn btn-primary hero-ask-submit">Ask</button>
                     </div>
-                    <div class="stat">
-                        <span class="stat-number" id="stat-projects">15</span>
-                        <span class="stat-label">Projects Completed</span>
-                    </div>
-                    <div class="stat">
-                        <span class="stat-number">3</span>
-                        <span class="stat-label">Different schools around the world</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Skills Section -->
-    <section id="skills" class="skills">
-        <div class="container">
-            <h2 class="section-title" data-i18n="skills.title">Technical Skills</h2>
-            <div class="cypher-head" data-rows="4" aria-hidden="true">
-                <pre><code>MATCH (leon:Person {name: "Léon Morales"})-[:HAS_SKILL]-&gt;(s:Skill)
-RETURN s.category, collect(s.name) AS skills</code></pre>
-                <p class="cypher-result"></p>
-            </div>
-            <div class="certifications-section">
-                <h3 class="subsection-title" data-i18n="skills.certificationsTitle">Certifications & Badges</h3>
-                <ul class="certification-list">
-                    <li><a href="https://graphacademy.neo4j.com/c/dc5d32f9-cc44-4169-96e0-cbf5075aca15/" target="_blank" rel="noopener noreferrer">Neo4j Certified Professional</a></li>
-                    <li><a href="https://learn.nvidia.com/certificates?id=yu32AcCcTjG7Tnwshzvg_Q" target="_blank" rel="noopener noreferrer">NVIDIA DLI - Accelerating End-to-End Data Science Workflows</a></li>
-                    <li><a href="https://www.skills.google/public_profiles/5f23e336-8cc8-4026-91fb-28d4519a10c0/badges/14799776" target="_blank" rel="noopener noreferrer">Google - AI Fundamentals</a></li>
-                </ul>
+                    <div class="hero-ask-suggestions"></div>
+                    <div class="hero-ask-answer" id="hero-ask-answer" aria-live="polite" hidden></div>
+                </form>
             </div>
         </div>
     </section>
@@ -188,16 +129,38 @@ ORDER BY e.startDate DESC</code></pre>
         </div>
     </section>
 
+    <!-- Skills Section -->
+    <section id="skills" class="skills">
+        <div class="container">
+            <h2 class="section-title" data-i18n="skills.title">Technical skills</h2>
+            <div class="cypher-head" data-rows="4" aria-hidden="true">
+                <pre><code>MATCH (leon:Person {name: "Léon Morales"})-[:HAS_SKILL]-&gt;(s:Skill)
+RETURN s.category, collect(s.name) AS skills</code></pre>
+                <p class="cypher-result"></p>
+            </div>
+            <div class="skills-layout">
+                <div class="skills-lists"></div>
+                <div id="skills-graph" class="projects-graph"></div>
+            </div>
+            <div class="certifications-section">
+                <h3 class="subsection-title" data-i18n="skills.certificationsTitle">Certifications & Badges</h3>
+                <ul class="certification-list">
+                    <li><a href="https://graphacademy.neo4j.com/c/dc5d32f9-cc44-4169-96e0-cbf5075aca15/" target="_blank" rel="noopener noreferrer">Neo4j Certified Professional</a></li>
+                    <li><a href="https://learn.nvidia.com/certificates?id=yu32AcCcTjG7Tnwshzvg_Q" target="_blank" rel="noopener noreferrer">NVIDIA DLI - Accelerating End-to-End Data Science Workflows</a></li>
+                    <li><a href="https://www.skills.google/public_profiles/5f23e336-8cc8-4026-91fb-28d4519a10c0/badges/14799776" target="_blank" rel="noopener noreferrer">Google - AI Fundamentals</a></li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
     <!-- MNIST Interactive Demo Section -->
     <section id="mnist-demo" class="mnist-section">
         <div class="container">
-            <h2 class="section-title">Interactive MNIST Demo</h2>
-            <div class="mnist-intro">
-                <p class="mnist-description">
-                    My first project at Ksilink (September 2024) was a convolutional neural network recognizing handwritten digits from the MNIST dataset, to test and understand the method. This PyTorch-trained CNN runs directly in your browser with ONNX Runtime Web. Draw a digit below and see the model's predictions.
-                </p>
-            </div>
-            
+            <h2 class="section-title">Interactive MNIST demo</h2>
+            <p class="mnist-description">
+                My first project at Ksilink (September 2024) was a convolutional neural network recognizing handwritten digits from the MNIST dataset, to test and understand the method. This PyTorch-trained CNN runs directly in your browser with ONNX Runtime Web. Draw a digit below and see the model's predictions.
+            </p>
+
             <div class="mnist-demo-container">
                 <div class="drawing-section">
                     <h3>Draw a digit (0-9):</h3>
@@ -207,7 +170,7 @@ ORDER BY e.startDate DESC</code></pre>
                         <button id="predictDigit" class="btn btn-primary">Predict</button>
                     </div>
                 </div>
-                
+
                 <div class="preview-section">
                     <h3>How the model sees it:</h3>
                     <div class="preview-container">
@@ -219,7 +182,7 @@ ORDER BY e.startDate DESC</code></pre>
                         </div>
                     </div>
                 </div>
-                
+
                 <div class="prediction-section">
                     <h3>Model Predictions:</h3>
                     <div id="predictionTable" class="prediction-table">
@@ -232,15 +195,30 @@ ORDER BY e.startDate DESC</code></pre>
         </div>
     </section>
 
+    <!-- About Section -->
+    <section id="about" class="about">
+        <div class="container">
+            <h2 class="section-title">About me</h2>
+            <div class="about-content">
+                <p class="hero-description">
+                    Dual-degree engineer (UTBM / UQAC) specializing in Generative AI and Machine Learning, currently completing my end-of-studies internship at Astek Innovation Lab. Passionate about solving problems with data, traveling the world, and taking on new challenges, I combine a strong academic background with hands-on R&amp;D experience.
+                </p>
+                <div class="about-text">
+                    <p>I’m an engineering student with an international journey that shaped both my technical and personal skills. After starting my studies at the University of Technology of Belfort-Montbéliard (UTBM) in France, I had the opportunity to spend a semester abroad at Yeditepe University in Istanbul, where I strengthened my expertise in computer science. Today, I am pursuing a double degree at the University of Quebec in Chicoutimi (UQAC), focusing on Artificial Intelligence.</p>
+                    <p>Outside of academics, I’ve been playing basketball for over 15 years, I love skiing (and even led a ski association with 200+ students), and I enjoy traveling—which has given me a broader perspective and adaptability in both life and work.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Contact Section -->
     <section id="contact" class="contact">
         <div class="container">
-            <h2 class="section-title">Get In Touch</h2>
+            <h2 class="section-title">Get in touch</h2>
             <div class="contact-content">
                 <div class="contact-info">
                     <p class="contact-description">
-                        I'm always interested in discussing new opportunities, collaborations,
-                        or innovative AI projects. Let's connect and explore how we can work together!
+                        I'm always interested in discussing new opportunities, collaborations, or innovative AI projects. Let's connect and explore how we can work together!
                     </p>
                     <div class="contact-methods">
                         <a href="mailto:leon.morales@outlook.fr" class="contact-method">
@@ -261,7 +239,7 @@ ORDER BY e.startDate DESC</code></pre>
                     <!-- Formspree hidden input for spam protection -->
                     <input type="hidden" name="_subject" value="New Portfolio Contact Message">
                     <input type="text" name="_gotcha" style="display:none !important">
-                    
+
                     <div class="form-group">
                         <label for="name">Name</label>
                         <input type="text" id="name" name="name" required>
@@ -285,41 +263,40 @@ ORDER BY e.startDate DESC</code></pre>
     </section>
 
     <!-- Floating chatbot -->
-            <!-- Chatbot Widget -->
-            <div class="chatbot-widget chatbot-floating minimized" id="chatbot-widget">
-                <div class="chatbot-header">
-                    <h3 data-translate="chatbot.title">Ask me anything!</h3>
-                    <button class="chatbot-minimize" id="chatbot-minimize" aria-label="Open the assistant" aria-expanded="false" aria-controls="chatbot-messages">+</button>
+    <div class="chatbot-widget chatbot-floating minimized" id="chatbot-widget">
+        <div class="chatbot-header">
+            <h3 data-translate="chatbot.title">Ask me anything!</h3>
+            <button class="chatbot-minimize" id="chatbot-minimize" aria-label="Open the assistant" aria-expanded="false" aria-controls="chatbot-messages">+</button>
+        </div>
+        <div class="chatbot-messages" id="chatbot-messages">
+            <div class="chatbot-message bot-message">
+                <div class="message-avatar">
+                    <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor" aria-hidden="true"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H6l-2 2V4h16v12z"/><circle cx="9" cy="10" r="1.5"/><circle cx="15" cy="10" r="1.5"/></svg>
                 </div>
-                <div class="chatbot-messages" id="chatbot-messages">
-                    <div class="chatbot-message bot-message">
-                        <div class="message-avatar">
-                            <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H6l-2 2V4h16v12z"/><circle cx="9" cy="10" r="1.5"/><circle cx="15" cy="10" r="1.5"/></svg>
-                        </div>
-                        <div class="message-content">
-                            <p data-translate="chatbot.welcome">Hi! I'm Léon's AI assistant. I answer from his knowledge graph: ask me about his experience, skills or projects.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="chatbot-input-container">
-                    <input 
-                        type="text" 
-                        id="chatbot-input" 
-                        class="chatbot-input" 
-                        placeholder="Ask about my experience, skills, projects..."
-                        data-translate-placeholder="chatbot.placeholder"
-                        autocomplete="off"
-                    />
-                    <button id="chatbot-send" class="chatbot-send" aria-label="Send message">
-                        <span>➤</span>
-                    </button>
-                </div>
-                <div class="chatbot-suggestions">
-                    <button class="suggestion-btn" data-question="What are your main skills?" data-translate="chatbot.suggestion1">Skills</button>
-                    <button class="suggestion-btn" data-question="Tell me about your projects" data-translate="chatbot.suggestion2">Projects</button>
-                    <button class="suggestion-btn" data-question="What is your experience?" data-translate="chatbot.suggestion3">Experience</button>
+                <div class="message-content">
+                    <p data-translate="chatbot.welcome">Hi! I'm Léon's AI assistant. I answer from his knowledge graph: ask me about his experience, skills or projects.</p>
                 </div>
             </div>
+        </div>
+        <div class="chatbot-input-container">
+            <input
+                type="text"
+                id="chatbot-input"
+                class="chatbot-input"
+                placeholder="Ask about my experience, skills, projects..."
+                data-translate-placeholder="chatbot.placeholder"
+                autocomplete="off"
+            />
+            <button id="chatbot-send" class="chatbot-send" aria-label="Send message">
+                <span aria-hidden="true">➤</span>
+            </button>
+        </div>
+        <div class="chatbot-suggestions">
+            <button class="suggestion-btn" data-question="What are your main skills?" data-translate="chatbot.suggestion1">Skills</button>
+            <button class="suggestion-btn" data-question="Tell me about your projects" data-translate="chatbot.suggestion2">Projects</button>
+            <button class="suggestion-btn" data-question="What is your experience?" data-translate="chatbot.suggestion3">Experience</button>
+        </div>
+    </div>
 
     <!-- Footer -->
     <footer class="footer">
@@ -341,15 +318,17 @@ ORDER BY e.startDate DESC</code></pre>
 
     <script src="chatbot-config.js?v=20261030a"></script>
     <script src="i18n.js?v=20261031h"></script>
-    <script src="nav.js?v=20261031h"></script>
+    <script src="nav.js?v=20261108a"></script>
     <script src="contact-form.js?v=20261031h"></script>
-    <script src="timeline.js?v=20261031h"></script>
+    <script src="timeline.js?v=20261108a"></script>
     <script src="mnist-demo.js?v=20261031h"></script>
     <script src="chatbot-client.js?v=20261031j"></script>
-    <script src="enhancements.js?v=20261101a"></script>
-    <script src="projects.js?v=20261101a"></script>
-    <script src="experience-graph.js?v=20261031e"></script>
-    <script src="cypher-heads.js?v=20261030a"></script>
-    <script src="hero-graph.js?v=20261101a"></script>
+    <script src="enhancements.js?v=20261108a"></script>
+    <script src="projects.js?v=20261108a"></script>
+    <script src="experience-graph.js?v=20261108a"></script>
+    <script src="cypher-heads.js?v=20261108a"></script>
+    <script src="field-shader.js?v=20261108a"></script>
+    <script src="liquid-glass.js?v=20261108a"></script>
+    <script src="hero-graph.js?v=20261108a"></script>
 </body>
 </html>

@@ -52,6 +52,8 @@
                 link.classList.toggle('active', link.getAttribute('href') === '#' + current);
             });
             if (nav) nav.classList.toggle('scrolled', window.scrollY > 50);
+            // The hero has its own question box: the floating assistant appears after it
+            document.body.classList.toggle('past-hero', window.scrollY > window.innerHeight * 0.6);
         }
 
         window.addEventListener('scroll', onScroll, { passive: true });

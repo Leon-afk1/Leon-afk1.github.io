@@ -63,9 +63,10 @@
 
             var body = el('div', 'tl-body');
             body.id = 'tl-body-' + index;
+            var inner = el('div', 'tl-body-inner');
             var list = el('ul', 'achievements');
             achievements(data).forEach(function (a) { list.appendChild(el('li', null, a)); });
-            body.appendChild(list);
+            inner.appendChild(list);
             if (cfg.report && data.reportUrl) {
                 var links = el('div', 'experience-links');
                 var a = el('a', 'project-link internship-report-link', data.reportText);
@@ -73,8 +74,9 @@
                 a.target = '_blank';
                 a.rel = 'noopener noreferrer';
                 links.appendChild(a);
-                body.appendChild(links);
+                inner.appendChild(links);
             }
+            body.appendChild(inner);
 
             content.appendChild(header);
             content.appendChild(body);

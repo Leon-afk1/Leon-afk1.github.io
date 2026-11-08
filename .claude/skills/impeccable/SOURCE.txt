@@ -1,0 +1,2 @@
+https://github.com/pbakaus/impeccable/tree/924bbd194d02e5e15a227e75b5901fb0d7a4ecad/.claude/skills/impeccable
+Instructions only: scripts/ is not included (the launcher downloads a binary on first run).

@@ -1,6 +1,4 @@
-// Section openers: the Cypher query that would fetch the section from the knowledge graph.
-// The query is in the HTML (readable without JS); when it first scrolls into view it is typed out once,
-// then the result line ("n rows returned") appears. Respects prefers-reduced-motion.
+// Section openers: the Cypher query that would fetch the section from the knowledge graph, with its row count.
 (function () {
     'use strict';
 
@@ -20,43 +18,12 @@
         if (out && t && t.cypher) out.textContent = t.cypher.rows.replace('{n}', head.dataset.rows);
     }
 
-    function run(head) {
-        var code = head.querySelector('code');
-        var query = head.dataset.query;
-        var reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
-        if (reduce) { code.innerHTML = highlight(query); head.classList.add('is-done'); return; }
-        var i = 0;
-        (function type() {
-            i = Math.min(query.length, i + 3);
-            code.innerHTML = highlight(query.slice(0, i)) + (i < query.length ? '<span class="cy-caret"></span>' : '');
-            if (i < query.length) setTimeout(type, 14);
-            else head.classList.add('is-done');
-        })();
-    }
-
     document.addEventListener('DOMContentLoaded', function () {
-        var heads = Array.prototype.slice.call(document.querySelectorAll('.cypher-head'));
-        heads.forEach(function (head) {
+        document.querySelectorAll('.cypher-head').forEach(function (head) {
             var code = head.querySelector('code');
-            head.dataset.query = code.textContent.trim();
-            code.innerHTML = highlight(head.dataset.query);
+            code.innerHTML = highlight(code.textContent.trim());
             result(head);
         });
-        if (!('IntersectionObserver' in window)) { heads.forEach(function (h) { h.classList.add('is-done'); }); return; }
-        // Keep the final height while typing so the page does not jump
-        heads.forEach(function (head) {
-            var pre = head.querySelector('pre');
-            pre.style.minHeight = pre.offsetHeight + 'px';
-            head.querySelector('code').innerHTML = '<span class="cy-caret"></span>';
-        });
-        var observer = new IntersectionObserver(function (entries) {
-            entries.forEach(function (e) {
-                if (!e.isIntersecting) return;
-                observer.unobserve(e.target);
-                run(e.target);
-            });
-        }, { threshold: 0.6 });
-        heads.forEach(function (h) { observer.observe(h); });
     });
     document.addEventListener('languageChanged', function () {
         setTimeout(function () { document.querySelectorAll('.cypher-head').forEach(result); }, 0);

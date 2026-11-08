@@ -1,6 +1,6 @@
 {
   "en": {
-    "pageTitle": "Léon - AI Engineer & Researcher",
+    "pageTitle": "Léon Morales - Generative AI Engineer",
     "metaDescription": "Léon Morales — Generative AI engineer (LLM & Graph RAG). Dual degree UTBM / UQAC. Available from April 2027, open to relocation worldwide.",
     "nav": {
       "logo": "Léon MORALES",
@@ -33,7 +33,7 @@
       "legendExperience": "Experience and education"
     },
     "about": {
-      "title": "About Me",
+      "title": "About me",
       "paragraph1": "I’m an engineering student with an international journey that shaped both my technical and personal skills. After starting my studies at the University of Technology of Belfort-Montbéliard (UTBM) in France, I had the opportunity to spend a semester abroad at Yeditepe University in Istanbul, where I strengthened my expertise in computer science. Today, I am pursuing a double degree at the University of Quebec in Chicoutimi (UQAC), focusing on Artificial Intelligence.",
       "paragraph2": "Outside of academics, I’ve been playing basketball for over 15 years, I love skiing (and even led a ski association with 200+ students), and I enjoy traveling—which has given me a broader perspective and adaptability in both life and work.",
       "stat1Label": "AI R&D experiences",
@@ -41,7 +41,7 @@
       "stat3Label": "Different schools around the world"
     },
     "skills": {
-      "title": "Technical Skills",
+      "title": "Technical skills",
       "certificationsTitle": "Certifications & Badges",
       "certifications": [
         {
@@ -220,7 +220,8 @@
       "filtersLabel": "Filter projects",
       "tagsLabel": "Technologies",
       "graphLabel": "Projects and the skills they use, from the knowledge graph",
-      "graphHint": "Hover a project to light up its skills. Click a skill to see every project that uses it.",
+      "graphHint": "Click a blue skill to list every project that uses it.",
+      "otherTitle": "Other projects",
       "skillMatch": "{skill}: {n} projects. Click again or press Escape to clear.",
       "yearContext": {
         "2026": "UQAC, then internship at Astek",
@@ -243,7 +244,7 @@
       }
     },
     "mnistDemo": {
-      "title": "Interactive MNIST Demo",
+      "title": "Interactive MNIST demo",
       "description": "My first project at Ksilink (September 2024) was a convolutional neural network recognizing handwritten digits from the MNIST dataset, to test and understand the method. This PyTorch-trained CNN runs directly in your browser with ONNX Runtime Web. Draw a digit below and see the model's predictions.",
       "drawingTitle": "Draw a digit (0-9):",
       "clearButton": "Clear",
@@ -327,7 +328,7 @@
       "current": "Current"
     },
     "contact": {
-      "title": "Get In Touch",
+      "title": "Get in touch",
       "description": "I'm always interested in discussing new opportunities, collaborations, or innovative AI projects. Let's connect and explore how we can work together!",
       "method1": "leon.morales@outlook.fr",
       "method2": "LinkedIn Profile",
@@ -370,7 +371,7 @@
     }
   },
   "fr": {
-    "pageTitle": "Léon - Ingénieur & Chercheur IA",
+    "pageTitle": "Léon Morales - Ingénieur IA générative",
     "metaDescription": "Léon Morales — Ingénieur IA générative (LLM & Graph RAG). Double diplôme UTBM / UQAC. Disponible à partir d'avril 2027, mobilité internationale.",
     "nav": {
       "logo": "Léon MORALES",
@@ -403,7 +404,7 @@
       "legendExperience": "Expériences et études"
     },
     "about": {
-      "title": "À Propos de Moi",
+      "title": "À propos",
       "paragraph1": "Je suis un étudiant ingénieur avec un parcours international qui a façonné mes compétences techniques et personnelles. Après avoir commencé mes études à l'Université de Technologie de Belfort-Montbéliard (UTBM) en France, j'ai eu l'opportunité de passer un semestre à l'étranger à l'Université Yeditepe à Istanbul, où j'ai renforcé mon expertise en informatique. Aujourd'hui, je poursuis un double diplôme à l'Université du Québec à Chicoutimi (UQAC), centré sur l'Intelligence Artificielle.",
       "paragraph2": "En dehors des études, je joue au basketball depuis plus de 15 ans, j'adore skier (j'ai même dirigé une association de ski comptant plus de 200 étudiants) et j'aime voyager, ce qui m'a donné une perspective plus large et une grande adaptabilité dans la vie et le travail.",
       "stat1Label": "Expériences R&D en IA",
@@ -411,7 +412,7 @@
       "stat3Label": "Écoles différentes dans le monde"
     },
     "skills": {
-      "title": "Compétences Techniques",
+      "title": "Compétences techniques",
       "certificationsTitle": "Certifications & Badges",
       "certifications": [
         {
@@ -431,7 +432,7 @@
       "certCount": "{n} certifications vérifiables"
     },
     "projects": {
-      "title": "Projets Principaux",
+      "title": "Projets",
       "card1": {
         "title": "Chatbot RAG Intelligent & Dashboard (Gagnant Hackathon)",
         "tag1": "RAG",
@@ -590,7 +591,8 @@
       "filtersLabel": "Filtrer les projets",
       "tagsLabel": "Technologies",
       "graphLabel": "Les projets et les compétences qu'ils utilisent, d'après le graphe de connaissances",
-      "graphHint": "Survolez un projet pour allumer ses compétences. Cliquez une compétence pour voir tous les projets qui l'utilisent.",
+      "graphHint": "Cliquez une compétence en bleu pour lister les projets qui l'utilisent.",
+      "otherTitle": "Autres projets",
       "skillMatch": "{skill} : {n} projets. Cliquez à nouveau ou appuyez sur Échap pour effacer.",
       "yearContext": {
         "2026": "UQAC, puis stage chez Astek",
@@ -613,7 +615,7 @@
       }
     },
     "mnistDemo": {
-      "title": "Démo Interactive MNIST",
+      "title": "Démo interactive MNIST",
       "description": "Mon premier projet chez Ksilink (septembre 2024) était un réseau neuronal convolutif qui reconnaît les chiffres manuscrits du jeu de données MNIST, pour tester et comprendre la méthode. Ce CNN entraîné avec PyTorch s'exécute directement dans votre navigateur grâce à ONNX Runtime Web. Dessinez un chiffre ci-dessous et regardez les prédictions du modèle.",
       "drawingTitle": "Dessinez un chiffre (0-9) :",
       "clearButton": "Effacer",
@@ -697,7 +699,7 @@
       "current": "En cours"
     },
     "contact": {
-      "title": "Me Contacter",
+      "title": "Me contacter",
       "description": "Je suis toujours intéressé par de nouvelles opportunités, collaborations ou projets innovants en IA. Connectons-nous et explorons comment nous pouvons travailler ensemble !",
       "method1": "leon.morales@outlook.fr",
       "method2": "Profil LinkedIn",

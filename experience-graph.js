@@ -10,7 +10,7 @@
         { id: 'Yeditepe', from: '2023-01', to: '2023-06', item: 5, row: 1 },
         { id: 'Ksilink', from: '2024-09', to: '2025-02', item: 4, row: 1 },
         { id: 'UQAC', from: '2025-09', to: '2027-02', item: 1, row: 2 },
-        { id: 'Hackathon', from: '2025-11', to: '2025-12', item: 2, row: 3 },
+        { id: 'Hackathon', from: '2025-11', to: '2025-11', item: 2, row: 3 },
         { id: 'Astek', from: '2026-09', to: '2027-02', item: 0, row: 3 }
     ];
     var FIRST = '2021-09', LAST = '2027-03';
@@ -98,7 +98,8 @@
             var y = base - n.lane * LANE;
             var g = svgEl('g', { 'class': 'em-project', transform: 'translate(' + n.x + ' ' + y + ')' });
             g.appendChild(svgEl('circle', { r: 8 }));
-            var label = svgEl('text', { x: 13, y: 5 });
+            // Labels near the right edge point left so they stay inside the map
+            var label = n.x > W - 230 ? svgEl('text', { x: -13, y: 5, 'text-anchor': 'end' }) : svgEl('text', { x: 13, y: 5 });
             var short = p.title.length > 26 ? p.title.slice(0, 25).trim() + '…' : p.title;
             label.textContent = short;
             g.appendChild(label);

@@ -4,7 +4,7 @@
     'use strict';
 
     var SVG_NS = 'http://www.w3.org/2000/svg';
-    var RADIUS = { person: 20, project: 13, experience: 13, skill: 9 };
+    var RADIUS = { person: 11, project: 7.5, experience: 7.5, skill: 5 };
     var FALLBACK = {
         askLabel: 'Ask my knowledge graph', askPlaceholder: 'e.g. Which projects use Graph RAG?', askButton: 'Ask',
         askLoading: 'Querying the graph…', askRateLimited: 'Too many questions in a short time. Wait a minute, then ask again.',
@@ -18,6 +18,8 @@
     var graph = null;
     var nodeEls = {};
     var edgeEls = [];
+    var lastAnswer = '';
+    var renderedWidth = 0;
     // Same conversation as the floating chatbot when it is on the page
     function sessionId() { return window.portfolioChat ? window.portfolioChat.sessionId : 'hero'; }
 
@@ -43,10 +45,37 @@
         return e;
     }
 
+    // The exported layout is stretched to the screen: only positions change, so nodes and labels keep their size.
+    // On wide screens the graph leaves the top left to the name and runs under the glass capsule.
+    function layout(w, h) {
+        var wide = w >= 900;
+        var area = wide ? { x0: 0.4, x1: 0.965, y0: 0.27, y1: 0.885 } : { x0: 0.07, x1: 0.93, y0: 0.08, y1: 0.92 };
+        var xs = graph.nodes.map(function (n) { return n.x; }), ys = graph.nodes.map(function (n) { return n.y; });
+        var minX = Math.min.apply(null, xs), maxX = Math.max.apply(null, xs);
+        var minY = Math.min.apply(null, ys), maxY = Math.max.apply(null, ys);
+        return function (n) {
+            return {
+                x: Math.round(w * (area.x0 + (n.x - minX) / (maxX - minX) * (area.x1 - area.x0))),
+                y: Math.round(h * (area.y0 + (n.y - minY) / (maxY - minY) * (area.y1 - area.y0)))
+            };
+        };
+    }
+
     function render(svg) {
-        svg.setAttribute('viewBox', '0 0 ' + graph.width + ' ' + graph.height);
+        var w = svg.clientWidth || 800, h = svg.clientHeight || 600;
+        var scale = w >= 900 ? 1 : 0.8;
+        renderedWidth = w;
+        svg.innerHTML = '';
+        nodeEls = {};
+        edgeEls = [];
+        svg.setAttribute('viewBox', '0 0 ' + w + ' ' + h);
+        var place = layout(w, h);
         var byId = {};
-        graph.nodes.forEach(function (n) { byId[n.id] = n; });
+        graph.nodes.forEach(function (n) {
+            var pos = place(n);
+            byId[n.id] = { id: n.id, type: n.type, label: n.label, card: n.card, x: pos.x, y: pos.y };
+        });
+        var positioned = graph.nodes.map(function (n) { return byId[n.id]; });
 
         var edges = el('g', { 'class': 'hg-edges' });
         graph.edges.forEach(function (pair) {
@@ -60,14 +89,17 @@
 
         var leon = byId.leon;
         var nodes = el('g', { 'class': 'hg-nodes' });
-        graph.nodes.forEach(function (n) {
+        positioned.forEach(function (n) {
             var g = el('g', { 'class': 'hg-node hg-' + n.type, transform: 'translate(' + n.x + ' ' + n.y + ')' });
-            g.appendChild(el('circle', { r: RADIUS[n.type] }));
-            // Léon's name sits above his node; other labels point away from him to avoid overlaps
-            var r = RADIUS[n.type], left = n.x < leon.x;
+            var r = RADIUS[n.type] * scale;
+            g.appendChild(el('circle', { r: r }));
+            // Léon's name sits above his node. Experiences are always labelled and point away from him;
+            // long project and skill labels, shown on demand, point towards the middle so they stay on screen.
+            // On a phone every label points inwards: there is no room outside the graph.
+            var left = n.type === 'experience' && w >= 900 ? n.x < leon.x || n.x > w * 0.88 : n.x >= w * (w >= 900 ? 0.68 : 0.55);
             var label = n.type === 'person'
-                ? el('text', { 'class': 'hg-label', x: 0, y: -(r + 12), 'text-anchor': 'middle' })
-                : el('text', { 'class': 'hg-label', x: left ? -(r + 6) : r + 6, y: 7, 'text-anchor': left ? 'end' : 'start' });
+                ? el('text', { 'class': 'hg-label', x: 0, y: -(r + 8), 'text-anchor': 'middle' })
+                : el('text', { 'class': 'hg-label', x: left ? -(r + 6) : r + 6, y: 4.5, 'text-anchor': left ? 'end' : 'start' });
             g.appendChild(label);
             g.addEventListener('mouseenter', function () { focusNode(n.id, true); });
             g.addEventListener('mouseleave', function () { focusNode(n.id, false); });
@@ -80,6 +112,7 @@
         });
         svg.appendChild(nodes);
         updateLabels();
+        if (lastAnswer) highlight(lastAnswer);
     }
 
     function updateLabels() {
@@ -101,15 +134,19 @@
     function highlight(answer) {
         var text = answer.toLowerCase();
         var lit = {};
+        var counts = { project: 0, skill: 0, experience: 0 };
+        lastAnswer = answer;
         Object.keys(nodeEls).forEach(function (id) {
             var n = nodeEls[id].node;
             var names = [n.label, nodeLabel(n)].map(function (s) { return s.toLowerCase(); });
             var hit = id === 'leon' || names.some(function (s) { return s.length > 2 && text.indexOf(s) !== -1; });
             lit[id] = hit;
             nodeEls[id].g.classList.toggle('is-lit', hit);
+            if (hit && id !== 'leon') counts[n.type]++;
         });
         edgeEls.forEach(function (line) { line.classList.toggle('is-lit', lit[line.dataset.a] && lit[line.dataset.b]); });
         $('.hero-graph').classList.toggle('has-answer', Object.keys(lit).filter(function (k) { return lit[k]; }).length > 1);
+        if (window.fieldShader) window.fieldShader.cite(counts);
     }
 
     function escapeHtml(s) {
@@ -138,6 +175,7 @@
         box.innerHTML = '<p class="hero-ask-loading">' + escapeHtml(t.askLoading) + '</p>';
         button.disabled = true;
         form.setAttribute('aria-busy', 'true');
+        if (window.fieldShader) window.fieldShader.busy(true);
 
         fetch(api + '/chat', {
             method: 'POST',
@@ -157,6 +195,7 @@
         }).then(function () {
             button.disabled = false;
             form.removeAttribute('aria-busy');
+            if (window.fieldShader) window.fieldShader.busy(false);
         });
     }
 
@@ -202,6 +241,11 @@
         fetch('graph.json?v=20261101a').then(function (r) { return r.json(); }).then(function (data) {
             graph = data;
             render(svg);
+            var timer = 0;
+            new ResizeObserver(function () {
+                clearTimeout(timer);
+                timer = setTimeout(function () { if (svg.clientWidth !== renderedWidth) render(svg); }, 120);
+            }).observe(svg);
         }).catch(function () { $('.hero-graph').hidden = true; });
     });
 })();
