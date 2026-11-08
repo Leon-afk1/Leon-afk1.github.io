@@ -14,7 +14,7 @@
         { id: 'Astek', from: '2026-09', to: '2027-02', item: 0, row: 3 }
     ];
     var FIRST = '2021-09', LAST = '2027-03';
-    var W = 1200, PAD = 24, BAND_H = 26, BAND_GAP = 8, LANE = 26;
+    var W = 1200, PAD = 24, BAND_H = 36, BAND_GAP = 10, LANE = 36;
     var SVG_NS = 'http://www.w3.org/2000/svg';
 
     function svgEl(name, attrs) {
@@ -55,7 +55,7 @@
         var projects = window.portfolioProjects.list.slice().sort(function (a, b) { return a.start.localeCompare(b.start); });
         var lanes = [], placed = projects.map(function (p) {
             var x = X(p.start), lane = 0;
-            while (lanes[lane] != null && x - lanes[lane] < 26) lane++;
+            while (lanes[lane] != null && x - lanes[lane] < 30) lane++;
             lanes[lane] = x;
             return { p: p, x: x, lane: lane };
         });
@@ -83,9 +83,9 @@
 
         EXPERIENCES.forEach(function (e) {
             var g = svgEl('g', { 'class': 'em-band' });
-            var x = X(e.from), w = Math.max(X(e.to) - x, 92);
-            g.appendChild(svgEl('rect', { x: x, y: bandY[e.id], width: w, height: BAND_H, rx: 6 }));
-            var label = svgEl('text', { x: x + 9, y: bandY[e.id] + 17 });
+            var x = X(e.from), w = Math.max(X(e.to) - x, 116);
+            g.appendChild(svgEl('rect', { x: x, y: bandY[e.id], width: w, height: BAND_H, rx: 8 }));
+            var label = svgEl('text', { x: x + 12, y: bandY[e.id] + 23 });
             label.textContent = t.experience.bands[e.id];
             g.appendChild(label);
             g.setAttribute('aria-label', t.experience.bands[e.id]);
@@ -97,20 +97,24 @@
             var p = t.projects[n.p.key];
             var y = base - n.lane * LANE;
             var g = svgEl('g', { 'class': 'em-project', transform: 'translate(' + n.x + ' ' + y + ')' });
-            g.appendChild(svgEl('circle', { r: 8 }));
+            g.appendChild(svgEl('circle', { r: 10 }));
             // Labels near the right edge point left so they stay inside the map
-            var label = n.x > W - 230 ? svgEl('text', { x: -13, y: 5, 'text-anchor': 'end' }) : svgEl('text', { x: 13, y: 5 });
+            var label = n.x > W - 230 ? svgEl('text', { x: -16, y: 5, 'text-anchor': 'end' }) : svgEl('text', { x: 16, y: 5 });
             var short = p.title.length > 26 ? p.title.slice(0, 25).trim() + '…' : p.title;
             label.textContent = short;
             g.appendChild(label);
             // Full title on hover or focus, raised above the other nodes
-            g.addEventListener('mouseenter', function () { label.textContent = p.title; svg.appendChild(g); });
+            g.addEventListener('mouseenter', function () { label.textContent = p.title; if (svg.lastChild !== g) svg.appendChild(g); });
             g.addEventListener('focus', function () { label.textContent = p.title; });
             ['mouseleave', 'blur'].forEach(function (ev) { g.addEventListener(ev, function () { label.textContent = short; }); });
             g.setAttribute('aria-label', p.title);
             activate(g, function () { window.portfolioProjects.open(n.p.key); });
             svg.appendChild(g);
         });
+
+        // On a phone the map scrolls sideways: it opens on the most recent years
+        var scroller = svg.parentNode;
+        scroller.scrollLeft = scroller.scrollWidth;
 
         var hint = document.getElementById('experience-map-hint');
         if (hint) hint.textContent = t.experience.mapHint;

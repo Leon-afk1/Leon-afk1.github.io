@@ -26,6 +26,7 @@
         'e:SKIUTBM_Presidency': 3, 'e:Ksilink_Internship': 4, 'e:Yeditepe_Exchange': 5
     };
     var renderedWidth = 0;
+    var renderedHeight = 0;
     // Same conversation as the floating chatbot when it is on the page
     function sessionId() { return window.portfolioChat ? window.portfolioChat.sessionId : 'hero'; }
 
@@ -67,19 +68,30 @@
         };
     }
 
+    function nameBox(svg) {
+        var el = $('.hero-name');
+        if (!el) return null;
+        var box = el.getBoundingClientRect(), origin = svg.getBoundingClientRect();
+        return { right: box.right - origin.left + 24, bottom: box.bottom - origin.top + 26 };
+    }
+
     function render(svg) {
         var w = svg.clientWidth || 800, h = svg.clientHeight || 600;
         var scale = w >= 900 ? 1 : 0.8;
         renderedWidth = w;
+        renderedHeight = h;
         svg.innerHTML = '';
         nodeEls = {};
         edgeEls = [];
         neighbors = {};
         svg.setAttribute('viewBox', '0 0 ' + w + ' ' + h);
         var place = layout(w, h);
+        var name = w >= 900 ? nameBox(svg) : null;
         var byId = {};
         graph.nodes.forEach(function (n) {
             var pos = place(n);
+            // A node never runs under the big name: it drops just below it, keeping room for its label
+            if (name && pos.x < name.right && pos.y < name.bottom) pos.y = Math.round(name.bottom + (name.bottom - pos.y) * 0.3);
             byId[n.id] = { id: n.id, type: n.type, label: n.label, card: n.card, x: pos.x, y: pos.y };
         });
         var positioned = graph.nodes.map(function (n) { return byId[n.id]; });
@@ -265,8 +277,13 @@
             var timer = 0;
             new ResizeObserver(function () {
                 clearTimeout(timer);
-                timer = setTimeout(function () { if (svg.clientWidth !== renderedWidth) render(svg); }, 120);
+                timer = setTimeout(function () {
+                    // The height only matters on wide screens: on phones it follows the address bar
+                    if (svg.clientWidth !== renderedWidth || (svg.clientWidth >= 900 && svg.clientHeight !== renderedHeight)) render(svg);
+                }, 120);
             }).observe(svg);
+            // The name's width depends on its web font
+            if (document.fonts) document.fonts.ready.then(function () { render(svg); });
         }).catch(function () { $('.hero-graph').hidden = true; });
     });
 })();

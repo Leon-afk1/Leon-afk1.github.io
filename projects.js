@@ -225,10 +225,12 @@
         host.setAttribute('aria-label', t.projects.graphLabel);
         // aria-label rather than <title>: a <title> shows as a tooltip that hides part of the graph
         var svg = svgEl('svg', { 'class': 'projects-graph-svg', role: 'img', 'aria-label': t.projects.graphLabel });
-        host.appendChild(svg);
+        var inner = el('div', 'projects-graph-inner');
+        host.appendChild(inner);
+        inner.appendChild(svg);
         var cap = el('p', 'projects-graph-caption');
         cap.setAttribute('aria-live', 'polite');
-        host.appendChild(cap);
+        inner.appendChild(cap);
         if (graph) renderGraph(svg, t);
         resetCaption();
         if (activeSkill) focusSkill(activeSkill);
@@ -274,6 +276,22 @@
             nodes[id] = g;
         });
         graphEls = { svg: svg, nodes: nodes, edges: edges };
+        hideCollidingLabels(svg);
+    }
+
+    // Skills linked to the most projects keep their label; a label that would overlap one of them waits for hover
+    function hideCollidingLabels(svg) {
+        var degree = {};
+        graph.edges.forEach(function (e) { degree[e[1]] = (degree[e[1]] || 0) + 1; });
+        var placed = [];
+        Array.prototype.slice.call(svg.querySelectorAll('.pg-skill'))
+            .sort(function (a, b) { return (degree['s:' + b.getAttribute('aria-label')] || 0) - (degree['s:' + a.getAttribute('aria-label')] || 0); })
+            .forEach(function (g) {
+                var label = g.querySelector('text'), r = label.getBoundingClientRect();
+                var clash = placed.some(function (p) { return r.left < p.right + 4 && r.right > p.left - 4 && r.top < p.bottom && r.bottom > p.top; });
+                g.classList.toggle('label-on-demand', clash);
+                if (!clash) placed.push(r);
+            });
     }
 
     function light(set) {

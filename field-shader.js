@@ -35,9 +35,9 @@
         'float x=texture2D(uMask,uv+vec2(uTexel,0.)).g-texture2D(uMask,uv-vec2(uTexel,0.)).g;',
         'float y=texture2D(uMask,uv+vec2(0.,uTexel)).g-texture2D(uMask,uv-vec2(0.,uTexel)).g;',
         'float w=uv.x*.55+uv.y*.9+x*2.6+y*3.4+sin(uv.x*7.+uTime*1.5)*.05+uTime*.2;float b=fract(w*1.9);',
-        'vec3 dark=vec3(.34,.4,.5),mid=vec3(.74,.8,.87),hi=vec3(1.);',
+        'vec3 dark=vec3(.4,.42,.46),mid=vec3(.78,.8,.84),hi=vec3(1.);',
         'vec3 c=b<.4?mix(dark,mid,b/.4):b<.6?mix(mid,hi,(b-.4)/.2):b<.8?mix(hi,mid,(b-.6)/.2):mix(mid,dark,(b-.8)/.2);',
-        'float g=.5+.5*sin(w*16.+uv.y*11.);vec3 leaf=mix(vec3(.15,.48,.33),vec3(.6,.9,.7),g);',
+        'vec3 leaf=mix(vec3(.2,.52,.36),vec3(.42,.78,.56),uv.y);',
         'c=mix(c,leaf,ivy);float alpha=max(a,ivy);gl_FragColor=vec4(c*alpha,alpha);}'
     ].join('');
 
@@ -68,15 +68,16 @@
 
     var IDLE = [0.16, 0.2, 0.16];
 
-    function createField(canvas) {
+    function createField(canvas, options) {
         var gl = canvas.getContext('webgl', { antialias: false, alpha: false, powerPreference: 'low-power' });
         var p = gl && program(gl, FIELD);
         if (!p) return null;
         var u = {};
         ['uRes', 'uTime', 'uTint', 'uGlow'].forEach(function (n) { u[n] = gl.getUniformLocation(p, n); });
 
-        var cur = { tint: IDLE.slice(), glow: 0 }, target = { tint: IDLE, glow: 0 };
-        var time = 11, busy = false, raf = 0, last = 0;
+        var opts = options || {};
+        var cur = { tint: (opts.idle || IDLE).slice(), glow: opts.glow || 0 }, target = { tint: opts.idle || IDLE, glow: opts.glow || 0 };
+        var time = opts.time || 11, busy = false, raf = 0, last = 0;
 
         function draw() {
             gl.uniform2f(u.uRes, canvas.width, canvas.height);
@@ -171,16 +172,16 @@
             function at(t) {
                 return { x: size * (v[0] + (v[1] - v[0]) * t + 0.022 * Math.sin(t * 10 + v[3])), y: size * (0.9 + (v[2] - 0.9) * t) };
             }
-            x.lineWidth = size * 0.02;
+            x.lineWidth = size * 0.013;
             x.beginPath();
             for (var i = 0; i <= 40; i++) {
                 var p = at(i / 40);
                 if (i) x.lineTo(p.x, p.y); else x.moveTo(p.x, p.y);
             }
             x.stroke();
-            for (var k = 1; k <= 6; k++) {
-                var q = at(k / 6.2), side = k % 2 ? 1 : -1;
-                leaf(q.x + side * size * 0.04, q.y, size * (0.052 - k * 0.003), side * 1.0);
+            for (var k = 1; k <= 3; k++) {
+                var q = at(k / 3.3), side = k % 2 ? 1 : -1;
+                leaf(q.x + side * size * 0.045, q.y, size * (0.075 - k * 0.006), side * 1.0);
             }
         });
         return x.getImageData(0, 0, size, size).data;
@@ -280,6 +281,14 @@
         try {
             if (canvas) field = createField(canvas);
         } catch (e) { field = null; }
+
+        // The other fog bands: the same fog as the hero, from another place in the noise. They never move.
+        [['experience-field', 23], ['closing-field', 37]].forEach(function (band) {
+            var c = document.getElementById(band[0]);
+            try {
+                if (c) createField(c, { time: band[1] });
+            } catch (e) { /* the CSS background stays */ }
+        });
 
         var mark = document.getElementById('liquid-mark');
         if (!mark || !document.fonts) return;

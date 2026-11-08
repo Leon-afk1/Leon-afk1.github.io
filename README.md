@@ -19,7 +19,7 @@ Bilingual EN/FR: every text lives in `texte.json`; the English HTML is the fallb
 | `projects.js` | Featured projects, index by year, and the projects/skills graph of the Skills section |
 | `experience-graph.js` | Constellation of experiences and projects over time |
 | `timeline.js` | Experience timeline |
-| `cypher-heads.js` | Cypher query shown at the top of Skills, Projects and Experience |
+| `cypher-heads.js` | Cypher query shown at the top of Projects |
 | `mnist-demo.js` | In-browser MNIST demo (ONNX Runtime Web, loaded on demand) |
 | `chatbot-config.js`, `chatbot-client.js` | Floating chatbot calling the Cloud Run API |
 | `contact-form.js` | Contact form (Formspree) |

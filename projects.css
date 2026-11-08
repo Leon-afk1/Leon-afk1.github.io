@@ -7,9 +7,14 @@
     align-items: start;
 }
 
+/* Sticky, and centred in the height left under the navigation */
 .projects-graph {
     position: sticky;
-    top: 88px;
+    top: 80px;
+    min-height: calc(100vh - 96px);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
 .projects-featured {
@@ -244,7 +249,23 @@
     }
 }
 
+/* Out of the flow: a caption changing height must not move the graph under the pointer */
+.projects-graph-inner {
+    position: relative;
+}
+
+.projects-graph-inner .projects-graph-caption {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+}
+
 @media (max-width: 1000px) {
+    .projects-graph-inner .projects-graph-caption {
+        position: static;
+    }
+
     .projects-layout {
         grid-template-columns: minmax(0, 1fr);
     }
@@ -252,6 +273,7 @@
     .projects-graph {
         position: static;
         order: -1;
+        min-height: 0;
     }
 }
 

@@ -1,5 +1,58 @@
 /* Experience, Skills, About, Contact, footer */
 
+/* Two grounds only, graphite and fog, on the same base colour: the bands melt into each other */
+.experience {
+    position: relative;
+}
+
+.experience > .container {
+    position: relative;
+}
+
+.fog-band {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transition: opacity 200ms ease;
+    -webkit-mask-image: linear-gradient(transparent, #000 22%, #000 78%, transparent);
+    mask-image: linear-gradient(transparent, #000 22%, #000 78%, transparent);
+}
+
+.fog-band.is-ready {
+    opacity: 1;
+}
+
+/* The fog of the hero comes back to close the page */
+.closing {
+    position: relative;
+    overflow: hidden;
+    background:
+        radial-gradient(60% 60% at 70% 50%, rgba(108, 180, 245, 0.08), transparent 70%),
+        var(--bg-primary);
+}
+
+.closing-field {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transition: opacity 200ms ease;
+    -webkit-mask-image: linear-gradient(transparent, #000 34%);
+    mask-image: linear-gradient(transparent, #000 34%);
+}
+
+.closing-field.is-ready {
+    opacity: 1;
+}
+
+.closing > section,
+.closing > footer {
+    position: relative;
+}
+
 /* Experience */
 .experience-map {
     margin-bottom: clamp(2rem, 4vw, 3rem);
@@ -18,7 +71,7 @@
 }
 
 .em-year-line { stroke: var(--border-color); }
-.em-year { fill: var(--text-muted); font-size: 13px; }
+.em-year { fill: var(--text-muted); font-size: 14px; }
 .em-link { stroke: rgba(186, 196, 211, 0.24); }
 
 .em-band { cursor: pointer; }
@@ -27,7 +80,7 @@
     stroke: rgba(185, 163, 245, 0.55);
     transition: fill 160ms ease;
 }
-.em-band text { fill: var(--text-primary); font-size: 13px; font-weight: 600; }
+.em-band text { fill: var(--text-primary); font-size: 15px; font-weight: 600; }
 
 .em-project { cursor: pointer; }
 .em-project circle { fill: var(--node-project); }
@@ -37,7 +90,7 @@
     fill: var(--text-primary);
     font-size: 13px;
     paint-order: stroke;
-    stroke: var(--bg-primary);
+    stroke: var(--band, var(--bg-primary));
     stroke-width: 4px;
     stroke-linejoin: round;
 }
@@ -71,20 +124,28 @@
     grid-template-columns: minmax(0, 1fr) auto;
     column-gap: 2rem;
     align-items: baseline;
-    padding: 1rem 0;
-    min-height: 56px;
+    padding: 1.25rem 0;
+    min-height: 72px;
     cursor: pointer;
 }
 
+/* Colour marks what a thing is, as in the graph legend; the text itself stays neutral */
+.tl-header h3::before {
+    content: '';
+    display: inline-block;
+    width: 0.5em;
+    height: 0.5em;
+    margin-right: 0.55em;
+    border-radius: 50%;
+    background: var(--node-experience);
+    vertical-align: 0.08em;
+}
+
 .tl-header h3 {
-    font-size: clamp(1.125rem, 1.8vw, 1.375rem);
+    font-size: clamp(1.25rem, 2.2vw, 1.625rem);
     font-weight: 600;
     letter-spacing: -0.015em;
     transition: color 160ms ease;
-}
-
-.timeline-item.is-open .tl-header h3 {
-    color: var(--node-experience);
 }
 
 .tl-header .period {
@@ -104,7 +165,7 @@
 .tl-badge {
     grid-column: 2;
     justify-self: end;
-    color: var(--node-experience);
+    color: var(--accent-bright);
     font-size: 0.875rem;
     font-weight: 600;
 }
@@ -132,6 +193,7 @@
 
 .achievements {
     max-width: 75ch;
+    font-size: 1.0625rem;
     list-style: disc;
     padding-left: 1.25rem;
     color: var(--text-secondary);
@@ -156,8 +218,22 @@
     font-size: 1.125rem;
     font-weight: 700;
     letter-spacing: -0.01em;
-    color: var(--node-skill);
     margin-bottom: 0.375rem;
+}
+
+.skills-group h3 {
+    text-wrap: wrap;
+}
+
+.skills-group h3::before {
+    content: '';
+    display: inline-block;
+    width: 0.5em;
+    height: 0.5em;
+    margin-right: 0.5em;
+    border-radius: 50%;
+    background: var(--node-skill);
+    vertical-align: 0.08em;
 }
 
 .skills-group ul {
@@ -202,13 +278,24 @@
 }
 
 .pg-node text {
-    font-size: 21px;
+    font-size: 25px;
     fill: var(--text-primary);
     paint-order: stroke;
     stroke: var(--bg-primary);
     stroke-width: 6px;
     stroke-linejoin: round;
     pointer-events: none;
+}
+
+/* Skills whose label would collide show it on hover or when lit */
+.label-on-demand text {
+    opacity: 0;
+    transition: opacity 120ms ease;
+}
+
+.label-on-demand.is-hover text,
+.label-on-demand.is-lit text {
+    opacity: 1;
 }
 
 /* Project names are listed under the graph when a skill is selected */
@@ -270,8 +357,8 @@
     display: grid;
     place-items: center;
     border-radius: 50%;
-    background: rgba(108, 180, 245, 0.15);
-    color: var(--node-skill);
+    background: rgba(232, 236, 242, 0.08);
+    color: var(--text-primary);
     font-weight: 700;
     font-size: 0.8125rem;
 }
@@ -310,6 +397,22 @@
 
 .contact {
     padding-top: 0;
+}
+
+/* Same material as the question capsule of the hero */
+.contact-form {
+    padding: 1.5rem;
+    border-radius: 28px;
+    background: rgba(24, 31, 44, 0.55);
+    border: 1px solid rgba(232, 236, 242, 0.2);
+    -webkit-backdrop-filter: blur(16px) saturate(1.3);
+    backdrop-filter: blur(16px) saturate(1.3);
+    box-shadow: 0 18px 50px rgba(0, 0, 0, 0.28), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+.contact-form .form-group input,
+.contact-form .form-group textarea {
+    background: rgba(13, 18, 27, 0.5);
 }
 
 .contact-content {
@@ -396,17 +499,18 @@
 .form-success { color: var(--accent-bright); }
 .form-error { color: #F4B6A6; }
 
-/* Footer */
+/* Footer: one line, clear of the floating assistant */
 .footer {
-    border-top: 1px solid var(--border-color);
-    padding: 2.5rem 0 5.5rem;
-    font-size: 0.9375rem;
+    border-top: 1px solid rgba(232, 236, 242, 0.16);
+    padding: 0.875rem 0;
+    font-size: 0.875rem;
 }
 
 .footer-layout {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) auto;
-    gap: 1rem 3rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.125rem 2rem;
+    padding-right: calc(var(--gutter) + 240px);
     color: var(--text-muted);
 }
 
@@ -414,14 +518,19 @@
     color: inherit;
 }
 
-.footer-name {
-    color: var(--text-primary) !important;
-    font-weight: 700;
+@media (max-width: 768px) {
+    .footer {
+        padding-bottom: 5rem;
+    }
+
+    .footer-layout {
+        padding-right: var(--gutter);
+    }
 }
 
 @media (hover: hover) and (pointer: fine) {
     .em-band:hover rect { fill: rgba(185, 163, 245, 0.34); }
-    .tl-header:hover h3 { color: var(--node-experience); }
+    .tl-header:hover h3 { color: var(--accent-bright); }
     .contact-method:hover { color: var(--accent-bright); }
     .copy-email:hover { color: var(--text-primary); border-color: var(--accent-text); }
 }
@@ -434,8 +543,7 @@
 
 @media (max-width: 900px) {
     .about-text,
-    .contact-content,
-    .footer-layout {
+    .contact-content {
         grid-template-columns: minmax(0, 1fr);
     }
 

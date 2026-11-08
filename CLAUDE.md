@@ -8,7 +8,7 @@ Personal portfolio of Léon Morales: static site on GitHub Pages (`main` is publ
 - After editing an asset, bump its `?v=` in `index.html` (GitHub Pages caching).
 - Design: graphite background, one font family (Schibsted Grotesk; JetBrains Mono only for real code). Colour encodes the kind of content: fir green = projects/actions (`--accent-primary` for fills with white text, `--accent-text` for text on dark), sky blue = skills, lilac = experience. No decorative animations; motion only in answer to the user, and `prefers-reduced-motion` is respected.
 - The skills in `.claude/skills/` guide visual work: `frontend-design`, `impeccable`, `emil-design-eng`, `taste-skill` (instructions only, without their scripts or hooks). This file wins over them, e.g. the lilac of experiences stays.
-- The hero shader and the monogram are still at rest: they move only while a question is answered or the mark is hovered.
+- Two grounds only, graphite and fog, on the same base colour so that the bands melt into each other. The hero shader and the monogram are still at rest: they move only while a question is answered or the mark is hovered.
 - Never use `<title>` inside the graph SVGs (browser tooltips hide the graph): use `aria-label`.
 
 ## Data

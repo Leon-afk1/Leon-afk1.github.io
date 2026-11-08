@@ -18,12 +18,12 @@
     <link rel="preload" href="texte.json" as="fetch" crossorigin>
     <link rel="icon" href="favicon.svg" type="image/svg+xml">
     <link rel="stylesheet" href="base.css?v=20261108a">
-    <link rel="stylesheet" href="nav.css?v=20261108d">
-    <link rel="stylesheet" href="chatbot.css?v=20261108a">
-    <link rel="stylesheet" href="mnist.css?v=20261108a">
-    <link rel="stylesheet" href="hero.css?v=20261108d">
-    <link rel="stylesheet" href="projects.css?v=20261108d">
-    <link rel="stylesheet" href="sections.css?v=20261108d">
+    <link rel="stylesheet" href="nav.css?v=20261108k">
+    <link rel="stylesheet" href="chatbot.css?v=20261108k">
+    <link rel="stylesheet" href="mnist.css?v=20261108g">
+    <link rel="stylesheet" href="hero.css?v=20261108e">
+    <link rel="stylesheet" href="projects.css?v=20261108h">
+    <link rel="stylesheet" href="sections.css?v=20261108j">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -63,7 +63,7 @@
                 <p class="hero-subtitle">Generative AI Engineer — LLM &amp; Graph RAG</p>
                 <p class="hero-availability"><span id="availability-text">Full-time or VIE · Available from April 2027 · Open to relocation worldwide</span></p>
                 <div class="hero-buttons">
-                    <a href="#projects" class="btn btn-primary">View Projects</a>
+                    <a href="#projects" class="btn btn-primary">View projects</a>
                     <a href="CV_Leon_Morales_AI_2027_English.pdf" class="btn btn-secondary btn-cv" id="cv-download" download>Download CV</a>
                 </div>
             </div>
@@ -111,13 +111,18 @@ ORDER BY p.startDate DESC</code></pre>
 
     <!-- Experience Section -->
     <section id="experience" class="experience">
+        <canvas id="experience-field" class="fog-band" aria-hidden="true"></canvas>
         <div class="container">
-            <h2 class="section-title">Experience</h2>
-            <figure class="experience-map">
-                <div class="experience-map-scroll"><svg id="experience-map-svg" class="experience-map-svg" role="img"></svg></div>
-                <figcaption id="experience-map-hint" class="experience-map-hint"></figcaption>
-            </figure>
-            <div class="timeline" id="timeline"></div>
+            <div class="exp-layout">
+                <h2 class="section-title">Experience</h2>
+                <div class="exp-main">
+                    <figure class="experience-map">
+                        <div class="experience-map-scroll"><svg id="experience-map-svg" class="experience-map-svg" role="img"></svg></div>
+                        <figcaption id="experience-map-hint" class="experience-map-hint"></figcaption>
+                    </figure>
+                    <div class="timeline" id="timeline"></div>
+                </div>
+            </div>
         </div>
     </section>
 
@@ -140,10 +145,13 @@ ORDER BY p.startDate DESC</code></pre>
     <!-- MNIST Interactive Demo Section -->
     <section id="mnist-demo" class="mnist-section">
         <div class="container">
+            <div class="mnist-layout">
+            <div class="mnist-text">
             <h2 class="section-title">Interactive MNIST demo</h2>
             <p class="mnist-description">
                 My first project at Ksilink (September 2024) was a convolutional neural network recognizing handwritten digits from the MNIST dataset, to test and understand the method. This PyTorch-trained CNN runs directly in your browser with ONNX Runtime Web. Draw a digit below and see the model's predictions.
             </p>
+            </div>
 
             <div class="mnist-demo-container">
                 <div class="drawing-section">
@@ -176,8 +184,12 @@ ORDER BY p.startDate DESC</code></pre>
                     </div>
                 </div>
             </div>
+            </div>
         </div>
     </section>
+
+    <div class="closing">
+    <canvas id="closing-field" class="closing-field" aria-hidden="true"></canvas>
 
     <!-- About Section -->
     <section id="about" class="about">
@@ -234,7 +246,7 @@ ORDER BY p.startDate DESC</code></pre>
                         <textarea id="message" name="message" rows="5" required></textarea>
                     </div>
                     <button type="submit" class="btn btn-primary" id="submit-btn">
-                        <span class="btn-text">Send Message</span>
+                        <span class="btn-text">Send message</span>
                         <span class="btn-loading" style="display: none;">Sending...</span>
                     </button>
                     <div class="form-status" id="form-status"></div>
@@ -242,6 +254,15 @@ ORDER BY p.startDate DESC</code></pre>
             </div>
         </div>
     </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container footer-layout">
+            <p class="footer-built">Static site on GitHub Pages, assistant on Google Cloud Run. <a href="https://github.com/Leon-afk1/Leon-afk1.github.io" target="_blank" rel="noopener noreferrer">Source code</a></p>
+            <p class="footer-copyright">&copy; 2026 Léon Morales</p>
+        </div>
+    </footer>
+    </div>
 
     <!-- Floating chatbot -->
     <div class="chatbot-widget chatbot-floating minimized" id="chatbot-widget">
@@ -279,31 +300,19 @@ ORDER BY p.startDate DESC</code></pre>
         </div>
     </div>
 
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="container footer-layout">
-            <div class="footer-id">
-                <p class="footer-name">Léon Morales</p>
-                <p class="footer-role">Generative AI Engineer — LLM &amp; Graph RAG</p>
-            </div>
-            <p class="footer-built">Static site on GitHub Pages, assistant on Google Cloud Run. <a href="https://github.com/Leon-afk1/Leon-afk1.github.io" target="_blank" rel="noopener noreferrer">Source code</a></p>
-            <p class="footer-copyright">&copy; 2026 Léon Morales</p>
-        </div>
-    </footer>
-
     <script src="chatbot-config.js?v=20261030a"></script>
     <script src="i18n.js?v=20261031h"></script>
-    <script src="nav.js?v=20261108a"></script>
+    <script src="nav.js?v=20261108l"></script>
     <script src="contact-form.js?v=20261031h"></script>
     <script src="timeline.js?v=20261108a"></script>
     <script src="mnist-demo.js?v=20261031h"></script>
     <script src="chatbot-client.js?v=20261031j"></script>
     <script src="enhancements.js?v=20261108a"></script>
-    <script src="projects.js?v=20261108d"></script>
-    <script src="experience-graph.js?v=20261108d"></script>
+    <script src="projects.js?v=20261108i"></script>
+    <script src="experience-graph.js?v=20261108j"></script>
     <script src="cypher-heads.js?v=20261108a"></script>
-    <script src="field-shader.js?v=20261108d"></script>
+    <script src="field-shader.js?v=20261108i"></script>
     <script src="liquid-glass.js?v=20261108a"></script>
-    <script src="hero-graph.js?v=20261108d"></script>
+    <script src="hero-graph.js?v=20261108g"></script>
 </body>
 </html>
