@@ -199,7 +199,7 @@
         applyTexts();
         document.addEventListener('languageChanged', function () { setTimeout(applyTexts, 0); });
 
-        fetch('graph.json?v=20261101a').then(function (r) { return r.json(); }).then(function (data) {
+        fetch('graph.json?v=20261108b').then(function (r) { return r.json(); }).then(function (data) {
             graph = data;
             render(svg);
         }).catch(function () { $('.hero-graph').hidden = true; });
