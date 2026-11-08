@@ -31,13 +31,14 @@
         'precision highp float;varying vec2 v;',
         'uniform sampler2D uMask;uniform float uTime;uniform float uTexel;',
         'void main(){',
-        'vec2 uv=vec2(v.x,v.y);vec4 m=texture2D(uMask,uv);float a=m.r;',
+        'vec2 uv=vec2(v.x,v.y);vec4 m=texture2D(uMask,uv);float a=m.r;float ivy=m.b;',
         'float x=texture2D(uMask,uv+vec2(uTexel,0.)).g-texture2D(uMask,uv-vec2(uTexel,0.)).g;',
         'float y=texture2D(uMask,uv+vec2(0.,uTexel)).g-texture2D(uMask,uv-vec2(0.,uTexel)).g;',
-        'float b=fract((uv.x*.55+uv.y*.9+x*2.6+y*3.4+sin(uv.x*7.+uTime*1.5)*.05+uTime*.2)*1.9);',
-        'vec3 dark=vec3(.34,.4,.5),mid=vec3(.74,.8,.87),hi=vec3(1.),fir=vec3(.42,.78,.59);',
-        'vec3 c=b<.35?mix(dark,mid,b/.35):b<.55?mix(mid,hi,(b-.35)/.2):b<.78?mix(hi,fir,(b-.55)/.23):mix(fir,dark,(b-.78)/.22);',
-        'gl_FragColor=vec4(c*a,a);}'
+        'float w=uv.x*.55+uv.y*.9+x*2.6+y*3.4+sin(uv.x*7.+uTime*1.5)*.05+uTime*.2;float b=fract(w*1.9);',
+        'vec3 dark=vec3(.34,.4,.5),mid=vec3(.74,.8,.87),hi=vec3(1.);',
+        'vec3 c=b<.4?mix(dark,mid,b/.4):b<.6?mix(mid,hi,(b-.4)/.2):b<.8?mix(hi,mid,(b-.6)/.2):mix(mid,dark,(b-.8)/.2);',
+        'float g=.5+.5*sin(w*16.+uv.y*11.);vec3 leaf=mix(vec3(.15,.48,.33),vec3(.6,.9,.7),g);',
+        'c=mix(c,leaf,ivy);float alpha=max(a,ivy);gl_FragColor=vec4(c*alpha,alpha);}'
     ].join('');
 
     function reduceMotion() { return matchMedia('(prefers-reduced-motion: reduce)').matches; }
@@ -143,6 +144,64 @@
 
     // ---------- Monogram
 
+    // Ivy climbing the legs of the letters: a wavy stem with heart-shaped leaves on alternate sides
+    function ivyLayer(size) {
+        var c = document.createElement('canvas');
+        c.width = c.height = size;
+        var x = c.getContext('2d');
+        x.fillStyle = x.strokeStyle = '#fff';
+        x.lineCap = 'round';
+
+        function leaf(px, py, r, angle) {
+            x.save();
+            x.translate(px, py);
+            x.rotate(angle);
+            x.beginPath();
+            x.moveTo(0, r * 0.9);
+            x.bezierCurveTo(-r * 1.1, r * 0.45, -r * 1.15, -r * 0.3, -r * 0.42, -r * 0.3);
+            x.quadraticCurveTo(-r * 0.2, -r * 0.8, 0, -r * 1.1);
+            x.quadraticCurveTo(r * 0.2, -r * 0.8, r * 0.42, -r * 0.3);
+            x.bezierCurveTo(r * 1.15, -r * 0.3, r * 1.1, r * 0.45, 0, r * 0.9);
+            x.fill();
+            x.restore();
+        }
+
+        // [x start, x end, y end (top), phase]
+        [[0.1, 0.17, 0.24, 0.4], [0.45, 0.5, 0.2, 2.1], [0.87, 0.93, 0.28, 4.2]].forEach(function (v) {
+            function at(t) {
+                return { x: size * (v[0] + (v[1] - v[0]) * t + 0.022 * Math.sin(t * 10 + v[3])), y: size * (0.9 + (v[2] - 0.9) * t) };
+            }
+            x.lineWidth = size * 0.02;
+            x.beginPath();
+            for (var i = 0; i <= 40; i++) {
+                var p = at(i / 40);
+                if (i) x.lineTo(p.x, p.y); else x.moveTo(p.x, p.y);
+            }
+            x.stroke();
+            for (var k = 1; k <= 6; k++) {
+                var q = at(k / 6.2), side = k % 2 ? 1 : -1;
+                leaf(q.x + side * size * 0.04, q.y, size * (0.052 - k * 0.003), side * 1.0);
+            }
+        });
+        return x.getImageData(0, 0, size, size).data;
+    }
+
+    // The tab icon is the same drawing, on the page's background so it reads on any browser theme
+    function setFavicon(source) {
+        var link = document.querySelector('link[rel="icon"]');
+        if (!link) return;
+        var c = document.createElement('canvas');
+        c.width = c.height = 64;
+        var x = c.getContext('2d');
+        x.fillStyle = '#161C28';
+        x.beginPath();
+        if (x.roundRect) x.roundRect(0, 0, 64, 64, 14); else x.rect(0, 0, 64, 64);
+        x.fill();
+        x.drawImage(source, 0, 0, 64, 64);
+        link.type = 'image/png';
+        link.href = c.toDataURL('image/png');
+    }
+
     function buildMask(size) {
         function layer(blur) {
             var c = document.createElement('canvas');
@@ -156,11 +215,12 @@
             x.fillText('LM', size / 2, size * 0.54);
             return x.getImageData(0, 0, size, size).data;
         }
-        var sharp = layer(0), soft = layer(size / 22);
+        var sharp = layer(0), soft = layer(size / 22), ivy = ivyLayer(size);
         var out = new Uint8Array(size * size * 4);
         for (var i = 0; i < out.length; i += 4) {
             out[i] = sharp[i + 3];
             out[i + 1] = soft[i + 3];
+            out[i + 2] = ivy[i + 3];
             out[i + 3] = 255;
         }
         return out;
@@ -195,6 +255,7 @@
             raf = hovering ? requestAnimationFrame(frame) : 0;
         }
         draw();
+        setFavicon(canvas);   // right after drawing: the WebGL buffer is cleared at the end of the task
         canvas.parentNode.classList.add('has-gl');
 
         var host = canvas.parentNode;

@@ -19,6 +19,12 @@
     var nodeEls = {};
     var edgeEls = [];
     var lastAnswer = '';
+    var neighbors = {};
+    // Experience node -> entry of the timeline (see timeline.js)
+    var TIMELINE = {
+        'e:Astek_RND_Internship': 0, 'e:UQAC_Degree': 1, 'e:Hackathon_UQAC_2025': 2, 'e:UTBM_Degree': 3,
+        'e:SKIUTBM_Presidency': 3, 'e:Ksilink_Internship': 4, 'e:Yeditepe_Exchange': 5
+    };
     var renderedWidth = 0;
     // Same conversation as the floating chatbot when it is on the page
     function sessionId() { return window.portfolioChat ? window.portfolioChat.sessionId : 'hero'; }
@@ -68,6 +74,7 @@
         svg.innerHTML = '';
         nodeEls = {};
         edgeEls = [];
+        neighbors = {};
         svg.setAttribute('viewBox', '0 0 ' + w + ' ' + h);
         var place = layout(w, h);
         var byId = {};
@@ -84,6 +91,8 @@
             line.dataset.a = a.id; line.dataset.b = b.id;
             edges.appendChild(line);
             edgeEls.push(line);
+            (neighbors[a.id] = neighbors[a.id] || []).push(b.id);
+            (neighbors[b.id] = neighbors[b.id] || []).push(a.id);
         });
         svg.appendChild(edges);
 
@@ -92,6 +101,8 @@
         positioned.forEach(function (n) {
             var g = el('g', { 'class': 'hg-node hg-' + n.type, transform: 'translate(' + n.x + ' ' + n.y + ')' });
             var r = RADIUS[n.type] * scale;
+            // Invisible square around the dot: small nodes stay easy to reach with the pointer
+            g.appendChild(el('rect', { 'class': 'hg-hit', x: -(r + 9), y: -(r + 9), width: 2 * r + 18, height: 2 * r + 18 }));
             g.appendChild(el('circle', { r: r }));
             // Léon's name sits above his node. Experiences are always labelled and point away from him;
             // long project and skill labels, shown on demand, point towards the middle so they stay on screen.
@@ -103,9 +114,10 @@
             g.appendChild(label);
             g.addEventListener('mouseenter', function () { focusNode(n.id, true); });
             g.addEventListener('mouseleave', function () { focusNode(n.id, false); });
-            if (n.card) {
+            var open = openerOf(n);
+            if (open) {
                 g.classList.add('hg-link');
-                g.addEventListener('click', function () { scrollToCard(n); });
+                g.addEventListener('click', open);
             }
             nodes.appendChild(g);
             nodeEls[n.id] = { node: n, g: g, label: label };
@@ -121,13 +133,22 @@
 
     function focusNode(id, on) {
         nodeEls[id].g.classList.toggle('is-hover', on);
+        $('#hero-graph-svg').classList.toggle('has-hover', on);
+        // Léon is linked to everything: his neighbours stay unlabelled
+        (neighbors[id] || []).forEach(function (other) {
+            nodeEls[other].g.classList.toggle('is-near', on && id !== 'leon');
+        });
         edgeEls.forEach(function (line) {
             if (line.dataset.a === id || line.dataset.b === id) line.classList.toggle('is-hover', on);
         });
     }
 
-    function scrollToCard(node) {
-        if (window.portfolioProjects) window.portfolioProjects.open(node.card);
+    // What a click on a node opens: its project, its entry in the timeline, or the projects using a skill
+    function openerOf(n) {
+        if (n.card) return function () { window.portfolioProjects.open(n.card); };
+        if (n.type === 'experience' && TIMELINE[n.id] != null) return function () { window.portfolioExperience.open(TIMELINE[n.id]); };
+        if (n.type === 'skill') return function () { window.portfolioProjects.focusSkill(n.label); };
+        return null;
     }
 
     // Light up nodes whose name appears in the answer (Léon himself is always part of it)

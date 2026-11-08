@@ -1,20 +1,30 @@
 /* Projects: featured projects in full, then an index by year */
 
+.projects-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(320px, 40%);
+    gap: 2.5rem clamp(2rem, 5vw, 4.5rem);
+    align-items: start;
+}
+
+.projects-graph {
+    position: sticky;
+    top: 88px;
+}
+
 .projects-featured {
     border-top: 1px solid var(--border-color);
 }
 
 .project-feature {
-    display: grid;
-    grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
-    gap: 1.5rem clamp(2rem, 6vw, 6rem);
-    padding: clamp(2rem, 4vw, 3.5rem) 0;
+    padding: clamp(1.75rem, 3vw, 2.5rem) 0;
+    transition: opacity 160ms ease;
     border-bottom: 1px solid var(--border-color);
     scroll-margin-top: 6rem;
 }
 
 .project-feature-title {
-    font-size: clamp(1.625rem, 2.8vw, 2.5rem);
+    font-size: clamp(1.5rem, 2.2vw, 2rem);
     font-weight: 700;
     letter-spacing: -0.03em;
     color: var(--text-primary);
@@ -26,7 +36,24 @@
 }
 
 .project-feature-head .project-org {
-    margin-top: 0.75rem;
+    margin-top: 0.5rem;
+}
+
+.project-feature-body {
+    margin-top: 0.875rem;
+}
+
+.is-dim {
+    opacity: 0.38;
+}
+
+.project-card {
+    transition: opacity 160ms ease;
+}
+
+.is-match .project-title,
+.is-match .project-feature-title {
+    color: var(--accent-bright);
 }
 
 .project-feature-body .project-description {
@@ -54,7 +81,7 @@
 }
 
 .project-feature-head .project-links {
-    margin-top: 1rem;
+    margin-top: 0.25rem;
 }
 
 .project-link {
@@ -217,11 +244,18 @@
     }
 }
 
-@media (max-width: 768px) {
-    .project-feature {
+@media (max-width: 1000px) {
+    .projects-layout {
         grid-template-columns: minmax(0, 1fr);
     }
 
+    .projects-graph {
+        position: static;
+        order: -1;
+    }
+}
+
+@media (max-width: 768px) {
     .year-chapter {
         grid-template-columns: minmax(0, 1fr);
     }

@@ -14,7 +14,7 @@
         { id: 'Astek', from: '2026-09', to: '2027-02', item: 0, row: 3 }
     ];
     var FIRST = '2021-09', LAST = '2027-03';
-    var W = 1200, PAD = 24, BAND_H = 26, BAND_GAP = 8, LANE = 46;
+    var W = 1200, PAD = 24, BAND_H = 26, BAND_GAP = 8, LANE = 26;
     var SVG_NS = 'http://www.w3.org/2000/svg';
 
     function svgEl(name, attrs) {
@@ -55,7 +55,7 @@
         var projects = window.portfolioProjects.list.slice().sort(function (a, b) { return a.start.localeCompare(b.start); });
         var lanes = [], placed = projects.map(function (p) {
             var x = X(p.start), lane = 0;
-            while (lanes[lane] != null && x - lanes[lane] < 205) lane++;
+            while (lanes[lane] != null && x - lanes[lane] < 26) lane++;
             lanes[lane] = x;
             return { p: p, x: x, lane: lane };
         });
@@ -115,6 +115,8 @@
         var hint = document.getElementById('experience-map-hint');
         if (hint) hint.textContent = t.experience.mapHint;
     }
+
+    window.portfolioExperience = { open: openExperience };
 
     document.addEventListener('languageChanged', function () { setTimeout(render, 0); });
     document.addEventListener('DOMContentLoaded', render);

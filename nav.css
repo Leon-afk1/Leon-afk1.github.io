@@ -27,8 +27,8 @@
     position: relative;
     display: block;
     flex: none;
-    width: 44px;
-    height: 44px;
+    width: 56px;
+    height: 56px;
     text-decoration: none;
 }
 
@@ -53,21 +53,6 @@
 
 .nav-mark.has-gl::before {
     content: none;
-}
-
-.nav-logo {
-    font-weight: 700;
-    letter-spacing: -0.02em;
-    text-decoration: none;
-    white-space: nowrap;
-    opacity: 0;
-    visibility: hidden;
-    transition: opacity 200ms ease, visibility 200ms;
-}
-
-.nav.scrolled .nav-logo {
-    opacity: 1;
-    visibility: visible;
 }
 
 .nav-menu {

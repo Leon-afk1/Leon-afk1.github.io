@@ -18,12 +18,12 @@
     <link rel="preload" href="texte.json" as="fetch" crossorigin>
     <link rel="icon" href="favicon.svg" type="image/svg+xml">
     <link rel="stylesheet" href="base.css?v=20261108a">
-    <link rel="stylesheet" href="nav.css?v=20261108a">
+    <link rel="stylesheet" href="nav.css?v=20261108d">
     <link rel="stylesheet" href="chatbot.css?v=20261108a">
     <link rel="stylesheet" href="mnist.css?v=20261108a">
-    <link rel="stylesheet" href="hero.css?v=20261108a">
-    <link rel="stylesheet" href="projects.css?v=20261108a">
-    <link rel="stylesheet" href="sections.css?v=20261108a">
+    <link rel="stylesheet" href="hero.css?v=20261108d">
+    <link rel="stylesheet" href="projects.css?v=20261108d">
+    <link rel="stylesheet" href="sections.css?v=20261108d">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -35,7 +35,6 @@
     <nav class="nav">
         <div class="nav-container">
             <a href="#home" class="nav-mark" aria-label="Léon Morales"><canvas id="liquid-mark" aria-hidden="true"></canvas></a>
-            <a href="#home" class="nav-logo">Léon MORALES</a>
             <ul class="nav-menu" id="nav-menu">
                 <li><a href="#projects" class="nav-link">Projects</a></li>
                 <li><a href="#experience" class="nav-link">Experience</a></li>
@@ -114,13 +113,6 @@ ORDER BY p.startDate DESC</code></pre>
     <section id="experience" class="experience">
         <div class="container">
             <h2 class="section-title">Experience</h2>
-            <div class="cypher-head" data-rows="6" aria-hidden="true">
-                <pre><code>MATCH (leon:Person {name: "Léon Morales"})-[:HAS_EXPERIENCE]-&gt;(e:Experience)
-OPTIONAL MATCH (e)-[:INCLUDED_PROJECT]-&gt;(p:Project)
-RETURN e, collect(p.name) AS projects
-ORDER BY e.startDate DESC</code></pre>
-                <p class="cypher-result"></p>
-            </div>
             <figure class="experience-map">
                 <div class="experience-map-scroll"><svg id="experience-map-svg" class="experience-map-svg" role="img"></svg></div>
                 <figcaption id="experience-map-hint" class="experience-map-hint"></figcaption>
@@ -133,15 +125,7 @@ ORDER BY e.startDate DESC</code></pre>
     <section id="skills" class="skills">
         <div class="container">
             <h2 class="section-title" data-i18n="skills.title">Technical skills</h2>
-            <div class="cypher-head" data-rows="4" aria-hidden="true">
-                <pre><code>MATCH (leon:Person {name: "Léon Morales"})-[:HAS_SKILL]-&gt;(s:Skill)
-RETURN s.category, collect(s.name) AS skills</code></pre>
-                <p class="cypher-result"></p>
-            </div>
-            <div class="skills-layout">
-                <div class="skills-lists"></div>
-                <div id="skills-graph" class="projects-graph"></div>
-            </div>
+            <div class="skills-lists"></div>
             <div class="certifications-section">
                 <h3 class="subsection-title" data-i18n="skills.certificationsTitle">Certifications & Badges</h3>
                 <ul class="certification-list">
@@ -200,9 +184,6 @@ RETURN s.category, collect(s.name) AS skills</code></pre>
         <div class="container">
             <h2 class="section-title">About me</h2>
             <div class="about-content">
-                <p class="hero-description">
-                    Dual-degree engineer (UTBM / UQAC) specializing in Generative AI and Machine Learning, currently completing my end-of-studies internship at Astek Innovation Lab. Passionate about solving problems with data, traveling the world, and taking on new challenges, I combine a strong academic background with hands-on R&amp;D experience.
-                </p>
                 <div class="about-text">
                     <p>I’m an engineering student with an international journey that shaped both my technical and personal skills. After starting my studies at the University of Technology of Belfort-Montbéliard (UTBM) in France, I had the opportunity to spend a semester abroad at Yeditepe University in Istanbul, where I strengthened my expertise in computer science. Today, I am pursuing a double degree at the University of Quebec in Chicoutimi (UQAC), focusing on Artificial Intelligence.</p>
                     <p>Outside of academics, I’ve been playing basketball for over 15 years, I love skiing (and even led a ski association with 200+ students), and I enjoy traveling—which has given me a broader perspective and adaptability in both life and work.</p>
@@ -305,12 +286,6 @@ RETURN s.category, collect(s.name) AS skills</code></pre>
                 <p class="footer-name">Léon Morales</p>
                 <p class="footer-role">Generative AI Engineer — LLM &amp; Graph RAG</p>
             </div>
-            <ul class="footer-links">
-                <li><a href="mailto:leon.morales@outlook.fr">leon.morales@outlook.fr</a></li>
-                <li><a href="https://www.linkedin.com/in/léon-morales" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
-                <li><a href="https://github.com/Leon-afk1" target="_blank" rel="noopener noreferrer">GitHub</a></li>
-                <li><a href="CV_Leon_Morales_AI_2027_English.pdf" id="cv-download-footer" download>Download CV</a></li>
-            </ul>
             <p class="footer-built">Static site on GitHub Pages, assistant on Google Cloud Run. <a href="https://github.com/Leon-afk1/Leon-afk1.github.io" target="_blank" rel="noopener noreferrer">Source code</a></p>
             <p class="footer-copyright">&copy; 2026 Léon Morales</p>
         </div>
@@ -324,11 +299,11 @@ RETURN s.category, collect(s.name) AS skills</code></pre>
     <script src="mnist-demo.js?v=20261031h"></script>
     <script src="chatbot-client.js?v=20261031j"></script>
     <script src="enhancements.js?v=20261108a"></script>
-    <script src="projects.js?v=20261108a"></script>
-    <script src="experience-graph.js?v=20261108a"></script>
+    <script src="projects.js?v=20261108d"></script>
+    <script src="experience-graph.js?v=20261108d"></script>
     <script src="cypher-heads.js?v=20261108a"></script>
-    <script src="field-shader.js?v=20261108a"></script>
+    <script src="field-shader.js?v=20261108d"></script>
     <script src="liquid-glass.js?v=20261108a"></script>
-    <script src="hero-graph.js?v=20261108a"></script>
+    <script src="hero-graph.js?v=20261108d"></script>
 </body>
 </html>

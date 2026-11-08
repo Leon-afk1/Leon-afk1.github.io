@@ -1,5 +1,5 @@
-// Projects section: the featured projects in full, then the others in a compact index by year.
-// The projects/skills graph (graph.json) lives in the Skills section: clicking a skill lists its projects.
+// Projects section: the featured projects, then the others by year, next to a sticky projects/skills graph
+// (graph.json). Hovering a project lights its skills; hovering or clicking a skill highlights its projects.
 // Texts come from texte.json.
 // start = first commit or start date (see Neo4j); exp = experience it belongs to (used by experience-graph.js).
 // A link href of 'report' points to the translated internship report; org links are shown as context.
@@ -100,6 +100,8 @@
         body.appendChild(el('p', 'project-description', p.description));
         body.appendChild(tagList(p, t));
         li.appendChild(body);
+        li.addEventListener('mouseenter', function () { focusProject(cfg.key); });
+        li.addEventListener('mouseleave', leaveProject);
         rows[cfg.key] = li;
         return li;
     }
@@ -130,6 +132,9 @@
         li.appendChild(detail);
 
         head.addEventListener('click', function () { setOpen(cfg.key, !openKeys[cfg.key]); });
+        head.addEventListener('mouseenter', function () { focusProject(cfg.key); });
+        head.addEventListener('focus', function () { focusProject(cfg.key); });
+        head.addEventListener('mouseleave', leaveProject);
         rows[cfg.key] = li;
         return li;
     }
@@ -163,9 +168,11 @@
         root.innerHTML = '';
         rows = {};
 
+        var layout = el('div', 'projects-layout');
+        var main = el('div', 'projects-main');
         var featured = el('ol', 'projects-featured');
         PROJECTS.filter(function (cfg) { return cfg.featured; }).forEach(function (cfg) { featured.appendChild(renderFeature(cfg, t)); });
-        root.appendChild(featured);
+        main.appendChild(featured);
 
         var indexHead = el('div', 'projects-index-head');
         indexHead.appendChild(el('h3', 'projects-index-title', t.projects.otherTitle));
@@ -180,7 +187,7 @@
             bar.appendChild(b);
         });
         indexHead.appendChild(bar);
-        root.appendChild(indexHead);
+        main.appendChild(indexHead);
 
         var list = el('div', 'projects-chapters');
         var byYear = {};
@@ -199,17 +206,20 @@
             ch.appendChild(ol);
             list.appendChild(ch);
         });
-        root.appendChild(list);
+        main.appendChild(list);
+        layout.appendChild(main);
+        layout.appendChild(el('aside', 'projects-graph'));
+        root.appendChild(layout);
 
         PROJECTS.forEach(function (cfg) { setOpen(cfg.key, !!openKeys[cfg.key]); });
         applyFilter();
         renderSkillsGraph(t);
     }
 
-    // ---------- Projects/skills graph, in the Skills section
+    // ---------- Projects/skills graph
 
     function renderSkillsGraph(t) {
-        var host = $('#skills-graph');
+        var host = $('.projects-graph');
         if (!host) return;
         host.innerHTML = '';
         host.setAttribute('aria-label', t.projects.graphLabel);
@@ -219,7 +229,6 @@
         var cap = el('p', 'projects-graph-caption');
         cap.setAttribute('aria-live', 'polite');
         host.appendChild(cap);
-        host.appendChild(el('ul', 'skill-projects'));
         if (graph) renderGraph(svg, t);
         resetCaption();
         if (activeSkill) focusSkill(activeSkill);
@@ -254,8 +263,12 @@
                 g.setAttribute('aria-label', n.label);
                 g.addEventListener('click', function (e) { e.stopPropagation(); toggleSkill(n.label); });
                 g.addEventListener('keydown', function (e) { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggleSkill(n.label); } });
-                g.addEventListener('mouseenter', function () { g.classList.add('is-hover'); });
-                g.addEventListener('mouseleave', function () { g.classList.remove('is-hover'); });
+                g.addEventListener('mouseenter', function () { g.classList.add('is-hover'); if (!activeSkill) showSkill(n.label); });
+                g.addEventListener('mouseleave', function () { g.classList.remove('is-hover'); if (!activeSkill) clearSkill(); });
+            } else if (n.card) {
+                g.addEventListener('click', function (e) { e.stopPropagation(); window.portfolioProjects.open(n.card); });
+                g.addEventListener('mouseenter', function () { g.classList.add('is-hover'); focusProject(n.card); });
+                g.addEventListener('mouseleave', function () { g.classList.remove('is-hover'); leaveProject(); });
             }
             svg.appendChild(g);
             nodes[id] = g;
@@ -273,30 +286,37 @@
     function caption(text) { var c = $('.projects-graph-caption'); if (c) c.textContent = text; }
     function resetCaption() { var t = texts(); if (t) caption(t.projects.graphHint); }
 
-    function listSkillProjects(configs, t) {
-        var host = $('.skill-projects');
-        if (!host) return;
-        host.innerHTML = '';
-        configs.forEach(function (cfg) {
-            var li = el('li');
-            var b = el('button', 'skill-project', t.projects[cfg.key].title);
-            b.type = 'button';
-            b.addEventListener('click', function () { window.portfolioProjects.open(cfg.key); });
-            li.appendChild(b);
-            host.appendChild(li);
+    function focusProject(key) {
+        var t = texts();
+        if (activeSkill || !t) return;
+        var id = nodeByCard[key];
+        if (!id) { light(null); return; }
+        var set = {}; set[id] = 1;
+        (skillsByCard[key] || []).forEach(function (s) { set['s:' + s] = 1; });
+        light(set);
+        caption(t.projects[key].title + ': ' + (skillsByCard[key] || []).join(', '));
+    }
+
+    function leaveProject() { if (!activeSkill) { light(null); resetCaption(); } }
+
+    // Lights a skill and its projects, in the graph and in the list
+    function showSkill(skill) {
+        var t = texts();
+        var set = {}, count = 0;
+        set['s:' + skill] = 1;
+        PROJECTS.forEach(function (cfg) {
+            var match = (skillsByCard[cfg.key] || []).indexOf(skill) !== -1;
+            if (match) { set[nodeByCard[cfg.key]] = 1; count++; }
+            var li = rows[cfg.key];
+            if (li) { li.classList.toggle('is-match', match); li.classList.toggle('is-dim', !match); }
         });
+        light(set);
+        caption(t.projects.skillMatch.replace('{skill}', skill).replace('{n}', count));
     }
 
     function focusSkill(skill) {
-        var t = texts();
         activeSkill = skill;
-        var set = {};
-        var matches = PROJECTS.filter(function (cfg) { return (skillsByCard[cfg.key] || []).indexOf(skill) !== -1; });
-        set['s:' + skill] = 1;
-        matches.forEach(function (cfg) { set[nodeByCard[cfg.key]] = 1; });
-        light(set);
-        caption(t.projects.skillMatch.replace('{skill}', skill).replace('{n}', matches.length));
-        listSkillProjects(matches, t);
+        showSkill(skill);
     }
 
     function toggleSkill(skill) {
@@ -304,11 +324,10 @@
     }
 
     function clearSkill() {
-        var t = texts();
         activeSkill = null;
+        Object.keys(rows).forEach(function (k) { rows[k].classList.remove('is-match', 'is-dim'); });
         light(null);
         resetCaption();
-        if (t) listSkillProjects([], t);
     }
 
     // Lights the projects and skills named in an assistant answer (floating chatbot)
@@ -332,6 +351,10 @@
     window.portfolioProjects = {
         list: PROJECTS,
         highlightText: highlightText,
+        focusSkill: function (skill) {
+            focusSkill(skill);
+            $('#projects-list').scrollIntoView({ behavior: reduceMotion() ? 'auto' : 'smooth', block: 'start' });
+        },
         open: function (key) {
             if (activeFilter !== 'all') { activeFilter = 'all'; applyFilter(); }
             setOpen(key, true);
@@ -343,7 +366,7 @@
     };
 
     document.addEventListener('click', function (e) {
-        if (activeSkill && !e.target.closest('.pg-skill') && !e.target.closest('.skill-project')) clearSkill();
+        if (activeSkill && !e.target.closest('.pg-skill') && !e.target.closest('.hg-skill') && !e.target.closest('.project-row')) clearSkill();
     });
     document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && activeSkill) clearSkill(); });
     document.addEventListener('languageChanged', function () { setTimeout(render, 0); });
