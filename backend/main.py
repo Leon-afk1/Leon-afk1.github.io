@@ -13,6 +13,7 @@ from slowapi.errors import RateLimitExceeded
 from slowapi.util import get_remote_address
 from typing import List, Dict, Optional
 import json
+import re
 import threading
 import time
 import traceback
@@ -246,6 +247,15 @@ executor = ThreadPoolExecutor(max_workers=8)
 
 # --- Simplified RAG Functions ---
 
+CONTACT_EMAIL = "leon.morales@outlook.fr"
+NO_RESULTS = "No information found in the database."
+
+# Opens every prompt that writes something a visitor will read
+ASSISTANT_IDENTITY = """You are the assistant on Léon Morales's portfolio website. Most visitors are recruiters.
+- In a question, "you", "your", "tu", "ton", "ta", "tes", "vous" and "votre" always mean Léon, never the assistant.
+- Write about Léon in the third person ("he" / "il").
+- Do not talk about yourself: no "as an AI", no "as a language model", no remarks on your capabilities, your training or your lack of personal motivations. Only if a visitor asks directly what you are, say you are an AI assistant answering from Léon's knowledge graph."""
+
 DATABASE_SCHEMA = """
 Neo4j Database Schema for Léon Morales Portfolio:
 
@@ -261,7 +271,7 @@ Neo4j Database Schema for Léon Morales Portfolio:
 - **Internship** (additional): role, report_en, report_fr
 - **Leadership** (additional): role, achievements (array)
 - **Job** (additional): role
-- **Event** (additional): name, date, duration_hours, team_size, result
+- **Event** (additional): name, date, duration_hours, team_size, result, contribution (Léon's personal part in the team)
 
 ### Skills & Competencies
 - **Skill**: name, category, level, description
@@ -270,7 +280,7 @@ Neo4j Database Schema for Léon Morales Portfolio:
 - **Certification**: name, url, date
 
 ### Projects & Activities
-- **Project**: name, type, source, status, startDate, endDate, description, difficulty, url, reportUrl_en, reportUrl_fr, skills (array), experienceId
+- **Project**: name, type, source, status, startDate, endDate, description, contribution (Léon's personal part in a team project), difficulty, url, reportUrl_en, reportUrl_fr, skills (array), experienceId
 - **Interest**: name, details
 
 ### Methodologies & Values
@@ -363,7 +373,8 @@ Neo4j Database Schema for Léon Morales Portfolio:
 - Relationship properties: level (for HAS_SKILL, SPEAKS), primary (for HAS_QUALITY), year (for BORN_IN), period (for INCLUDED_LOCATION)
 - The main person is named "Léon Morales"
 - Always use MATCH (p:Person {name: "Léon Morales"}) to start queries about Léon
-- Use parameterized queries with $name variable
+- Write every value inline in the query: never use query parameters ($name, $company...), none are provided
+- Events (hackathons) are linked with PARTICIPATED_IN, not HAS_EXPERIENCE, and to their hosts with HOSTED_BY, not AT_INSTITUTION. To cover all his experiences, use (p)-[:HAS_EXPERIENCE|PARTICIPATED_IN]->(e:Experience)
 - Project.startDate / Project.endDate and Experience.startDate / Experience.endDate are dates: to answer "first", "latest", "before" or "since", ORDER BY or compare them
 - Projects done during an internship or a degree: (Experience)-[:INCLUDED_PROJECT]->(Project); find the experience through its institution, e.g. (e:Experience)-[:AT_INSTITUTION]->(i:Institution) WHERE toLower(i.name) CONTAINS "ksilink"
 - Some labs and partners are not Institution nodes (e.g. the LIARA lab, Haute École de Louvain): look for them in Project.source or Project.description too, e.g. WHERE toLower(pr.source) CONTAINS "liara" OR toLower(pr.description) CONTAINS "liara"
@@ -380,7 +391,91 @@ Question: Which projects use Neo4j?
 MATCH (p:Person {name: "Léon Morales"})-[:WORKED_ON]->(pr:Project)-[:UTILIZED_SKILL]->(s:Skill)
 WHERE toLower(s.name) CONTAINS "neo4j"
 RETURN pr.name, pr.description, pr.startDate ORDER BY pr.startDate DESC
+
+Question: What was Léon's contribution to the UQAC hackathon?
+MATCH (p:Person {name: "Léon Morales"})-[:PARTICIPATED_IN]->(e:Event)
+WHERE toLower(e.name) CONTAINS "hackathon"
+OPTIONAL MATCH (e)-[:INCLUDED_PROJECT]->(pr:Project)
+OPTIONAL MATCH (e)-[:INVOLVED_SKILL]->(s:Skill)
+OPTIONAL MATCH (e)-[:HOSTED_BY]->(i:Institution)
+RETURN e.name, e.description, e.result, e.team_size, e.contribution, pr.name, pr.description, pr.contribution, collect(DISTINCT s.name) AS skills, collect(DISTINCT i.name) AS hosts
+
+Question: What position are you looking for?
+MATCH (p:Person {name: "Léon Morales"})-[:SEEKS]->(s:InternshipPreferences)
+RETURN p.status, s.target_roles, s.role_preference, s.contract_type, s.availability_start_ideal, s.mobility, s.preferred_sectors
 """
+
+# Language of a question, for the messages that do not go through Gemini
+FRENCH_WORDS = {
+    'qui', 'que', 'quoi', 'comment', 'pourquoi', 'où', 'quand', 'quel', 'quelle', 'quels', 'quelles', 'est', 'sont',
+    'avez', 'fait', 'peut', 'peux', 'tu', 'ton', 'ta', 'tes', 'vous', 'votre', 'le', 'la', 'les', 'des', 'une', 'pour',
+    'avec', 'recherches', 'recherchez',
+}
+
+
+def is_french(text: str) -> bool:
+    return any(word in FRENCH_WORDS for word in re.findall(r"[a-zà-ÿ]+", text.lower()))
+
+
+# The assistant describing itself instead of Léon. Precise on purpose: Léon's own work involves "language models"
+# and he is an "AI engineer", so those words alone are not a sign of anything.
+SELF_REFERENCE = re.compile(
+    r"\bas an ai(?:\s+(?:assistant|model|language model))?(?:\s*,|\s+i\b)"
+    r"|\bas a (?:large )?language model(?:\s*,|\s+i\b)"
+    r"|\bi(?:'m|’m| am) a (?:large )?language model\b"
+    r"|\bmy capabilities\b"
+    r"|\bi (?:do not|don't|don’t) have personal\b"
+    r"|\ben tant qu['’](?:ia|intelligence artificielle|assistant)\b"
+    r"|\ben tant que (?:grand )?modèle de langage\b"
+    r"|\bje suis un (?:grand )?modèle de langage\b"
+    r"|\bmes capacités\b"
+    r"|\bje n['’]ai pas de motivations?\b",
+    re.IGNORECASE,
+)
+
+
+def interview_message(user_query: str) -> str:
+    if is_french(user_query):
+        return f"Ce point se discute mieux directement avec Léon, lors d'un entretien. Vous pouvez lui écrire à {CONTACT_EMAIL}."
+    return f"This is best discussed with Léon directly, in an interview. You can write to him at {CONTACT_EMAIL}."
+
+
+def without_self_reference(response_text: str, user_query: str) -> str:
+    """Last safeguard: a reply where the assistant talks about itself is replaced by a referral to Léon."""
+    if SELF_REFERENCE.search(response_text or ""):
+        print(f"Self-referencing reply replaced: {response_text[:200]}")
+        return interview_message(user_query)
+    return response_text
+
+
+# Keyword search over experiences and projects, when the generated Cypher finds nothing.
+# Lists the returned fields explicitly so that private properties stay out of the answers.
+KEYWORD_SEARCH_CYPHER = """
+MATCH (n)
+WHERE n:Experience OR n:Project
+WITH n, toLower(coalesce(n.name, '') + ' ' + coalesce(n.identifier, '') + ' ' + coalesce(n.source, '') + ' ' + coalesce(n.description, '')) AS text
+WITH n, size([k IN $keywords WHERE text CONTAINS k]) AS hits
+WHERE hits > 0
+OPTIONAL MATCH (n)-[:INCLUDED_PROJECT]-(related)
+OPTIONAL MATCH (n)-[:INVOLVED_SKILL|UTILIZED_SKILL]->(s:Skill)
+RETURN n.name AS name, n.identifier AS identifier, n.role AS role, n.description AS description, n.contribution AS contribution,
+       n.result AS result, n.team_size AS team_size, n.source AS source, n.startDate AS startDate, n.endDate AS endDate, n.date AS date,
+       collect(DISTINCT related.name) AS related, collect(DISTINCT s.name) AS skills, hits
+ORDER BY hits DESC
+LIMIT 8
+"""
+
+STOPWORDS = {
+    'leon', 'léon', 'morales', 'the', 'and', 'for', 'with', 'what', 'which', 'who', 'how', 'why', 'when', 'where', 'did', 'does',
+    'was', 'were', 'are', 'his', 'your', 'you', 'about', 'tell', 'that', 'this', 'has', 'have', 'quel', 'quelle', 'quels',
+    'quelles', 'qui', 'que', 'quoi', 'dont', 'comment', 'pourquoi', 'quand', 'est', 'sont', 'été', 'une', 'des', 'les', 'pour',
+    'avec', 'dans', 'sur', 'par', 'ton', 'tes', 'ses', 'son', 'votre', 'vos', 'tu', 'vous', 'lui', 'fait', 'parle', 'moi',
+}
+
+
+def question_keywords(user_query: str) -> List[str]:
+    words = re.findall(r"[a-zà-ÿ0-9+#-]+", user_query.lower())
+    return list(dict.fromkeys(w for w in words if len(w) > 2 and w not in STOPWORDS))[:6]
 
 def generate_cypher_query_with_gemini(user_query: str, conversation_context: str = "", previous_attempt: str = "", error_message: str = "") -> str:
     """Generate Cypher query. Always instructed to use English for the DB interaction."""
@@ -423,11 +518,55 @@ def execute_cypher_query(cypher_query: str, parameters: Optional[dict] = None) -
     try:
         results = neo4j_conn.run_query(cypher_query, parameters)
         if not results:
-            return "No information found in the database.", True, ""
+            return NO_RESULTS, True, ""
         # default=str: Neo4j dates are not JSON serializable
         return json.dumps(results, indent=2, ensure_ascii=False, default=str), True, ""
     except Exception as e:
         return "", False, str(e)
+
+def retrieve_context(user_query: str, conversation_context: str, cypher: str) -> str:
+    """Run the generated Cypher. On an error or an empty result, ask for a corrected query, then fall back on a keyword search."""
+    context, success, error_msg = execute_cypher_query(cypher)
+    if success and context != NO_RESULTS:
+        return context
+
+    problem = error_msg or "The query returned no rows. Check the labels and relationships against the schema (events use PARTICIPATED_IN and HOSTED_BY) and match more broadly."
+    retry = generate_cypher_query_with_gemini(user_query, conversation_context, previous_attempt=cypher, error_message=problem)
+    context, success, _ = execute_cypher_query(retry)
+    if success and context != NO_RESULTS:
+        return context
+
+    keywords = question_keywords(user_query)
+    if keywords:
+        found, success, _ = execute_cypher_query(KEYWORD_SEARCH_CYPHER, {"keywords": keywords})
+        if success and found != NO_RESULTS:
+            return found
+    return NO_RESULTS
+
+
+def answer_motivation(user_query: str, field: str) -> str:
+    """Why this company or field: give what is known of his job search, then refer the visitor to an interview."""
+    cypher = """
+    MATCH (p:Person {name: "Léon Morales"})
+    OPTIONAL MATCH (p)-[:SEEKS]->(s:InternshipPreferences)
+    OPTIONAL MATCH (p)-[:HAS_GOAL]->(g:Goal)
+    OPTIONAL MATCH (p)-[:VALUES]->(v:Value)
+    RETURN s.target_roles AS target_roles, s.role_preference AS role_preference, s.contract_type AS contract_type,
+           s.availability_start_ideal AS available_from, s.preferred_sectors AS preferred_sectors,
+           collect(DISTINCT g.name) AS goals, collect(DISTINCT v.name) AS values
+    """
+    context, _, _ = execute_cypher_query(cypher)
+    prompt = f"""{ASSISTANT_IDENTITY}
+
+A visitor asked about Léon's motivations: "{user_query}" (company or field: {field}).
+
+What is known about his job search: {context}
+
+Reply in the visitor's language, in two or three sentences:
+1. Say what Léon is looking for, using only the facts above. Do not invent a link with the company or the field.
+2. Say that his motivations for this specific opportunity are best discussed with him in an interview, and give his email: {CONTACT_EMAIL}."""
+    return model_manager.generate_content(prompt).text
+
 
 def analyze_question_intent(user_query: str) -> dict:
     """Analyze intent. Gemini handles the language understanding naturally."""
@@ -440,11 +579,15 @@ def analyze_question_intent(user_query: str) -> dict:
 
 USER QUESTION: "{user_query}"
 
+"You", "your", "tu", "ton", "vous" and "votre" in the question mean Léon.
+
 Classify into:
-1. RELEVANT: Is it about Léon, his skills, projects, or professional life? (YES/NO)
-2. MOTIVATION: Is it asking why he wants to join a specific company? (YES/NO)
+1. RELEVANT: Is it about Léon, his skills, projects, job search, or professional life? (YES/NO)
+2. MOTIVATION: Is it asking WHY he would join a specific company or field, what personally drives him, or his salary expectations? (YES/NO)
+   - YES: "Why do you want to join Google?", "Pourquoi travailler dans la santé ?", "What are your salary expectations?"
+   - NO, these are facts: "What position are you looking for?", "Quel poste recherches-tu ?", "When are you available?", "Where can you work?"
    - IF YES: Extract company name/field.
-3. TECH_DEFINITION: Is it asking to explain a tech concept WITHOUT mentioning Léon? (YES/NO)
+3. TECH_DEFINITION: Is it asking to explain a tech concept WITHOUT mentioning Léon or "you"? (YES/NO)
    - IF YES: Extract the tech name.
 
 Answer format:
@@ -483,8 +626,8 @@ def generate_response_with_gemini(user_query: str, context: str, conversation_hi
     
     history_text = "\n".join([f"User: {msg['user']}\nAssistant: {msg['assistant']}" for msg in conversation_history[-5:]])
     
-    prompt = f"""You are an AI assistant representing Léon Morales.
-    
+    prompt = f"""{ASSISTANT_IDENTITY}
+
 **CRITICAL INSTRUCTION ON LANGUAGE:**
 - **Reply in the SAME language as the USER'S CURRENT QUESTION.**
 - If the user writes in French, answer in French.
@@ -501,8 +644,9 @@ Conversation History: {history_text}
 **GUIDELINES:**
 1. Speak in THIRD PERSON about Léon ("he", "his" / "il", "son").
 2. Be professional, concise, and friendly.
-3. Base your answer strictly on the Database Results. If the info isn't there, say you don't know (in the user's language).
+3. Base your answer strictly on the Database Results. If they really hold nothing on the question, say so in the user's language and suggest writing to Léon at {CONTACT_EMAIL}.
 4. Do not translate technical terms (Python, Machine Learning, etc.).
+5. For a team project or event, use the contribution field for Léon's personal part when it is present. Without it, describe what the team built and say it was a team effort: never reply that you have no information when the results describe the project, and never invent who did what.
 
 Response:"""
 
@@ -529,6 +673,12 @@ def handle_chat(request: Request, chat_query: ChatQuery):
     history = sessions.get(session_id)
     convo_context = "\n".join([f"Q: {m['user']}\nA: {m['assistant']}" for m in history[-3:]])
 
+    def reply(text: str) -> ChatResponse:
+        """Every answer goes through the same safeguard and into the conversation history."""
+        text = without_self_reference(text, user_query)
+        sessions.append(session_id, user_query, text)
+        return ChatResponse(response=text, session_id=session_id)
+
     try:
         # 1. Analyze intent, and generate the Cypher query at the same time (discarded if off-topic)
         intent_future = executor.submit(analyze_question_intent, user_query)
@@ -538,16 +688,13 @@ def handle_chat(request: Request, chat_query: ChatQuery):
         # 2. Handle Non-Relevant / Off-topic
         if not intent['is_relevant']:
             # We ask Gemini to generate the polite refusal in the correct language
-            refusal_prompt = f"The user asked: '{user_query}'. Politely refuse to answer because it's off-topic. Say you only answer about Léon Morales. Reply in the same language as the user."
+            refusal_prompt = f"{ASSISTANT_IDENTITY}\n\nThe user asked: '{user_query}'. Politely refuse to answer because it's off-topic. Say you only answer about Léon Morales. Reply in the same language as the user."
             resp = model_manager.generate_content(refusal_prompt)
-            return ChatResponse(response=resp.text, session_id=session_id)
+            return reply(resp.text)
 
         # 3. Handle Motivation Questions
         if intent['is_motivation']:
-            field = intent['company_field']
-            motiv_prompt = f"The user represents a company in '{field}' and asked: '{user_query}'. Reply in the user's language that Léon cannot speak to specific personal motivations as an AI, but would love to discuss it in an interview."
-            resp = model_manager.generate_content(motiv_prompt)
-            return ChatResponse(response=resp.text, session_id=session_id)
+            return reply(answer_motivation(user_query, intent['company_field']))
 
         # 4. Handle Tech Definitions (General Knowledge fallback)
         if intent['is_tech_definition'] and intent['technology'] != "none":
@@ -559,45 +706,33 @@ def handle_chat(request: Request, chat_query: ChatQuery):
             has_skill = "No information" not in db_res
             
             skill_status = "confirm Léon has this skill" if has_skill else "state you don't have details on Léon's use of this"
-            def_prompt = f"""User asked about tech '{tech}': '{user_query}'. 
+            def_prompt = f"""{ASSISTANT_IDENTITY}
+
+            User asked about tech '{tech}': '{user_query}'.
             1. Define it briefly (2 sentences).
             2. Then, {skill_status} based on the portfolio.
             Reply in the user's language."""
-            
+
             resp = model_manager.generate_content(def_prompt)
-            return ChatResponse(response=resp.text, session_id=session_id)
+            return reply(resp.text)
 
         # 5. Standard RAG Flow: execute the Cypher generated in parallel with the intent
-        cypher = cypher_future.result()
-        context, success, error_msg = execute_cypher_query(cypher)
-        
-        if not success and error_msg:
-            cypher_retry = generate_cypher_query_with_gemini(user_query, convo_context, previous_attempt=cypher, error_message=error_msg)
-            context, success, error_msg = execute_cypher_query(cypher_retry)
-        
+        context = retrieve_context(user_query, convo_context, cypher_future.result())
+
         # Generate Answer
-        response_text = generate_response_with_gemini(user_query, context, history)
-        
-        sessions.append(session_id, user_query, response_text)
-            
-        return ChatResponse(response=response_text, session_id=session_id)
+        return reply(generate_response_with_gemini(user_query, context, history))
 
     except AllModelsExhaustedException as e:
         print(f"ALL MODELS EXHAUSTED: {e}")
-        # Detect user's language from query
-        user_lower = user_query.lower()
-        french_words = ['qui', 'que', 'quoi', 'comment', 'pourquoi', 'où', 'quand', 'quel', 'quelle', 'est', 'sont', 'avez', 'fait', 'peut', 'peux']
-        is_french = any(word in user_lower for word in french_words)
-        
-        if is_french:
+        if is_french(user_query):
             error_message = (
                 "L'assistant est momentanément indisponible : le service Gemini est surchargé ou a atteint son quota. "
-                "Réessayez dans quelques minutes, ou écrivez directement à Léon : leon.morales@outlook.fr"
+                f"Réessayez dans quelques minutes, ou écrivez directement à Léon : {CONTACT_EMAIL}"
             )
         else:
             error_message = (
                 "The assistant is temporarily unavailable: the Gemini service is overloaded or has reached its quota. "
-                "Try again in a few minutes, or write to Léon directly: leon.morales@outlook.fr"
+                f"Try again in a few minutes, or write to Léon directly: {CONTACT_EMAIL}"
             )
 
         return ChatResponse(response=error_message, session_id=session_id)

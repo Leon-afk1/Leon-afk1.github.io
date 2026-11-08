@@ -26,7 +26,7 @@ EXPERIENCES = {
     "Yeditepe_Exchange": "Yeditepe",
     "Ksilink_Internship": "Ksilink",
     "Astek_RND_Internship": "Astek",
-    "Hackathon_UQAC_2025": "Hackathon UQAC",
+    "Hackathon_UQAC_2025": "Hackathon Conformit x UQAC",
     "SKIUTBM_Presidency": "SKI'UTBM",
 }
 
