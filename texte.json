@@ -63,16 +63,16 @@
     "projects": {
       "title": "Projects",
       "card1": {
-        "title": "Intelligent RAG Chatbot & Dashboard (Hackathon Winner)",
+        "title": "Intelligent RAG Chatbot & Dashboard (2nd Place, Conformit x UQAC Hackathon)",
         "tag1": "RAG",
         "tag2": "LLM",
         "tag3": "Google Gemini",
         "tag4": "Streamlit",
         "tag5": "FastAPI",
         "tag6": "Docker",
-        "description": "Co-developed in a team of four during a 25-hour hackathon, winning 2nd place ($1000 CAD). This project is an expert assistant using a RAG pipeline to translate natural language questions into secure SQL queries for a PostgreSQL database. The solution, powered by Google Gemini, features an interactive Streamlit dashboard for chat/visualization and a FastAPI backend, all containerized with Docker.",
+        "description": "Co-developed in a team of four during the 25-hour Conformit x UQAC hackathon, winning 2nd place ($1000 CAD). This project is an expert assistant using a RAG pipeline to translate natural language questions into secure SQL queries for a PostgreSQL database. The solution, powered by Google Gemini, features an interactive Streamlit dashboard for chat/visualization and a FastAPI backend, all containerized with Docker.",
         "link1Text": "View Code",
-        "link2Text": "UQAC"
+        "link2Text": "Conformit x UQAC"
       },
       "card2": {
         "title": "Multimodal Contrastive Learning for Drug Analysis",
@@ -279,8 +279,8 @@
         "achievement3": "Research project at the LIARA laboratory on human activity recognition"
       },
       "item2": {
-        "title": "Hackathon X UQAC - 2nd Place Winner",
-        "company": "Université du Québec à Chicoutimi (UQAC), Canada",
+        "title": "Conformit x UQAC Hackathon - 2nd Place",
+        "company": "Conformit and Université du Québec à Chicoutimi (UQAC), Canada",
         "period": "November 2, 2025",
         "achievement1": "Won 2nd place ($1000 CAD) in a 25-hour hackathon",
         "achievement2": "Co-developed an intelligent RAG chatbot using Google Gemini for SQL query generation",
@@ -433,16 +433,16 @@
     "projects": {
       "title": "Projets Principaux",
       "card1": {
-        "title": "Chatbot RAG Intelligent & Dashboard (Gagnant Hackathon)",
+        "title": "Chatbot RAG Intelligent & Dashboard (2e place, hackathon Conformit x UQAC)",
         "tag1": "RAG",
         "tag2": "LLM",
         "tag3": "Google Gemini",
         "tag4": "Streamlit",
         "tag5": "FastAPI",
         "tag6": "Docker",
-        "description": "Co-développé en équipe de quatre lors d'un hackathon de 25h, remportant la 2e place (1000 $CAD). Ce projet est un assistant expert utilisant un pipeline RAG et Google Gemini pour traduire des questions en langage naturel en requêtes SQL sécurisées pour une base de données PostgreSQL. La solution inclut un dashboard interactif Streamlit (chat/visualisation) et un backend FastAPI, le tout conteneurisé avec Docker.",
+        "description": "Co-développé en équipe de quatre lors du hackathon Conformit x UQAC de 25 h, remportant la 2e place (1000 $CAD). Ce projet est un assistant expert utilisant un pipeline RAG et Google Gemini pour traduire des questions en langage naturel en requêtes SQL sécurisées pour une base de données PostgreSQL. La solution inclut un dashboard interactif Streamlit (chat/visualisation) et un backend FastAPI, le tout conteneurisé avec Docker.",
         "link1Text": "Voir le Code",
-        "link2Text": "UQAC"
+        "link2Text": "Conformit x UQAC"
       },
       "card2": {
         "title": "Apprentissage Contrastif Multimodal pour l'Analyse de Médicaments",
@@ -649,8 +649,8 @@
         "achievement3": "Projet de recherche au laboratoire LIARA sur la reconnaissance d'activités humaines"
       },
       "item2": {
-        "title": "Hackathon X UQAC - Gagnant 2e Place",
-        "company": "Université du Québec à Chicoutimi (UQAC), Canada",
+        "title": "Hackathon Conformit x UQAC - 2e place",
+        "company": "Conformit et Université du Québec à Chicoutimi (UQAC), Canada",
         "period": "2 novembre 2025",
         "achievement1": "Remporté la 2e place (1000 $CAD) lors d'un hackathon de 25 heures",
         "achievement2": "Co-développement d'un chatbot RAG intelligent utilisant Google Gemini pour la génération de requêtes SQL",
